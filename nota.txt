@@ -1,6 +1,3 @@
 - Calixto Laureano Jhordan
-<<<<<<< HEAD
 - Dalia Alberto Joaquin
-=======
 - De La Cruz De La Cruz Jhon Cristian
->>>>>>> ac631645ef58fcac23322b3f2e14cd0c211bfd00

@@ -1,14 +1,15 @@
 
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Employee  extends Person{
-  private String username; 
-  private String password;
-  private String role;
+    private String username; 
+    private String password;
+    private String role;
 
-    public Employee(String username, String password, String role, String name, String lastname_paternal, String lastname_maternal, int dni, Date birthdate, int ruc, String email) {
+    public Employee(String username, String password, String role, String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, int ruc, String email) {
         super(name, lastname_paternal, lastname_maternal, dni, birthdate, ruc, email);
         this.username = username;
         this.password = password;
@@ -38,7 +39,5 @@ public class Employee  extends Person{
     public void setRole(String role) {
         this.role = role;
     }
-    
-
     
 }

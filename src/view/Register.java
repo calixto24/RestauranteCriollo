@@ -4,15 +4,14 @@
  */
 package view;
 
+import database.Restaurant;
+
 /**
  *
  * @author jeanfranco
  */
 public class Register extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Register
-     */
+    
     public Register() {
         initComponents();
     }

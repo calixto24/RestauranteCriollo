@@ -8,8 +8,9 @@ import java.time.LocalDate;
 public class Restaurant {
     
     private ArrayList<Employee>employeeList;
+    private static Restaurant instance;
     
-    public Restaurant(){
+    private Restaurant(){
         
         //inicializando el objeto
         employeeList = new ArrayList<>();
@@ -20,6 +21,19 @@ public class Restaurant {
 
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
+    }
+    
+    //patron singleton
+    public static Restaurant getInstance() {
+        
+        if(instance == null) {
+            
+            instance = new Restaurant();
+            
+        }
+        
+        return instance;
+        
     }
     
 }

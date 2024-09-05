@@ -1,13 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
-/**
- *
- * @author JHORDAN
- */
+import database.Restaurant;
+import java.util.ArrayList;
+import model.Employee;
+
 public class EmployeeDao {
+    
+    //objeto
+    private ArrayList<Employee> employeeList;
+
+    //constructor vacio
+    public EmployeeDao() {
+        
+        employeeList = Restaurant.getInstance().getEmployeeList();
+        
+    }
+    
+    //metodos
+    public ArrayList<Employee> getAll() {
+        
+        return employeeList;
+        
+    }
+    
+    public void add(Employee employee) {
+        
+        employeeList.add(employee);
+        
+    }
     
 }

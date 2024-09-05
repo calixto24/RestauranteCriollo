@@ -1,5 +1,38 @@
 package controller;
 
-public class EmployeeController {
+import dao.EmployeeDao;
+import java.time.LocalDate;
+import java.time.Month;
+import view.Register;
+import model.Employee;
 
+public class EmployeeController {
+    private EmployeeDao employeeDao;
+    private Register view;
+    
+    public EmployeeController (Register view) {
+        employeeDao = new EmployeeDao();
+        this.view = view;
+    }
+    
+    public void handleRegisterClick() {
+        String user = view.getjTFUser().getText();
+        String pass = view.getjTFPass().getText();
+        String role = (String) view.getjCBRole().getSelectedItem();
+        String name = view.getjTFName().getText();
+        String ap = view.getjTFAP().getText();
+        String am = view.getjTFAM().getText();
+        int dni = Integer.parseInt(view.getjTFDni().getText());
+        int ruc = Integer.parseInt(view.getjTFRuc().getText());
+        String email = view.getjTFEmail().getText();
+        int[] date = new int[3];
+        String dateString = view.getjTFBirthdate().getText();
+        date[0] = Integer.parseInt(dateString.split("/")[0]);
+        date[1] = Integer.parseInt(dateString.split("/")[1]);
+        date[2] = Integer.parseInt(dateString.split("/")[2]);
+        
+        employeeDao.add(new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email));
+        
+        view.showMessage("Usuario creado");
+    }
 }

@@ -2,7 +2,6 @@ package controller;
 
 import dao.EmployeeDao;
 import java.time.LocalDate;
-import javax.swing.JOptionPane;
 import view.Register;
 import model.Employee;
 
@@ -33,6 +32,6 @@ public class EmployeeController {
         
         employeeDao.add(new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email));
         
-        JOptionPane.showConfirmDialog(null, "asd");
+        view.showMessage("Usuario creado");
     }
 }

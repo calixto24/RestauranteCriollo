@@ -2,7 +2,7 @@ package controller;
 
 import dao.EmployeeDao;
 import java.time.LocalDate;
-import java.time.Month;
+import javax.swing.JOptionPane;
 import view.Register;
 import model.Employee;
 
@@ -26,13 +26,13 @@ public class EmployeeController {
         int ruc = Integer.parseInt(view.getjTFRuc().getText());
         String email = view.getjTFEmail().getText();
         int[] date = new int[3];
-        String dateString = view.getjTFBirthdate().getText();
-        date[0] = Integer.parseInt(dateString.split("/")[0]);
-        date[1] = Integer.parseInt(dateString.split("/")[1]);
-        date[2] = Integer.parseInt(dateString.split("/")[2]);
+        String[] datePart = view.getjTFBirthdate().getText().split("/");
+        date[0] = Integer.parseInt(datePart[0]);
+        date[1] = Integer.parseInt(datePart[1]);
+        date[2] = Integer.parseInt(datePart[2]);
         
         employeeDao.add(new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email));
         
-        view.showMessage("Usuario creado");
+        JOptionPane.showConfirmDialog(null, "asd");
     }
 }

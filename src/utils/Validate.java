@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Validate {
     public static boolean isRequired(String str) {
         return !str.equals("");
@@ -8,7 +11,7 @@ public class Validate {
     public static boolean isInt(String str) {
         try {
             
-            Integer.parseInt(str); //abc
+            Integer.parseInt(str);
             return true;
         } catch (Exception e) {
             return false;
@@ -25,5 +28,27 @@ public class Validate {
     
     public static boolean equalsLength(String str, int equals){
        return str.length()==equals; 
-    }  
+    }
+    
+    public static boolean isEmail(String str) {
+        String regex = "^[a-z0-9.-_]+@[a-z0-9.-]+\\.[a-z]{2,}$";
+        
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+        
+        return matcher.matches();
+    }
+    
+    public static boolean isDate(String str) {
+        String regex = "^[1-31]/[1-12]/[0-9]{4}$"; // 01/05/2004
+        
+        Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(str);
+        
+        return matcher.matches();
+    }
+    
+    public static void main(String[] args) {
+        System.out.println((isInt("12345678901") ? "si" : "no"));
+    }
 }

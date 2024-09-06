@@ -11,10 +11,10 @@ public class Person {
     protected String lastname_maternal;
     protected int dni;
     protected LocalDate birthdate;
-    protected int ruc;
+    protected String ruc;
     protected String email;
 
-    public Person(String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, int ruc, String email) {
+    public Person(String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;
@@ -64,11 +64,11 @@ public class Person {
         this.birthdate = birthdate;
     }
 
-    public int getRuc() {
+    public String getRuc() {
         return ruc;
     }
 
-    public void setRuc(int ruc) {
+    public void setRuc(String ruc) {
         this.ruc = ruc;
     }
 

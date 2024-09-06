@@ -2,6 +2,7 @@ package controller;
 
 import dao.EmployeeDao;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import view.Register;
 import model.Employee;
@@ -12,7 +13,6 @@ public class EmployeeController {
     //atributos
     private EmployeeDao employeeDao;
     private Register view;
-    private DefaultTableModel defaultTableModel;
     
     //constructor vacio
     public EmployeeController (Register view) {
@@ -20,7 +20,6 @@ public class EmployeeController {
         
         //instancia de los objetos a utilizar
         employeeDao = new EmployeeDao();
-        defaultTableModel = new DefaultTableModel();
     }
     
     public void handleRegisterClick() {
@@ -85,35 +84,48 @@ public class EmployeeController {
         int dni = Integer.parseInt(dnistr);
         
         
-        String rucstr = view.getjTFRuc().getText();
-            if( !Validate.isRequired(rucstr)){
+        String ruc = view.getjTFRuc().getText();
+        if( !Validate.isRequired(ruc)){
             view.showMessage("el RUC es obligatorio");
             view.getjTFRuc().requestFocus();
             return;
         }
-        if( !Validate.isInt(rucstr)){
-            view.showMessage("el RUC tiene que ser numerico");
-            view.getjTFRuc().requestFocus();
-            return;
-        }
-         if(!Validate.equalsLength(rucstr, 11)){
+        
+        if(!Validate.equalsLength(ruc, 11)){
             view.showMessage("el RUC tiene que ser igual a 11 digitos");
             view.getjTFRuc().requestFocus();
             return;
         }
-        int ruc = Integer.parseInt(rucstr);
+        
         
         String email = view.getjTFEmail().getText();
+        if( !Validate.isRequired(email)){
+            view.showMessage("el email es obligatorio");
+            view.getjTFEmail().requestFocus();
+            return;
+        }
+        if( !Validate.isEmail(email)){
+            view.showMessage("el email no es valido");
+            view.getjTFEmail().requestFocus();
+            return;
+        }
         
-        String datesta = view.getjTFBirthdate().getText();
-        if ( !Validate.isRequired(datesta)){
+        String datestr = view.getjTFBirthdate().getText();
+        
+        if ( !Validate.isRequired(datestr)){
             view.showMessage("la fecha es obligatorio");
-            view.getjTFRuc().requestFocus();
+            view.getjTFBirthdate().requestFocus();
+            return;
+        }
+        
+        if( !Validate.isDate(datestr)){
+            view.showMessage("la fecha no es valida");
+            view.getjTFBirthdate().requestFocus();
             return;
         }
         int[] date = new int[3];
         
-        String[] datePart = view.getjTFBirthdate().getText().split("/");
+        String[] datePart = datestr.split("/");
             date[0] = Integer.parseInt(datePart[0]);
             date[1] = Integer.parseInt(datePart[1]);
             date[2] = Integer.parseInt(datePart[2]);
@@ -142,7 +154,7 @@ public class EmployeeController {
         };
     
         // Agregar fila al modelo de tabla
-        defaultTableModel.addRow(rowData);
+        view.renderTable();
         
         try {
             
@@ -156,42 +168,7 @@ public class EmployeeController {
         
     }
     
-    public void tableUser() {
-        
-        //titulando encabezados
-        defaultTableModel.addColumn("Usuario");
-        defaultTableModel.addColumn("Contraseña");
-        defaultTableModel.addColumn("Rol");
-        defaultTableModel.addColumn("Nombre");
-        defaultTableModel.addColumn("A. Paterno");
-        defaultTableModel.addColumn("A. Materno");
-        defaultTableModel.addColumn("DNI");
-        defaultTableModel.addColumn("Fecha Nacimiento");
-        defaultTableModel.addColumn("RUC");
-        defaultTableModel.addColumn("Email");
-        
-        //pintando
-        view.getjTUserList().setModel(defaultTableModel);
-        
-        //mostrar lista de arreglos (USUARIOS QUE YA EXISTEN)
-        for(Employee employee : employeeDao.getAll()) {
-        
-            Object[] rowData = {
-                employee.getUsername(), 
-                employee.getPassword(),
-                employee.getRole(),
-                employee.getName(),
-                employee.getLastname_paternal(),
-                employee.getLastname_maternal(),
-                employee.getDni(),
-                employee.getBirthdate(),
-                employee.getRuc(),
-                employee.getEmail()
-            };
-            
-            defaultTableModel.addRow(rowData);
-        
-        }
-        
+    public ArrayList<Employee> getEmployeeList() {
+        return employeeDao.getAll();
     }
 }

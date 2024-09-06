@@ -4,12 +4,14 @@
  */
 package view;
 
-import database.Restaurant;
+import model.Employee;
 import controller.EmployeeController;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,7 +29,50 @@ public class Register extends javax.swing.JFrame {
         
         initComponents();
         
-        employeeController.tableUser();
+        renderTable();
+    }
+    
+    public void renderTable() {
+        DefaultTableModel employeeTable = new DefaultTableModel();
+        String[] columns = {
+            "Usuario", 
+            "Contraseña", 
+            "Rol", 
+            "Nombre",
+            "A. Paterno",
+            "A. Materno",
+            "DNI",
+            "Fecha Nacimiento",
+            "RUC",
+            "Email"
+        };
+        
+        for(String column: columns) {
+            employeeTable.addColumn(column);
+        }
+        
+        ArrayList<Employee> employeeList = employeeController.getEmployeeList();
+        
+        for(Employee employee : employeeList) {
+        
+            Object[] rowData = {
+                employee.getUsername(), 
+                employee.getPassword(),
+                employee.getRole(),
+                employee.getName(),
+                employee.getLastname_paternal(),
+                employee.getLastname_maternal(),
+                employee.getDni(),
+                employee.getBirthdate(),
+                employee.getRuc(),
+                employee.getEmail()
+            };
+            
+            employeeTable.addRow(rowData);
+        
+        }
+        
+       jTUserList.setModel(employeeTable);
     }
 
     /**
@@ -244,6 +289,11 @@ public class Register extends javax.swing.JFrame {
 
             }
         ));
+        jTUserList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTUserListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTUserList);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -322,6 +372,11 @@ public class Register extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTUserListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUserListMouseClicked
+        System.out.println("clicked");
+        
+    }//GEN-LAST:event_jTUserListMouseClicked
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);

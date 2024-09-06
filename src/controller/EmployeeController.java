@@ -129,11 +129,8 @@ public class EmployeeController {
             date[0] = Integer.parseInt(datePart[0]);
             date[1] = Integer.parseInt(datePart[1]);
             date[2] = Integer.parseInt(datePart[2]);
+
             
-            
-            
-        //employeeDao.add(new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email));
-        
         // Crear el nuevo empleado
         Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);
 
@@ -170,5 +167,19 @@ public class EmployeeController {
     
     public ArrayList<Employee> getEmployeeList() {
         return employeeDao.getAll();
+    }
+    
+    public void handleCleanClick() {
+        
+        view.getjTFUser().setText(" ");
+        view.getjTFAM().setText(" ");
+        view.getjTFAP().setText(" ");
+        view.getjTFBirthdate().setText(" ");
+        view.getjTFDni().setText(" ");
+        view.getjTFEmail().setText(" ");
+        view.getjTFName().setText(" ");
+        view.getjTFPass().setText(" ");
+        view.getjTFRuc().setText(" ");
+        
     }
 }

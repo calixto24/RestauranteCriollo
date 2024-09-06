@@ -23,6 +23,8 @@ public class EmployeeController {
     }
     
     public void handleRegisterClick() {
+        
+        //VALIDACION USUARIO
         String user = view.getjTFUser().getText();
         if( !Validate.isRequired(user)){
             view.showMessage("el campo usuario es requerido");
@@ -30,6 +32,7 @@ public class EmployeeController {
             return ;
         }
         
+        //VALIDACION CONTRASEÑA
         String pass = view.getjTFPass().getText();
         if( !Validate.isRequired(pass)){
             view.showMessage(" la contraseña es obligatoria");
@@ -44,6 +47,7 @@ public class EmployeeController {
         
         String role = (String) view.getjCBRole().getSelectedItem();
         
+        //VALIDACION NOMBRE
         String name = view.getjTFName().getText();
         if( !Validate.isRequired(name)){
             view.showMessage(" el nombre es obligatorio");
@@ -51,6 +55,7 @@ public class EmployeeController {
             return;
         }
         
+        //VALIDACION PATERNO
         String ap = view.getjTFAP().getText();
          if( !Validate.isRequired(ap)){
             view.showMessage(" el apellido paterno es obligatorio");
@@ -58,6 +63,7 @@ public class EmployeeController {
             return;
         }
 
+        //VALIDACION MATERNO
         String am = view.getjTFAM().getText();
          if( !Validate.isRequired(am)){
             view.showMessage(" el apellido materno es obligatorio");
@@ -65,6 +71,7 @@ public class EmployeeController {
             return;
         }
         
+        //VALIDACION DNI
         String dnistr = view.getjTFDni().getText();
         if( !Validate.isRequired(dnistr)){
             view.showMessage("el DNI es obligatorio");
@@ -81,9 +88,20 @@ public class EmployeeController {
             view.getjTFDni().requestFocus();
             return;
         }
+        
         int dni = Integer.parseInt(dnistr);
         
+        for(Employee employee : employeeDao.getAll()) {
+            
+            if (dni == employee.getDni()) {
+                
+                view.showMessage("el DNI ya existe");
+                
+            }
+            
+        }
         
+        //VALIDACION RUC
         String ruc = view.getjTFRuc().getText();
         if( !Validate.isRequired(ruc)){
             view.showMessage("el RUC es obligatorio");
@@ -97,7 +115,17 @@ public class EmployeeController {
             return;
         }
         
+        for(Employee employee : employeeDao.getAll()) {
+            
+            if (ruc.equals(employee.getRuc())) {
+                
+                view.showMessage("el RUC ya existe");
+                
+            }
+            
+        }
         
+        //VALIDACION EMAIL
         String email = view.getjTFEmail().getText();
         if( !Validate.isRequired(email)){
             view.showMessage("el email es obligatorio");
@@ -110,6 +138,7 @@ public class EmployeeController {
             return;
         }
         
+        //VALIDACION FECHA DE NACIMIENTO
         String datestr = view.getjTFBirthdate().getText();
         
         if ( !Validate.isRequired(datestr)){
@@ -130,6 +159,7 @@ public class EmployeeController {
             date[1] = Integer.parseInt(datePart[1]);
             date[2] = Integer.parseInt(datePart[2]);
 
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */            
             
         // Crear el nuevo empleado
         Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);

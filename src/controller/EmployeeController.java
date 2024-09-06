@@ -43,8 +43,6 @@ public class EmployeeController {
             return ;
         }
         
-            
-        
         String role = (String) view.getjCBRole().getSelectedItem();
         
         String name = view.getjTFName().getText();
@@ -68,7 +66,6 @@ public class EmployeeController {
             return;
         }
         
-     
         String dnistr = view.getjTFDni().getText();
         if( !Validate.isRequired(dnistr)){
             view.showMessage("el DNI es obligatorio");
@@ -80,17 +77,49 @@ public class EmployeeController {
             view.getjTFDni().requestFocus();
             return;
         }
+        if(!Validate.equalsLength(dnistr, 8)){
+            view.showMessage("el DNI tiene que ser igual a 8 digitos");
+            view.getjTFDni().requestFocus();
+            return;
+        }
         int dni = Integer.parseInt(dnistr);
         
-        int ruc = Integer.parseInt(view.getjTFRuc().getText());
+        
+        String rucstr = view.getjTFRuc().getText();
+            if( !Validate.isRequired(rucstr)){
+            view.showMessage("el RUC es obligatorio");
+            view.getjTFRuc().requestFocus();
+            return;
+        }
+        if( !Validate.isInt(rucstr)){
+            view.showMessage("el RUC tiene que ser numerico");
+            view.getjTFRuc().requestFocus();
+            return;
+        }
+         if(!Validate.equalsLength(rucstr, 11)){
+            view.showMessage("el RUC tiene que ser igual a 11 digitos");
+            view.getjTFRuc().requestFocus();
+            return;
+        }
+        int ruc = Integer.parseInt(rucstr);
+        
         String email = view.getjTFEmail().getText();
+        
+        String datesta = view.getjTFBirthdate().getText();
+        if ( !Validate.isRequired(datesta)){
+            view.showMessage("la fecha es obligatorio");
+            view.getjTFRuc().requestFocus();
+            return;
+        }
         int[] date = new int[3];
         
         String[] datePart = view.getjTFBirthdate().getText().split("/");
             date[0] = Integer.parseInt(datePart[0]);
             date[1] = Integer.parseInt(datePart[1]);
             date[2] = Integer.parseInt(datePart[2]);
-        
+            
+            
+            
         //employeeDao.add(new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email));
         
         // Crear el nuevo empleado

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
 import view.Register;
 import model.Employee;
+import utils.Validate;
 
 public class EmployeeController {
     
@@ -24,12 +25,63 @@ public class EmployeeController {
     
     public void handleRegisterClick() {
         String user = view.getjTFUser().getText();
+        if( !Validate.isRequired(user)){
+            view.showMessage("el campo usuario es requerido");
+            view.getjTFUser().requestFocus();
+            return ;
+        }
+        
         String pass = view.getjTFPass().getText();
+        if( !Validate.isRequired(pass)){
+            view.showMessage(" la contraseña es obligatoria");
+            view.getjTFPass().requestFocus();
+            return ;
+        }
+        if( !Validate.minLength(pass, 8)){
+             view.showMessage(" la contraseña debe de tener 8 caracteres  como minimo ");
+            view.getjTFPass().requestFocus();
+            return ;
+        }
+        
+            
+        
         String role = (String) view.getjCBRole().getSelectedItem();
+        
         String name = view.getjTFName().getText();
+        if( !Validate.isRequired(name)){
+            view.showMessage(" el nombre es obligatorio");
+            view.getjTFName().requestFocus();
+            return;
+        }
+        
         String ap = view.getjTFAP().getText();
+         if( !Validate.isRequired(ap)){
+            view.showMessage(" el apellido paterno es obligatorio");
+            view.getjTFAP().requestFocus();
+            return;
+        }
+
         String am = view.getjTFAM().getText();
-        int dni = Integer.parseInt(view.getjTFDni().getText());
+         if( !Validate.isRequired(am)){
+            view.showMessage(" el apellido materno es obligatorio");
+            view.getjTFAM().requestFocus();
+            return;
+        }
+        
+     
+        String dnistr = view.getjTFDni().getText();
+        if( !Validate.isRequired(dnistr)){
+            view.showMessage("el DNI es obligatorio");
+            view.getjTFDni().requestFocus();
+            return;
+        }
+        if( !Validate.isInt(dnistr)){
+            view.showMessage("el DNI tiene que ser numerico");
+            view.getjTFDni().requestFocus();
+            return;
+        }
+        int dni = Integer.parseInt(dnistr);
+        
         int ruc = Integer.parseInt(view.getjTFRuc().getText());
         String email = view.getjTFEmail().getText();
         int[] date = new int[3];

@@ -14,10 +14,10 @@ public class Validate {
             return false;
         }
     }
-    
-    public static void main(String[] args) {
-        boolean isCorrect = isInt("asd");
-        
-        System.out.println((isCorrect ? "Correcto" : "incorrecto"));
+    public static boolean minLength( String str , int min){
+   return str.length()>min;
+   
     }
+    
+ 
 }

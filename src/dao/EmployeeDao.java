@@ -21,10 +21,13 @@ public class EmployeeDao implements Dao<Employee> {
 
     @Override
     public Employee get(long id) {
+        
         for (Employee employee : employeeList) {
+            
             if (id == employee.getId()) {
                 return employee;
             }
+            
         }
 
         return null;

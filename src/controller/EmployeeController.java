@@ -14,6 +14,7 @@ public class EmployeeController {
     private EmployeeDao employeeDao;
     private Register view;
     private String action;
+    private Validate vldt;
     
     //constructor vacio
     public EmployeeController (Register view) {
@@ -22,24 +23,16 @@ public class EmployeeController {
         
         //instancia de los objetos a utilizar
         employeeDao = new EmployeeDao();
+        vldt = new Validate();
     }
     
     public void handleRegisterClick() {
         
         if (action.equals("add")) {
-            Validate vldt = new Validate();
-            String date = view.getjTFBirthdate().getText();
-            System.out.println(date);
-            vldt.setElement(date).isRequired("la fecha es obligatoria")
-                    .isDate("formato de fecha invalida");
-            if(!vldt.exec()){
-                view.showMessage(vldt.getMessage());
-                view.getjTFBirthdate().requestFocus();
-                return;
-            }
-            //addEmployee();
             
-        } else {
+            addEmployee();
+            
+        } else if (action.equals("edit")){
             
             editEmployee();
             
@@ -48,68 +41,9 @@ public class EmployeeController {
         
     }
     
-    /*public void addEmployee() {
+    public void addEmployee() {
         
-        //VALIDACION USUARIO
-        String user = view.getjTFUser().getText();
-        if( !Validate.isRequired(user)){
-            view.showMessage("el campo usuario es requerido");
-            view.getjTFUser().requestFocus();
-            return ;
-        }
-        
-        for(Employee employee : employeeDao.getAll()) {
-            
-            if ( employee.getUsername().equals(user) ) {
-                
-                view.showMessage("el usuario ya existe");
-                view.getjTFUser().requestFocus();
-                return ;
-                
-            }
-            
-        }
-        
-        //VALIDACION CONTRASEÑA
-        String pass = view.getjTFPass().getText();
-        if( !Validate.isRequired(pass)){
-            view.showMessage(" la contraseña es obligatoria");
-            view.getjTFPass().requestFocus();
-            return ;
-        }
-        if( !Validate.minLength(pass, 8)){
-             view.showMessage(" la contraseña debe de tener 8 caracteres  como minimo ");
-            view.getjTFPass().requestFocus();
-            return ;
-        }
-        
-        String role = (String) view.getjCBRole().getSelectedItem();
-        
-        //VALIDACION NOMBRE
-        String name = view.getjTFName().getText();
-        if( !Validate.isRequired(name)){
-            view.showMessage(" el nombre es obligatorio");
-            view.getjTFName().requestFocus();
-            return;
-        }
-        
-        //VALIDACION PATERNO
-        String ap = view.getjTFAP().getText();
-         if( !Validate.isRequired(ap)){
-            view.showMessage(" el apellido paterno es obligatorio");
-            view.getjTFAP().requestFocus();
-            return;
-        }
-
-        //VALIDACION MATERNO
-        String am = view.getjTFAM().getText();
-         if( !Validate.isRequired(am)){
-            view.showMessage(" el apellido materno es obligatorio");
-            view.getjTFAM().requestFocus();
-            return;
-        }
-        
-        //VALIDACION DNI
+        /*//VALIDACION DNI
         String dnistr = view.getjTFDni().getText();
         if( !Validate.isRequired(dnistr)){
             view.showMessage("el DNI es obligatorio");
@@ -211,14 +145,153 @@ public class EmployeeController {
         String[] datePart = datestr.split("/");
             date[0] = Integer.parseInt(datePart[0]);
             date[1] = Integer.parseInt(datePart[1]);
-            date[2] = Integer.parseInt(datePart[2]);
+            date[2] = Integer.parseInt(datePart[2]);*/
 
+        //VALIDACION NOMBRE
+        String name = view.getjTFName().getText();
             
-        // Crear el nuevo empleado
-        Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);
+        vldt.setElement(name)
+            .isRequired("El nombre es obligatorio");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFName().requestFocus();
+            return;
+                
+        }
+            
+        //VALIDACION A. PATERNO
+        String ap = view.getjTFAP().getText();
+            
+        vldt.setElement(ap)
+            .isRequired("El apellido paterno es obligatorio");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFAP().requestFocus();
+            return;
+                
+        }
+            
+        //VALIDACION A. MATERNO
+        String am = view.getjTFAM().getText();
+            
+        vldt.setElement(am)
+            .isRequired("El apellido materno es obligatorio");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFAM().requestFocus();
+            return;
+                
+        }
+            
+        //VALIDACION F, NACIMIENTO
+        String date = view.getjTFBirthdate().getText();
+            
+        vldt.setElement(date).isRequired("La fecha es obligatoria")
+            .isDate("formato de fecha invalida");
+            
+        if(!vldt.exec()){
+            view.showMessage(vldt.getMessage());
+            view.getjTFBirthdate().requestFocus();
+            return;
+        }
+        
+        int[] dateV = new int[3];
+        
+        String[] datePart = date.split("/");
+            dateV[0] = Integer.parseInt(datePart[0]);
+            dateV[1] = Integer.parseInt(datePart[1]);
+            dateV[2] = Integer.parseInt(datePart[2]);
+            
+        //VALIDACION DNI
+        String dnistr = view.getjTFDni().getText();
+            
+        vldt.setElement(dnistr)
+            .isRequired("El DNI es obligatorio")
+            .isInt("El DNI debe ser numerico")
+            .equalsLength(8, "El DNI debe tener 8 digitos");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFDni().requestFocus();
+            return;
+                
+        }
+        
+        int dni = Integer.parseInt(dnistr);
+            
+        //VALIDACION RUC
+        String ruc = view.getjTFRuc().getText();
+            
+        vldt.setElement(ruc)
+            .isRequired("El RUC es obligatorio")
+            .equalsLength(11, "El RUC debe tener 11 digitos");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFRuc().requestFocus();
+            return;
+                
+        }
+            
+        //VALIDACION CORREO
+        String email = view.getjTFEmail().getText();
+            
+        vldt.setElement(email)
+            .isRequired("El email es obligatorio")
+            .isEmail("Email invalido");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFEmail().requestFocus();
+            return;
+                
+        }
+            
+        //VALIDACION USERNAME
+        String username = view.getjTFUser().getText();
+           
+        vldt.setElement(username).isRequired("El nombre es obligatorio");
+            
+        if(!vldt.exec()) {
+            view.showMessage(vldt.getMessage());
+            view.getjTFUser().requestFocus();
+            return;
+        }
+            
+        //VALIDACION CONTRASEÑA
+        String password = view.getjTFPass().getText();
+            
+        vldt.setElement(password)
+            .isRequired("La contraseña es obligatoria")
+            .minLength(8, "La contraseña debe tener minimo 8 caracteres");
+            
+        if(!vldt.exec()) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFPass().requestFocus();
+            return;
+                
+        }   
+        
+        //ROL
+        String role = (String) view.getjCBRole().getSelectedItem();
+            
+        // ----------------------------------------------------------------------
+        //---------------------------------------------- Crear el nuevo empleado
+        Employee newEmployee = new Employee(username, password, role, name, ap, am, dni, LocalDate.of(dateV[2], dateV[1], dateV[0]), ruc, email);
         
         try {
-            // Guardar el nuevo empleado en LA LISTA DE ARREGLOS
+            
+            // Guardar el nuevo empleado en LA LISTA DE ARREGLOS (DAO)
             employeeDao.add(newEmployee);
 
             Object[] rowData = {
@@ -237,23 +310,26 @@ public class EmployeeController {
             // Agregar fila al modelo de tabla
             view.renderTable();
 
-            view.showMessage("Usuario creado");       
+            view.showMessage("Usuario creado"); 
+            
         } catch (Exception e) {
-            view.showMessage("Usuario no creado" + e.toString());       
+            
+            view.showMessage("Usuario no creado" + e.toString()); 
+            
         }
         
-    }*/
+    }
     
     public void editEmployee() {
         
-        int dni = Integer.parseInt(view.getjTFDni().getText());
+        long idEmployee = 1;
         
-        Employee employeeUp = employeeDao.get(dni);
+        /*Employee employeeUp = employeeDao.get(dni);  view.getjTUserList().getModel().getValueAt(row, 0);
         
         //actualizando valores
         employeeUp.setName(view.getjTFName().toString());
         employeeUp.setLastname_paternal(view.getjTFAP().toString());
-        employeeUp.setLastname_maternal(view.getjTFAM().toString());
+        employeeUp.setLastname_maternal(view.getjTFAM().toString());*/
         
         
         
@@ -314,6 +390,7 @@ public class EmployeeController {
     
     public void heandleViewEditClick(int row) {
         System.out.println(view.getjTUserList().getModel().getValueAt(row, 0));
+        
         //pintando la columna con la informacion de la fila
         view.getjTFUser().setText(view.getjTUserList().getValueAt(row, 0).toString());
         view.getjTFPass().setText(view.getjTUserList().getValueAt(row, 1).toString());

@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validate {
+    
+    //atributos
     private String message;
     private boolean valid;
     private String el;

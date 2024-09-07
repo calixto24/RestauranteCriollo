@@ -158,7 +158,7 @@
                 <StringItem index="0" value="Mesero"/>
                 <StringItem index="1" value="Cocinero"/>
                 <StringItem index="2" value="Cajero"/>
-                <StringItem index="3" value="Adminstrador"/>
+                <StringItem index="3" value="Administrador"/>
               </StringArray>
             </Property>
           </Properties>

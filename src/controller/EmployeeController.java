@@ -252,6 +252,7 @@ public class EmployeeController {
     
     public DefaultTableModel getEmployeeModel() {
         String[] columns = {
+            "Id",
             "Usuario", 
             "Contraseña", 
             "Rol", 
@@ -267,11 +268,9 @@ public class EmployeeController {
         
         ArrayList<Employee> employeeList = employeeDao.getAll();
         
-        for(Employee employee : employeeList) {
-            
-            System.out.println(employee.getId());
-            
+        for(Employee employee : employeeList) {   
             Object[] row = {
+                employee.getId(),
                 employee.getUsername(), 
                 employee.getPassword(),
                 employee.getRole(),
@@ -305,10 +304,11 @@ public class EmployeeController {
     }
     
     public void heandleViewEditClick(int row) {
-        
+        System.out.println(view.getjTUserList().getModel().getValueAt(row, 0));
         //pintando la columna con la informacion de la fila
         view.getjTFUser().setText(view.getjTUserList().getValueAt(row, 0).toString());
         view.getjTFPass().setText(view.getjTUserList().getValueAt(row, 1).toString());
+        view.getjCBRole().setSelectedItem(view.getjTUserList().getValueAt(row,2).toString());
         view.getjTFName().setText(view.getjTUserList().getValueAt(row, 3).toString());
         view.getjTFAP().setText(view.getjTUserList().getValueAt(row, 4).toString());
         view.getjTFAM().setText(view.getjTUserList().getValueAt(row, 5).toString());
@@ -316,7 +316,7 @@ public class EmployeeController {
         view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(row, 7).toString());
         view.getjTFRuc().setText(view.getjTUserList().getValueAt(row, 8).toString());
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(row, 9).toString());
-        
+    
         action = "edit";
         editEmployee();
         

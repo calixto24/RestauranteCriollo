@@ -116,6 +116,8 @@ public class Validate {
         return this;
     }
     
+    
+    
     public String getMessage() {
         return message;
     }

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -32,8 +33,11 @@ public class Register extends javax.swing.JFrame {
     
     public void renderTable() {
        DefaultTableModel employeeModel = employeeController.getEmployeeModel();
-        
        jTUserList.setModel(employeeModel);
+       
+       TableColumnModel tcm = jTUserList.getColumnModel();
+       tcm.removeColumn(tcm.getColumn(0));
+
     }
 
     /**
@@ -86,7 +90,7 @@ public class Register extends javax.swing.JFrame {
 
         jLabel10.setText("Rol");
 
-        jCBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesero", "Cocinero", "Cajero", "Adminstrador" }));
+        jCBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesero", "Cocinero", "Cajero", "Administrador" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

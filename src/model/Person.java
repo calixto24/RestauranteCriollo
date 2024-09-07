@@ -3,10 +3,11 @@ package model;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Random;
 
 public class Person {
     
-    protected int id;
+    protected long id;
     protected String name;
     protected String lastname_paternal;
     protected String lastname_maternal;
@@ -15,8 +16,8 @@ public class Person {
     protected String ruc;
     protected String email;
 
-    public Person(int id, String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
-        this.id = id;
+    public Person(String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
+        this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;
@@ -26,12 +27,8 @@ public class Person {
         this.email = email;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

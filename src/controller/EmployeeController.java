@@ -28,7 +28,7 @@ public class EmployeeController {
         
         if (action.equals("add")) {
             
-            addEmployee();
+            //addEmployee();
             
         } else {
             
@@ -39,7 +39,7 @@ public class EmployeeController {
         
     }
     
-    public void addEmployee() {
+    /*public void addEmployee() {
         
         //VALIDACION USUARIO
         String user = view.getjTFUser().getText();
@@ -204,7 +204,6 @@ public class EmployeeController {
             date[1] = Integer.parseInt(datePart[1]);
             date[2] = Integer.parseInt(datePart[2]);
 
-/* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */            
             
         // Crear el nuevo empleado
         Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);
@@ -234,7 +233,7 @@ public class EmployeeController {
             view.showMessage("Usuario no creado" + e.toString());       
         }
         
-    }
+    }*/
     
     public void editEmployee() {
         
@@ -269,6 +268,9 @@ public class EmployeeController {
         ArrayList<Employee> employeeList = employeeDao.getAll();
         
         for(Employee employee : employeeList) {
+            
+            System.out.println(employee.getId());
+            
             Object[] row = {
                 employee.getUsername(), 
                 employee.getPassword(),

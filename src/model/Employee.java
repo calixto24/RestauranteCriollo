@@ -9,8 +9,8 @@ public class Employee  extends Person{
     private String password;
     private String role;
 
-    public Employee(int id, String username, String password, String role, String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
-        super(id, name, lastname_paternal, lastname_maternal, dni, birthdate, ruc, email);
+    public Employee(String username, String password, String role, String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
+        super(name, lastname_paternal, lastname_maternal, dni, birthdate, ruc, email);
         this.username = username;
         this.password = password;
         this.role = role;

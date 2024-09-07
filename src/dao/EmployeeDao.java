@@ -30,4 +30,26 @@ public class EmployeeDao {
         
     }
     
+    public void update(int dni) {
+        
+        get(dni);
+        
+    }
+    
+    public Employee get(int dni) {
+        
+        for(Employee employee : employeeList) {
+            
+            if (dni == employee.getDni()) {
+                
+                return employee;
+                
+            }
+            
+        }
+        
+        return null;
+        
+    }
+    
 }

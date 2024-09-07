@@ -13,16 +13,33 @@ public class EmployeeController {
     //atributos
     private EmployeeDao employeeDao;
     private Register view;
+    private String action;
     
     //constructor vacio
     public EmployeeController (Register view) {
         this.view = view;
+        action = "add";
         
         //instancia de los objetos a utilizar
         employeeDao = new EmployeeDao();
     }
     
     public void handleRegisterClick() {
+        
+        if (action.equals("add")) {
+            
+            addEmployee();
+            
+        } else {
+            
+            editEmployee();
+            
+        }
+        
+        
+    }
+    
+    public void addEmployee() {
         
         //VALIDACION USUARIO
         String user = view.getjTFUser().getText();
@@ -193,29 +210,45 @@ public class EmployeeController {
         Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);
         
         try {
-        // Guardar el nuevo empleado en LA LISTA DE ARREGLOS
-        employeeDao.add(newEmployee);
-    
-        Object[] rowData = {
-            newEmployee.getUsername(), 
-            newEmployee.getPassword(),
-            newEmployee.getRole(),
-            newEmployee.getName(),
-            newEmployee.getLastname_paternal(),
-            newEmployee.getLastname_maternal(),
-            newEmployee.getDni(),
-            newEmployee.getBirthdate(),
-            newEmployee.getRuc(),
-            newEmployee.getEmail()
-        };
-    
-        // Agregar fila al modelo de tabla
-        view.renderTable();
-            
-        view.showMessage("Usuario creado");       
+            // Guardar el nuevo empleado en LA LISTA DE ARREGLOS
+            employeeDao.add(newEmployee);
+
+            Object[] rowData = {
+                newEmployee.getUsername(), 
+                newEmployee.getPassword(),
+                newEmployee.getRole(),
+                newEmployee.getName(),
+                newEmployee.getLastname_paternal(),
+                newEmployee.getLastname_maternal(),
+                newEmployee.getDni(),
+                newEmployee.getBirthdate(),
+                newEmployee.getRuc(),
+                newEmployee.getEmail()
+            };
+
+            // Agregar fila al modelo de tabla
+            view.renderTable();
+
+            view.showMessage("Usuario creado");       
         } catch (Exception e) {
             view.showMessage("Usuario no creado" + e.toString());       
         }
+        
+    }
+    
+    public void editEmployee() {
+        
+        int dni = Integer.parseInt(view.getjTFDni().getText());
+        
+        Employee employeeUp = employeeDao.get(dni);
+        
+        //actualizando valores
+        employeeUp.setName(view.getjTFName().toString());
+        employeeUp.setLastname_paternal(view.getjTFAP().toString());
+        employeeUp.setLastname_maternal(view.getjTFAM().toString());
+        
+        
+        
     }
     
     public DefaultTableModel getEmployeeModel() {
@@ -268,4 +301,24 @@ public class EmployeeController {
         view.getjTFRuc().setText(" ");
         
     }
+    
+    public void heandleViewEditClick(int row) {
+        
+        //pintando la columna con la informacion de la fila
+        view.getjTFUser().setText(view.getjTUserList().getValueAt(row, 0).toString());
+        view.getjTFPass().setText(view.getjTUserList().getValueAt(row, 1).toString());
+        view.getjTFName().setText(view.getjTUserList().getValueAt(row, 3).toString());
+        view.getjTFAP().setText(view.getjTUserList().getValueAt(row, 4).toString());
+        view.getjTFAM().setText(view.getjTUserList().getValueAt(row, 5).toString());
+        view.getjTFDni().setText(view.getjTUserList().getValueAt(row, 6).toString());
+        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(row, 7).toString());
+        view.getjTFRuc().setText(view.getjTUserList().getValueAt(row, 8).toString());
+        view.getjTFEmail().setText(view.getjTUserList().getValueAt(row, 9).toString());
+        
+        action = "edit";
+        editEmployee();
+        
+    }
+    
+    
 }

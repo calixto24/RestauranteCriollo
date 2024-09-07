@@ -96,6 +96,8 @@ public class EmployeeController {
             if (dni == employee.getDni()) {
                 
                 view.showMessage("el DNI ya existe");
+                view.getjTFDni().requestFocus();
+                return;
                 
             }
             
@@ -120,6 +122,8 @@ public class EmployeeController {
             if (ruc.equals(employee.getRuc())) {
                 
                 view.showMessage("el RUC ya existe");
+                view.getjTFRuc().requestFocus();
+                return;
                 
             }
             

@@ -2,6 +2,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
 public class Person {
@@ -64,6 +65,10 @@ public class Person {
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+    public String getBirthdateFormatted() {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return df.format(birthdate);
     }
 
     public void setBirthdate(LocalDate birthdate) {

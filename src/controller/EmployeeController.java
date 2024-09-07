@@ -27,7 +27,16 @@ public class EmployeeController {
     public void handleRegisterClick() {
         
         if (action.equals("add")) {
-            
+            Validate vldt = new Validate();
+            String date = view.getjTFBirthdate().getText();
+            System.out.println(date);
+            vldt.setElement(date).isRequired("la fecha es obligatoria")
+                    .isDate("formato de fecha invalida");
+            if(!vldt.exec()){
+                view.showMessage(vldt.getMessage());
+                view.getjTFBirthdate().requestFocus();
+                return;
+            }
             //addEmployee();
             
         } else {
@@ -278,7 +287,7 @@ public class EmployeeController {
                 employee.getLastname_paternal(),
                 employee.getLastname_maternal(),
                 employee.getDni(),
-                employee.getBirthdate(),
+                employee.getBirthdateFormatted(),
                 employee.getRuc(),
                 employee.getEmail()
             };
@@ -318,9 +327,5 @@ public class EmployeeController {
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(row, 9).toString());
     
         action = "edit";
-        editEmployee();
-        
     }
-    
-    
 }

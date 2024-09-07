@@ -32,6 +32,18 @@ public class EmployeeController {
             return ;
         }
         
+        for(Employee employee : employeeDao.getAll()) {
+            
+            if ( employee.getUsername().equals(user) ) {
+                
+                view.showMessage("el usuario ya existe");
+                view.getjTFUser().requestFocus();
+                return ;
+                
+            }
+            
+        }
+        
         //VALIDACION CONTRASEÑA
         String pass = view.getjTFPass().getText();
         if( !Validate.isRequired(pass)){
@@ -140,6 +152,18 @@ public class EmployeeController {
             view.showMessage("el email no es valido");
             view.getjTFEmail().requestFocus();
             return;
+        }
+        
+        for(Employee employee : employeeDao.getAll()) {
+            
+            if (employee.getEmail().equals(email)) {
+                
+                view.showMessage("el email ya existe");
+                view.getjTFEmail().requestFocus();
+                return;
+                
+            }
+            
         }
         
         //VALIDACION FECHA DE NACIMIENTO

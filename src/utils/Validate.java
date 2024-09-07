@@ -1,11 +1,14 @@
 package utils;
 
+import dao.EmployeeDao;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import model.Employee;
 
 public class Validate {
     
     //atributos
+    private EmployeeDao employeeDao;
     private String message;
     private boolean valid;
     private String el;
@@ -14,6 +17,8 @@ public class Validate {
         message = "";
         valid = true;
         el = "";
+        
+        employeeDao = new EmployeeDao();
     }
     
     public Validate(String el) {
@@ -118,7 +123,55 @@ public class Validate {
         return this;
     }
     
+    //METODOS DE IGUALDAD
+    public Validate equalsAttribute(String msg, Object value, String attribute) {
+        if (!valid) return this;
+        
+        for (Employee employee : employeeDao.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (value.equals(employee.getEmail())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "ruc":
+                    if (value.equals(employee.getRuc())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "username":
+                    if (value.equals(employee.getUsername())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+            }
+        }
+        
+        return this;
+        
+    }
     
+    public Validate equalsDNI(String msg, int dni) {
+        if (!valid) return this;
+        
+        for(Employee employee : employeeDao.getAll()) {
+            
+            if (dni == employee.getDni()) {
+                
+                valid = false;
+                message = msg;
+                
+            }
+            
+        }
+        
+        return this;
+    }
+    
+    //////
     
     public String getMessage() {
         return message;

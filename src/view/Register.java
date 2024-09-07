@@ -20,6 +20,7 @@ public class Register extends javax.swing.JFrame {
     
     //atributos
     private EmployeeController employeeController;
+    private int row;
     
     //constructor vacio
     public Register() {
@@ -138,6 +139,11 @@ public class Register extends javax.swing.JFrame {
         });
 
         jButton3.setText("ELIMINAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos personales"));
 
@@ -332,15 +338,23 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTUserListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUserListMouseClicked
-        int row = jTUserList.rowAtPoint(evt.getPoint());
+        row = jTUserList.rowAtPoint(evt.getPoint());
         
-        employeeController.heandleViewEditClick(row);
+        employeeController.heandleViewEditClick();
         
     }//GEN-LAST:event_jTUserListMouseClicked
 
+    public int getRow() {
+        return row;
+    }
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         employeeController.handleCleanClick();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        employeeController.heandleDeleteClick();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);

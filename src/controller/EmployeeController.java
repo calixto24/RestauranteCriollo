@@ -42,132 +42,22 @@ public class EmployeeController {
     }
     
     public void addEmployee() {
-        
-        /*//VALIDACION DNI
-        String dnistr = view.getjTFDni().getText();
-        if( !Validate.isRequired(dnistr)){
-            view.showMessage("el DNI es obligatorio");
-            view.getjTFDni().requestFocus();
-            return;
-        }
-        if( !Validate.isInt(dnistr)){
-            view.showMessage("el DNI tiene que ser numerico");
-            view.getjTFDni().requestFocus();
-            return;
-        }
-        if(!Validate.equalsLength(dnistr, 8)){
-            view.showMessage("el DNI tiene que ser igual a 8 digitos");
-            view.getjTFDni().requestFocus();
-            return;
-        }
-        
-        int dni = Integer.parseInt(dnistr);
-        
-        for(Employee employee : employeeDao.getAll()) {
-            
-            if (dni == employee.getDni()) {
-                
-                view.showMessage("el DNI ya existe");
-                view.getjTFDni().requestFocus();
-                return;
-                
-            }
-            
-        }
-        
-        //VALIDACION RUC
-        String ruc = view.getjTFRuc().getText();
-        if( !Validate.isRequired(ruc)){
-            view.showMessage("el RUC es obligatorio");
-            view.getjTFRuc().requestFocus();
-            return;
-        }
-        
-        if(!Validate.equalsLength(ruc, 11)){
-            view.showMessage("el RUC tiene que ser igual a 11 digitos");
-            view.getjTFRuc().requestFocus();
-            return;
-        }
-        
-        for(Employee employee : employeeDao.getAll()) {
-            
-            if (ruc.equals(employee.getRuc())) {
-                
-                view.showMessage("el RUC ya existe");
-                view.getjTFRuc().requestFocus();
-                return;
-                
-            }
-            
-        }
-        
-        //VALIDACION EMAIL
-        String email = view.getjTFEmail().getText();
-        if( !Validate.isRequired(email)){
-            view.showMessage("el email es obligatorio");
-            view.getjTFEmail().requestFocus();
-            return;
-        }
-        if( !Validate.isEmail(email)){
-            view.showMessage("el email no es valido");
-            view.getjTFEmail().requestFocus();
-            return;
-        }
-        
-        for(Employee employee : employeeDao.getAll()) {
-            
-            if (employee.getEmail().equals(email)) {
-                
-                view.showMessage("el email ya existe");
-                view.getjTFEmail().requestFocus();
-                return;
-                
-            }
-            
-        }
-        
-        //VALIDACION FECHA DE NACIMIENTO
-        String datestr = view.getjTFBirthdate().getText();
-        
-        if ( !Validate.isRequired(datestr)){
-            view.showMessage("la fecha es obligatorio");
-            view.getjTFBirthdate().requestFocus();
-            return;
-        }
-        
-        if( !Validate.isDate(datestr)){
-            view.showMessage("la fecha no es valida");
-            view.getjTFBirthdate().requestFocus();
-            return;
-        }
-        int[] date = new int[3];
-        
-        String[] datePart = datestr.split("/");
-            date[0] = Integer.parseInt(datePart[0]);
-            date[1] = Integer.parseInt(datePart[1]);
-            date[2] = Integer.parseInt(datePart[2]);*/
 
         //VALIDACION NOMBRE
         String name = view.getjTFName().getText();
+
+        if (!validateName(name, action)) {
             
-        vldt.setElement(name)
-            .isRequired("El nombre es obligatorio");
-            
-        if(!vldt.exec()) {
-                
             view.showMessage(vldt.getMessage());
             view.getjTFName().requestFocus();
             return;
-                
+            
         }
             
         //VALIDACION A. PATERNO
         String ap = view.getjTFAP().getText();
             
-        vldt.setElement(ap)
-            .isRequired("El apellido paterno es obligatorio");
-            
-        if(!vldt.exec()) {
+        if(!validateAP(ap, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFAP().requestFocus();
@@ -177,11 +67,8 @@ public class EmployeeController {
             
         //VALIDACION A. MATERNO
         String am = view.getjTFAM().getText();
-            
-        vldt.setElement(am)
-            .isRequired("El apellido materno es obligatorio");
-            
-        if(!vldt.exec()) {
+        
+        if(!validateAM(am, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFAM().requestFocus();
@@ -210,30 +97,19 @@ public class EmployeeController {
             
         //VALIDACION DNI
         String dnistr = view.getjTFDni().getText();
-            
-        vldt.setElement(dnistr)
-            .isRequired("El DNI es obligatorio")
-            .isInt("El DNI debe ser numerico")
-            .equalsLength(8, "El DNI debe tener 8 digitos");
-            
-        if(!vldt.exec()) {
+        int dni = Integer.parseInt(dnistr);
+        
+        if(!validateDNI(dni, dnistr, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFDni().requestFocus();
             return;
                 
         }
-        
-        int dni = Integer.parseInt(dnistr);
             
         //VALIDACION RUC
         String ruc = view.getjTFRuc().getText();
-            
-        vldt.setElement(ruc)
-            .isRequired("El RUC es obligatorio")
-            .equalsLength(11, "El RUC debe tener 11 digitos");
-            
-        if(!vldt.exec()) {
+        if(!validateRUC(ruc, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFRuc().requestFocus();
@@ -242,13 +118,8 @@ public class EmployeeController {
         }
             
         //VALIDACION CORREO
-        String email = view.getjTFEmail().getText();
-            
-        vldt.setElement(email)
-            .isRequired("El email es obligatorio")
-            .isEmail("Email invalido");
-            
-        if(!vldt.exec()) {
+        String email = view.getjTFEmail().getText();  
+        if(!validateEmail(email, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFEmail().requestFocus();
@@ -258,23 +129,15 @@ public class EmployeeController {
             
         //VALIDACION USERNAME
         String username = view.getjTFUser().getText();
-           
-        vldt.setElement(username).isRequired("El nombre es obligatorio");
-            
-        if(!vldt.exec()) {
+        if(!validateUsername(username, action)) {
             view.showMessage(vldt.getMessage());
             view.getjTFUser().requestFocus();
             return;
         }
             
         //VALIDACION CONTRASEÑA
-        String password = view.getjTFPass().getText();
-            
-        vldt.setElement(password)
-            .isRequired("La contraseña es obligatoria")
-            .minLength(8, "La contraseña debe tener minimo 8 caracteres");
-            
-        if(!vldt.exec()) {
+        String password = view.getjTFPass().getText();  
+        if(!validatePassword(password, action)) {
                 
             view.showMessage(vldt.getMessage());
             view.getjTFPass().requestFocus();
@@ -285,7 +148,6 @@ public class EmployeeController {
         //ROL
         String role = (String) view.getjCBRole().getSelectedItem();
             
-        // ----------------------------------------------------------------------
         //---------------------------------------------- Crear el nuevo empleado
         Employee newEmployee = new Employee(username, password, role, name, ap, am, dni, LocalDate.of(dateV[2], dateV[1], dateV[0]), ruc, email);
         
@@ -307,10 +169,12 @@ public class EmployeeController {
                 newEmployee.getEmail()
             };
 
-            // Agregar fila al modelo de tabla
+            //renderizar los cambios en la tabla
             view.renderTable();
 
             view.showMessage("Usuario creado"); 
+            handleCleanClick();
+            
             
         } catch (Exception e) {
             
@@ -322,18 +186,290 @@ public class EmployeeController {
     
     public void editEmployee() {
         
-        long idEmployee = 1;
+        //Obtengo el id unico de la fila
+        long idEmployee = (long) view.getjTUserList().getModel().getValueAt(view.getRow(), 0);
         
-        /*Employee employeeUp = employeeDao.get(dni);  view.getjTUserList().getModel().getValueAt(row, 0);
+        //envio el id unico al dao y traigo el objeto empleado con sus atributos
+        Employee employeeUp = employeeDao.get(idEmployee);
         
-        //actualizando valores
-        employeeUp.setName(view.getjTFName().toString());
-        employeeUp.setLastname_paternal(view.getjTFAP().toString());
-        employeeUp.setLastname_maternal(view.getjTFAM().toString());*/
+        /* ------- VALIDACION DE EDICION (EMPLOYEE) --------*/
         
+        //VALIDACION NOMBRE
+        String name = view.getjTFName().getText();
         
+        if(!validateName(name, action)) {
+            
+            view.showMessage(vldt.getMessage());
+            view.getjTFName().requestFocus();
+            return;
+            
+        }
+        employeeUp.setName(name);
+        
+        //VALIDACION AP
+        String ap = view.getjTFAP().getText();
+        
+        if(!validateAP(ap, action)) {
+            
+            view.showMessage(vldt.getMessage());
+            view.getjTFAP().requestFocus();
+            return;
+            
+        } 
+        employeeUp.setLastname_paternal(ap);
+        
+        //VALIDACION AM
+        String am = view.getjTFAM().getText();
+        if(!validateAM(am, action)) {
+            
+            view.showMessage(vldt.getMessage());
+            view.getjTFAM().requestFocus();
+            return;
+            
+        }
+        employeeUp.setLastname_maternal(am);
+
+        //VALIDACION DNI
+        String dnistr = view.getjTFDni().getText();
+        int dni = Integer.parseInt(dnistr);
+        
+        if(!validateDNI(dni, dnistr, action)) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFDni().requestFocus();
+            return;
+                
+        }
+        employeeUp.setDni(dni);
+        
+        //VALIDACION RUC
+        String ruc = view.getjTFRuc().getText();
+        if(!validateRUC(ruc, action)) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFRuc().requestFocus();
+            return;
+                
+        }
+        employeeUp.setRuc(ruc);
+        
+        //VALIDACION EMAIL
+        String email = view.getjTFEmail().getText();
+        if(!validateEmail(email, action)) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFEmail().requestFocus();
+            return;
+                
+        }
+        employeeUp.setEmail(email);
+        
+        //VALIDACION USERNAME
+        String username = view.getjTFUser().getText();
+        if(!validateUsername(username, action)) {
+            view.showMessage(vldt.getMessage());
+            view.getjTFUser().requestFocus();
+            return;
+        }
+        employeeUp.setUsername(username);
+            
+        //VALIDACION CONTRASEÑA
+        String password = view.getjTFPass().getText();  
+        if(!validatePassword(password, action)) {
+                
+            view.showMessage(vldt.getMessage());
+            view.getjTFPass().requestFocus();
+            return;
+                
+        }
+        employeeUp.setPassword(password);
+        
+        //ROL
+        String role = (String) view.getjCBRole().getSelectedItem();
+        employeeUp.setRole(role);
+        
+        try {
+            
+            employeeDao.update(idEmployee, employeeUp);
+
+            //renderizar los cambios en la tabla
+            view.renderTable();
+            view.showMessage("Usuario modificado correctamente");
+            handleCleanClick();
+            
+        } catch (Exception e) {
+            
+            view.showMessage("Error al modificar el usuario" + e.toString()); 
+            
+        }
         
     }
+    
+    //OPTIMIZACION DE VALIDACION 
+    public boolean validateName(String name, String action) {
+        
+        if(action.equals("add") || action.equals("edit")) {
+            
+            vldt.setElement(name)
+                    .isRequired("El nombre es obligatorio");
+            
+            return vldt.exec();
+            
+        } 
+        
+        return false;
+        
+    }
+    
+    public boolean validateAP(String ap, String accion) {
+        
+        if(action.equals("add") || action.equals("edit")) {
+            
+            vldt.setElement(ap)
+                    .isRequired("El apellido paterno es obligatorio");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validateAM(String ap, String accion) {
+        
+        if(action.equals("add") || action.equals("edit")) {
+            
+            vldt.setElement(ap)
+                    .isRequired("El apellido materno es obligatorio");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validateDNI(int dni, String dnistr, String accion) {
+        
+        if (action.equals("add")) {
+            
+            vldt.setElement(dnistr)
+                    .isRequired("El DNI es obligatorio")
+                    .isInt("El DNI debe ser numerico")
+                    .equalsLength(8, "El DNI debe tener 8 digitos")
+                    .equalsDNI("El DNI ya existe", dni);
+            
+            return vldt.exec();
+            
+        } else if (action.equals("edit")) {
+            
+            vldt.setElement(dnistr)
+                    .isRequired("El DNI es obligatorio")
+                    .isInt("El DNI debe ser numerico")
+                    .equalsLength(8, "El DNI debe tener 8 digitos");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validateRUC(String ruc, String accion) {
+        
+        if (action.equals("add")) {
+            
+            vldt.setElement(ruc)
+                    .isRequired("El RUC es obligatorio")
+                    .equalsLength(11, "El RUC debe tener 11 digitos")
+                    .equalsAttribute("El RUC ya existe", ruc, "ruc");
+            
+            return vldt.exec();
+            
+        } else if (action.equals("edit")) {
+            
+            vldt.setElement(ruc)
+                    .isRequired("El RUC es obligatorio")
+                    .equalsLength(11, "El RUC debe tener 11 digitos");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validateEmail(String email, String accion) {
+        
+        if (action.equals("add")) {
+            
+            vldt.setElement(email)
+                    .isRequired("El email es obligatorio")
+                    .isEmail("Email invalido")
+                    .equalsAttribute("El email ya existe", email, "email");
+            
+            return vldt.exec();
+            
+        } else if (action.equals("edit")) {
+            
+            vldt.setElement(email)
+                    .isRequired("El email es obligatorio")
+                    .isEmail("Email invalido");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validateUsername(String username, String accion) {
+        
+        if (action.equals("add")) {
+            
+            vldt.setElement(username)
+                    .isRequired("El usuario es obligatorio")
+                    .equalsAttribute("El usuario ya existe", username, "username");
+            
+            return vldt.exec();
+            
+        } else if (action.equals("edit")) {
+            
+            vldt.setElement(username)
+                    .isRequired("El usuario es obligatorio");
+            
+            return vldt.exec();
+            
+        }
+        
+        return false;
+        
+    }
+    
+    public boolean validatePassword(String password, String action) {
+        
+        if(action.equals("add") || action.equals("edit")) {
+            
+            vldt.setElement(password)
+                    .isRequired("La contraseña es obligatoria")
+                    .minLength(8, "La contraseña debe tener minimo 8 caracteres");
+            
+            return vldt.exec();
+            
+        } 
+        
+        return false;
+        
+    }
+    
+    //FIN OPTIMIZACION DE VALIDACION
+    
+    
     
     public DefaultTableModel getEmployeeModel() {
         String[] columns = {
@@ -388,21 +524,42 @@ public class EmployeeController {
         
     }
     
-    public void heandleViewEditClick(int row) {
-        System.out.println(view.getjTUserList().getModel().getValueAt(row, 0));
+    public void heandleViewEditClick() {
+        System.out.println(view.getjTUserList().getModel().getValueAt(view.getRow(), 0));
         
         //pintando la columna con la informacion de la fila
-        view.getjTFUser().setText(view.getjTUserList().getValueAt(row, 0).toString());
-        view.getjTFPass().setText(view.getjTUserList().getValueAt(row, 1).toString());
-        view.getjCBRole().setSelectedItem(view.getjTUserList().getValueAt(row,2).toString());
-        view.getjTFName().setText(view.getjTUserList().getValueAt(row, 3).toString());
-        view.getjTFAP().setText(view.getjTUserList().getValueAt(row, 4).toString());
-        view.getjTFAM().setText(view.getjTUserList().getValueAt(row, 5).toString());
-        view.getjTFDni().setText(view.getjTUserList().getValueAt(row, 6).toString());
-        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(row, 7).toString());
-        view.getjTFRuc().setText(view.getjTUserList().getValueAt(row, 8).toString());
-        view.getjTFEmail().setText(view.getjTUserList().getValueAt(row, 9).toString());
+        view.getjTFUser().setText(view.getjTUserList().getValueAt(view.getRow(), 0).toString());
+        view.getjTFPass().setText(view.getjTUserList().getValueAt(view.getRow(), 1).toString());
+        view.getjCBRole().setSelectedItem(view.getjTUserList().getValueAt(view.getRow(),2).toString());
+        view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
+        view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
+        view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
+        view.getjTFDni().setText(view.getjTUserList().getValueAt(view.getRow(), 6).toString());
+        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
+        view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
+        view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
     
         action = "edit";
+    }
+    
+    public void heandleDeleteClick() {
+        
+        long idEmployee = (long) view.getjTUserList().getModel().getValueAt(view.getRow(), 0);
+        
+        try {
+            
+            employeeDao.delete(idEmployee);
+
+            //renderizar los cambios en la tabla
+            view.renderTable();
+            view.showMessage("Usuario eliminado correctamente");
+            handleCleanClick();
+            
+        } catch (Exception e) {
+            
+            view.showMessage("Error al eliminar el usuario" + e.toString()); 
+            
+        }
+        
     }
 }

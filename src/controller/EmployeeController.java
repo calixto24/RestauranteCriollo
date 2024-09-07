@@ -163,7 +163,8 @@ public class EmployeeController {
             
         // Crear el nuevo empleado
         Employee newEmployee = new Employee(user, pass, role, name, ap, am, dni, LocalDate.of(date[2], date[1], date[0]), ruc, email);
-
+        
+        try {
         // Guardar el nuevo empleado en LA LISTA DE ARREGLOS
         employeeDao.add(newEmployee);
     
@@ -182,21 +183,48 @@ public class EmployeeController {
     
         // Agregar fila al modelo de tabla
         view.renderTable();
-        
-        try {
             
-            view.showMessage("Usuario creado");
-            
+        view.showMessage("Usuario creado");       
         } catch (Exception e) {
-            
-            view.showMessage("Usuario no creado" + e.toString());
-            
+            view.showMessage("Usuario no creado" + e.toString());       
         }
-        
     }
     
-    public ArrayList<Employee> getEmployeeList() {
-        return employeeDao.getAll();
+    public DefaultTableModel getEmployeeModel() {
+        String[] columns = {
+            "Usuario", 
+            "Contraseña", 
+            "Rol", 
+            "Nombre",
+            "A. Paterno",
+            "A. Materno",
+            "DNI",
+            "Fecha Nacimiento",
+            "RUC",
+            "Email"
+        };
+        DefaultTableModel employeeModel = new DefaultTableModel(null, columns);
+        
+        ArrayList<Employee> employeeList = employeeDao.getAll();
+        
+        for(Employee employee : employeeList) {
+            Object[] row = {
+                employee.getUsername(), 
+                employee.getPassword(),
+                employee.getRole(),
+                employee.getName(),
+                employee.getLastname_paternal(),
+                employee.getLastname_maternal(),
+                employee.getDni(),
+                employee.getBirthdate(),
+                employee.getRuc(),
+                employee.getEmail()
+            };
+            
+            employeeModel.addRow(row);
+        }
+        
+        return employeeModel;
     }
     
     public void handleCleanClick() {

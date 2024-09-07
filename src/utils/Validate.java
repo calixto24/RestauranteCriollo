@@ -40,15 +40,11 @@ public class Validate {
     }
     
     public static boolean isDate(String str) {
-        String regex = "^[1-31]/[1-12]/[0-9]{4}$"; // 01/05/2004
+        String regex = "^(0[1-9]|[1-9]|12[0-9]|3[01])/(0[1-9]|[1-9]|1[0-2])/[0-9]{4}$"; // 01/05/2004
         
         Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(str);
         
         return matcher.matches();
-    }
-    
-    public static void main(String[] args) {
-        System.out.println((isInt("12345678901") ? "si" : "no"));
     }
 }

@@ -90,8 +90,8 @@ public class EmployeeController {
                 .isInt("El DNI debe ser numerico")
                 .equalsLength(8, "El DNI debe tener 8 digitos");
 
-        if (action.equals("add")) vldt.equalsDNI("El DNI ya existe");
-        else if (action.equals("edit")) vldt.equalsDNI("El DNI ya existe", selectedId);
+        if (action.equals("add")) vldt.equalsAttribute("El DNI ya existe", "dni");
+        else if (action.equals("edit")) vldt.equalsAttribute("El DNI ya existe", "dni", selectedId);
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
@@ -105,9 +105,12 @@ public class EmployeeController {
         String ruc = view.getjTFRuc().getText();
         vldt.setElement(ruc)
                 .isRequired("El RUC es obligatorio")
-                .equalsLength(11, "El RUC debe tener 11 digitos")
-                .equalsAttribute("El RUC ya existe", ruc, "ruc");
+                .isLong("El RUC debe ser numerico")
+                .equalsLength(11, "El RUC debe tener 11 digitos");
 
+        if(action.equals("add")) vldt.equalsAttribute("El RUC ya existe", "ruc");
+        else if (action.equals("edit")) vldt.equalsAttribute("El RUC ya existe", "ruc", selectedId);
+        
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFRuc().requestFocus();
@@ -122,6 +125,9 @@ public class EmployeeController {
                 .isRequired("El email es obligatorio")
                 .isEmail("Email invalido");
 
+        if(action.equals("add")) vldt.equalsAttribute("El email ya existe", "email");
+        else if (action.equals("edit")) vldt.equalsAttribute("El email ya existe", "email", selectedId);
+        
         if (!vldt.exec()) {
 
             view.showMessage(vldt.getMessage());
@@ -134,8 +140,10 @@ public class EmployeeController {
         String username = view.getjTFUser().getText();
 
         vldt.setElement(username)
-                .isRequired("El usuario es obligatorio")
-                .equalsAttribute("El usuario ya existe", username, "username");
+                .isRequired("El usuario es obligatorio");
+        
+        if(action.equals("add")) vldt.equalsAttribute("El username ya existe", "username");
+        else if (action.equals("edit")) vldt.equalsAttribute("El username ya existe", "username", selectedId);
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());

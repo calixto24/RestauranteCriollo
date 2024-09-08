@@ -62,6 +62,23 @@ public class Validate {
             return this;
         }
     }
+    
+    public Validate isLong(String msg) {
+        
+        if(!valid) {
+            return this;
+        }
+        
+        try {
+            Long.parseLong(el);
+        } catch (Exception e) {
+            valid = false;
+            message = msg;
+        } finally {
+            return this;
+        }
+        
+    }
 
     public Validate minLength(int min, String msg) {
         if (!valid) {
@@ -175,8 +192,59 @@ public class Validate {
 
         return this;
     }
+    
+    public Validate equalsAttribute(String msg, String attribute, long id) {
+        if (!valid) return this;
+        
+        for (Employee employee : employeeDao.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (el.equals(employee.getEmail())) {
+                        if(id != employee.getId()) {
+                            
+                            valid = false;
+                            message = msg;
+                            
+                        }
+                    }
+                    break;
+                case "ruc":
+                    if (el.equals(employee.getRuc())) {
+                        if(id != employee.getId()) {
+                            
+                            valid = false;
+                            message = msg;
+                            
+                        }
+                    }
+                    break;
+                case "username":
+                    if (el.equals(employee.getUsername())) {
+                        if(id != employee.getId()) {
+                            
+                            valid = false;
+                            message = msg;
+                            
+                        }
+                    }
+                    break;
+                case "dni":
+                    if (Integer.parseInt(el) == employee.getDni()) {
+                        if(id != employee.getId()) {
+                            
+                            valid = false;
+                            message = msg;
+                            
+                        }
+                    }
+                    break;
+            }
+        }
 
-    public Validate equalsDNI(String msg, long id) {
+        return this;
+    }
+
+    /*public Validate equalsDNI(String msg, long id) {
         if (!valid) {
             return this;
         }
@@ -191,7 +259,7 @@ public class Validate {
         }
 
         return this;
-    }
+    }*/
 
     //////
     public String getMessage() {

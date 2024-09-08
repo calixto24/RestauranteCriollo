@@ -244,23 +244,6 @@ public class Validate {
         return this;
     }
 
-    /*public Validate equalsDNI(String msg, long id) {
-        if (!valid) {
-            return this;
-        }
-
-        for (Employee employee : employeeDao.getAll()) {
-            if (Integer.parseInt(el) == employee.getDni()) {
-                if (id != employee.getId()) {
-                    valid = false;
-                    message = msg;
-                }
-            }
-        }
-
-        return this;
-    }*/
-
     //////
     public String getMessage() {
         return message;

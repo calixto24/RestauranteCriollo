@@ -175,21 +175,23 @@ public class EmployeeController {
 
             try {
                 employeeDao.add(newEmployee);
-
                 view.showMessage("Usuario creado");
+                
             } catch (Exception e) {
 
                 view.showMessage("Usuario no creado" + e.toString());
+                
             }
         } else if (action.equals("edit")) {
 
             try {
                 employeeDao.update(selectedId, newEmployee);
-
                 view.showMessage("Usuario actualizado");
+                
             } catch (Exception e) {
 
                 view.showMessage("Usuario no actualizado" + e.toString());
+                
             }
 
         }
@@ -239,16 +241,18 @@ public class EmployeeController {
 
     public void handleCleanForm() {
         action = "add";
+        
+        view.getjBDelete().setEnabled(false);
 
-        view.getjTFUser().setText(" ");
-        view.getjTFAM().setText(" ");
-        view.getjTFAP().setText(" ");
-        view.getjTFBirthdate().setText(" ");
-        view.getjTFDni().setText(" ");
-        view.getjTFEmail().setText(" ");
-        view.getjTFName().setText(" ");
-        view.getjTFPass().setText(" ");
-        view.getjTFRuc().setText(" ");
+        view.getjTFUser().setText("");
+        view.getjTFAM().setText("");
+        view.getjTFAP().setText("");
+        view.getjTFBirthdate().setText("");
+        view.getjTFDni().setText("");
+        view.getjTFEmail().setText("");
+        view.getjTFName().setText("");
+        view.getjTFPass().setText("");
+        view.getjTFRuc().setText("");
     }
 
     public void heandleViewEditClick() {
@@ -267,11 +271,22 @@ public class EmployeeController {
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
 
         action = "edit";
+        
+        view.getjBDelete().setEnabled(true);
     }
 
     public void heandleDeleteClick() {
+        
         selectedId = Long.parseLong(view.getjTUserList().getModel().getValueAt(view.getRow(), 0).toString());
 
+        int op = view.showConfirmation("¿Desea eliminar este empleado?");
+        
+        if (op != 0) {
+            
+            return;
+            
+        }
+        
         try {
             employeeDao.delete(selectedId);
 

@@ -5,6 +5,7 @@
 package view;
 
 import controller.EmployeeController;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -59,7 +60,7 @@ public class Register extends javax.swing.JFrame {
         jCBRole = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBDelete = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -138,10 +139,11 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("ELIMINAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBDelete.setText("ELIMINAR");
+        jBDelete.setEnabled(false);
+        jBDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBDeleteActionPerformed(evt);
             }
         });
 
@@ -297,7 +299,7 @@ public class Register extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(66, 66, 66)
-                        .addComponent(jButton3))
+                        .addComponent(jBDelete))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -323,7 +325,7 @@ public class Register extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton3)
+                            .addComponent(jBDelete)
                             .addComponent(jButton4)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(46, 46, 46))
@@ -352,15 +354,24 @@ public class Register extends javax.swing.JFrame {
         employeeController.handleCleanForm();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
         employeeController.heandleDeleteClick();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jBDeleteActionPerformed
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
+    
+    public int showConfirmation(String message) {
+        return JOptionPane.showConfirmDialog(rootPane, message);
+    }
 
     //metodos getters
+
+    public JButton getjBDelete() {
+        return jBDelete;
+    }
+    
     public JTable getjTUserList() {
         return jTUserList;
     }
@@ -457,8 +468,8 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBDelete;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jCBRole;
     private javax.swing.JLabel jLabel1;

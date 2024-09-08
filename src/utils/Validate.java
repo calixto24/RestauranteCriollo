@@ -62,13 +62,13 @@ public class Validate {
             return this;
         }
     }
-    
+
     public Validate isLong(String msg) {
-        
-        if(!valid) {
+
+        if (!valid) {
             return this;
         }
-        
+
         try {
             Long.parseLong(el);
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class Validate {
         } finally {
             return this;
         }
-        
+
     }
 
     public Validate minLength(int min, String msg) {
@@ -192,49 +192,51 @@ public class Validate {
 
         return this;
     }
-    
+
     public Validate equalsAttribute(String msg, String attribute, long id) {
-        if (!valid) return this;
-        
+        if (!valid) {
+            return this;
+        }
+
         for (Employee employee : employeeDao.getAll()) {
             switch (attribute.toLowerCase()) {
                 case "email":
                     if (el.equals(employee.getEmail())) {
-                        if(id != employee.getId()) {
-                            
+                        if (id != employee.getId()) {
+
                             valid = false;
                             message = msg;
-                            
+
                         }
                     }
                     break;
                 case "ruc":
                     if (el.equals(employee.getRuc())) {
-                        if(id != employee.getId()) {
-                            
+                        if (id != employee.getId()) {
+
                             valid = false;
                             message = msg;
-                            
+
                         }
                     }
                     break;
                 case "username":
                     if (el.equals(employee.getUsername())) {
-                        if(id != employee.getId()) {
-                            
+                        if (id != employee.getId()) {
+
                             valid = false;
                             message = msg;
-                            
+
                         }
                     }
                     break;
                 case "dni":
                     if (Integer.parseInt(el) == employee.getDni()) {
-                        if(id != employee.getId()) {
-                            
+                        if (id != employee.getId()) {
+
                             valid = false;
                             message = msg;
-                            
+
                         }
                     }
                     break;

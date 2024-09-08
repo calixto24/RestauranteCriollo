@@ -4,11 +4,13 @@ package database;
 import java.util.ArrayList;
 import model.Employee;
 import java.time.LocalDate;
+import model.Table;
 
 public class Restaurant {
     
     private ArrayList<Employee>employeeList;
     private static Restaurant instance;
+    private ArrayList<Table>tableList;
     
     private Restaurant(){
         
@@ -19,9 +21,17 @@ public class Restaurant {
         employeeList.add(new Employee( "Nolan", "nol12345", "Administrador", "John", "Mayro", "luna", 60749102, LocalDate.of(2005, 06, 05), "298392839", "kenao@gmail.com"));
         employeeList.add(new Employee( "Calix", "12345678", "Mesero", "Jhordan", "Calixto", "Laureano", 71597595, LocalDate.of(2005, 06, 24), "11111211111", "calix@gmail.com"));
         employeeList.add(new Employee( "admin", "admin12345", "Cajero", "Manuel", "Parra", "Flores", 71597592, LocalDate.of(2005, 06, 24), "11111111111", "manu@gmail.com"));
-
+        
+        tableList = new ArrayList<>(); 
+        tableList.add(new Table(1, 15, "Disponible"));
+        tableList.add(new Table(2, 12, "Disponible"));
+        tableList.add(new Table(3, 10, "Disponible"));
     }
 
+    public ArrayList<Table> getTableList() {
+        return tableList;
+    }
+    
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }

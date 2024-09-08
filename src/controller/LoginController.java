@@ -22,7 +22,7 @@ public class LoginController {
         this.loginView = loginView;
         
         employeeDao = new EmployeeDao();
-      //  previewAdminView = new PreviewAdminView();
+        previewAdminView = new PreviewAdminView();
         vldt = new Validate();
         
     }
@@ -68,7 +68,7 @@ public class LoginController {
                 switch(user.getRole()) {
                     
                     case "Administrador": 
-              //          previewAdminView.setVisible(true); 
+                     previewAdminView.setVisible(true); 
                         loginView.setVisible(false);
                     
                     break;

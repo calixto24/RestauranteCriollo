@@ -1,14 +1,18 @@
 package utils;
 
 import dao.EmployeeDao;
+import dao.TableDao;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.Employee;
+import model.Table;
 
 public class Validate {
 
     //atributos
     private EmployeeDao employeeDao;
+    private TableDao tableDao;
+    
     private String message;
     private boolean valid;
     private String el;
@@ -19,6 +23,7 @@ public class Validate {
         el = "";
 
         employeeDao = new EmployeeDao();
+        tableDao = new TableDao();
     }
 
     public Validate(String el) {
@@ -244,6 +249,23 @@ public class Validate {
         }
 
         return this;
+    }
+    
+    public Validate equalsNtable(String msg) {
+        
+        if (!valid) {
+            return this;
+        }
+        
+        for (Table table : tableDao.getAll()) {
+            if (el.equals(table.getNumber_table())) {
+                        valid = false;
+                        message = msg;
+            }
+        }
+        
+        return this;
+        
     }
 
     //////

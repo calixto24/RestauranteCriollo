@@ -5,9 +5,13 @@
 package view;
 
 import controller.TableController;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -19,10 +23,14 @@ public class TableRegisterView extends javax.swing.JFrame {
      * Creates new form TableRegisterView
      */
     private TableController tableController;
+    private int row;
     
     public TableRegisterView() {
+        
         tableController= new TableController(this);
         initComponents();
+        
+        renderTable();
     }
 
     /**
@@ -45,9 +53,9 @@ public class TableRegisterView extends javax.swing.JFrame {
         jCBestatus = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTtableList = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBdelete = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -128,7 +136,7 @@ public class TableRegisterView extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTtableList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -139,7 +147,12 @@ public class TableRegisterView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTtableList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTtableListMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTtableList);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -160,11 +173,22 @@ public class TableRegisterView extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton2.setText("Eliminar");
+        jBdelete.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jBdelete.setText("Eliminar");
+        jBdelete.setEnabled(false);
+        jBdelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBdeleteActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jButton3.setText("Limpiar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,7 +203,7 @@ public class TableRegisterView extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jBdelete, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -200,7 +224,7 @@ public class TableRegisterView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBdelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -235,8 +259,50 @@ public class TableRegisterView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNmesaActionPerformed
 
+    private void jTtableListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTtableListMouseClicked
+        
+        row = jTtableList.rowAtPoint(evt.getPoint());
+        tableController.heandleViewEditClick();
+        
+    }//GEN-LAST:event_jTtableListMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        tableController.handleCleanForm();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jBdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdeleteActionPerformed
+        tableController.heandleDeleteClick();
+    }//GEN-LAST:event_jBdeleteActionPerformed
+
+    public void renderTable() {
+        
+        DefaultTableModel tableModel = tableController.getTableModel();
+        jTtableList.setModel(tableModel);
+        
+        TableColumnModel tcm = jTtableList.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
+        
+        
+    }
+    
     public void showMessage( String message){
         JOptionPane.showMessageDialog(null, message);
+    }
+    
+    public int showConfirmation(String message) {
+        return JOptionPane.showConfirmDialog(rootPane, message);
+    }
+
+    public JButton getjBdelete() {
+        return jBdelete;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public JTable getjTtableList() {
+        return jTtableList;
     }
     
     public JComboBox<String> getjCBestatus() {
@@ -287,8 +353,8 @@ public class TableRegisterView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBdelete;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCBestatus;
     private javax.swing.JLabel jLabel1;
@@ -301,6 +367,6 @@ public class TableRegisterView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFNmesa;
     private javax.swing.JTextField jTFcapacity;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTtableList;
     // End of variables declaration//GEN-END:variables
 }

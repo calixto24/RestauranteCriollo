@@ -34,6 +34,7 @@ public class Register extends javax.swing.JFrame {
     }
     
     public void renderTable() {
+        
        DefaultTableModel employeeModel = employeeController.getEmployeeModel();
        jTUserList.setModel(employeeModel);
        

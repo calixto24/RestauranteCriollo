@@ -22,10 +22,9 @@ public class TableController {
         String nTablestr = tableRegisterView.getjTFNmesa().getText();
         vld.setElement(nTablestr).isRequired(" este campo es obligatorio").isInt(" el numero de mesa tiene que ser numerico");
         if( !vld.exec()){
-        tableRegisterView.showMessage(vld.getMessage());
-        tableRegisterView.getjTFNmesa().requestFocus();
-        return;
-       
+            tableRegisterView.showMessage(vld.getMessage());
+            tableRegisterView.getjTFNmesa().requestFocus();
+            return;
         }
         int nTable= Integer.parseInt(nTablestr);
         
@@ -33,12 +32,13 @@ public class TableController {
         String nCapacistr= tableRegisterView.getjTFcapacity().getText();
         vld.setElement(nCapacistr).isRequired("este campo es obligatorio").isInt("tiene que ser numerico");
         if( !vld.exec()){
-        tableRegisterView.showMessage(vld.getMessage());
-        tableRegisterView.getjTFcapacity().requestFocus();
-        return;
+            tableRegisterView.showMessage(vld.getMessage());
+            tableRegisterView.getjTFcapacity().requestFocus();
+            return;
         }
         int nCapaci= Integer.parseInt(nCapacistr);
-        //rol
+        
+        //estado
         String status= (String)tableRegisterView.getjCBestatus().getSelectedItem();
         Table newTable = new Table(nTable, nCapaci, status);
     }

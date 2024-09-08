@@ -4,6 +4,7 @@ package controller;
 import dao.EmployeeDao;
 import view.LoginView;
 import model.Employee;
+import utils.Validate;
 import view.Register;
 
 public class LoginController {
@@ -12,6 +13,7 @@ public class LoginController {
     private LoginView loginView;
     private EmployeeDao employeeDao;
     private Register registerView;
+    private Validate vldt;
 
     public LoginController(LoginView loginView) {
         
@@ -19,14 +21,38 @@ public class LoginController {
         
         employeeDao = new EmployeeDao();
         registerView = new Register();
+        vldt = new Validate();
         
     }
     
     public void handleLoginClick() {
         
+        //Obtencion y validacion
         String username = loginView.getjTFUsername().getText();
-        String password = loginView.getjTFPassword().getText();
+        vldt.setElement(username)
+                .isRequired("Este campo es requerido");
         
+        if(!vldt.exec()) {
+            
+            loginView.showMessage(vldt.getMessage());
+            loginView.getjTFUsername().requestFocus();
+            return;
+            
+        }
+        
+        String password = loginView.getjTFPassword().getText();
+        vldt.setElement(password)
+                .isRequired("Este campo es requerido");
+        
+        if(!vldt.exec()) {
+            
+            loginView.showMessage(vldt.getMessage());
+            loginView.getjTFPassword().requestFocus();
+            return;
+            
+        }
+        
+        //obtiene el empleado de ser existente
         Employee user = verifyUsername(username);
         
         if (user != null) {
@@ -56,13 +82,13 @@ public class LoginController {
                 
             } else {
                 
-                loginView.showMessage("Incorrecto");
+                loginView.showMessage("Credenciales incorrectas");
                 
             }
             
         } else {
             
-            loginView.showMessage("Incorrecto");
+            loginView.showMessage("Credenciales incorrectas");
             
         }
         

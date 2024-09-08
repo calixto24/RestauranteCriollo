@@ -5,6 +5,7 @@ import dao.EmployeeDao;
 import view.LoginView;
 import model.Employee;
 import utils.Validate;
+import view.PreviewAdminView;
 import view.Register;
 
 public class LoginController {
@@ -12,15 +13,16 @@ public class LoginController {
     //atributos
     private LoginView loginView;
     private EmployeeDao employeeDao;
-    private Register registerView;
+    
     private Validate vldt;
+    private PreviewAdminView previewAdminView; //objeto 
 
     public LoginController(LoginView loginView) {
         
         this.loginView = loginView;
         
         employeeDao = new EmployeeDao();
-        registerView = new Register();
+      //  previewAdminView = new PreviewAdminView();
         vldt = new Validate();
         
     }
@@ -66,8 +68,7 @@ public class LoginController {
                 switch(user.getRole()) {
                     
                     case "Administrador": 
-                        
-                        registerView.setVisible(true); 
+              //          previewAdminView.setVisible(true); 
                         loginView.setVisible(false);
                     
                     break;

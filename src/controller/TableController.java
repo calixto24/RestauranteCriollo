@@ -30,7 +30,13 @@ public class TableController {
         
         //validacion de numero de mesa
         String nTablestr = tableRegisterView.getjTFNmesa().getText();
-        vld.setElement(nTablestr).isRequired(" este campo es obligatorio").isInt(" el numero de mesa tiene que ser numerico");
+        vld.setElement(nTablestr)
+                .isRequired(" este campo es obligatorio")
+                .isInt(" el numero de mesa tiene que ser numerico");
+        
+        if (action.equals("add")) vld.equalsNtable("El numero de mesa ya existe", "ntable");
+        else if (action.equals("edit")) vld.equalsNtable("El numero de mesa ya existe", "ntable", selectedId);
+        
         if( !vld.exec()){
             tableRegisterView.showMessage(vld.getMessage());
             tableRegisterView.getjTFNmesa().requestFocus();

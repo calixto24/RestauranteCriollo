@@ -12,7 +12,7 @@ public class Validate {
     //atributos
     private EmployeeDao employeeDao;
     private TableDao tableDao;
-    
+
     private String message;
     private boolean valid;
     private String el;
@@ -250,22 +250,63 @@ public class Validate {
 
         return this;
     }
-    
-    public Validate equalsNtable(String msg) {
-        
+
+    public Validate equalsNtable(String msg, String attribute) {
+
         if (!valid) {
             return this;
         }
-        
+
         for (Table table : tableDao.getAll()) {
-            if (el.equals(table.getNumber_table())) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "ntable":
+                    if (Integer.parseInt(el) == table.getNumber_table()) {
+
                         valid = false;
                         message = msg;
+
+                    }
+                    break;
+
             }
+
         }
-        
+
         return this;
-        
+
+    }
+
+    public Validate equalsNtable(String msg, String attribute, long id) {
+
+        if (!valid) {
+            return this;
+        }
+
+        for (Table table : tableDao.getAll()) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "ntable":
+                    if (Integer.parseInt(el) == table.getNumber_table()) {
+
+                        if (id != table.getId()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+
+                    }
+                    break;
+
+            }
+
+        }
+
+        return this;
+
     }
 
     //////

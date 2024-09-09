@@ -63,8 +63,6 @@ public class LoginController {
             
             if(verifyPass) {
                 
-                loginView.showMessage("Correcto");
-                
                 switch(user.getRole()) {
                     
                     case "Administrador": 

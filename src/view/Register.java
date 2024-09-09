@@ -131,8 +131,11 @@ public class Register extends javax.swing.JFrame {
         );
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 112, 121));
         jLabel8.setText("REGISTRO \"PERSONA\"");
 
+        jButton1.setBackground(new java.awt.Color(0, 112, 121));
+        jButton1.setForeground(java.awt.Color.white);
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +143,8 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        jBDelete.setBackground(new java.awt.Color(0, 112, 121));
+        jBDelete.setForeground(java.awt.Color.white);
         jBDelete.setText("ELIMINAR");
         jBDelete.setEnabled(false);
         jBDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -280,6 +285,8 @@ public class Register extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton4.setBackground(new java.awt.Color(0, 112, 121));
+        jButton4.setForeground(java.awt.Color.white);
         jButton4.setText("LIMPIAR");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

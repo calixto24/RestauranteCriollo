@@ -42,7 +42,7 @@ public class LoginController {
             
         }
         
-        String password = loginView.getjTFPassword().getText();
+        String password = new String(loginView.getjTFPassword().getPassword());
         vldt.setElement(password)
                 .isRequired("Este campo es requerido");
         

@@ -18,7 +18,7 @@ public class Restaurant {
         employeeList = new ArrayList<>();
         
         //lista de empleados
-        employeeList.add(new Employee( "Omar", "12345678", "Administrador", "JoOmarhn", "Carrion", "Alcocer", 60749102, LocalDate.of(2005, 06, 15), "11111111111", "omar@gmail.com"));
+        employeeList.add(new Employee( "Omar", "12345678", "Administrador", "Omar", "Carrion", "Alcocer", 60749102, LocalDate.of(2005, 06, 15), "11111111111", "omar@gmail.com"));
         employeeList.add(new Employee( "Cristian", "12345678", "Administrador", "Cristian", "De la Cruz", "De la Cruz", 40749102, LocalDate.of(2004, 02, 05), "21111111111", "cristian@gmail.com"));
         employeeList.add(new Employee( "Dalia", "12345678", "Administrador", "Dalia", "Alberto", "Joaquin", 60249102, LocalDate.of(2005, 03, 12), "31111111111", "dalia@gmail.com"));
         employeeList.add(new Employee( "Leonardo", "12345678", "Mesero", "Leonardo", "Murillo", "Alejandro", 70129102, LocalDate.of(2005, 01, 12), "41111111111", "leonardo@gmail.com"));

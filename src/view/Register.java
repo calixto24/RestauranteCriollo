@@ -367,7 +367,7 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jBDeleteActionPerformed
 
     public void showMessage(String message) {
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(rootPane, message);
     }
     
     public int showConfirmation(String message) {

@@ -142,8 +142,10 @@ public class EmployeeController {
         vldt.setElement(username)
                 .isRequired("El usuario es obligatorio");
         
-        if(action.equals("add")) vldt.equalsAttribute("El username ya existe", "username");
-        else if (action.equals("edit")) vldt.equalsAttribute("El username ya existe", "username", selectedId);
+        if(action.equals("add")) 
+            vldt.equalsAttribute("El username ya existe", "username");
+        else if (action.equals("edit")) 
+            vldt.equalsAttribute("El username ya existe", "username", selectedId);
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
@@ -169,7 +171,9 @@ public class EmployeeController {
         String role = (String) view.getjCBRole().getSelectedItem();
 
         //---------------------------------------------- Crear el nuevo empleado
-        Employee newEmployee = new Employee(username, password, role, name, ap, am, dni, LocalDate.of(dateV[2], dateV[1], dateV[0]), ruc, email);
+        Employee newEmployee = new Employee(username, password, role, name, 
+                ap, am, dni, LocalDate.of(dateV[2], 
+                        dateV[1], dateV[0]), ruc, email);
 
         if (action.equals("add")) {
 

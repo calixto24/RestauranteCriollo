@@ -299,7 +299,7 @@ public class TableRegisterView extends javax.swing.JFrame {
     }
     
     public void showMessage( String message){
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(rootPane, message);
     }
     
     public int showConfirmation(String message) {

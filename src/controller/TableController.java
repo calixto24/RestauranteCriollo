@@ -147,7 +147,8 @@ public class TableController {
     
     public void heandleDeleteClick() {
         
-        selectedId = Long.parseLong(tableRegisterView.getjTtableList().getModel().getValueAt(tableRegisterView.getRow(), 0).toString());
+        selectedId = Long.parseLong(tableRegisterView.getjTtableList().getModel().
+                getValueAt(tableRegisterView.getRow(), 0).toString());
         
         int op = tableRegisterView.showConfirmation("¿Desea eliminar esta mesa?");
         

@@ -16,7 +16,8 @@ public class Person {
     protected String ruc;
     protected String email;
 
-    public Person(String name, String lastname_paternal, String lastname_maternal, int dni, LocalDate birthdate, String ruc, String email) {
+    public Person(String name, String lastname_paternal, String lastname_maternal, 
+            int dni, LocalDate birthdate, String ruc, String email) {
         this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.lastname_paternal = lastname_paternal;

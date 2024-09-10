@@ -22,7 +22,7 @@ public class EmployeeController {
         this.view = view;
         action = "add";
         selectedId = 0;
-
+        
         //instancia de los objetos a utilizar
         employeeDao = new EmployeeDao();
         vldt = new Validate();

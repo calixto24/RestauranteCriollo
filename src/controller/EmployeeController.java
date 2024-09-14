@@ -101,22 +101,23 @@ public class EmployeeController {
 
         int dni = Integer.parseInt(dnistr);
 
-        //VALIDACION RUC
-        String ruc = view.getjTFRuc().getText();
-        vldt.setElement(ruc)
-                .isRequired("El RUC es obligatorio")
-                .isLong("El RUC debe ser numerico")
-                .equalsLength(11, "El RUC debe tener 11 digitos");
-
-        if(action.equals("add")) vldt.equalsAttribute("El RUC ya existe", "ruc");
-        else if (action.equals("edit")) vldt.equalsAttribute("El RUC ya existe", "ruc", selectedId);
+        //VALIDACION TELEFONO
+        String phoneNumber = view.getjTFphoneNumber().getText();
+        vldt.setElement(phoneNumber)
+                .isRequired("El telefono es obligatorio")
+                .isInt("El telefono debe ser numero")
+                .equalsLength(9, "El telefono debe tener 9 digitos");
         
-        if (!vldt.exec()) {
+        if(action.equals("add")) vldt.equalsAttribute("El numero ya existe", "phoneNumber");
+            else if (action.equals("edit")) vldt.equalsAttribute("El numero ya existe tarao", "phoneNumber", selectedId); 
+        
+         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
-            view.getjTFRuc().requestFocus();
+            view.getjTFphoneNumber().requestFocus();
             return;
-
         }
+
+        int phonenumber = Integer.parseInt(phoneNumber);
 
         //VALIDACION CORREO
         String email = view.getjTFEmail().getText();
@@ -135,7 +136,18 @@ public class EmployeeController {
             return;
 
         }
+        //VALIDACION DIRECCION
+        String direction = view.getjTFaddress().getText();
 
+        vldt.setElement(direction)
+                .isRequired("La direccion es obligatorio");
+
+        if (!vldt.exec()) {
+            view.showMessage(vldt.getMessage());
+            view.getjTFaddress().requestFocus();
+            return;
+        }
+        
         //VALIDACION USERNAME
         String username = view.getjTFUser().getText();
 
@@ -173,7 +185,7 @@ public class EmployeeController {
         //---------------------------------------------- Crear el nuevo empleado
         Employee newEmployee = new Employee(username, password, role, name, 
                 ap, am, dni, LocalDate.of(dateV[2], 
-                        dateV[1], dateV[0]), ruc, email);
+                        dateV[1], dateV[0]), phonenumber, email, direction);
 
         if (action.equals("add")) {
 
@@ -215,8 +227,9 @@ public class EmployeeController {
             "A. Materno",
             "DNI",
             "Fecha Nacimiento",
-            "RUC",
-            "Email"
+            "Telefono",
+            "Email",
+            "Direccion"
         };
         DefaultTableModel employeeModel = new DefaultTableModel(null, columns);
 
@@ -233,8 +246,9 @@ public class EmployeeController {
                 employee.getLastname_maternal(),
                 employee.getDni(),
                 employee.getBirthdateFormatted(),
-                employee.getRuc(),
-                employee.getEmail()
+                employee.getPhoneNumber(),
+                employee.getEmail(),
+                employee.getAddress()
             };
 
             employeeModel.addRow(row);

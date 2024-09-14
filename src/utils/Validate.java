@@ -174,12 +174,6 @@ public class Validate {
                         message = msg;
                     }
                     break;
-                case "ruc":
-                    if (el.equals(employee.getRuc())) {
-                        valid = false;
-                        message = msg;
-                    }
-                    break;
                 case "username":
                     if (el.equals(employee.getUsername())) {
                         valid = false;
@@ -192,6 +186,12 @@ public class Validate {
                         message = msg;
                     }
                     break;
+                case "phoneNumber":
+                   if (Integer.parseInt(el) == employee.getPhoneNumber()) {
+                        valid = false;
+                        message = msg;
+                    }
+                   break;
             }
         }
 
@@ -215,16 +215,6 @@ public class Validate {
                         }
                     }
                     break;
-                case "ruc":
-                    if (el.equals(employee.getRuc())) {
-                        if (id != employee.getId()) {
-
-                            valid = false;
-                            message = msg;
-
-                        }
-                    }
-                    break;
                 case "username":
                     if (el.equals(employee.getUsername())) {
                         if (id != employee.getId()) {
@@ -245,6 +235,16 @@ public class Validate {
                         }
                     }
                     break;
+                 case "phoneNumber":
+                   if (Integer.parseInt(el) == employee.getPhoneNumber()) {
+                      if (id != employee.getId()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                   break;
             }
         }
 

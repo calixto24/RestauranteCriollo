@@ -76,8 +76,10 @@ public class Register extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTFDni = new javax.swing.JTextField();
-        jTFRuc = new javax.swing.JTextField();
+        jTFphoneNumber = new javax.swing.JTextField();
         jTFEmail = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTFaddress = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTUserList = new javax.swing.JTable();
@@ -133,7 +135,7 @@ public class Register extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 112, 121));
-        jLabel8.setText("REGISTRO \"PERSONA\"");
+        jLabel8.setText("REGISTRO \"EMPLEADO\"");
 
         jButton1.setBackground(new java.awt.Color(0, 112, 121));
         jButton1.setForeground(java.awt.Color.white);
@@ -209,27 +211,47 @@ public class Register extends javax.swing.JFrame {
 
         jLabel4.setText("DNI");
 
-        jLabel6.setText("RUC");
+        jLabel6.setText("Telefono");
 
         jLabel7.setText("Correo Electronico");
+
+        jTFphoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFphoneNumberActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("Direccion");
+
+        jTFaddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFaddressActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7))
-                .addGap(37, 37, 37)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(89, 89, 89)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTFEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(jTFRuc)
-                    .addComponent(jTFDni))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTFphoneNumber)
+                    .addComponent(jTFDni)
+                    .addComponent(jTFaddress, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,12 +263,16 @@ public class Register extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTFRuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFphoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jTFaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "LISTA DE USUARIOS"));
@@ -340,7 +366,7 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -382,6 +408,14 @@ public class Register extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTFphoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFphoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFphoneNumberActionPerformed
+
+    private void jTFaddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFaddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFaddressActionPerformed
+
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(rootPane, message);
     }
@@ -389,8 +423,15 @@ public class Register extends javax.swing.JFrame {
     public int showConfirmation(String message) {
         return JOptionPane.showConfirmDialog(rootPane, message);
     }
+    
+    public JTextField getjTFaddress() {
+        return jTFaddress;
+    }
 
     //metodos getters
+    public JTextField getjTFphoneNumber() {    
+        return jTFphoneNumber;
+    }
 
     public JButton getjBDelete() {
         return jBDelete;
@@ -433,7 +474,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     public JTextField getjTFRuc() {
-        return jTFRuc;
+        return jTFphoneNumber;
     }
 
     public JTextField getjTFUser() {
@@ -500,6 +541,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -520,8 +562,9 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField jTFEmail;
     private javax.swing.JTextField jTFName;
     private javax.swing.JTextField jTFPass;
-    private javax.swing.JTextField jTFRuc;
     private javax.swing.JTextField jTFUser;
+    private javax.swing.JTextField jTFaddress;
+    private javax.swing.JTextField jTFphoneNumber;
     private javax.swing.JTable jTUserList;
     // End of variables declaration//GEN-END:variables
 }

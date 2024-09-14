@@ -13,20 +13,26 @@ public class Person {
     protected String lastname_maternal;
     protected int dni;
     protected LocalDate birthdate;
-    protected String ruc;
+    protected int phoneNumber;
     protected String email;
+    protected String address;
 
     public Person(String name, String lastname_paternal, String lastname_maternal, 
-            int dni, LocalDate birthdate, String ruc, String email) {
+            int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
         this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;
         this.dni = dni;
         this.birthdate = birthdate;
-        this.ruc = ruc;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
         this.email = email;
     }
+
+    public Person() {
+    }
+    
 
     public long getId() {
         return id;
@@ -76,14 +82,23 @@ public class Person {
         this.birthdate = birthdate;
     }
 
-    public String getRuc() {
-        return ruc;
+    public int getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setRuc(String ruc) {
-        this.ruc = ruc;
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String addres) {
+        this.address = addres;
+    }
+
+   
     public String getEmail() {
         return email;
     }

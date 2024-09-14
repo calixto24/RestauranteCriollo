@@ -10,13 +10,17 @@ public class Employee  extends Person{
     private String role;
 
     public Employee(String username, String password, String role, String name, String lastname_paternal, String lastname_maternal,
-            int dni, LocalDate birthdate, String ruc, String email) {
+            int dni, LocalDate birthdate, int phoneNumber, String email, String addres ) {
         
-        super(name, lastname_paternal, lastname_maternal, dni, birthdate, ruc, email);
+        super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
         this.username = username;
         this.password = password;
         this.role = role;
     }
+
+    public Employee() {
+    }
+    
 
     public String getUsername() {
         return username;

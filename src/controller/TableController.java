@@ -1,17 +1,21 @@
 
 package controller;
 
+import dao.EmployeeDao;
 import dao.TableDao;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import model.Table;
+import model.Employee;
 import utils.Validate;
 import view.TableRegisterView;
+
 
 public class TableController {
     
     private TableRegisterView tableRegisterView;
     private TableDao tableDao;
+    private EmployeeDao employeeDao;
     private String action;
     private Validate vld;
     private long selectedId;
@@ -24,10 +28,11 @@ public class TableController {
       
       vld= new Validate();
       tableDao = new TableDao();
+      employeeDao = new EmployeeDao();
       
     } 
     public void handleRegisterClick(){
-        
+        System.out.println(((Employee) tableRegisterView.getJCBEmployees().getSelectedItem()).getId());
         //validacion de numero de mesa
         String nTablestr = tableRegisterView.getjTFNmesa().getText();
         vld.setElement(nTablestr)
@@ -119,6 +124,19 @@ public class TableController {
         return tableModel;
         
         
+    }
+    
+    public ArrayList<Employee> getEmployeeListFiltered() {
+        ArrayList<Employee> EmployeeList = employeeDao.getAll();
+        ArrayList<Employee> EmployeeListFiltered = new ArrayList<>();
+        
+        for(Employee e: EmployeeList) {
+            if (e.getRole().equals("Mesero")) {
+                EmployeeListFiltered.add(e);
+            }
+        }
+        
+        return EmployeeListFiltered;
     }
     
     public void handleCleanForm() {

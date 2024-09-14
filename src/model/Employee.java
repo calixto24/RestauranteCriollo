@@ -46,4 +46,9 @@ public class Employee  extends Person{
         this.role = role;
     }
     
+    @Override
+    public String toString() {
+        return name + " " + lastname_paternal;
+    }
+    
 }

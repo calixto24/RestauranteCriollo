@@ -1,7 +1,9 @@
+utp\restaurant\database\NewClass.class
 utp\restaurant\login\view\LoginView$2.class
 utp\restaurant\admin\view\Register$4.class
 utp\restaurant\admin\view\TableRegisterView$7.class
 utp\restaurant\admin\view\PreviewAdminView$1.class
+utp\restaurant\database\DB.class
 utp\restaurant\admin\view\TableRegisterView$2.class
 utp\restaurant\model\Table.class
 utp\restaurant\model\Person.class

@@ -26,7 +26,7 @@ public class EmployeeDAO implements DAO<Employee> {
     public ArrayList<Employee> getAll() {
         ArrayList<Employee> employeeList = new ArrayList<>();
         
-        query = "SELECT r.name AS roleName, p.name as personName, * FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id";
+        query = "SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, * FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id";
         
         try {
            st = conn.createStatement();
@@ -37,10 +37,10 @@ public class EmployeeDAO implements DAO<Employee> {
                Role role = new Role();
                
                role.setId(rs.getInt("role_id"));
-               role.setName(rs.getString("roleName"));
+               role.setName(rs.getString("role_name"));
                
-               employee.setId(rs.getInt("id"));
-               employee.setName(rs.getString("personName"));
+               employee.setId(rs.getInt("employee_id"));
+               employee.setName(rs.getString("person_name"));
                employee.setLastname_paternal(rs.getString("lastname_paternal"));
                employee.setLastname_maternal(rs.getString("lastname_maternal"));
                employee.setDni(Integer.parseInt(rs.getString("dni")));
@@ -64,6 +64,39 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public Employee get(long id) {
         
+        query = "SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, * FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id WHERE e.id = " + id;
+        
+        Employee employee = new Employee();
+        
+        try {
+           st = conn.createStatement();
+           rs = st.executeQuery(query);
+           
+           while(rs.next()) {
+               Role role = new Role();
+               
+               role.setId(rs.getInt("role_id"));
+               role.setName(rs.getString("role_name"));
+               
+               employee.setId(rs.getInt("employee_id"));
+               employee.setName(rs.getString("person_name"));
+               employee.setLastname_paternal(rs.getString("lastname_paternal"));
+               employee.setLastname_maternal(rs.getString("lastname_maternal"));
+               employee.setDni(Integer.parseInt(rs.getString("dni")));
+               employee.setBirthdate(rs.getDate("birthdate").toLocalDate());
+               employee.setPhoneNumber(Integer.parseInt(rs.getString("phoneNumber")));
+               employee.setAddress(rs.getString("address"));
+               employee.setEmail(rs.getString("email"));
+               employee.setUsername(rs.getString("username"));
+               employee.setPassword(rs.getString("password"));
+               employee.setRole(role);
+           }
+ 
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return employee;
         
     }
 

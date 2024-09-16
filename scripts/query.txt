@@ -11,7 +11,7 @@ create table person (
 	birthdate date not null,
 	phoneNumber char(9) unique not null check (phoneNumber ~ '^[0-9]+$'),
 	address varchar(100) not null,
-	email varchar(100) not null
+	email varchar(100) unique not null
 );
 
 create table role(
@@ -52,19 +52,22 @@ create or replace procedure add_employee(
 	email varchar,
 	username varchar,
 	password varchar,
-	id int
-
+	role_id int
 )
 
 LANGUAGE plpgsql as $$
 declare
 	person_id int;
 begin
-	insert into person(name, lastname_paternal, lastname_maternal, dni, birthdate, address, email)
-	values (name, lastname_paternal, lastname_maternal, dni, birthdate, address, email) returning id INTO person_id;
+	insert into person(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email)
+	values (name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email) returning id INTO person_id;
 
 	insert into employee(username, password, role_id, person_id)
 	values (username, password, role_id, person_id);
 	
 end;	
 $$;
+
+create view get_employees as SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, e.role_id as role_id, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email, username, password FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id
+
+call add_employee('Pepito', 'Diaz', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 'admin', 2)

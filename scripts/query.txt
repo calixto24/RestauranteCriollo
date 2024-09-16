@@ -1,0 +1,70 @@
+create database restaurant;
+
+use restaurant;
+
+create table person (
+	id SERIAL not null primary key,
+	name varchar(100),
+	lastname_paternal varchar (100) not null,
+	lastname_maternal varchar (100) not null,
+	dni char(8) unique not null check (dni ~ '^[0-9]+$'),
+	birthdate date not null,
+	phoneNumber char(9) unique not null check (phoneNumber ~ '^[0-9]+$'),
+	address varchar(100) not null,
+	email varchar(100) not null
+);
+
+create table role(
+	id serial not null primary key,
+	name varchar(100) unique not null
+);
+
+create table employee (
+	id serial not null primary key,
+	username varchar(100) unique not null,
+	password varchar(100) not null,
+	role_id int not null,
+	person_id int not null,
+	
+	constraint fk_role foreign key (role_id) references role(id),
+	constraint fk_person foreign key (person_id) references person(id)
+);
+
+create table "table" (
+	id SERIAL not null primary key,
+	capacity int not null,
+	status varchar(100) not null,
+	employee_id int not null,
+
+	constraint fk_employee foreign key (employee_id) references employee(id)
+
+);
+
+create or replace procedure add_employee(
+
+	name varchar,
+	lastname_paternal varchar,
+	lastname_maternal varchar,
+	dni char(8),
+	birthdate date,
+	phoneNumber char(9),
+	address varchar,
+	email varchar,
+	username varchar,
+	password varchar,
+	id int
+
+)
+
+LANGUAGE plpgsql as $$
+declare
+	person_id int;
+begin
+	insert into person(name, lastname_paternal, lastname_maternal, dni, birthdate, address, email)
+	values (name, lastname_paternal, lastname_maternal, dni, birthdate, address, email) returning id INTO person_id;
+
+	insert into employee(username, password, role_id, person_id)
+	values (username, password, role_id, person_id);
+	
+end;	
+$$;

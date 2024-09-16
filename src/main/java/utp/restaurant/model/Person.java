@@ -19,7 +19,6 @@ public class Person {
 
     public Person(String name, String lastname_paternal, String lastname_maternal, 
             int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
-        this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;
@@ -36,6 +35,10 @@ public class Person {
 
     public long getId() {
         return id;
+    }
+    
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -73,6 +76,7 @@ public class Person {
     public LocalDate getBirthdate() {
         return birthdate;
     }
+    
     public String getBirthdateFormatted() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return df.format(birthdate);

@@ -1,40 +1,38 @@
 package utp.restaurant.database;
 
-import java.util.ArrayList;
-import java.time.LocalDate;
-
-import utp.restaurant.model.Employee;
-import utp.restaurant.model.Table;
+import io.github.cdimascio.dotenv.Dotenv;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class RestaurantDB {
-    
-    private ArrayList<Employee>employeeList;
     private static RestaurantDB instance;
-    private ArrayList<Table>tableList;
+    private String url;
+    private String user;
+    private String password;
+    private Connection conn;
+    private Dotenv dotenv;
+
     
     private RestaurantDB(){
+        dotenv = Dotenv.load();
+        url = dotenv.get("DB_URL");
+        user = dotenv.get("DB_USER");
+        password = dotenv.get("DB_PASSWORD");
         
-        //inicializando el objeto
-        employeeList = new ArrayList<>();
-        
-        //lista de empleados
-        employeeList.add(new Employee( "Omar", "12345678", "Mesero", "Omar", "Carrion", "Alcocer", 12365478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 16 al pincho"));
-        employeeList.add(new Employee( "Pepe", "12345687", "Administrador", "Pepe", "Torres", "Alcocer", 45678932, LocalDate.of(2005, 06, 15), 123456489, "omaras@gmail.com", "Mz. 16 al pincho"));
-        employeeList.add(new Employee( "Carlos", "32165498", "Mesero", "Carlos", "Mamani", "Alcocer", 12345678, LocalDate.of(2005, 06, 15), 121456789, "omarasd@gmail.com", "Mz. 16 al pincho"));
-        employeeList.add(new Employee( "Tom", "123456456345", "Mesero", "Tom", "Quispe", "Alcocer", 65432185, LocalDate.of(2005, 06, 15), 123456589, "omarasd@gmail.com", "Mz. 16 al pincho"));
-        
-        tableList = new ArrayList<>(); 
-        tableList.add(new Table(1, 15, "Disponible"));
-        tableList.add(new Table(2, 12, "Disponible"));
-        tableList.add(new Table(3, 10, "Disponible"));
+        startConnection();
     }
 
-    public ArrayList<Table> getTableList() {
-        return tableList;
+    private void startConnection() {
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
-    public ArrayList<Employee> getEmployeeList() {
-        return employeeList;
+    public Connection getConn() {
+        return conn;
     }
     
     //patron singleton
@@ -45,5 +43,4 @@ public class RestaurantDB {
         
         return instance;  
     }
-    
 }

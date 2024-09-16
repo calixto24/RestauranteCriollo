@@ -3,12 +3,12 @@ package utp.restaurant.model;
 
 import java.time.LocalDate;
 
-public class Employee  extends Person{
+public class Employee extends Person {
     private String username; 
     private String password;
-    private String role;
+    private Role role;
 
-    public Employee(String username, String password, String role, String name, String lastname_paternal, String lastname_maternal,
+    public Employee(String username, String password, Role role, String name, String lastname_paternal, String lastname_maternal,
             int dni, LocalDate birthdate, int phoneNumber, String email, String addres ) {
         
         super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
@@ -37,11 +37,11 @@ public class Employee  extends Person{
         this.password = password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
     

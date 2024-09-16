@@ -1,7 +1,5 @@
 create database restaurant;
 
-use restaurant;
-
 create table person (
 	id SERIAL not null primary key,
 	name varchar(100),
@@ -27,16 +25,17 @@ create table employee (
 	person_id int not null,
 	
 	constraint fk_role foreign key (role_id) references role(id),
-	constraint fk_person foreign key (person_id) references person(id)
+	constraint fk_person foreign key (person_id) references person(id) on delete cascade
 );
 
 create table "table" (
 	id SERIAL not null primary key,
+	number int unique not null,
 	capacity int not null,
 	status varchar(100) not null,
-	employee_id int not null,
+	employee_id int,
 
-	constraint fk_employee foreign key (employee_id) references employee(id)
+	constraint fk_employee foreign key (employee_id) references employee(id) on delete set null
 
 );
 
@@ -70,4 +69,7 @@ $$;
 
 create view get_employees as SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, e.role_id as role_id, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email, username, password FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id
 
+insert into role(name) values ('Administrador'), ('Mesero'), ('Cocinero'), ('Cajero')
 call add_employee('Pepito', 'Diaz', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 'admin', 2)
+
+insert into "table"(number, capacity,status, employee_id) values (1, 5, 'Disponible', 3)

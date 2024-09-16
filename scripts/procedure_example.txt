@@ -1,0 +1,47 @@
+CREATE TABLE persona(
+	id SERIAL PRIMARY KEY,
+	nombre varchar(100),
+	apellido varchar(100) not null,
+	dni int(8) UNIQUE
+);
+
+create table prueba(
+dni varchar(8) UNIQUE
+);
+
+CREATE TABLE usuario(
+	id SERIAL PRIMARY KEY,
+	username VARCHAR(100),
+	password VARCHAR(100),
+	persona_id INT,
+	CONSTRAINT fk_persona FOREIGN KEY (persona_id) REFERENCES persona(id)
+);
+
+CREATE OR REPLACE PROCEDURE add_user(
+	nombre VARCHAR,
+	apellido VARCHAR,
+	username varchar,
+	password varchar
+)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	persona_id int;
+BEGIN
+	insert into persona(nombre, apellido)
+	values (nombre, apellido)
+	returning id INTO persona_id;
+
+	insert into usuario(username, password, persona_id)
+	values (username, password, persona_id);
+END;
+$$;
+
+call add_user('omar', 'carrion', 'aomine', '[assword');
+call add_user('jhordan', 'calixto', 'calix', 'pass');
+
+select * from usuario;
+
+select u.id, p.id, nombre, apellido, username, password from usuario u
+inner join persona p
+on u.persona_id = p.id;

@@ -4,14 +4,16 @@ package utp.restaurant.model;
 import java.time.LocalDate;
 
 public class Employee extends Person {
+    private long id_employee;
     private String username; 
     private String password;
     private Role role;
 
-    public Employee(String username, String password, Role role, String name, String lastname_paternal, String lastname_maternal,
+    public Employee(long id_person, String username, String password, Role role, String name, String lastname_paternal, String lastname_maternal,
             int dni, LocalDate birthdate, int phoneNumber, String email, String addres ) {
         
-        super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
+        super(id_person, name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
+        this.id_employee = id_employee;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -19,7 +21,14 @@ public class Employee extends Person {
 
     public Employee() {
     }
-    
+
+    public long getId_employee() {
+        return id_employee;
+    }
+
+    public void setId_employee(long id_employee) {
+        this.id_employee = id_employee;
+    }
 
     public String getUsername() {
         return username;

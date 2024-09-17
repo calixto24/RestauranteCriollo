@@ -67,9 +67,47 @@ begin
 end;	
 $$;
 
-create view get_employees as SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, e.role_id as role_id, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email, username, password FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id
+create or REPLACE PROCEDURE update_employee (
+	name_p varchar,
+	lastname_paternal_n varchar,
+	lastname_maternal_n varchar,
+	dni_n char(8),
+	birthdate_n date,
+	phoneNumber_n char(9),
+	address_n varchar,
+	email_n varchar,
+	username_n varchar,
+	role_id_n int,
+	person_id_n int,
+	employee_id_n int
+)
+
+LANGUAGE plpgsql as $$
+
+BEGIN
+	update person SET
+	name = name_p,
+	lastname_paternal = lastname_paternal_n,
+	lastname_maternal = lastname_maternal_n,
+	dni = dni_n,
+	birthdate = birthdate_n,
+	phoneNumber = phoneNumber_n,
+	address = address_n,
+	email = email_n
+	where id = person_id_n;
+
+	update employee set
+	username = username_n,
+	role_id = role_id_n
+	where id = employee_id_n;
+END;
+$$;
+
+create view get_employees as SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, e.role_id as role_id, p.id as person_id, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email, username, password FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id
 
 insert into role(name) values ('Administrador'), ('Mesero'), ('Cocinero'), ('Cajero')
 call add_employee('Pepito', 'Diaz', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 'admin', 2)
+call update_employee('Manuel', 'Gracia', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 2, 4, 4)
 
 insert into "table"(number, capacity,status, employee_id) values (1, 5, 'Disponible', 3)
+

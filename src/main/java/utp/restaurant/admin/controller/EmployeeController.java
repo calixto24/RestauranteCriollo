@@ -1,5 +1,6 @@
 package utp.restaurant.admin.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import utp.restaurant.dao.EmployeeDAO;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -178,6 +179,8 @@ public class EmployeeController {
             return;
 
         }
+        
+        password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
         //ROL
         String role = (String) view.getjCBRole().getSelectedItem();

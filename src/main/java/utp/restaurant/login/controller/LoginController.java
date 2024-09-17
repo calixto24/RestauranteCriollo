@@ -1,6 +1,7 @@
 
 package utp.restaurant.login.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import utp.restaurant.dao.EmployeeDAO;
 import utp.restaurant.login.view.LoginView;
 import utp.restaurant.model.Employee;
@@ -110,7 +111,9 @@ public class LoginController {
     
     public boolean verifyPassword(String password, Employee employee) {
         
-        return employee.getPassword().equals(password);
+        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), employee.getPassword());
+        
+        return result.verified;
         
     }
     

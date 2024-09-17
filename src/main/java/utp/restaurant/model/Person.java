@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Person {
     
-    protected long id;
+    protected long id_person;
     protected String name;
     protected String lastname_paternal;
     protected String lastname_maternal;
@@ -17,8 +17,9 @@ public class Person {
     protected String email;
     protected String address;
 
-    public Person(String name, String lastname_paternal, String lastname_maternal, 
+    public Person(long id_person, String name, String lastname_paternal, String lastname_maternal, 
             int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
+        this.id_person = id_person;
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;
@@ -32,13 +33,12 @@ public class Person {
     public Person() {
     }
     
-
-    public long getId() {
-        return id;
+    public long getId_person() {
+        return id_person;
     }
     
-    public void setId(long id) {
-        this.id = id;
+    public void setId_person(long id_person) {
+        this.id_person = id_person;
     }
 
     public String getName() {

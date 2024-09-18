@@ -207,7 +207,7 @@ public class Validate {
             switch (attribute.toLowerCase()) {
                 case "email":
                     if (el.equals(employee.getEmail())) {
-                        if (id != employee.getId()) {
+                        if (id != employee.getId_employee()) {
 
                             valid = false;
                             message = msg;
@@ -217,7 +217,7 @@ public class Validate {
                     break;
                 case "username":
                     if (el.equals(employee.getUsername())) {
-                        if (id != employee.getId()) {
+                        if (id != employee.getId_employee()) {
 
                             valid = false;
                             message = msg;
@@ -227,7 +227,7 @@ public class Validate {
                     break;
                 case "dni":
                     if (Integer.parseInt(el) == employee.getDni()) {
-                        if (id != employee.getId()) {
+                        if (id != employee.getId_employee()) {
 
                             valid = false;
                             message = msg;
@@ -237,7 +237,7 @@ public class Validate {
                     break;
                  case "phoneNumber":
                    if (Integer.parseInt(el) == employee.getPhoneNumber()) {
-                      if (id != employee.getId()) {
+                      if (id != employee.getId_employee()) {
 
                             valid = false;
                             message = msg;

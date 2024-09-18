@@ -2,6 +2,7 @@
 package utp.restaurant.model;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Employee extends Person {
     private long id_employee;
@@ -9,11 +10,11 @@ public class Employee extends Person {
     private String password;
     private Role role;
 
-    public Employee(long id_person, String username, String password, Role role, String name, String lastname_paternal, String lastname_maternal,
+    public Employee(String username, String password, Role role, String name, String lastname_paternal, String lastname_maternal,
             int dni, LocalDate birthdate, int phoneNumber, String email, String addres ) {
         
-        super(id_person, name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
-        this.id_employee = id_employee;
+        super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, addres);
+        this.id_employee = System.currentTimeMillis() + new Random().nextInt(1000);;
         this.username = username;
         this.password = password;
         this.role = role;

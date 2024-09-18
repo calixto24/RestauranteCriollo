@@ -1,11 +1,13 @@
 package utp.restaurant.model;
 
+import java.util.Random;
+
 public class Role {
     private long id;
     private String name;
 
-    public Role(long id, String name) {
-        this.id = id;
+    public Role(String name) {
+        this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
     }
     
@@ -29,5 +31,8 @@ public class Role {
         this.name = name;
     }
     
-    
+    @Override
+    public String toString() {
+        return name;
+    }
 }

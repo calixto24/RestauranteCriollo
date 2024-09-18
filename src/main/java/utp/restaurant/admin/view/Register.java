@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import utp.restaurant.model.Role;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         
         renderTable();
+        employeeController.renderCBRole();
     }
     
     public void renderTable() {
@@ -40,7 +42,7 @@ public class Register extends javax.swing.JFrame {
        
        TableColumnModel tcm = jTUserList.getColumnModel();
        tcm.removeColumn(tcm.getColumn(0));
-
+       tcm.removeColumn(tcm.getColumn(1));
     }
 
     /**
@@ -97,8 +99,6 @@ public class Register extends javax.swing.JFrame {
         jLabel11.setText("Contraseña");
 
         jLabel10.setText("Rol");
-
-        jCBRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mesero", "Cocinero", "Cajero", "Administrador" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -389,7 +389,7 @@ public class Register extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -463,7 +463,7 @@ public class Register extends javax.swing.JFrame {
         return jTUserList;
     }
     
-    public JComboBox<String> getjCBRole() {
+    public JComboBox<Role> getjCBRole() {
         return jCBRole;
     }
 
@@ -560,7 +560,7 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jCBRole;
+    private javax.swing.JComboBox<Role> jCBRole;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

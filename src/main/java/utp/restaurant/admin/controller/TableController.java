@@ -32,7 +32,7 @@ public class TableController {
       
     } 
     public void handleRegisterClick(){
-        System.out.println(((Employee) tableRegisterView.getJCBEmployees().getSelectedItem()).getId());
+        System.out.println(((Employee) tableRegisterView.getJCBEmployees().getSelectedItem()).getId_employee());
         //validacion de numero de mesa
         String nTablestr = tableRegisterView.getjTFNmesa().getText();
         vld.setElement(nTablestr)
@@ -62,8 +62,11 @@ public class TableController {
         //estado
         String status= (String)tableRegisterView.getjCBestatus().getSelectedItem();
         
+        
+        // Empleado
+        Employee employee = ((Employee) tableRegisterView.getJCBEmployees().getSelectedItem());
         //creando nuevas mesa
-        Table newTable = new Table(nTable, nCapaci, status);
+        Table newTable = new Table(nTable, nCapaci, status, employee);
         
         if(action.equals("add")) {
             

@@ -6,13 +6,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.admin.view.Register;
+import utp.restaurant.dao.RoleDAO;
 import utp.restaurant.model.Employee;
+import utp.restaurant.model.Role;
 import utp.restaurant.utils.Validate;
 
 public class EmployeeController {
 
     //atributos
     private EmployeeDAO employeeDAO;
+    private RoleDAO roleDao;
     private Register view;
     private String action;
     private Validate vldt;
@@ -26,6 +29,7 @@ public class EmployeeController {
         
         //instancia de los objetos a utilizar
         employeeDAO = new EmployeeDAO();
+        roleDao = new RoleDAO();
         vldt = new Validate();
     }
 
@@ -183,7 +187,7 @@ public class EmployeeController {
         password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
         //ROL
-        String role = (String) view.getjCBRole().getSelectedItem();
+        Role role = (Role) view.getjCBRole().getSelectedItem();
 
         //---------------------------------------------- Crear el nuevo empleado
         Employee newEmployee = new Employee(username, password, role, name, 
@@ -232,7 +236,8 @@ public class EmployeeController {
             "Fecha Nacimiento",
             "Telefono",
             "Email",
-            "Direccion"
+            "Direccion",
+            "role_id"
         };
         DefaultTableModel employeeModel = new DefaultTableModel(null, columns);
 
@@ -240,7 +245,7 @@ public class EmployeeController {
 
         for (Employee employee : employeeList) {
             Object[] row = {
-                employee.getId(),
+                employee.getId_employee(),
                 employee.getUsername(),
                 employee.getPassword(),
                 employee.getRole(),
@@ -251,13 +256,22 @@ public class EmployeeController {
                 employee.getBirthdateFormatted(),
                 employee.getPhoneNumber(),
                 employee.getEmail(),
-                employee.getAddress()
+                employee.getAddress(),
+                employee.getRole().getId()
             };
 
             employeeModel.addRow(row);
         }
 
         return employeeModel;
+    }
+    
+    public void renderCBRole() {
+        ArrayList<Role> roleList = roleDao.getAll();
+        
+        for (Role r: roleList) {
+            view.getjCBRole().addItem(r);
+        }
     }
 
     public void handleCleanForm() {
@@ -282,7 +296,8 @@ public class EmployeeController {
         //pintando la columna con la informacion de la fila
         view.getjTFUser().setText(view.getjTUserList().getValueAt(view.getRow(), 0).toString());
         view.getjTFPass().setText(view.getjTUserList().getValueAt(view.getRow(), 1).toString());
-        view.getjCBRole().setSelectedItem(view.getjTUserList().getValueAt(view.getRow(), 2).toString());
+        Role role = roleDao.get(Long.parseLong(view.getjTUserList().getValueAt(view.getRow(), 11).toString()));
+        view.getjCBRole().setSelectedItem(role);
         view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
         view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
         view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
@@ -290,7 +305,7 @@ public class EmployeeController {
         view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
         view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
-
+        view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 10).toString());
         action = "edit";
         
         view.getjBDelete().setEnabled(true);

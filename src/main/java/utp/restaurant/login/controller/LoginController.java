@@ -63,11 +63,11 @@ public class LoginController {
             
             if(verifyPass) {
                 
-                switch(user.getRole()) {
+                switch(user.getRole().getName()) {
                     
                     case "Administrador": 
                      previewAdminView.setVisible(true); 
-                        loginView.setVisible(false);
+                     loginView.dispose();
                     
                     break;
                     

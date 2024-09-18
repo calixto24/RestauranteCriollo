@@ -5,15 +5,18 @@ public class Table {
     private long id;
     private int number_table;
     private int capacity; 
-    private String status; 
+    private String status;
+    private Employee employee;
     
-    public Table( int number_table, int capacity, String status) {
+    public Table(int number_table, int capacity, String status, Employee employee) {
         this.id = System.currentTimeMillis()+new Random().nextInt(1000);
         this.number_table = number_table; 
         this.capacity = capacity; 
-        this.status = status; 
-   
+        this.status = status;
+        this.employee = employee;
     }
+    
+    public Table(){}
 
     public int getNumber_table() {
         return number_table;
@@ -41,6 +44,14 @@ public class Table {
 
     public long getId() {
         return id;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
     
     

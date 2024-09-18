@@ -17,9 +17,9 @@ public class Person {
     protected String email;
     protected String address;
 
-    public Person(long id_person, String name, String lastname_paternal, String lastname_maternal, 
+    public Person(String name, String lastname_paternal, String lastname_maternal, 
             int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
-        this.id_person = id_person;
+        this.id_person = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.lastname_paternal = lastname_paternal;
         this.lastname_maternal = lastname_maternal;

@@ -295,17 +295,15 @@ public class EmployeeController {
 
         //pintando la columna con la informacion de la fila
         view.getjTFUser().setText(view.getjTUserList().getValueAt(view.getRow(), 0).toString());
-        view.getjTFPass().setText(view.getjTUserList().getValueAt(view.getRow(), 1).toString());
-        Role role = roleDao.get(Long.parseLong(view.getjTUserList().getValueAt(view.getRow(), 11).toString()));
-        view.getjCBRole().setSelectedItem(role);
-        view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
-        view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
-        view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
-        view.getjTFDni().setText(view.getjTUserList().getValueAt(view.getRow(), 6).toString());
-        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
-        view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
-        view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
-        view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 10).toString());
+        view.getjCBRole().setSelectedItem((Role) view.getjTUserList().getValueAt(view.getRow(), 1));
+        view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 2).toString());
+        view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
+        view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
+        view.getjTFDni().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
+        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 6).toString());
+        view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
+        view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
+        view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
         action = "edit";
         
         view.getjBDelete().setEnabled(true);

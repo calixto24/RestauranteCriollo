@@ -32,7 +32,7 @@ public class TableRegisterView extends javax.swing.JFrame {
         tableController= new TableController(this);
         initComponents();
         
-        renderCBEmployee();
+        tableController.renderCBWaiter();
         renderTable();
     }
 
@@ -304,7 +304,6 @@ public class TableRegisterView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFNmesaActionPerformed
 
     private void jTtableListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTtableListMouseClicked
-        
         row = jTtableList.rowAtPoint(evt.getPoint());
         tableController.heandleViewEditClick();
         
@@ -331,14 +330,6 @@ public class TableRegisterView extends javax.swing.JFrame {
         tcm.removeColumn(tcm.getColumn(0));
         
         
-    }
-    
-    public void renderCBEmployee() {
-        ArrayList<Employee> employeeListFiltered = tableController.getEmployeeListFiltered();
-        
-        for (Employee e: employeeListFiltered) {
-            jCBEmployees.addItem(e);
-        }
     }
     
     public void showMessage( String message){

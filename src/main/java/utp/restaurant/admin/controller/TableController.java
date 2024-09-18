@@ -129,17 +129,14 @@ public class TableController {
         
     }
     
-    public ArrayList<Employee> getEmployeeListFiltered() {
+    public void renderCBWaiter() {
         ArrayList<Employee> EmployeeList = employeeDao.getAll();
-        ArrayList<Employee> EmployeeListFiltered = new ArrayList<>();
         
         for(Employee e: EmployeeList) {
             if (e.getRole().equals("Mesero")) {
-                EmployeeListFiltered.add(e);
+                tableRegisterView.getJCBEmployees().addItem(e);
             }
-        }
-        
-        return EmployeeListFiltered;
+        }       
     }
     
     public void handleCleanForm() {

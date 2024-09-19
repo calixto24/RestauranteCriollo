@@ -42,7 +42,8 @@ public class Register extends javax.swing.JFrame {
        
        TableColumnModel tcm = jTUserList.getColumnModel();
        tcm.removeColumn(tcm.getColumn(0));
-       tcm.removeColumn(tcm.getColumn(1));
+       tcm.removeColumn(tcm.getColumn(0));
+       tcm.removeColumn(tcm.getColumn(0));
     }
 
     /**

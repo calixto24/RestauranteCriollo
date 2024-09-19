@@ -356,6 +356,12 @@ public class TableRegisterView extends javax.swing.JFrame {
         return jCBestatus;
     }
 
+    public JComboBox<Employee> getjCBEmployees() {
+        return jCBEmployees;
+    }
+    
+    
+
     public JTextField getjTFNmesa() {
         return jTFNmesa;
     }

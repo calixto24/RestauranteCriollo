@@ -107,7 +107,8 @@ public class TableController {
             "Id",
             "N° Mesa",
             "Capacidad",
-            "Estado"
+            "Estado",
+            "Mesero"
         };
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
         
@@ -118,7 +119,8 @@ public class TableController {
                 table.getId(),
                 table.getNumber_table(),
                 table.getCapacity(),
-                table.getStatus()
+                table.getStatus(),
+                table.getEmployee()
             };
 
             tableModel.addRow(row);
@@ -133,7 +135,7 @@ public class TableController {
         ArrayList<Employee> EmployeeList = employeeDao.getAll();
         
         for(Employee e: EmployeeList) {
-            if (e.getRole().equals("Mesero")) {
+            if (e.getRole().getName().equals("Mesero")) {
                 tableRegisterView.getJCBEmployees().addItem(e);
             }
         }       
@@ -156,6 +158,8 @@ public class TableController {
         //pintando la columna con la informacion de la fila
         tableRegisterView.getjTFNmesa().setText(tableRegisterView.getjTtableList().getValueAt(tableRegisterView.getRow(), 0).toString());
         tableRegisterView.getjTFcapacity().setText(tableRegisterView.getjTtableList().getValueAt(tableRegisterView.getRow(), 1).toString());
+        tableRegisterView.getjCBestatus().setSelectedItem(tableRegisterView.getjTtableList().getValueAt(tableRegisterView.getRow(), 2));
+        tableRegisterView.getjCBEmployees().setSelectedItem(tableRegisterView.getjTtableList().getValueAt(tableRegisterView.getRow(), 3));
         
         action = "edit";
         

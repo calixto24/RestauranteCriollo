@@ -25,12 +25,13 @@ public class RestaurantDB {
         employeeList = new ArrayList<>();
         employeeList.add(new Employee( "Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 12365478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 16 al pincho"));
         employeeList.add(new Employee( "Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Cristian", "asd", "gdfgd", 12365479, LocalDate.of(2000, 01, 20), 123456799, "cristian@gmail.com", "Mz. 16 al pincho"));
+        employeeList.add(new Employee( "Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Manuel", "asd", "gdfgd", 12365479, LocalDate.of(2000, 01, 20), 123456799, "cristian@gmail.com", "Mz. 16 al pincho"));
         
         // lista de mesas
         tableList = new ArrayList<>(); 
-        tableList.add(new Table(1, 15, "Disponible", employeeList.get(1)));
+        tableList.add(new Table(1, 15, "Ocupado", employeeList.get(1)));
         tableList.add(new Table(2, 12, "Disponible", employeeList.get(1)));
-        tableList.add(new Table(3, 10, "Disponible", employeeList.get(1)));
+        tableList.add(new Table(3, 10, "Disponible", employeeList.get(2)));
     }
     
     //patron singleton

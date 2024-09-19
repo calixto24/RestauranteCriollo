@@ -155,7 +155,6 @@ public class Register extends javax.swing.JFrame {
         jBDelete.setBackground(new java.awt.Color(0, 112, 121));
         jBDelete.setForeground(java.awt.Color.white);
         jBDelete.setText("ELIMINAR");
-        jBDelete.setEnabled(false);
         jBDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBDeleteActionPerformed(evt);

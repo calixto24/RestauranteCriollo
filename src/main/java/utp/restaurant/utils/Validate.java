@@ -4,14 +4,17 @@ import utp.restaurant.dao.EmployeeDAO;
 import utp.restaurant.dao.TableDAO;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import utp.restaurant.dao.RoleDAO;
 import utp.restaurant.model.Employee;
 import utp.restaurant.model.Table;
+import utp.restaurant.model.Role;
 
 public class Validate {
 
     //atributos
     private EmployeeDAO employeeDAO;
     private TableDAO tableDAO;
+    private RoleDAO roleDAO;
 
     private String message;
     private boolean valid;
@@ -24,6 +27,7 @@ public class Validate {
 
         employeeDAO = new EmployeeDAO();
         tableDAO = new TableDAO();
+        roleDAO = new RoleDAO();
     }
 
     public Validate(String el) {
@@ -160,7 +164,7 @@ public class Validate {
         return this;
     }
 
-    //METODOS DE IGUALDAD
+    //METODOS DE IGUALDAD para empleado
     public Validate equalsAttribute(String msg, String attribute) {
         if (!valid) {
             return this;
@@ -251,6 +255,67 @@ public class Validate {
         return this;
     }
 
+    
+    //para el nombre del rol
+    public Validate equalsNameRol(String msg, String attribute) {
+
+        if (!valid) {
+            return this;
+        }
+
+        for (Role role : roleDAO.getAll()) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "name":
+                    if (el.equals(role.getName())) {
+
+                        valid = false;
+                        message = msg;
+
+                    }
+                    break;
+
+            }
+
+        }
+
+        return this;
+
+    }
+    
+    public Validate equalsNameRol(String msg, String attribute, long id) {
+
+        if (!valid) {
+            return this;
+        }
+
+        for (Role role : roleDAO.getAll()) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "name":
+                    if (el.equals(role.getName())) {
+
+                        if (id != role.getId()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+
+                    }
+                    break;
+
+            }
+
+        }
+
+        return this;
+
+    }
+    
+    //para el numero de mesa
     public Validate equalsNtable(String msg, String attribute) {
 
         if (!valid) {

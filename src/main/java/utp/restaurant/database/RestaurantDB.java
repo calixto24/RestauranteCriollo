@@ -3,6 +3,7 @@ package utp.restaurant.database;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import utp.restaurant.model.Employee;
+import utp.restaurant.model.Item_Menu;
 import utp.restaurant.model.Role;
 import utp.restaurant.model.Table;
 
@@ -11,6 +12,7 @@ public class RestaurantDB {
     private ArrayList<Employee> employeeList;
     private ArrayList<Table> tableList;
     private ArrayList<Role> roleList;
+    private ArrayList<Item_Menu> Menulist; 
 
     
     private RestaurantDB(){
@@ -53,5 +55,9 @@ public class RestaurantDB {
 
     public ArrayList<Role> getRoleList() {
         return roleList;
+    }
+
+    public ArrayList<Item_Menu> getMenulist() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

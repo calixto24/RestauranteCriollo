@@ -301,7 +301,8 @@ public class EmployeeController {
 
     public void handleCleanForm() {
         
-        view.getjBDelete().setEnabled(false);
+        view.getjBDelete().setVisible(false);
+        view.getBtnUpdatePassword().setVisible(false);
 
         view.getjTFUser().setText("");
         view.getjTFAM().setText("");
@@ -335,9 +336,11 @@ public class EmployeeController {
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
         view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
 
+        
+        view.getjBDelete().setVisible(true);
+        view.getBtnUpdatePassword().setVisible(true);
+        
         view.getjTFPass().setEnabled(false);
-
-        view.getjBDelete().setEnabled(true);
     }
 
     public void heandleDeleteClick() {

@@ -33,6 +33,8 @@ public class Register extends javax.swing.JFrame {
         
         renderTable();
         employeeController.renderCBRole();
+        jBDelete.setVisible(false);
+        btnUpdatePassword.setVisible(false);
     }
     
     public void renderTable() {
@@ -90,6 +92,7 @@ public class Register extends javax.swing.JFrame {
         jTUserList = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnUpdatePassword = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -331,6 +334,13 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        btnUpdatePassword.setText("Actualizar Contraseña");
+        btnUpdatePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatePasswordActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -343,9 +353,11 @@ public class Register extends javax.swing.JFrame {
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton4)
-                                .addGap(66, 66, 66)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUpdatePassword)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBDelete))
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -378,7 +390,8 @@ public class Register extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jBDelete)
-                            .addComponent(jButton4)))
+                            .addComponent(jButton4)
+                            .addComponent(btnUpdatePassword)))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -438,6 +451,13 @@ public class Register extends javax.swing.JFrame {
     private void jTFaddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFaddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFaddressActionPerformed
+
+    private void btnUpdatePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePasswordActionPerformed
+        ResetPassword rp = new ResetPassword(this, true);
+        rp.setRoot(this);
+        rp.setEmployee_id(Long.parseLong(jTUserList.getModel().getValueAt(row, 0).toString()));
+        rp.setVisible(true);
+    }//GEN-LAST:event_btnUpdatePasswordActionPerformed
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(rootPane, message);
@@ -504,6 +524,10 @@ public class Register extends javax.swing.JFrame {
         return jTFUser;
     }
 
+    public JButton getBtnUpdatePassword() {
+        return btnUpdatePassword;
+    }
+
     public static int getDO_NOTHING_ON_CLOSE() {
         return DO_NOTHING_ON_CLOSE;
     }
@@ -557,6 +581,7 @@ public class Register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnUpdatePassword;
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

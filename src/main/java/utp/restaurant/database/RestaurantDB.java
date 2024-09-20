@@ -14,10 +14,7 @@ public class RestaurantDB {
     private ArrayList<Employee> employeeList;
     private ArrayList<Table> tableList;
     private ArrayList<Role> roleList;
-
-    private ArrayList<ItemMenu> Menulist; 
     private ArrayList<Category> categoryList; 
-
     private ArrayList<ItemMenu> itemMenuList;
 
 
@@ -44,9 +41,9 @@ public class RestaurantDB {
         
         //lista de categorias
         categoryList= new ArrayList<>();
-        categoryList.add(new Category("postres", "dulces", ""));
-        categoryList.add(new Category("bebidas", "frutas", ""));
-        categoryList.add(new Category("platos", "sopas", ""));
+        categoryList.add(new Category("postres", "aaaa", ""));
+        categoryList.add(new Category("bebidas", "eee", ""));
+        categoryList.add(new Category("platos", "eeee", ""));
 
 
         // lista de item menu 
@@ -80,6 +77,10 @@ public class RestaurantDB {
 
     public ArrayList<ItemMenu> getItemMenuList() {
         return itemMenuList;
+    }
+
+    public ArrayList<Category> getCategoryList() {
+        return categoryList;
     }
     
 }

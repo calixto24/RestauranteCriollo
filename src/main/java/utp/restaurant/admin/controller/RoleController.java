@@ -30,8 +30,6 @@ public class RoleController {
 
     public void handleRegisterClick() {
 
-        roleRegisterView.getjBDelete().setVisible(false);
-
         //NAME
         String name = roleRegisterView.getjTFNameRol().getText();
 
@@ -48,6 +46,7 @@ public class RoleController {
 
             roleRegisterView.showMessage(vldt.getMessage());
             roleRegisterView.getjTFNameRol().requestFocus();
+            return;
 
         }
 

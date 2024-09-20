@@ -37,10 +37,6 @@ public class ItemMenu {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getImage() {
         return image;
     }

@@ -2,6 +2,7 @@ package utp.restaurant.database;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import utp.restaurant.model.Category;
 import utp.restaurant.model.Employee;
 import utp.restaurant.model.Item_Menu;
 import utp.restaurant.model.Role;
@@ -13,6 +14,7 @@ public class RestaurantDB {
     private ArrayList<Table> tableList;
     private ArrayList<Role> roleList;
     private ArrayList<Item_Menu> Menulist; 
+    private ArrayList<Category> categoryList; 
 
     
     private RestaurantDB(){
@@ -34,6 +36,12 @@ public class RestaurantDB {
         tableList.add(new Table(1, 15, "Ocupado", employeeList.get(1)));
         tableList.add(new Table(2, 12, "Disponible", employeeList.get(1)));
         tableList.add(new Table(3, 10, "Disponible", employeeList.get(2)));
+        
+        //lista de categorias
+        categoryList= new ArrayList<>();
+        categoryList.add(new Category("postres", "dulces", ""));
+        categoryList.add(new Category("bebidas", "frutas", ""));
+        categoryList.add(new Category("platos", "sopas", ""));
     }
     
     //patron singleton

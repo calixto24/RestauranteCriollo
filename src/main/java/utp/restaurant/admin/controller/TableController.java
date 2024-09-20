@@ -90,7 +90,6 @@ public class TableController {
             } catch (Exception e) {
                 
                 tableRegisterView.showMessage("Mesa no modificada" + e.toString());
-                System.out.println("Mesa no modificada" + e.toString());
                 
             }
             

@@ -32,8 +32,6 @@ public class EmployeeController {
         roleDao = new RoleDAO();
         vldt = new Validate();
 
-        //BCrypt.withDefaults().hashToString(12, "12345678".toCharArray());
-        System.out.println(BCrypt.withDefaults().hashToString(12, "12345678".toCharArray()));
     }
 
     public void handleRegisterClick() {
@@ -206,8 +204,6 @@ public class EmployeeController {
         } else {
             
             password = view.getjTUserList().getModel().getValueAt(view.getRow(), 2).toString();
-            
-            System.out.println(password);
             
         }
 

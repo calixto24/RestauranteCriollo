@@ -183,9 +183,9 @@ public class EmployeeController {
 
         //VALIDACION CONTRASEÑA
         String password;
-        
+
         if (!action.equals("edit")) {
-            
+
             password = view.getjTFPass().getText();
 
             vldt.setElement(password)
@@ -198,13 +198,13 @@ public class EmployeeController {
                 return;
 
             }
-            
+
             password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
         } else {
-            
+
             password = view.getjTUserList().getModel().getValueAt(view.getRow(), 2).toString();
-            
+
         }
 
         //ROL
@@ -296,7 +296,7 @@ public class EmployeeController {
     }
 
     public void handleCleanForm() {
-        
+
         view.getjBDelete().setVisible(false);
         view.getBtnUpdatePassword().setVisible(false);
 
@@ -310,7 +310,7 @@ public class EmployeeController {
         view.getjTFPass().setText("");
         view.getjTFRuc().setText("");
         view.getjTFaddress().setText("");
-        
+
         action = "add";
         view.getjTFPass().setEnabled(true);
     }
@@ -332,10 +332,9 @@ public class EmployeeController {
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
         view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
 
-        
         view.getjBDelete().setVisible(true);
         view.getBtnUpdatePassword().setVisible(true);
-        
+
         view.getjTFPass().setEnabled(false);
     }
 

@@ -27,19 +27,20 @@ public class ItemMenuController {
             "Id", "Nombre", "Precio", "Descripcion", "Estado", "Imagen"
 
         };
-        DefaultTableModel tableModel = new DefaultTableModel (null, columns);
+        
+        
+        DefaultTableModel tableModel = new DefaultTableModel(null, columns);
         ArrayList<ItemMenu> itemMenuList = itemMenuDao.getAll();
-        
-        for(ItemMenu e : itemMenuList){
-        Object  row [] = {
-           e.getId(),e.getName(),e.getPrice(),e.getDescription(),e.getStatus(),e.getImage()
-        };
-        tableModel.addRow(row);
-        
-        } 
+
+        for (ItemMenu e : itemMenuList) {
+            Object row[] = {
+                e.getId(), e.getName(), e.getPrice(), e.getDescription(), e.getStatus(), e.getImage()
+            };
+            tableModel.addRow(row);
+
+        }
         return tableModel;
-        
-        
+
     }
 
 }

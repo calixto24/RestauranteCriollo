@@ -12,33 +12,29 @@ public class ItemMenuController {
     // atributos
     private ItemMenuRegisterView itemMenuRegisterView;
     private ItemMenuDAO itemMenuDao;
-    private ItemMenuRegisterView view ; 
-    private String action ; 
+    private ItemMenuRegisterView view;
+    private String action;
     private Validate vldt;
-    
-    public ItemMenuController(ItemMenuRegisterView view ){
-        this.view=view ; 
 
-    itemMenuDao = new ItemMenuDAO();
-    vldt = new Validate();
-    
-    
+    public ItemMenuController(ItemMenuRegisterView view) {
+        this.view = view;
+
+        itemMenuDao = new ItemMenuDAO();
+        vldt = new Validate();
+
     }
 
-   // public ItemMenuController(ItemMenuRegisterView itemMenuRegisterView) {
-     ///   this.itemMenuRegisterView = itemMenuRegisterView;
-        ///itemMenuDao = new ItemMenuDAO();
-
+    // public ItemMenuController(ItemMenuRegisterView itemMenuRegisterView) {
+    ///   this.itemMenuRegisterView = itemMenuRegisterView;
+    ///itemMenuDao = new ItemMenuDAO();
     //}
-
     public DefaultTableModel getTableModel() {
 
         String columns[] = {
-            "Id","Imagen", "Nombre", "Precio", "Descripcion", "Estado"
+            "Id", "Imagen", "Nombre", "Precio", "Descripcion", "Estado"
 
         };
-        
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
         ArrayList<ItemMenu> itemMenuList = itemMenuDao.getAll();
 
@@ -50,40 +46,65 @@ public class ItemMenuController {
 
         }
         return tableModel;
-        
+
     }
-    
-    public void handleRegisterClick(){
-    //guardar datos ingresados
-    String name = view.getjTFname().getText();
-    vldt.setElement(name).isRequired("El nombre del plato es obligatorio");
-    
-            if (!vldt.exec()) {
+
+    public void handleRegisterClick() {
+        //guardar datos ingresados
+        // validacion Nombre del platos (ingresado y exisitente )
+        String name = view.getjTFname().getText();
+        vldt.setElement(name).isRequired("El nombre del plato es obligatorio");
+        if (action.equals("add")) {
+            vldt.equalsAttribute("El nombre del plato ya existe ", "name");
+        } else if (action.equals("edit")) {
+            vldt.equalsAttribute("El nomre del plato ya existe", "name", 0);
+        }
+
+        if (!vldt.exec()) {
 
             view.showMessage(vldt.getMessage());
             view.getjTFname().requestFocus();
             return;
 
         }
-    
-    }
-    
-    
-    public void handleCleanForm (){
-    //limpiar
-    
-    view.getjTFname().setText("");
-    view.getjTFprice().setText("");
-    view.getjTFdescription().setText("");
-    
-    
-    action ="add"; 
+        //validacion precio 
+        String price = view.getjTFprice().getText();
+        vldt.setElement(price).isRequired("Debe ingresar un precio al platillo ")
+                .isInt("El precio del plato debe ser numerico").maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
+        
+        
+        if (!vldt.exec()) {
+            view.showMessage(vldt.getMessage());
+            view.getjTFprice().requestFocus();
+        }
+        // validar descripcion
+        String description = view.getjTFdescription().getText();
+        vldt.setElement(description).isRequired("Debe ingresar la descripcion de la comida ");
+        
+        if (!vldt.exec()){
+        view.showMessage(vldt.getMessage());
+        view.getjTFdescription().requestFocus();
+        return ;
+        }
+        handleCleanForm();
+        view.renderTable();
 
-    
     }
-    public void heandleDeleteClick (){
-    //Eliminar
-    
+
+    public void handleCleanForm() {
+        //limpiar
+
+        view.getjTFname().setText("");
+        view.getjTFprice().setText("");
+        view.getjTFdescription().setText("");
+
+        action = "add";
+
+    }
+
+    public void heandleDeleteClick() {
+        //Eliminar
+
     }
 
 }

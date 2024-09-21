@@ -174,13 +174,13 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         jButton1.setBackground(new java.awt.Color(86, 42, 35));
         jButton1.setForeground(new java.awt.Color(249, 242, 228));
-        jButton1.setText("ATRAS");
+        jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 30, 104, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 670, 104, -1));
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
         jButton2.setForeground(new java.awt.Color(249, 242, 228));
@@ -217,13 +217,13 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         jButton4.setBackground(new java.awt.Color(86, 42, 35));
         jButton4.setForeground(new java.awt.Color(249, 242, 228));
-        jButton4.setText("GUARDAR");
+        jButton4.setText("ATRAS");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 673, 104, 30));
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 40, 104, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

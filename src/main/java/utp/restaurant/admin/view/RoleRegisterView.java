@@ -78,6 +78,11 @@ public class RoleRegisterView extends javax.swing.JFrame {
         jTFNameRol.setBackground(new java.awt.Color(249, 242, 228));
         jTFNameRol.setForeground(new java.awt.Color(51, 51, 51));
         jTFNameRol.setBorder(null);
+        jTFNameRol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNameRolActionPerformed(evt);
+            }
+        });
         jPanel2.add(jTFNameRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 45, 440, -1));
 
         jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
@@ -170,7 +175,7 @@ public class RoleRegisterView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -194,6 +199,10 @@ public class RoleRegisterView extends javax.swing.JFrame {
         
         roleController.heandleViewEditClick();
     }//GEN-LAST:event_jTRoleListMouseClicked
+
+    private void jTFNameRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameRolActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNameRolActionPerformed
 
     public void renderTable() {
         

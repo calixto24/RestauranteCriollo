@@ -59,18 +59,20 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
 
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jTFname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFnameActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("NOMBRE");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("PRECIO");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DESCRIPCIÓN");
 
         jCBstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "disponible", "ocupado" }));
 
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("ESTADO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -175,6 +177,15 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
             }
         ));
+        jTItemMenuList.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTItemMenuListAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jScrollPane1.setViewportView(jTItemMenuList);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -222,6 +233,14 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
       //  itemMenuController.handleRegisterClick(); 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTItemMenuListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTItemMenuListAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTItemMenuListAncestorAdded
+
+    private void jTFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFnameActionPerformed
 
     /**
      * @param args the command line arguments

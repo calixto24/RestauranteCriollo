@@ -7,7 +7,7 @@ import java.util.Random;
 public class Customer extends Person {
     private long id_customer;
     private LocalDate register;
-    protected long ruc;
+    private long ruc;
     
     public Customer(String name, String lastname_paternal, String lastname_maternal,
             int dni, LocalDate birthdate, int phoneNumber, String email, String address) {

@@ -1,28 +1,24 @@
-
 package utp.restaurant.model;
 
 import java.util.Random;
 
-
 public class ItemMenu {
-    // atributos 
-    private long id ; 
-    private String name ;  // name 
-    private double price ; // precio 
-    private String description ; // descripcion
-    private String status;
-    private String image ; 
-    
-    
-    
 
-    public ItemMenu(String name, double price, String description , String status, String image ) {
-        this.id = System.currentTimeMillis()+new Random().nextInt(1000); //ID AUTOMATICO
+    // atributos 
+    private long id;
+    private String name;  // name 
+    private double price; // precio 
+    private String description; // descripcion
+    private String status;
+    private String image;
+
+    public ItemMenu(String image, String name, double price, String description, String status) {
+        this.id = System.currentTimeMillis() + new Random().nextInt(1000); //ID AUTOMATICO
+        this.image = image;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.image = image ; 
-        this.status=status;
+        this.status = status;
     }
 
     public String getStatus() {
@@ -32,7 +28,7 @@ public class ItemMenu {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -68,9 +64,5 @@ public class ItemMenu {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
-    
-    
+
 }

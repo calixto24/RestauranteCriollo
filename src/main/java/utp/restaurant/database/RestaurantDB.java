@@ -48,9 +48,9 @@ public class RestaurantDB {
 
         // lista de item menu 
         itemMenuList = new ArrayList<>();
-        itemMenuList.add(new ItemMenu("Lomo Saltado", 20, "Carne de pollo","disponible", ""));
-        itemMenuList.add(new ItemMenu("Causa", 16, "Causa de atun","disponible",  ""));
-        itemMenuList.add(new ItemMenu("Ceviche", 15, "De tilapia", "agotado", ""));
+        itemMenuList.add(new ItemMenu("image","Lomo Saltado", 20, "Carne de pollo","disponible"));
+        itemMenuList.add(new ItemMenu("image","Causa", 16, "Causa de atun","disponible"));
+        itemMenuList.add(new ItemMenu("image","Ceviche", 15, "De tilapia", "agotado"));
         
     }
 

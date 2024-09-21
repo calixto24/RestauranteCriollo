@@ -4,7 +4,16 @@
  */
 package utp.restaurant.admin.view;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import utp.restaurant.admin.controller.ItemMenuController;
 
 /**
@@ -18,14 +27,20 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
     public ItemMenuRegisterView() {
         itemMenuController = new ItemMenuController(this);
-        
+
         initComponents();
         renderTable();
 
     }
-    public void  renderTable(){
-    DefaultTableModel tableModel = itemMenuController.getTableModel();
-    jTItemMenuList.setModel(tableModel);
+
+    public void renderTable() {
+        DefaultTableModel tableModel = itemMenuController.getTableModel();
+        jTItemMenuList.setModel(tableModel);
+
+        TableColumnModel tcm = jTItemMenuList.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
+        tcm.removeColumn(tcm.getColumn(0));
+
     }
 
     /**
@@ -132,8 +147,18 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(86, 42, 35));
 
         jButton3.setText("ELIMINAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("LIMPIAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("GUARDAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -230,9 +255,10 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      //  itemMenuController.handleRegisterClick(); 
+itemMenuController.handleRegisterClick();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
     private void jTItemMenuListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTItemMenuListAncestorAdded
         // TODO add your handling code here:
@@ -241,6 +267,18 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
     private void jTFnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFnameActionPerformed
+
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+itemMenuController.handleCleanForm();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+itemMenuController.heandleDeleteClick();
+    }//GEN-LAST:event_jButton3ActionPerformed
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(rootPane, message);
+    }
 
     /**
      * @param args the command line arguments
@@ -276,6 +314,135 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
             }
         });
     }
+
+    public JButton getjButton1() {
+        return jButton1;
+    }
+
+    public void setjButton1(JButton jButton1) {
+        this.jButton1 = jButton1;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
+    }
+
+    public void setjButton2(JButton jButton2) {
+        this.jButton2 = jButton2;
+    }
+
+    public JButton getjButton3() {
+        return jButton3;
+    }
+
+    public void setjButton3(JButton jButton3) {
+        this.jButton3 = jButton3;
+    }
+
+    public JComboBox<String> getjCBstatus() {
+        return jCBstatus;
+    }
+
+    public void setjCBstatus(JComboBox<String> jCBstatus) {
+        this.jCBstatus = jCBstatus;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JLabel getjLabel3() {
+        return jLabel3;
+    }
+
+    public void setjLabel3(JLabel jLabel3) {
+        this.jLabel3 = jLabel3;
+    }
+
+    public JLabel getjLabel4() {
+        return jLabel4;
+    }
+
+    public void setjLabel4(JLabel jLabel4) {
+        this.jLabel4 = jLabel4;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
+    }
+
+    public JPanel getjPanel4() {
+        return jPanel4;
+    }
+
+    public void setjPanel4(JPanel jPanel4) {
+        this.jPanel4 = jPanel4;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JTextField getjTFdescription() {
+        return jTFdescription;
+    }
+
+    public void setjTFdescription(JTextField jTFdescription) {
+        this.jTFdescription = jTFdescription;
+    }
+
+    public JTextField getjTFname() {
+        return jTFname;
+    }
+
+    public void setjTFname(JTextField jTFname) {
+        this.jTFname = jTFname;
+    }
+
+    public JTextField getjTFprice() {
+        return jTFprice;
+    }
+
+    public void setjTFprice(JTextField jTFprice) {
+        this.jTFprice = jTFprice;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

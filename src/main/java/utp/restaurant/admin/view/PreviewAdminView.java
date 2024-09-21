@@ -4,6 +4,8 @@
  */
 package utp.restaurant.admin.view;
 
+import java.awt.Color;
+
 /**
  *
  * @author PC
@@ -12,14 +14,22 @@ public class PreviewAdminView extends javax.swing.JFrame {
 
     private Register register;
     private TableRegisterView tableRegisterView;
+    private RoleRegisterView roleRegisterView;
+    private ItemMenuRegisterView itemMenuRegisterView;
+    private CategoryRegisterView categoryRegisterView;
+    private CustomerRegisterVIew customerRegisterVIew;
+    
     
     public PreviewAdminView() {
         
         register = new Register();
         tableRegisterView = new TableRegisterView();
+        roleRegisterView = new RoleRegisterView();
+        itemMenuRegisterView = new ItemMenuRegisterView();
+        categoryRegisterView = new CategoryRegisterView();
+        customerRegisterVIew = new CustomerRegisterVIew();
         
         initComponents();
-        
         
     }
 
@@ -34,73 +44,131 @@ public class PreviewAdminView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLBplatillo = new javax.swing.JLabel();
+        jLBemployee = new javax.swing.JLabel();
+        jLBrol = new javax.swing.JLabel();
+        jLBcliente = new javax.swing.JLabel();
+        jLBmesa = new javax.swing.JLabel();
+        jLBcategoria = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 112, 121));
+        jLabel1.setForeground(new java.awt.Color(86, 42, 35));
         jLabel1.setText("Bienvenido Administrador ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 14, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(249, 242, 228));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLBplatillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardPlatillo.png"))); // NOI18N
+        jLBplatillo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBplatillo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBplatilloMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBplatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, 180, 210));
+
+        jLBemployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardEmpleado.png"))); // NOI18N
+        jLBemployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBemployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBemployeeMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBemployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, 210));
+
+        jLBrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardRol.png"))); // NOI18N
+        jLBrol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBrol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBrolMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 180, 210));
+
+        jLBcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardCliente.png"))); // NOI18N
+        jLBcliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBcliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBclienteMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 180, 210));
+
+        jLBmesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardMesa.png"))); // NOI18N
+        jLBmesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBmesa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBmesaMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBmesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 180, 210));
+
+        jLBcategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardCategoria.png"))); // NOI18N
+        jLBcategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBcategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBcategoriaMouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLBcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 180, 210));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 1280, 460));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerPreview.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Gestión");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(334, 74, -1, -1));
-
-        jButton1.setBackground(new java.awt.Color(0, 112, 121));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Mesa");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(444, 173, 198, 161));
-
-        jButton3.setBackground(new java.awt.Color(0, 112, 121));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton3.setForeground(java.awt.Color.white);
-        jButton3.setText("Empleado");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 173, 208, 161));
+        jLabel3.setText(" Explora las opciones a continuación para realizar tareas, optimizar procesos y asegurar el éxito en cada área de gestión.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 740, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        register.setVisible(true);
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jLBplatilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseClicked
+        itemMenuRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBplatilloMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void jLBemployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseClicked
+        register.setVisible(true);
+    }//GEN-LAST:event_jLBemployeeMouseClicked
+
+    private void jLBrolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseClicked
+        roleRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBrolMouseClicked
+
+    private void jLBclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseClicked
+        customerRegisterVIew.setVisible(true);
+    }//GEN-LAST:event_jLBclienteMouseClicked
+
+    private void jLBmesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseClicked
         tableRegisterView.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLBmesaMouseClicked
+
+    private void jLBcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseClicked
+        categoryRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBcategoriaMouseClicked
 
    
     public static void main(String args[]) {
@@ -137,10 +205,16 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLBcategoria;
+    private javax.swing.JLabel jLBcliente;
+    private javax.swing.JLabel jLBemployee;
+    private javax.swing.JLabel jLBmesa;
+    private javax.swing.JLabel jLBplatillo;
+    private javax.swing.JLabel jLBrol;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

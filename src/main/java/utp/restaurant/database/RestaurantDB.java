@@ -7,6 +7,8 @@ import utp.restaurant.model.Employee;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.Role;
 import utp.restaurant.model.Table;
+import utp.restaurant.model.Customer;
+
 
 public class RestaurantDB {
 
@@ -16,7 +18,7 @@ public class RestaurantDB {
     private ArrayList<Role> roleList;
     private ArrayList<Category> categoryList; 
     private ArrayList<ItemMenu> itemMenuList;
-
+    private ArrayList<Customer> customerList; 
 
     private RestaurantDB() {
         // lista de roles
@@ -52,6 +54,11 @@ public class RestaurantDB {
         itemMenuList.add(new ItemMenu("Causa", 16, "Causa de atun","disponible",  ""));
         itemMenuList.add(new ItemMenu("Ceviche", 15, "De tilapia", "agotado", ""));
         
+        //lista de clientes
+        customerList = new ArrayList<>();
+        customerList.add(new Customer("Jean","Chamorro", "Granados", 74883675,LocalDate.of(2006, 06, 15),946087675, "jean@gmail.com","Santa Clara, ate"));
+        customerList.add(new Customer("Rizo","Linuz", "Lirun", 74883674,LocalDate.of(2005, 06, 16),946087875, "98n@gmail.com","Huaycan, ate"));
+        customerList.add(new Customer("Yhemi","Leño", "Peño", 74883679,LocalDate.of(2005, 02, 15),946087675, "leon@gmail.com","Santa Anita"));
     }
 
     //patron singleton
@@ -82,5 +89,10 @@ public class RestaurantDB {
     public ArrayList<Category> getCategoryList() {
         return categoryList;
     }
+
+    public ArrayList<Customer> getCustomerList() {
+        return customerList;
+    }
+    
     
 }

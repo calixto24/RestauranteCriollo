@@ -361,6 +361,10 @@ public class EmployeeController {
         } catch (Exception e) {
             view.showMessage("Error al eliminar el usuario" + e.toString());
         }
+        ///xd
+        
+        
+        
 
     }
 }

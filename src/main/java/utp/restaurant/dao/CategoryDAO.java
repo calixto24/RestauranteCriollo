@@ -1,6 +1,7 @@
 package utp.restaurant.dao;
 
 import java.util.ArrayList;
+import javax.swing.text.html.StyleSheet;
 import utp.restaurant.model.Category;
 
 public class CategoryDAO implements DAO<Category> {
@@ -9,27 +10,36 @@ public class CategoryDAO implements DAO<Category> {
 
     @Override
     public ArrayList<Category> getAll() {
-    return categoryList;
+        return categoryList;
     }
 
     @Override
     public Category get(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Category y : categoryList) {
+            if (y.getId() == id) {
+                return y;
+            }
+        }
+        return null;
     }
 
     @Override
     public void add(Category t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        categoryList.add(t);
     }
 
     @Override
     public void update(long id, Category t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        categoryList.set(getIndex(id), t);
     }
 
     @Override
     public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        categoryList.remove(getIndex(id));
+    }
+
+    private int getIndex(long id) {
+        return categoryList.indexOf(get(id));
     }
 
 }

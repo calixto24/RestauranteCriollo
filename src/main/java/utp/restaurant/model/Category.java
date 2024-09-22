@@ -18,6 +18,10 @@ public class Category {
         this.image = image;
     }
 
+    public Category(){
+        
+    }
+    
     public String getName() {
         return name;
     }
@@ -46,5 +50,8 @@ public class Category {
         return id;
     }
     
-    
+    @Override
+    public String toString() {
+        return name;
+    }
 }

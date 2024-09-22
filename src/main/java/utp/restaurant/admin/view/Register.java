@@ -111,7 +111,7 @@ public class Register extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(86, 42, 35));
         jLabel8.setText("¡Registro de Empleados!");
-        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
+        jPanel5.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(86, 42, 35));
         jButton1.setForeground(new java.awt.Color(249, 242, 228));
@@ -343,13 +343,13 @@ public class Register extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
         jButton2.setForeground(new java.awt.Color(249, 242, 228));
-        jButton2.setText("atras");
+        jButton2.setText("ATRAS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 30, 64, -1));
+        jPanel5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1134, 30, 70, -1));
 
         btnUpdatePassword.setBackground(new java.awt.Color(86, 42, 35));
         btnUpdatePassword.setForeground(new java.awt.Color(249, 242, 228));
@@ -367,13 +367,13 @@ public class Register extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(51, 51, 51));
         jLabel14.setText("Completa la información de los empleados");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 270, -1));
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 270, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

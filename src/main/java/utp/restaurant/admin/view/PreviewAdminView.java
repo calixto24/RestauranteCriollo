@@ -17,7 +17,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     private RoleRegisterView roleRegisterView;
     private ItemMenuRegisterView itemMenuRegisterView;
     private CategoryRegisterView categoryRegisterView;
-    private CustomerRegisterVIew customerRegisterVIew;
+    //private CustomerRegisterVIew customerRegisterVIew;
     
     
     public PreviewAdminView() {
@@ -27,7 +27,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         roleRegisterView = new RoleRegisterView();
         itemMenuRegisterView = new ItemMenuRegisterView();
         categoryRegisterView = new CategoryRegisterView();
-        customerRegisterVIew = new CustomerRegisterVIew();
+        //customerRegisterVIew = new CustomerRegisterVIew();
         
         initComponents();
         
@@ -159,7 +159,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBrolMouseClicked
 
     private void jLBclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseClicked
-        customerRegisterVIew.setVisible(true);
+        //customerRegisterVIew.setVisible(true);
     }//GEN-LAST:event_jLBclienteMouseClicked
 
     private void jLBmesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseClicked

@@ -1,57 +1,52 @@
-
 package utp.restaurant.model;
 
 import java.time.LocalDate;
-//import java.time.LocalDateTime;
-//import java.time.format.DateTimeFormatter;
-//import java.util.Locale;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Random;
 
 public class Customer extends Person {
+
     private long id_customer;
-    //private LocalDate register;
-    private long ruc;
-    
-    public Customer(long ruc, String name, String lastname_paternal, String lastname_maternal,
-            int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
+    private LocalDate register;
+    private String ruc;
+
+    public Customer(String name, String lastname_paternal, String lastname_maternal,
+            int dni, LocalDate birthdate, int phoneNumber, String email, String address, LocalDate register, String ruc) {
         super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, address);
-                this.id_customer=System.currentTimeMillis() + new Random().nextInt(1000);;
-               // this.register=register;
-                this.ruc=ruc;
+        
+        this.id_customer = System.currentTimeMillis() + new Random().nextInt(1000);;
+        this.register = register;
+        this.ruc = ruc;
     }
-    public Customer(){
+
+    public Customer() {
     }
 
     public long getId_customer() {
         return id_customer;
     }
 
-    public void setId_customer(long id_customer) {
-        this.id_customer = id_customer;
+    public LocalDate getRegister() {
+        return register;
     }
 
-    /*public LocalDate getRegister() {
-        return register;
-    }
-    
     public String getRegisterFormatted() {
-        LocalDateTime FechaHoraActual=LocalDateTime.now(); 
-        DateTimeFormatter xd=DateTimeFormatter.ofPattern("dd/MMM/yy HH:mm", Locale.ITALY);
-        String register=FechaHoraActual.format(xd);
-        return register;
+        DateTimeFormatter fr = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return fr.format(register);
     }
 
     public void setRegister(LocalDate register) {
         this.register = register;
-    }*/
+    }
 
-    public long getRuc() {
+    public String getRuc() {
         return ruc;
     }
 
-    public void setRuc(long ruc) {
+    public void setRuc(String ruc) {
         this.ruc = ruc;
     }
-    
-}
 
+}

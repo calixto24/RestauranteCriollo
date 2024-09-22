@@ -19,13 +19,9 @@ public class Validate {
     private EmployeeDAO employeeDAO;
     private TableDAO tableDAO;
     private RoleDAO roleDAO;
-<<<<<<< HEAD
     private CustomerDAO customerDAO;
-    
-=======
     private ItemMenuDAO itemMenuDAO;
 
->>>>>>> 8c3e48dbbaae9f56062a8caa365b835ad4ed019e
     private String message;
     private boolean valid;
     private String el;
@@ -38,15 +34,12 @@ public class Validate {
         employeeDAO = new EmployeeDAO();
         tableDAO = new TableDAO();
         roleDAO = new RoleDAO();
-<<<<<<< HEAD
         customerDAO = new CustomerDAO();
-=======
         itemMenuDAO = new ItemMenuDAO();
     }
 public Validate maxPriceLength(int max, String msg) {
     if (!valid) {
         return this;
->>>>>>> 8c3e48dbbaae9f56062a8caa365b835ad4ed019e
     }
 
     try {
@@ -422,7 +415,7 @@ public Validate maxPriceLength(int max, String msg) {
                     }
                     break;
                 case "ruc":
-                    if (Long.parseLong(el) == customer.getRuc()) {
+                    if (el.equals(customer.getRuc())) {
                         valid = false;
                         message = msg;
                     }
@@ -463,7 +456,7 @@ public Validate maxPriceLength(int max, String msg) {
                     }
                     break;
                 case "ruc":
-                    if (Long.parseLong(el) == customer.getRuc()) {
+                    if (el.equals(customer.getRuc())) {
                         if (id != customer.getId_customer()) {
 
                             valid = false;

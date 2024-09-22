@@ -3,20 +3,20 @@ package utp.restaurant.admin.controller;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import utp.restaurant.admin.view.CategoryView;
+import utp.restaurant.admin.view.CategoryRegisterView;
 import utp.restaurant.dao.CategoryDAO;
 import utp.restaurant.model.Category;
 import utp.restaurant.utils.Validate;
 
 public class CategoryController {
 
-    private CategoryView categoryView;
+    private CategoryRegisterView categoryView;
     private CategoryDAO categoryDAO;
     private long selectedId;
     private Validate vld;
     private String action;
 
-    public CategoryController(CategoryView categoryView) {
+    public CategoryController(CategoryRegisterView categoryView) {
         this.categoryView = categoryView;
         this.action = "add";
         selectedId = 0;

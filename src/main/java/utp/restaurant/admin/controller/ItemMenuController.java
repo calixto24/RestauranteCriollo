@@ -71,8 +71,7 @@ public class ItemMenuController {
         String price = view.getjTFprice().getText();
         vldt.setElement(price).isRequired("Debe ingresar un precio al platillo ")
                 .isInt("El precio del plato debe ser numerico").maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
-        
-        
+
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFprice().requestFocus();
@@ -80,14 +79,27 @@ public class ItemMenuController {
         // validar descripcion
         String description = view.getjTFdescription().getText();
         vldt.setElement(description).isRequired("Debe ingresar la descripcion de la comida ");
-        
-        if (!vldt.exec()){
-        view.showMessage(vldt.getMessage());
-        view.getjTFdescription().requestFocus();
-        return ;
+
+        if (!vldt.exec()) {
+            view.showMessage(vldt.getMessage());
+            view.getjTFdescription().requestFocus();
+            return;
         }
         handleCleanForm();
         view.renderTable();
+        
+        ItemMenu itemMenu = new ItemMenu(name, name, price, description, name);
+        if (action.equals("add")){
+        try {
+        itemMenuDao.add(itemMenu);
+        view.showMessage("Plato creado");
+        }catch(Exception e){
+        view.showMessage("Plato no creado"+e.toString());
+        }
+        
+        }
+        view.renderTable();
+        
 
     }
 

@@ -174,6 +174,9 @@ public Validate maxPriceLength(int max, String msg) {
         return this;
     }
 
+    
+    
+
     public Validate isDate(String msg) {
         if (!valid) {
             return this;

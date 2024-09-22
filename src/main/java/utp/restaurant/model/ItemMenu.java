@@ -16,7 +16,7 @@ public class ItemMenu {
         this.id = System.currentTimeMillis() + new Random().nextInt(1000); //ID AUTOMATICO
         this.image = image;
         this.name = name;
-        this.price = price;
+
         this.description = description;
         this.status = status;
     }
@@ -49,13 +49,6 @@ public class ItemMenu {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     public String getDescription() {
         return description;

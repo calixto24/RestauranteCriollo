@@ -15,9 +15,11 @@ public class ItemMenuController {
     private ItemMenuRegisterView view;
     private String action;
     private Validate vldt;
+    private long idPlato; 
 
     public ItemMenuController(ItemMenuRegisterView view) {
         this.view = view;
+        action="add";
 
         itemMenuDao = new ItemMenuDAO();
         vldt = new Validate();
@@ -67,15 +69,19 @@ public class ItemMenuController {
             return;
 
         }
+        String status = (String) view.getjCBstatus().getSelectedItem();
+        
         //validacion precio 
-        String price = view.getjTFprice().getText();
-        vldt.setElement(price).isRequired("Debe ingresar un precio al platillo ")
-                .isInt("El precio del plato debe ser numerico").maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
+        String priceCO = view.getjTFprice().getText();
+        vldt.setElement(priceCO).isRequired("Debe ingresar un precio al platillo ")
+                .isInt("El precio del plato debe ser numerico"); //.maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFprice().requestFocus();
+            return ; 
         }
+        double price = Double.parseDouble(priceCO);
         // validar descripcion
         String description = view.getjTFdescription().getText();
         vldt.setElement(description).isRequired("Debe ingresar la descripcion de la comida ");
@@ -87,8 +93,9 @@ public class ItemMenuController {
         }
         handleCleanForm();
         view.renderTable();
+        //crear nuevo plato y agregar ala tabla
+        ItemMenu itemMenu = new ItemMenu(name, name, price , description, status);
         
-        ItemMenu itemMenu = new ItemMenu(name, name, price, description, name);
         if (action.equals("add")){
         try {
         itemMenuDao.add(itemMenu);
@@ -116,7 +123,8 @@ public class ItemMenuController {
 
     public void heandleDeleteClick() {
         //Eliminar
-
+        
+        
     }
 
 }

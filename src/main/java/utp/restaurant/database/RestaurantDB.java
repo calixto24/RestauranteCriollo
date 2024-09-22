@@ -30,7 +30,7 @@ public class RestaurantDB {
 
         //lista de empleados
         employeeList = new ArrayList<>();
-        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 12365478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 16 al pincho"));
+        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 123123478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 16 al pincho"));
         employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Cristian", "asd", "gdfgd", 12365479, LocalDate.of(2000, 01, 20), 123456799, "cristian@gmail.com", "Mz. 16 al pincho"));
         employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Manuel", "asd", "gdfgd", 12365479, LocalDate.of(2000, 01, 20), 123456799, "cristian@gmail.com", "Mz. 16 al pincho"));
 
@@ -50,7 +50,7 @@ public class RestaurantDB {
 
         // lista de item menu 
         itemMenuList = new ArrayList<>();
-        itemMenuList.add(new ItemMenu("image","Lomo Saltado", 20, "Carne de pollo","disponible"));
+        itemMenuList.add(new ItemMenu("image","Lomo Saltado", 20.23, "Carne de pollo","disponible"));
         itemMenuList.add(new ItemMenu("image","Causa", 16, "Causa de atun","disponible"));
         itemMenuList.add(new ItemMenu("image","Ceviche", 15, "De tilapia", "agotado"));
         

@@ -37,6 +37,8 @@ public class Validate {
         customerDAO = new CustomerDAO();
         itemMenuDAO = new ItemMenuDAO();
     }
+    /// metodo para no poner una valor excedido
+    /*
 public Validate maxPriceLength(int max, String msg) {
     if (!valid) {
         return this;
@@ -58,6 +60,7 @@ public Validate maxPriceLength(int max, String msg) {
 
     return this;
 }
+*/
     public Validate(String el) {
         message = "";
         valid = true;

@@ -101,7 +101,7 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         jCBstatus.setBackground(new java.awt.Color(249, 242, 228));
         jCBstatus.setForeground(new java.awt.Color(51, 51, 51));
-        jCBstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "disponible", "ocupado" }));
+        jCBstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Agotado", " " }));
         jCBstatus.setBorder(null);
         jPanel2.add(jCBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 200, 30));
 

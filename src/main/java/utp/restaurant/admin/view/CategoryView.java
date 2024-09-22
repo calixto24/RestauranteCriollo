@@ -4,8 +4,12 @@
  */
 package utp.restaurant.admin.view;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import utp.restaurant.admin.controller.CategoryController;
 
 /**
@@ -21,23 +25,11 @@ public class CategoryView extends javax.swing.JFrame {
     public CategoryView() {
         categoryController= new CategoryController(this);
         initComponents();
-        
-      
-        
+       jBDelete.setVisible(false);
+       renderTable();
     }
     
-    public void showMessage( String message){
-        JOptionPane.showMessageDialog(rootPane, message);
-    }
-
-    public JTextField getTxtDescrip() {
-        return txtDescrip;
-    }
-
-    public JTextField getTxtName() {
-        return txtName;
-    }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,12 +76,22 @@ public class CategoryView extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("LIMPIAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 600, 117, 44));
 
         jBDelete.setBackground(new java.awt.Color(86, 42, 35));
         jBDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jBDelete.setForeground(new java.awt.Color(255, 255, 255));
         jBDelete.setText("ELIMINAR");
+        jBDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBDeleteActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 600, 117, 44));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 24)); // NOI18N
@@ -154,6 +156,11 @@ public class CategoryView extends javax.swing.JFrame {
 
             }
         ));
+        jTableC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableCMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableC);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -161,9 +168,9 @@ public class CategoryView extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +210,59 @@ public class CategoryView extends javax.swing.JFrame {
  
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+   categoryController.handleCleanForm();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
+     
+      categoryController.heandleDeleteClick();
+        
+    }//GEN-LAST:event_jBDeleteActionPerformed
+
+    private void jTableCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCMouseClicked
+      row = jTableC.rowAtPoint(evt.getPoint());
+      categoryController.heandleViewEditClik();
+        
+    }//GEN-LAST:event_jTableCMouseClicked
+
+   public void renderTable(){
+       DefaultTableModel tableModel= categoryController.getTableModel();
+       jTableC.setModel(tableModel);
+       
+       TableColumnModel tqm=  jTableC.getColumnModel();
+       tqm.removeColumn(tqm.getColumn(0));
+   }
+    public void showMessage( String message){
+        JOptionPane.showMessageDialog(rootPane, message);
+    }
+    public int showConfirmation( String msg){
+        return JOptionPane.showConfirmDialog(rootPane, msg);
+    }
+
+    public JTextField getTxtDescrip() {
+        return txtDescrip;
+    }
+
+    public JTextField getTxtName() {
+        return txtName;
+    }
+
+    public JTable getjTableC() {
+        return jTableC;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public JButton getjBDelete() {
+        return jBDelete;
+    }
+
+
+
+   
     /**
      * @param args the command line arguments
      */
@@ -254,7 +314,5 @@ public class CategoryView extends javax.swing.JFrame {
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
-    public Object gettxtName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
 }

@@ -11,7 +11,7 @@ public class Category {
     private String description;
     private String image;
 
-    public Category( String name, String description, String image) {
+    public Category(  String name, String description, String image) {
         this.id = System.currentTimeMillis()+new Random().nextInt( 1000);
         this.name = name;
         this.description = description;

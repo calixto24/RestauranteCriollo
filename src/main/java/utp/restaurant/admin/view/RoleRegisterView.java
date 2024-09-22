@@ -134,6 +134,15 @@ public class RoleRegisterView extends javax.swing.JFrame {
 
             }
         ));
+        jTRoleList.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTRoleListAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jTRoleList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTRoleListMouseClicked(evt);
@@ -203,6 +212,10 @@ public class RoleRegisterView extends javax.swing.JFrame {
     private void jTFNameRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameRolActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNameRolActionPerformed
+
+    private void jTRoleListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTRoleListAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTRoleListAncestorAdded
 
     public void renderTable() {
         

@@ -1,12 +1,16 @@
 package utp.restaurant.dao;
 
 import java.util.ArrayList;
-import javax.swing.text.html.StyleSheet;
+import utp.restaurant.database.RestaurantDB;
 import utp.restaurant.model.Category;
 
 public class CategoryDAO implements DAO<Category> {
 
     private ArrayList<Category> categoryList;
+
+    public CategoryDAO() {
+        categoryList = RestaurantDB.getInstance().getCategoryList();
+    }
 
     @Override
     public ArrayList<Category> getAll() {
@@ -24,13 +28,13 @@ public class CategoryDAO implements DAO<Category> {
     }
 
     @Override
-    public void add(Category t) {
-        categoryList.add(t);
+    public void add(Category category) {
+        categoryList.add(category);
     }
 
     @Override
-    public void update(long id, Category t) {
-        categoryList.set(getIndex(id), t);
+    public void update(long id, Category category) {
+        categoryList.set(getIndex(id), category);
     }
 
     @Override

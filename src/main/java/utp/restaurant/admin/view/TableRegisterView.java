@@ -166,6 +166,9 @@ public class TableRegisterView extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTtableListMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTtableListMouseEntered(evt);
+            }
         });
         jScrollPane1.setViewportView(jTtableList);
 
@@ -288,6 +291,10 @@ public class TableRegisterView extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTtableListMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTtableListMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTtableListMouseEntered
 
     public void renderTable() {
         

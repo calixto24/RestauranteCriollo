@@ -2,18 +2,22 @@
 package utp.restaurant.model;
 
 import java.time.LocalDate;
+//import java.time.LocalDateTime;
+//import java.time.format.DateTimeFormatter;
+//import java.util.Locale;
 import java.util.Random;
 
 public class Customer extends Person {
     private long id_customer;
-    private LocalDate register;
+    //private LocalDate register;
     private long ruc;
     
-    public Customer(String name, String lastname_paternal, String lastname_maternal,
+    public Customer(long ruc, String name, String lastname_paternal, String lastname_maternal,
             int dni, LocalDate birthdate, int phoneNumber, String email, String address) {
         super(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, email, address);
                 this.id_customer=System.currentTimeMillis() + new Random().nextInt(1000);;
-                this.register=register;
+               // this.register=register;
+                this.ruc=ruc;
     }
     public Customer(){
     }
@@ -26,13 +30,20 @@ public class Customer extends Person {
         this.id_customer = id_customer;
     }
 
-    public LocalDate getRegister() {
+    /*public LocalDate getRegister() {
+        return register;
+    }
+    
+    public String getRegisterFormatted() {
+        LocalDateTime FechaHoraActual=LocalDateTime.now(); 
+        DateTimeFormatter xd=DateTimeFormatter.ofPattern("dd/MMM/yy HH:mm", Locale.ITALY);
+        String register=FechaHoraActual.format(xd);
         return register;
     }
 
     public void setRegister(LocalDate register) {
         this.register = register;
-    }
+    }*/
 
     public long getRuc() {
         return ruc;

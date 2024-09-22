@@ -8,6 +8,8 @@ import utp.restaurant.dao.RoleDAO;
 import utp.restaurant.model.Employee;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.Role;
+import utp.restaurant.dao.CustomerDAO;
+import utp.restaurant.model.Customer;
 
 public class Validate {
 
@@ -15,7 +17,8 @@ public class Validate {
     private EmployeeDAO employeeDAO;
     private TableDAO tableDAO;
     private RoleDAO roleDAO;
-
+    private CustomerDAO customerDAO;
+    
     private String message;
     private boolean valid;
     private String el;
@@ -28,6 +31,7 @@ public class Validate {
         employeeDAO = new EmployeeDAO();
         tableDAO = new TableDAO();
         roleDAO = new RoleDAO();
+        customerDAO = new CustomerDAO();
     }
 
     public Validate(String el) {
@@ -373,7 +377,98 @@ public class Validate {
         return this;
 
     }
+    
+    //Para el cliente
+    public Validate equalsAtt(String msg, String attribute) {
+        if (!valid) {
+            return this;
+        }
 
+        for (Customer customer : customerDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (el.equals(customer.getEmail())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "ruc":
+                    if (Long.parseLong(el) == customer.getRuc()) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "dni":
+                    if (Integer.parseInt(el) == customer.getDni()) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "phoneNumber":
+                   if (Integer.parseInt(el) == customer.getPhoneNumber()) {
+                        valid = false;
+                        message = msg;
+                    }
+                   break;
+            }
+        }
+
+        return this;
+    }
+
+    public Validate equalsAtt(String msg, String attribute, long id) {
+        if (!valid) {
+            return this;
+        }
+
+        for (Customer customer : customerDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (el.equals(customer.getEmail())) {
+                        if (id != customer.getId_customer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                case "ruc":
+                    if (Long.parseLong(el) == customer.getRuc()) {
+                        if (id != customer.getId_customer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                case "dni":
+                    if (Integer.parseInt(el) == customer.getDni()) {
+                        if (id != customer.getId_customer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                 case "phoneNumber":
+                   if (Integer.parseInt(el) == customer.getPhoneNumber()) {
+                      if (id != customer.getId_customer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                   break;
+            }
+        }
+
+        return this;
+    }
+    
     public String getMessage() {
         return message;
     }

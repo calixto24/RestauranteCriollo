@@ -56,7 +56,7 @@ public class RestaurantDB {
         
         //lista de clientes
         customerList = new ArrayList<>();
-        customerList.add(new Customer("Jean","Chamorro", "Granados", 74883675,LocalDate.of(2006, 06, 15),946087675, "jean@gmail.com","Santa Clara, ate"));
+        customerList.add(new Customer("Jean","Chamorro", "Granados",74883675,LocalDate.of(2005, 02, 15),946087675, "jean@gmail.com","Santa Clara, ate"));
         customerList.add(new Customer("Rizo","Linuz", "Lirun", 74883674,LocalDate.of(2005, 06, 16),946087875, "98n@gmail.com","Huaycan, ate"));
         customerList.add(new Customer("Yhemi","Leño", "Peño", 74883679,LocalDate.of(2005, 02, 15),946087675, "leon@gmail.com","Santa Anita"));
     }

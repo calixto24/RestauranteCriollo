@@ -43,8 +43,8 @@ public class RestaurantDB {
         
         //lista de categorias
         categoryList= new ArrayList<>();
-        categoryList.add(new Category("POSTRES", "aaaa", ""));
-        categoryList.add(new Category("BEBIDAS", "eee", ""));
+        categoryList.add(new Category("POSTRES", "aaaa", "avatar.jpg"));
+        categoryList.add(new Category("BEBIDAS", "eee", "btnEliminar.png"));
         categoryList.add(new Category("PLATOS", "eeee", ""));
 
 

@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import utp.restaurant.admin.controller.CategoryController;
+import utp.restaurant.utils.ImgTable;
 
 /**
  *
@@ -25,6 +26,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
     public CategoryRegisterView() {
         categoryController = new CategoryController(this);
         initComponents();
+        
         jBDelete.setVisible(false);
         renderTable();
     }
@@ -291,11 +293,13 @@ public class CategoryRegisterView extends javax.swing.JFrame {
 
     public void renderTable() {
         DefaultTableModel tableModel = categoryController.getTableModel();
+        jTableC.setRowHeight(50);
         jTableC.setModel(tableModel);
+        
+        jTableC.getColumnModel().getColumn(3).setCellRenderer(new ImgTable());
 
         TableColumnModel tqm = jTableC.getColumnModel();
         tqm.removeColumn(tqm.getColumn(0));
-        tqm.removeColumn(tqm.getColumn(2));
     }
 
     public void showMessage(String message) {

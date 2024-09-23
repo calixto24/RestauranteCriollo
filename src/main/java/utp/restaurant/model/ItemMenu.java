@@ -22,9 +22,6 @@ public class ItemMenu {
         this.status = status;
         this.category = category ; }
 
-    
-    
-
     public Category getCategory() {
         return category;
     }

@@ -82,7 +82,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 650, 117, 44));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 670, 117, 44));
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -93,7 +93,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 650, 117, 44));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 670, 117, 44));
 
         jBDelete.setBackground(new java.awt.Color(86, 42, 35));
         jBDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -104,7 +104,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
                 jBDeleteActionPerformed(evt);
             }
         });
-        jPanel1.add(jBDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 650, 117, 44));
+        jPanel1.add(jBDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 670, 117, 44));
 
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -176,7 +176,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
         jSeparator6.setForeground(new java.awt.Color(86, 42, 35));
         jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 310, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 720, 270));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 720, 260));
 
         jTableC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,13 +207,13 @@ public class CategoryRegisterView extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 390, 720, 240));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 720, 290));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerCategoria.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
@@ -293,7 +293,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
 
     public void renderTable() {
         DefaultTableModel tableModel = categoryController.getTableModel();
-        jTableC.setRowHeight(50);
+        jTableC.setRowHeight(100);
         jTableC.setModel(tableModel);
         
         jTableC.getColumnModel().getColumn(3).setCellRenderer(new ImgTable());

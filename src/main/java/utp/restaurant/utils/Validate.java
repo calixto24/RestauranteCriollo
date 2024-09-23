@@ -42,30 +42,6 @@ public class Validate {
         itemMenuDAO = new ItemMenuDAO();
     }
 
-    /// metodo para no poner una valor excedido
-    /*
-public Validate maxPriceLength(int max, String msg) {
-    if (!valid) {
-        return this;
-    }
-
-    try {
-        double price = Double.parseDouble(el);
-        String[] parts = el.split("\\.");       
-        
-        if (parts[0].length() > max) {
-            valid = false;
-            message = msg;
-        }
-        
-    } catch (NumberFormatException e) {
-        valid = false;
-        message = "El precio debe ser un número válido";
-    }
-
-    return this;
-}
-     */
     public Validate(String el) {
         message = "";
         valid = true;

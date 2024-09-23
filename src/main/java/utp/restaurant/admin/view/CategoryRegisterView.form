@@ -71,7 +71,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="510" y="650" width="117" height="44"/>
+              <AbsoluteConstraints x="500" y="670" width="117" height="44"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -93,7 +93,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="1110" y="650" width="117" height="44"/>
+              <AbsoluteConstraints x="1100" y="670" width="117" height="44"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -115,7 +115,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="820" y="650" width="117" height="44"/>
+              <AbsoluteConstraints x="810" y="670" width="117" height="44"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -127,7 +127,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="490" y="110" width="720" height="270"/>
+              <AbsoluteConstraints x="490" y="110" width="720" height="260"/>
             </Constraint>
           </Constraints>
 
@@ -330,7 +330,7 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="500" y="390" width="720" height="240"/>
+              <AbsoluteConstraints x="500" y="370" width="720" height="290"/>
             </Constraint>
           </Constraints>
 
@@ -346,9 +346,9 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="228" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="278" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

@@ -1,11 +1,11 @@
 package utp.restaurant.admin.controller;
 
-import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import java.awt.Image;
+import java.io.File;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -165,26 +165,26 @@ public class CategoryController {
         categoryView.getTxtName().setText("");
         categoryView.getTxtDescrip().setText("");
         categoryView.getjTFimage().setText("");
+        categoryView.getjLBmostrar().setIcon(new ImageIcon(""));
 
         action = "add";
     }
 
     public void heandleViewEditClik() {
-        int selectedRow = categoryView.getjTableC().getSelectedRow();
-        if (selectedRow >= 0) {
+        selectedId = Long.parseLong(categoryView.getjTableC().getModel().
+                getValueAt(categoryView.getRow(), 0).toString());
 
-            String name = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 1).toString();
-            String description = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 2).toString();
+        String name = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 1).toString();
+        String description = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 2).toString();
+        
+        categoryView.getTxtName().setText(name);
+        categoryView.getTxtDescrip().setText(description);
+        categoryView.getjTFimage().setText(categoryDAO.get(selectedId).getImage());
+        categoryView.getjLBmostrar().setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + categoryDAO.get(selectedId).getImage())));
 
-            categoryView.getTxtName().setText(name);
-            categoryView.getTxtDescrip().setText(description);
-            selectedId = Long.parseLong(categoryView.getjTableC().getModel().
-                    getValueAt(categoryView.getRow(), 0).toString());
+        categoryView.getjBDelete().setVisible(true);
 
-            categoryView.getjBDelete().setVisible(true);
-
-            action = "edit";
-        }
+        action = "edit";
 
     }
 

@@ -43,14 +43,15 @@ public class RestaurantDB {
         
         //lista de categorias
         categoryList= new ArrayList<>();
-        categoryList.add(new Category("POSTRES", "aaaa", "avatar.jpg"));
-        categoryList.add(new Category("BEBIDAS", "eee", "btnEliminar.png"));
-        categoryList.add(new Category("PLATOS", "eeee", ""));
+        categoryList.add(new Category("ENTRADAS", "Deliciosos aperitivos que abren el apetito con sabores auténticos de la cocina criolla.", "cardCategoryEntradas.png"));
+        categoryList.add(new Category("PLATOS", "Exquisitos platos fuertes que resaltan la riqueza de la gastronomía criolla en cada bocado", "cardCategoryPlatos.png"));
+        categoryList.add(new Category("POSTRES", "Dulces tentaciones que cierran la experiencia con los más clásicos postres criollos.", "cardCategoryPostres.png"));
+        categoryList.add(new Category("BEBIDAS", "Refrescantes y tradicionales bebidas que acompañan a la perfección nuestros sabores criollos.", "cardCategoryBebidas.png"));
 
 
         // lista de item menu 
         itemMenuList = new ArrayList<>();
-        itemMenuList.add(new ItemMenu("Lomo Saltado", 20.23, "Carne de pollo","disponible",categoryList.get(1),""));
+        itemMenuList.add(new ItemMenu("Lomo Saltado", 20.23, "Carne de pollo","disponible",categoryList.get(1),"cardCategoryEntradas.png"));
         itemMenuList.add(new ItemMenu("Causa", 16, "Causa de atun","disponible",categoryList.get(2),""));
         itemMenuList.add(new ItemMenu("Ceviche", 15, "De tilapia", "agotado",categoryList.get(1),""));
         

@@ -81,7 +81,7 @@ public class ItemMenuController {
         //validacion precio 
         String priceCO = view.getjTFprice().getText();
         vldt.setElement(priceCO).isRequired("Debe ingresar un precio al platillo ")
-                .isInt("El precio del plato debe ser numerico"); //.maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
+                .isDouble("El precio del plato debe ser numerico"); //.maxPriceLength(3, "El Precio no debe pasarse de 4 digitos");
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());

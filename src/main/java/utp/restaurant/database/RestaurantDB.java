@@ -56,7 +56,7 @@ public class RestaurantDB {
         
         //lista de clientes
         customerList = new ArrayList<>();
-        customerList.add( new Customer("Jean", "Chamorro", "Granados",74883675,LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com","Santa Clara, ate", LocalDate.of(2024, 05, 15), "12345678912"));
+        customerList.add( new Customer("Jean", "Chamorro", "Granados",74883675,LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com","Santa Clara, ate", "12345678912"));
     }
 
     //patron singleton

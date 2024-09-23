@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.admin.view.CategoryRegisterView;
 import utp.restaurant.dao.CategoryDAO;
@@ -20,16 +22,16 @@ public class CategoryController {
     private long selectedId;
     private Validate vld;
     private String action;
-    
+
     private JFileChooser jFileChooser;
     private File selectedFile;
 
     public CategoryController(CategoryRegisterView categoryView) {
         this.categoryView = categoryView;
-        
+
         this.action = "add";
         selectedId = 0;
-        
+
         categoryDAO = new CategoryDAO();
         vld = new Validate();
         jFileChooser = new JFileChooser();
@@ -41,7 +43,7 @@ public class CategoryController {
         String name = categoryView.getTxtName().getText().toUpperCase();
         vld.setElement(name)
                 .isRequired("El nombre es obligatorio");
-        
+
         if (action.equals("add")) {
             vld.equalsNameCategory("La categoria ya existe", "name");
         } else if (action.equals("edit")) {
@@ -64,10 +66,10 @@ public class CategoryController {
             categoryView.getTxtDescrip().requestFocus();
             return;
         }
-        
+
         //imagen
-        String imagestr = categoryView.getjTFimage().getText();
-        vld.setElement(imagestr)
+        String image = categoryView.getjTFimage().getText();
+        vld.setElement(image)
                 .isRequired("La imagen es obligatoria");
 
         if (!vld.exec()) {
@@ -75,13 +77,10 @@ public class CategoryController {
             categoryView.getjTFimage().requestFocus();
             return;
         }
-        
-        String image = selectedFile.toString();
 
         //creacion del objeto
         Category newCategory = new Category(name, descrip, image);
-        
-        
+
         if (action.equals("add")) {
 
             try {
@@ -103,47 +102,49 @@ public class CategoryController {
         handleCleanForm();
         categoryView.renderTable();
     }
-    
+
     public void heandleExplorerClick() {
-        
+
         //visualizacion del explorador
         int result = jFileChooser.showOpenDialog(null);
-        
+
         if (result == JFileChooser.APPROVE_OPTION) {
-            
+
             //ruta de la imagen seleccionada
             selectedFile = jFileChooser.getSelectedFile();
-            
+
             categoryView.getjTFimage().setText(selectedFile.getName());
-            
+
             try {
-                
+
                 //creacion de la imagen
                 Image img = ImageIO.read(selectedFile);
                 ImageIcon imageIcon = new ImageIcon(img);
-                
+
                 //establecer tamaño a la imagen
                 int width = categoryView.getjLBmostrar().getWidth();
                 int height = categoryView.getjLBmostrar().getHeight();
-                
+
                 Image scaledImage = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-                
+
                 categoryView.getjLBmostrar().setIcon(new ImageIcon(scaledImage));
-                
+
             } catch (Exception e) {
-                
+
                 categoryView.showMessage("No se pudo agregar imagen");
-                
+
             }
         }
-        
+
     }
 
     public DefaultTableModel getTableModel() {
+
         String column[] = {
             "id", "Nombre", " Descripcion", "imagen"
         };
         DefaultTableModel tableModel = new DefaultTableModel(null, column);
+
         ArrayList<Category> categoriaList = categoryDAO.getAll();
 
         for (Category y : categoriaList) {
@@ -151,7 +152,7 @@ public class CategoryController {
                 y.getId(),
                 y.getName(),
                 y.getDescription(),
-                y.getImage()
+                new ImageIcon(getClass().getResource("/utp/restaurant/images/" + y.getImage()))
             };
             tableModel.addRow(row);
         }
@@ -163,6 +164,7 @@ public class CategoryController {
         categoryView.getjBDelete().setVisible(false);
         categoryView.getTxtName().setText("");
         categoryView.getTxtDescrip().setText("");
+        categoryView.getjTFimage().setText("");
 
         action = "add";
     }

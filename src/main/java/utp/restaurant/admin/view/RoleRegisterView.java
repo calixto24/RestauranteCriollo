@@ -56,6 +56,7 @@ public class RoleRegisterView extends javax.swing.JFrame {
         jTRoleList = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,6 +177,16 @@ public class RoleRegisterView extends javax.swing.JFrame {
         jLabel3.setText("Completa la información de los roles");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 240, -1));
 
+        jButton5.setBackground(new java.awt.Color(86, 42, 35));
+        jButton5.setForeground(new java.awt.Color(249, 242, 228));
+        jButton5.setText("ATRAS");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 30, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,6 +227,10 @@ public class RoleRegisterView extends javax.swing.JFrame {
     private void jTRoleListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTRoleListAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jTRoleListAncestorAdded
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     public void renderTable() {
         
@@ -293,6 +308,7 @@ public class RoleRegisterView extends javax.swing.JFrame {
     private javax.swing.JButton jBDelete;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

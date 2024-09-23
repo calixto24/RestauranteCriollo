@@ -177,21 +177,21 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 290, 40));
+        jPanel2.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 290, 30));
 
         jLabel1.setText("Imagen Seleccionada");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, -1, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
 
         jTFimage.setEditable(false);
         jTFimage.setBackground(new java.awt.Color(249, 242, 228));
         jTFimage.setForeground(new java.awt.Color(51, 51, 51));
         jTFimage.setBorder(null);
-        jPanel2.add(jTFimage, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 290, 20));
+        jPanel2.add(jTFimage, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 290, 20));
 
         jSeparator7.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator7.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 290, 10));
-        jPanel2.add(jLBmostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 120, 290, 100));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 290, 10));
+        jPanel2.add(jLBmostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, 290, 110));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 760, 220));
 

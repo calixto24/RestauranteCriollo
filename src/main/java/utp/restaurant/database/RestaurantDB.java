@@ -43,9 +43,9 @@ public class RestaurantDB {
         
         //lista de categorias
         categoryList= new ArrayList<>();
-        categoryList.add(new Category("postres", "aaaa", ""));
-        categoryList.add(new Category("bebidas", "eee", ""));
-        categoryList.add(new Category("platos", "eeee", ""));
+        categoryList.add(new Category("POSTRES", "aaaa", ""));
+        categoryList.add(new Category("BEBIDAS", "eee", ""));
+        categoryList.add(new Category("PLATOS", "eeee", ""));
 
 
         // lista de item menu 

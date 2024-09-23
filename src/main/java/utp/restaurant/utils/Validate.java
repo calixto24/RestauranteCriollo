@@ -4,6 +4,7 @@ import utp.restaurant.dao.EmployeeDAO;
 import utp.restaurant.dao.TableDAO;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import utp.restaurant.dao.CategoryDAO;
 import utp.restaurant.dao.ItemMenuDAO;
 import utp.restaurant.dao.RoleDAO;
 import utp.restaurant.model.Employee;
@@ -12,6 +13,7 @@ import utp.restaurant.model.Table;
 import utp.restaurant.model.Role;
 import utp.restaurant.dao.CustomerDAO;
 import utp.restaurant.model.Customer;
+import utp.restaurant.model.Category;
 
 public class Validate {
 
@@ -19,6 +21,7 @@ public class Validate {
     private EmployeeDAO employeeDAO;
     private TableDAO tableDAO;
     private RoleDAO roleDAO;
+    private CategoryDAO categoryDAO;
     private CustomerDAO customerDAO;
     private ItemMenuDAO itemMenuDAO;
 
@@ -31,12 +34,14 @@ public class Validate {
         valid = true;
         el = "";
 
+        categoryDAO = new CategoryDAO();
         employeeDAO = new EmployeeDAO();
         tableDAO = new TableDAO();
         roleDAO = new RoleDAO();
         customerDAO = new CustomerDAO();
         itemMenuDAO = new ItemMenuDAO();
     }
+
     /// metodo para no poner una valor excedido
     /*
 public Validate maxPriceLength(int max, String msg) {
@@ -60,7 +65,7 @@ public Validate maxPriceLength(int max, String msg) {
 
     return this;
 }
-*/
+     */
     public Validate(String el) {
         message = "";
         valid = true;
@@ -177,9 +182,6 @@ public Validate maxPriceLength(int max, String msg) {
         return this;
     }
 
-    
-    
-
     public Validate isDate(String msg) {
         if (!valid) {
             return this;
@@ -288,6 +290,65 @@ public Validate maxPriceLength(int max, String msg) {
 
         return this;
     }
+    
+    //para el nombre de la categoria
+    public Validate equalsNameCategory(String msg, String attribute) {
+
+        if (!valid) {
+            return this;
+        }
+
+        for (Category category : categoryDAO.getAll()) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "name":
+                    if (el.equals(category.getName())) {
+
+                        valid = false;
+                        message = msg;
+
+                    }
+                    break;
+
+            }
+
+        }
+
+        return this;
+
+    }
+
+    public Validate equalsNameCategory(String msg, String attribute, long id) {
+
+        if (!valid) {
+            return this;
+        }
+
+        for (Category category : categoryDAO.getAll()) {
+
+            switch (attribute.toLowerCase()) {
+
+                case "name":
+                    if (el.equals(category.getName())) {
+
+                        if (id != category.getId()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+
+                    }
+                    break;
+
+            }
+
+        }
+
+        return this;
+
+    }
 
     //para el nombre del rol
     public Validate equalsNameRol(String msg, String attribute) {
@@ -387,7 +448,7 @@ public Validate maxPriceLength(int max, String msg) {
             switch (attribute.toLowerCase()) {
 
                 case "ntable":
-                    if (Integer.parseInt(el) == table.getNumber_table()) {
+                    if (Integer.parseInt(el) == table.getNumber_table() || id != table.getId()) {
 
                         if (id != table.getId()) {
 
@@ -405,7 +466,7 @@ public Validate maxPriceLength(int max, String msg) {
 
         return this;
     }
-    
+
     //Para el cliente
     public Validate equalsAtt(String msg, String attribute) {
         if (!valid) {
@@ -433,11 +494,11 @@ public Validate maxPriceLength(int max, String msg) {
                     }
                     break;
                 case "phoneNumber":
-                   if (Integer.parseInt(el) == customer.getPhoneNumber()) {
+                    if (Integer.parseInt(el) == customer.getPhoneNumber()) {
                         valid = false;
                         message = msg;
                     }
-                   break;
+                    break;
             }
         }
 
@@ -481,22 +542,22 @@ public Validate maxPriceLength(int max, String msg) {
                         }
                     }
                     break;
-                 case "phoneNumber":
-                   if (Integer.parseInt(el) == customer.getPhoneNumber()) {
-                      if (id != customer.getId_customer()) {
+                case "phoneNumber":
+                    if (Integer.parseInt(el) == customer.getPhoneNumber()) {
+                        if (id != customer.getId_customer()) {
 
                             valid = false;
                             message = msg;
 
                         }
                     }
-                   break;
+                    break;
             }
         }
 
         return this;
     }
-    
+
     public String getMessage() {
         return message;
     }
@@ -505,50 +566,45 @@ public Validate maxPriceLength(int max, String msg) {
         return valid;
     }
 
-    
-    
-    
-    
-    
     // PARA EL Nombre de la comida y el id 
     public Validate equalsNameMenu(String msg, String attribute) {
 
         if (!valid) {
             return this;
         }
-         
-            for (ItemMenu itemMenu : itemMenuDAO.getAll()) {
-                switch (attribute.toLowerCase()) {
-                    case "name":
-                        if (el.equals(itemMenu.getName())) {
+
+        for (ItemMenu itemMenu : itemMenuDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "name":
+                    if (el.equals(itemMenu.getName())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+            }
+
+        }
+        return this;
+    }
+
+    public Validate equalsNameMenu(String msg, String attribute, long id) {
+        if (!valid) {
+            return this;
+        }
+        for (ItemMenu itemMenu : itemMenuDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "name":
+                    if (el.equals(itemMenu.getName())) {
+                        if (id != itemMenu.getId()) {
                             valid = false;
                             message = msg;
                         }
-                        break;
-                }
-
+                    }
+                    break;
             }
-            return this ; 
-        }
 
-   public Validate equalsNameMenu(String msg , String attribute , long id ){
-       if (!valid){
-       return this ; 
-       }
-       for (ItemMenu itemMenu : itemMenuDAO.getAll()){
-       switch(attribute.toLowerCase()){
-           case "name":
-               if (el.equals(itemMenu.getName())){
-               if (id  != itemMenu.getId()){
-               valid = false ; 
-               message = msg ; 
-               }
-               }
-               break; 
-       }
-       
-       }
-   return this ; 
-   }
-        
+        }
+        return this;
     }
+
+}

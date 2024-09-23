@@ -93,6 +93,21 @@ public Validate maxPriceLength(int max, String msg) {
         return this;
     }
 
+    public Validate isDouble(String msg) {
+        if (!valid) {
+            return this;
+        }
+
+        try {
+            Double.parseDouble(el);
+        } catch (Exception e) {
+            valid = false;
+            message = msg;
+        } finally {
+            return this;
+        }
+    }
+
     public Validate isInt(String msg) {
         if (!valid) {
             return this;
@@ -290,7 +305,7 @@ public Validate maxPriceLength(int max, String msg) {
 
         return this;
     }
-    
+
     //para el nombre de la categoria
     public Validate equalsNameCategory(String msg, String attribute) {
 

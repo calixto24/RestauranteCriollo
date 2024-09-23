@@ -11,15 +11,28 @@ public class ItemMenu {
     private String description; // descripcion
     private String status;
     private String image;
+    private Category category; 
 
-    public ItemMenu(String image, String name, double price, String description, String status) {
+    public ItemMenu( String name, double price, String description, String status , Category category,String image ) {
         this.id = System.currentTimeMillis() + new Random().nextInt(1000); //ID AUTOMATICO
         this.image = image;
         this.name = name;
         this.price= price ; 
         this.description = description;
         this.status = status;
+        this.category = category ; }
+
+    
+    
+
+    public Category getCategory() {
+        return category;
     }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+    
 
     public double getPrice() {
         return price;

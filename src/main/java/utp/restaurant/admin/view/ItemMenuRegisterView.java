@@ -10,11 +10,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import utp.restaurant.admin.controller.ItemMenuController;
+import utp.restaurant.model.Category;
 
 /**
  *
@@ -30,6 +33,7 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         initComponents();
         renderTable();
+        itemMenuController.renderCBCate();
 
     }
 
@@ -39,7 +43,7 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         TableColumnModel tcm = jTItemMenuList.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
-        tcm.removeColumn(tcm.getColumn(0));
+
 
     }
 
@@ -56,7 +60,6 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTFname = new javax.swing.JTextField();
         jTFdescription = new javax.swing.JTextField();
-        jCBstatus = new javax.swing.JComboBox<>();
         jTFprice = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
@@ -65,6 +68,9 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jCBstatus1 = new javax.swing.JComboBox<>();
+        jcate = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTItemMenuList = new javax.swing.JTable();
@@ -99,12 +105,6 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         jTFdescription.setBorder(null);
         jPanel2.add(jTFdescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 200, 30));
 
-        jCBstatus.setBackground(new java.awt.Color(249, 242, 228));
-        jCBstatus.setForeground(new java.awt.Color(51, 51, 51));
-        jCBstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Agotado", " " }));
-        jCBstatus.setBorder(null);
-        jPanel2.add(jCBstatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 200, 30));
-
         jTFprice.setBackground(new java.awt.Color(249, 242, 228));
         jTFprice.setForeground(new java.awt.Color(51, 51, 51));
         jTFprice.setBorder(null);
@@ -129,8 +129,8 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         jLabel18.setBackground(new java.awt.Color(86, 42, 35));
         jLabel18.setForeground(new java.awt.Color(86, 42, 35));
-        jLabel18.setText("ESTADO");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 50, 20));
+        jLabel18.setText("Categoria");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 90, 20));
 
         jLabel13.setBackground(new java.awt.Color(86, 42, 35));
         jLabel13.setForeground(new java.awt.Color(86, 42, 35));
@@ -141,6 +141,18 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         jLabel19.setForeground(new java.awt.Color(86, 42, 35));
         jLabel19.setText("PRECIO");
         jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 20));
+
+        jLabel20.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel20.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel20.setText("ESTADO");
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 50, 20));
+
+        jCBstatus1.setBackground(new java.awt.Color(249, 242, 228));
+        jCBstatus1.setForeground(new java.awt.Color(51, 51, 51));
+        jCBstatus1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Agotado", " " }));
+        jCBstatus1.setBorder(null);
+        jPanel2.add(jCBstatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 200, 30));
+        jPanel2.add(jcate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 180, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 760, 150));
 
@@ -164,6 +176,11 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jTItemMenuList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTItemMenuListMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTItemMenuList);
@@ -245,7 +262,28 @@ itemMenuController.handleRegisterClick();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public ItemMenuController getItemMenuController() {
+        return itemMenuController;
+    }
 
+    public void setItemMenuController(ItemMenuController itemMenuController) {
+        this.itemMenuController = itemMenuController;
+    }
+    
+
+    
+ public int getRow() {
+        return row;
+    }
+  public void showMessage(String message) {
+        JOptionPane.showMessageDialog(rootPane, message);
+    }
+    
+    public int showConfirmation(String message) {
+        return JOptionPane.showConfirmDialog(rootPane, message);
+    }
+         
+        
     private void jTItemMenuListAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTItemMenuListAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jTItemMenuListAncestorAdded
@@ -266,9 +304,211 @@ itemMenuController.heandleDeleteClick();
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
-    public void showMessage(String message) {
-        JOptionPane.showMessageDialog(rootPane, message);
+
+    private void jTItemMenuListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTItemMenuListMouseClicked
+row = jTItemMenuList.rowAtPoint(evt.getPoint());
+        
+        itemMenuController.heandleViewEditClick();        // TODO add your handling code here:
+    }//GEN-LAST:event_jTItemMenuListMouseClicked
+
+    public JButton getjButton1() {
+        return jButton1;
     }
+
+    public void setjButton1(JButton jButton1) {
+        this.jButton1 = jButton1;
+    }
+
+    public JButton getjButton2() {
+        return jButton2;
+    }
+
+    public void setjButton2(JButton jButton2) {
+        this.jButton2 = jButton2;
+    }
+
+    public JButton getjButton3() {
+        return jButton3;
+    }
+
+    public void setjButton3(JButton jButton3) {
+        this.jButton3 = jButton3;
+    }
+
+    public JButton getjButton4() {
+        return jButton4;
+    }
+
+    public void setjButton4(JButton jButton4) {
+        this.jButton4 = jButton4;
+    }
+
+    public JComboBox<String> getjCBstatus1() {
+        return jCBstatus1;
+    }
+
+    public void setjCBstatus1(JComboBox<String> jCBstatus1) {
+        this.jCBstatus1 = jCBstatus1;
+    }
+
+    public JLabel getjLabel11() {
+        return jLabel11;
+    }
+
+    public void setjLabel11(JLabel jLabel11) {
+        this.jLabel11 = jLabel11;
+    }
+
+    public JLabel getjLabel13() {
+        return jLabel13;
+    }
+
+    public void setjLabel13(JLabel jLabel13) {
+        this.jLabel13 = jLabel13;
+    }
+
+    public JLabel getjLabel14() {
+        return jLabel14;
+    }
+
+    public void setjLabel14(JLabel jLabel14) {
+        this.jLabel14 = jLabel14;
+    }
+
+    public JLabel getjLabel16() {
+        return jLabel16;
+    }
+
+    public void setjLabel16(JLabel jLabel16) {
+        this.jLabel16 = jLabel16;
+    }
+
+    public JLabel getjLabel18() {
+        return jLabel18;
+    }
+
+    public void setjLabel18(JLabel jLabel18) {
+        this.jLabel18 = jLabel18;
+    }
+
+    public JLabel getjLabel19() {
+        return jLabel19;
+    }
+
+    public void setjLabel19(JLabel jLabel19) {
+        this.jLabel19 = jLabel19;
+    }
+
+    public JLabel getjLabel20() {
+        return jLabel20;
+    }
+
+    public void setjLabel20(JLabel jLabel20) {
+        this.jLabel20 = jLabel20;
+    }
+
+    public JLabel getjLabel5() {
+        return jLabel5;
+    }
+
+    public void setjLabel5(JLabel jLabel5) {
+        this.jLabel5 = jLabel5;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public void setjPanel1(JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
+
+    public JPanel getjPanel2() {
+        return jPanel2;
+    }
+
+    public void setjPanel2(JPanel jPanel2) {
+        this.jPanel2 = jPanel2;
+    }
+
+    public JPanel getjPanel3() {
+        return jPanel3;
+    }
+
+    public void setjPanel3(JPanel jPanel3) {
+        this.jPanel3 = jPanel3;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JSeparator getjSeparator3() {
+        return jSeparator3;
+    }
+
+    public void setjSeparator3(JSeparator jSeparator3) {
+        this.jSeparator3 = jSeparator3;
+    }
+
+    public JSeparator getjSeparator5() {
+        return jSeparator5;
+    }
+
+    public void setjSeparator5(JSeparator jSeparator5) {
+        this.jSeparator5 = jSeparator5;
+    }
+
+    public JSeparator getjSeparator6() {
+        return jSeparator6;
+    }
+
+    public void setjSeparator6(JSeparator jSeparator6) {
+        this.jSeparator6 = jSeparator6;
+    }
+
+    public JTextField getjTFdescription() {
+        return jTFdescription;
+    }
+
+    public void setjTFdescription(JTextField jTFdescription) {
+        this.jTFdescription = jTFdescription;
+    }
+
+    public JTextField getjTFname() {
+        return jTFname;
+    }
+
+    public void setjTFname(JTextField jTFname) {
+        this.jTFname = jTFname;
+    }
+
+    public JTextField getjTFprice() {
+        return jTFprice;
+    }
+
+    public void setjTFprice(JTextField jTFprice) {
+        this.jTFprice = jTFprice;
+    }
+
+    public JTable getjTItemMenuList() {
+        return jTItemMenuList;
+    }
+
+    public void setjTItemMenuList(JTable jTItemMenuList) {
+        this.jTItemMenuList = jTItemMenuList;
+    }
+
+    public JComboBox<Category> getJcate() {
+        return jcate;
+    }
+
+    
+   
 
     /**
      * @param args the command line arguments
@@ -305,108 +545,19 @@ itemMenuController.heandleDeleteClick();
         });
     }
 
-    public JButton getjButton1() {
-        return jButton1;
-    }
-
-    public void setjButton1(JButton jButton1) {
-        this.jButton1 = jButton1;
-    }
-
-    public JButton getjButton2() {
-        return jButton2;
-    }
-
-    public void setjButton2(JButton jButton2) {
-        this.jButton2 = jButton2;
-    }
-
-    public JButton getjButton3() {
-        return jButton3;
-    }
-
-    public void setjButton3(JButton jButton3) {
-        this.jButton3 = jButton3;
-    }
-
-    public JComboBox<String> getjCBstatus() {
-        return jCBstatus;
-    }
-
-    public void setjCBstatus(JComboBox<String> jCBstatus) {
-        this.jCBstatus = jCBstatus;
-    }
-
-    public JPanel getjPanel1() {
-        return jPanel1;
-    }
-
-    public void setjPanel1(JPanel jPanel1) {
-        this.jPanel1 = jPanel1;
-    }
-
-    public JPanel getjPanel2() {
-        return jPanel2;
-    }
-
-    public void setjPanel2(JPanel jPanel2) {
-        this.jPanel2 = jPanel2;
-    }
-
-    public JPanel getjPanel3() {
-        return jPanel3;
-    }
-
-    public void setjPanel3(JPanel jPanel3) {
-        this.jPanel3 = jPanel3;
-    }
-
-
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
-    }
-
-    public void setjScrollPane1(JScrollPane jScrollPane1) {
-        this.jScrollPane1 = jScrollPane1;
-    }
-
-    public JTextField getjTFdescription() {
-        return jTFdescription;
-    }
-
-    public void setjTFdescription(JTextField jTFdescription) {
-        this.jTFdescription = jTFdescription;
-    }
-
-    public JTextField getjTFname() {
-        return jTFname;
-    }
-
-    public void setjTFname(JTextField jTFname) {
-        this.jTFname = jTFname;
-    }
-
-    public JTextField getjTFprice() {
-        return jTFprice;
-    }
-
-    public void setjTFprice(JTextField jTFprice) {
-        this.jTFprice = jTFprice;
-    }
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jCBstatus;
+    private javax.swing.JComboBox<String> jCBstatus1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -419,5 +570,7 @@ itemMenuController.heandleDeleteClick();
     private javax.swing.JTextField jTFname;
     private javax.swing.JTextField jTFprice;
     private javax.swing.JTable jTItemMenuList;
+    private javax.swing.JComboBox<Category> jcate;
     // End of variables declaration//GEN-END:variables
+
 }

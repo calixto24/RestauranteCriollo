@@ -18,8 +18,10 @@ public class Category {
         this.description = description;
         this.image = image;
     }
+    
 
-    public Category(){
+    public Category(String name){
+        this.name=name;
         
     }
     

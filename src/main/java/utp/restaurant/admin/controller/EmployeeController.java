@@ -288,8 +288,11 @@ public class EmployeeController {
     }
 
     public void renderCBRole() {
+        
         ArrayList<Role> roleList = roleDao.getAll();
-
+        
+        view.getjCBRole().removeAllItems();
+        
         for (Role r : roleList) {
             view.getjCBRole().addItem(r);
         }

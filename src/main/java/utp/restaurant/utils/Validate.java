@@ -439,14 +439,10 @@ public class Validate {
             switch (attribute.toLowerCase()) {
 
                 case "ntable":
-                    if (Integer.parseInt(el) == table.getNumber_table() || id != table.getId()) {
+                    if (Integer.parseInt(el) == table.getNumber_table() && id != table.getId()) {
 
-                        if (id != table.getId()) {
-
-                            valid = false;
-                            message = msg;
-
-                        }
+                        valid = false;
+                        message = msg;
 
                     }
                     break;

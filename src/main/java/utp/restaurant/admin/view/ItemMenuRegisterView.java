@@ -34,8 +34,6 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
         initComponents();
         renderTable();
-        itemMenuController.renderCBCate();
-
     }
 
     public void renderTable() {
@@ -48,6 +46,10 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
         TableColumnModel tcm = jTItemMenuList.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
 
+    }
+    
+    public void renderCBCategory() {
+        itemMenuController.renderCBCate();
     }
 
     @SuppressWarnings("unchecked")

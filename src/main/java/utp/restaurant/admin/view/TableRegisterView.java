@@ -32,8 +32,11 @@ public class TableRegisterView extends javax.swing.JFrame {
         tableController= new TableController(this);
         initComponents();
         
-        tableController.renderCBWaiter();
         renderTable();
+    }
+    
+    public void renderCBWaiter() {
+        tableController.renderCBWaiter();
     }
 
     /**

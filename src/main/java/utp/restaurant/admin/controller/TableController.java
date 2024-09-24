@@ -133,6 +133,8 @@ public class TableController {
     public void renderCBWaiter() {
         ArrayList<Employee> EmployeeList = employeeDao.getAll();
         
+        tableRegisterView.getJCBEmployees().removeAllItems();
+        
         for(Employee e: EmployeeList) {
             if (e.getRole().getName().equals("Mesero")) {
                 tableRegisterView.getJCBEmployees().addItem(e);

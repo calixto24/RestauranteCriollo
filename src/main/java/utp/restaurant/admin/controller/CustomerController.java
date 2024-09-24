@@ -31,6 +31,7 @@ public class CustomerController {
     }
     
     public void handleRegisterClick() {
+        //VALIDACION NOMBRE
         String name = view.getjTFName().getText();
         vldt.setElement(name)
                 .isRequired("El nombre es obligatorio");
@@ -43,6 +44,7 @@ public class CustomerController {
 
         }
         
+        //VALIDACION A. PATERNO
         String ap = view.getjTFLastNameP().getText();
         vldt.setElement(ap)
                 .isRequired("El apellido paterno es obligatorio");
@@ -248,9 +250,7 @@ public class CustomerController {
     public void handleCleanForm() {
 
         view.getBtnDelete().setVisible(false);
-        view.getBtnLimpiar().setVisible(false);
 
-        view.getjTFruc().setText("");
         view.getjTFLastNameM().setText("");
         view.getjTFLastNameP().setText("");
         view.getjTFBhirtday().setText("");
@@ -259,7 +259,7 @@ public class CustomerController {
         view.getjTFName().setText("");
         view.getjTFTelephone().setText("");
         view.getjTFAddress().setText("");
-
+        view.getjTFruc().setText("");
         action = "add";
     }
 
@@ -270,15 +270,15 @@ public class CustomerController {
 
         //pintando la columna con la informacion de la fila
         
-        view.getjTFName().setText(view.getjTList().getValueAt(view.getRow(), 2).toString());
-        view.getjTFLastNameP().setText(view.getjTList().getValueAt(view.getRow(), 3).toString());
-        view.getjTFLastNameM().setText(view.getjTList().getValueAt(view.getRow(), 4).toString());
-        view.getjTFdni().setText(view.getjTList().getValueAt(view.getRow(), 5).toString());
-        view.getjTFBhirtday().setText(view.getjTList().getValueAt(view.getRow(), 6).toString());
-        view.getjTFTelephone().setText(view.getjTList().getValueAt(view.getRow(), 7).toString());
-        view.getjTFruc().setText(view.getjTList().getValueAt(view.getRow(), 0).toString());
-        view.getjTFEmail().setText(view.getjTList().getValueAt(view.getRow(), 8).toString());
-        view.getjTFAddress().setText(view.getjTList().getValueAt(view.getRow(), 9).toString());
+        view.getjTFName().setText(view.getjTList().getValueAt(view.getRow(), 0).toString());
+        view.getjTFLastNameP().setText(view.getjTList().getValueAt(view.getRow(), 1).toString());
+        view.getjTFLastNameM().setText(view.getjTList().getValueAt(view.getRow(), 2).toString());
+        view.getjTFdni().setText(view.getjTList().getValueAt(view.getRow(), 3).toString());
+        view.getjTFBhirtday().setText(view.getjTList().getValueAt(view.getRow(), 4).toString());
+        view.getjTFTelephone().setText(view.getjTList().getValueAt(view.getRow(), 5).toString());
+        view.getjTFEmail().setText(view.getjTList().getValueAt(view.getRow(), 6).toString());
+        view.getjTFAddress().setText(view.getjTList().getValueAt(view.getRow(), 7).toString());
+        view.getjTFruc().setText(view.getjTList().getValueAt(view.getRow(), 8).toString());
         
         view.getBtnDelete().setVisible(true);
     }

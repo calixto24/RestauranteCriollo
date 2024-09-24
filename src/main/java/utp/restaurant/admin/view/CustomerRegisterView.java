@@ -33,8 +33,6 @@ public class CustomerRegisterView extends javax.swing.JFrame {
        TableColumnModel xd = jTList.getColumnModel();
        xd.removeColumn(xd.getColumn(0));
        xd.removeColumn(xd.getColumn(0));
-       xd.removeColumn(xd.getColumn(0));
-       
     }
     
     @SuppressWarnings("unchecked")
@@ -267,6 +265,7 @@ public class CustomerRegisterView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTList.setBackground(new java.awt.Color(255, 255, 255));
         jTList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -278,6 +277,11 @@ public class CustomerRegisterView extends javax.swing.JFrame {
 
             }
         ));
+        jTList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTList);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 720, 350));
@@ -393,16 +397,22 @@ public class CustomerRegisterView extends javax.swing.JFrame {
     }//GEN-LAST:event_jTFrucActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        customerController.handleRegisterClick();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void BtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteActionPerformed
-        // TODO add your handling code here:
+        customerController.heandleDeleteClick();
     }//GEN-LAST:event_BtnDeleteActionPerformed
 
     private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
-        // TODO add your handling code here:
+        customerController.handleCleanForm();
     }//GEN-LAST:event_BtnLimpiarActionPerformed
+
+    private void jTListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTListMouseClicked
+        row = jTList.rowAtPoint(evt.getPoint());
+        
+        customerController.heandleViewEditClick();
+    }//GEN-LAST:event_jTListMouseClicked
 
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(rootPane, message);

@@ -35,45 +35,82 @@ public class MenuDetails extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
         txtAmount = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLBnameMenu = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Descripcion");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        txtDescription.setBackground(new java.awt.Color(249, 242, 228));
+        txtDescription.setForeground(new java.awt.Color(51, 51, 51));
+        txtDescription.setBorder(null);
+        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 320, 30));
 
-        jLabel2.setText("Cantidad");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 130, -1));
-        jPanel1.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 130, -1));
+        txtAmount.setBackground(new java.awt.Color(249, 242, 228));
+        txtAmount.setForeground(new java.awt.Color(51, 51, 51));
+        txtAmount.setBorder(null);
+        jPanel1.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 320, 30));
 
+        jButton1.setBackground(new java.awt.Color(86, 42, 35));
+        jButton1.setForeground(new java.awt.Color(249, 242, 228));
         jButton1.setText("CANCELAR");
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 100, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 100, 30));
 
+        jButton2.setBackground(new java.awt.Color(86, 42, 35));
+        jButton2.setForeground(new java.awt.Color(249, 242, 228));
         jButton2.setText("GUARDAR");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 90, 30));
+        jButton2.setBorder(null);
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 90, 30));
+
+        jLabel5.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel5.setText("DESCRIPCION");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 20));
+
+        jLBnameMenu.setBackground(new java.awt.Color(86, 42, 35));
+        jLBnameMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLBnameMenu.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBnameMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 310, 30));
+
+        jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator2.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 320, 12));
+
+        jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 320, 12));
+
+        jLabel7.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel7.setText("CANTIDAD");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
         );
 
         pack();
@@ -130,9 +167,12 @@ public class MenuDetails extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLBnameMenu;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtDescription;
     // End of variables declaration//GEN-END:variables

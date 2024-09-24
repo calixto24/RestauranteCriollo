@@ -45,12 +45,12 @@ public class LoginView extends javax.swing.JFrame {
         jTFPassword = new javax.swing.JPasswordField();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jCviewPassword = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
 
         jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jPanel1.setBackground(java.awt.Color.white);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -121,11 +121,22 @@ public class LoginView extends javax.swing.JFrame {
 
         jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator2.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 410, 20));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 410, 10));
 
         jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 410, 20));
+
+        jCviewPassword.setBackground(new java.awt.Color(249, 242, 228));
+        jCviewPassword.setForeground(new java.awt.Color(51, 51, 51));
+        jCviewPassword.setText("Mostrar");
+        jCviewPassword.setBorder(null);
+        jCviewPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCviewPasswordActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCviewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, 472, 400));
 
@@ -194,6 +205,20 @@ public class LoginView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTFPasswordMousePressed
 
+    private void jCviewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCviewPasswordActionPerformed
+        
+        if(jCviewPassword.isSelected()) {
+            
+            jTFPassword.setEchoChar((char)0);
+            
+        } else {
+            
+            jTFPassword.setEchoChar(('*'));
+            
+        }
+        
+    }//GEN-LAST:event_jCviewPasswordActionPerformed
+
     public void showMessage(String msg) {
 
         JOptionPane.showMessageDialog(rootPane, msg);
@@ -247,6 +272,7 @@ public class LoginView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBox jCviewPassword;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

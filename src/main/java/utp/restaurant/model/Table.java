@@ -54,5 +54,9 @@ public class Table {
         this.employee = employee;
     }
     
+    @Override
+    public String toString() {
+        return "Mesa N° " + number_table;
+    }
     
 }

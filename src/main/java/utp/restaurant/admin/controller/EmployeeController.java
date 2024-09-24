@@ -334,7 +334,7 @@ public class EmployeeController {
         view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
         view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
-
+        
         view.getjBDelete().setVisible(true);
         view.getBtnUpdatePassword().setVisible(true);
 
@@ -364,10 +364,5 @@ public class EmployeeController {
         } catch (Exception e) {
             view.showMessage("Error al eliminar el usuario" + e.toString());
         }
-        ///xd
-        
-        
-        
-
     }
 }

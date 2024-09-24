@@ -32,7 +32,6 @@ public class Register extends javax.swing.JFrame {
         initComponents();
         
         renderTable();
-        employeeController.renderCBRole();
         jBDelete.setVisible(false);
         btnUpdatePassword.setVisible(false);
     }
@@ -46,6 +45,10 @@ public class Register extends javax.swing.JFrame {
        tcm.removeColumn(tcm.getColumn(0));
        tcm.removeColumn(tcm.getColumn(0));
        tcm.removeColumn(tcm.getColumn(0));
+    }
+    
+    public void renderCBRole() {
+        employeeController.renderCBRole();
     }
 
     /**

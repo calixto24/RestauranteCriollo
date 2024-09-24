@@ -147,10 +147,12 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLBplatilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseClicked
+        itemMenuRegisterView.renderCBCategory();
         itemMenuRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBplatilloMouseClicked
 
     private void jLBemployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseClicked
+        register.renderCBRole();
         register.setVisible(true);
     }//GEN-LAST:event_jLBemployeeMouseClicked
 
@@ -163,6 +165,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBclienteMouseClicked
 
     private void jLBmesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseClicked
+        tableRegisterView.renderCBWaiter();
         tableRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBmesaMouseClicked
 

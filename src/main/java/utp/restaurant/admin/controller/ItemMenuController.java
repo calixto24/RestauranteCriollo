@@ -158,7 +158,9 @@ public class ItemMenuController {
 
     public void renderCBCate() {
         ArrayList<Category> categoryList = categoryDao.getAll();
-
+        
+        view.getJcate().removeAllItems();
+                
         for (Category x : categoryList) {
             view.getJcate().addItem(x);
         }

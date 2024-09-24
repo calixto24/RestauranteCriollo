@@ -22,7 +22,6 @@ public class CustomerRegisterView extends javax.swing.JFrame {
         
         renderTable();
         BtnDelete.setVisible(false);
-        BtnLimpiar.setVisible(false);
     }
     
     public void renderTable() {

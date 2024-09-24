@@ -1,8 +1,6 @@
-
 package utp.restaurant.admin.controller;
 
 //author cristian
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -10,15 +8,16 @@ import utp.restaurant.admin.view.CustomerRegisterView;
 import utp.restaurant.dao.CustomerDAO;
 import utp.restaurant.model.Customer;
 import utp.restaurant.utils.Validate;
+
 public class CustomerController {
-    
+
     //Atributos
     private CustomerDAO customerDAO;
     private CustomerRegisterView view;
     private String action;
     private Validate vldt;
     private long selectedId;
-    
+
     //constructor vacio
     public CustomerController(CustomerRegisterView view) {
         this.view = view;
@@ -29,7 +28,7 @@ public class CustomerController {
         customerDAO = new CustomerDAO();
         vldt = new Validate();
     }
-    
+
     public void handleRegisterClick() {
         //VALIDACION NOMBRE
         String name = view.getjTFName().getText();
@@ -43,7 +42,7 @@ public class CustomerController {
             return;
 
         }
-        
+
         //VALIDACION A. PATERNO
         String ap = view.getjTFLastNameP().getText();
         vldt.setElement(ap)
@@ -55,7 +54,7 @@ public class CustomerController {
             return;
 
         }
-    //VALIDACION A. MATERNO
+        //VALIDACION A. MATERNO
         String am = view.getjTFLastNameM().getText();
         vldt.setElement(am)
                 .isRequired("El apellido materno es obligatorio");
@@ -65,7 +64,7 @@ public class CustomerController {
             view.getjTFLastNameM().requestFocus();
             return;
         }
-        
+
         //VALIDACION DNI
         String dnistr = view.getjTFdni().getText();
         vldt.setElement(dnistr)
@@ -86,8 +85,8 @@ public class CustomerController {
         }
 
         int dni = Integer.parseInt(dnistr);
-    
-    //VALIDACION F, NACIMIENTO
+
+        //VALIDACION F, NACIMIENTO
         String date = view.getjTFBhirtday().getText();
 
         vldt.setElement(date).isRequired("La fecha es obligatoria")
@@ -105,12 +104,12 @@ public class CustomerController {
         dateV[0] = Integer.parseInt(datePart[0]);
         dateV[1] = Integer.parseInt(datePart[1]);
         dateV[2] = Integer.parseInt(datePart[2]);
-        
+
         //VALIDACION DE RUC
         String ruc = view.getjTFruc().getText();
         vldt.setElement(ruc)
                 .isRequired("El RUC es obligatorio")
-                .isInt("El RUC debe ser numerico")
+                .isLong("El RUC debe ser numerico")
                 .equalsLength(11, "El RUC debe tener 11 digitos");
 
         if (action.equals("add")) {
@@ -124,7 +123,7 @@ public class CustomerController {
             view.getjTFruc().requestFocus();
             return;
         }
-        
+
         //VALIDACION TELEFONO
         String phoneNumber = view.getjTFTelephone().getText();
         vldt.setElement(phoneNumber)
@@ -165,7 +164,7 @@ public class CustomerController {
             view.getjTFEmail().requestFocus();
             return;
         }
-        
+
         //VALIDACION DIRECCION
         String direction = view.getjTFAddress().getText();
 
@@ -177,8 +176,8 @@ public class CustomerController {
             view.getjTFAddress().requestFocus();
             return;
         }
-        
-    //--------------------------- Crear el nuevo cliente
+
+        //--------------------------- Crear el nuevo cliente
         Customer newCustomer = new Customer(name,
                 ap, am, dni, LocalDate.of(dateV[2],
                         dateV[1], dateV[0]), phonenumber, email, direction, ruc);
@@ -209,7 +208,7 @@ public class CustomerController {
         handleCleanForm();
         view.renderTable();
     }
-    
+
     public DefaultTableModel getCustomerModel() {
         String[] columns = {
             "customer_id",
@@ -231,6 +230,7 @@ public class CustomerController {
         for (Customer customer : customerList) {
             Object[] row = {
                 customer.getId_customer(),
+                customer.getId_person(),
                 customer.getName(),
                 customer.getLastname_paternal(),
                 customer.getLastname_maternal(),
@@ -246,7 +246,7 @@ public class CustomerController {
         }
         return customerModel;
     }
-    
+
     public void handleCleanForm() {
 
         view.getBtnDelete().setVisible(false);
@@ -269,7 +269,6 @@ public class CustomerController {
         action = "edit";
 
         //pintando la columna con la informacion de la fila
-        
         view.getjTFName().setText(view.getjTList().getValueAt(view.getRow(), 0).toString());
         view.getjTFLastNameP().setText(view.getjTList().getValueAt(view.getRow(), 1).toString());
         view.getjTFLastNameM().setText(view.getjTList().getValueAt(view.getRow(), 2).toString());
@@ -279,10 +278,10 @@ public class CustomerController {
         view.getjTFEmail().setText(view.getjTList().getValueAt(view.getRow(), 6).toString());
         view.getjTFAddress().setText(view.getjTList().getValueAt(view.getRow(), 7).toString());
         view.getjTFruc().setText(view.getjTList().getValueAt(view.getRow(), 8).toString());
-        
+
         view.getBtnDelete().setVisible(true);
     }
-    
+
     public void heandleDeleteClick() {
 
         selectedId = Long.parseLong(view.getjTList().getModel().getValueAt(view.getRow(), 0).toString());
@@ -307,7 +306,6 @@ public class CustomerController {
             view.showMessage("Error al eliminar al cliente" + e.toString());
         }
 
-    }    
-    
-}
+    }
 
+}

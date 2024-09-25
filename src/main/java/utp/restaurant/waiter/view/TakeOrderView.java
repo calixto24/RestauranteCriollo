@@ -5,7 +5,11 @@
 package utp.restaurant.waiter.view;
 
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import utp.restaurant.model.Table;
+import utp.restaurant.utils.ImgTable;
 import utp.restaurant.waiter.controller.TakeOrderController;
 
 /**
@@ -15,12 +19,14 @@ import utp.restaurant.waiter.controller.TakeOrderController;
 public class TakeOrderView extends javax.swing.JFrame {
 
     TakeOrderController takeOrderController;
+    int row;
     
     public TakeOrderView() {
      
         takeOrderController = new TakeOrderController(this);
-        
         initComponents();
+        
+        renderTable();
         
     }
 
@@ -73,6 +79,11 @@ public class TakeOrderView extends javax.swing.JFrame {
 
             }
         ));
+        jTsaucers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTsaucersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTsaucers);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 570, 420));
@@ -177,8 +188,33 @@ public class TakeOrderView extends javax.swing.JFrame {
         MenuDetails menu= new MenuDetails(this, true);
         menu.setRoot(this);
         menu.setVisible(true);
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jTsaucersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTsaucersMouseClicked
+        row = jTsaucers.rowAtPoint(evt.getPoint());
+        
+        System.out.println(row);
+    }//GEN-LAST:event_jTsaucersMouseClicked
+
+    public void renderTable() {
+        
+        DefaultTableModel tableModel = takeOrderController.getTableModel();
+        jTsaucers.setRowHeight(50);
+        jTsaucers.setModel(tableModel);
+        
+        jTsaucers.getColumnModel().getColumn(5).setCellRenderer(new ImgTable());
+        
+        TableColumnModel tcm = jTsaucers.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
+        
+    }
+
+    public int getRow() {
+        return row;
+    }
+    
     public void renderCBTable() {
         takeOrderController.renderCBTable();
     }
@@ -187,6 +223,14 @@ public class TakeOrderView extends javax.swing.JFrame {
         return jCBtable;
     }
 
+    public JTable getjTsaucers() {
+        return jTsaucers;
+    }
+
+    public void setjTsaucers(JTable jTsaucers) {
+        this.jTsaucers = jTsaucers;
+    }
+    
     /**
      * @param args the command line arguments
      */

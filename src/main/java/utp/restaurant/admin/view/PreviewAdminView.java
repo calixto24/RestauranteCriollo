@@ -6,6 +6,8 @@ package utp.restaurant.admin.view;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import utp.restaurant.admin.controller.PreviewAdminViewController;
 import utp.restaurant.login.view.LoginView;
 
 /**
@@ -20,7 +22,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     private ItemMenuRegisterView itemMenuRegisterView;
     private CategoryRegisterView categoryRegisterView;
     private CustomerRegisterView customerRegisterView;
-    
+    private PreviewAdminViewController previewAdminViewController;
     
     public PreviewAdminView() {
         
@@ -31,7 +33,11 @@ public class PreviewAdminView extends javax.swing.JFrame {
         categoryRegisterView = new CategoryRegisterView();
         customerRegisterView = new CustomerRegisterView();
         
+        previewAdminViewController = new PreviewAdminViewController(this);
+        
         initComponents();
+        
+        previewAdminViewController.getUser();
         
     }
 
@@ -45,7 +51,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLBuser = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLBplatillo = new javax.swing.JLabel();
         jLBemployee = new javax.swing.JLabel();
@@ -56,16 +62,16 @@ public class PreviewAdminView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(86, 42, 35));
-        jLabel1.setText("Bienvenido Administrador ");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
+        jLBuser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLBuser.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -184,6 +190,11 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 190, -1, 40));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel4.setText("Bienvenid@ ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 220, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -285,7 +296,14 @@ public class PreviewAdminView extends javax.swing.JFrame {
         jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardPlatillo.png")));
     }//GEN-LAST:event_jLBplatilloMouseExited
 
-   
+    public JLabel getjLBuser() {
+        return jLBuser;
+    }
+
+    public void setjLBuser(JLabel jLBuser) {
+        this.jLBuser = jLBuser;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -327,9 +345,10 @@ public class PreviewAdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLBmesa;
     private javax.swing.JLabel jLBplatillo;
     private javax.swing.JLabel jLBrol;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLBuser;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

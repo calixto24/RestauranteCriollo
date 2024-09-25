@@ -188,8 +188,6 @@ public class TakeOrderView extends javax.swing.JFrame {
         MenuDetails menu= new MenuDetails(this, true);
         menu.setRoot(this);
         menu.setVisible(true);
-        
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTsaucersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTsaucersMouseClicked

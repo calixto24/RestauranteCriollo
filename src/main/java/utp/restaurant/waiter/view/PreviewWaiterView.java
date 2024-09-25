@@ -4,6 +4,9 @@
  */
 package utp.restaurant.waiter.view;
 
+import javax.swing.JLabel;
+import utp.restaurant.login.view.LoginView;
+import utp.restaurant.waiter.controller.PreviewWaiterController;
 import utp.restaurant.waiter.controller.TakeOrderController;
 
 /**
@@ -13,12 +16,16 @@ import utp.restaurant.waiter.controller.TakeOrderController;
 public class PreviewWaiterView extends javax.swing.JFrame {
 
     private TakeOrderView takeOrderView;
+    private PreviewWaiterController pwc;
     
     public PreviewWaiterView() {
         
+        pwc = new PreviewWaiterController(this);
         takeOrderView = new TakeOrderView();
         
         initComponents();
+        
+        pwc.getUser();
     }
 
     /**
@@ -32,10 +39,15 @@ public class PreviewWaiterView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLBuser = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardTomarPedido.png"))); // NOI18N
@@ -45,7 +57,36 @@ public class PreviewWaiterView extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, 210));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 270, -1, 210));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerPreviewWaiter.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
+
+        jLBuser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLBuser.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 80, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel4.setText("Bienvenid@ ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 220, -1));
+
+        jButton4.setBackground(new java.awt.Color(86, 42, 35));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(249, 242, 228));
+        jButton4.setText("CERRAR SESION");
+        jButton4.setBorder(null);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 90, 120, 40));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel3.setText("Explora las opciones para ver y tomar pedidos, optimizando el servicio y asegurando una atención eficiente.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 140, 660, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,6 +108,21 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         takeOrderView.setVisible(true);
     }//GEN-LAST:event_jLabel1MouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        LoginView loginView = new LoginView();
+
+        loginView.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public JLabel getjLBuser() {
+        return jLBuser;
+    }
+
+    public void setjLBuser(JLabel jLBuser) {
+        this.jLBuser = jLBuser;
+    }
+           
     /**
      * @param args the command line arguments
      */
@@ -103,7 +159,12 @@ public class PreviewWaiterView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLBuser;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

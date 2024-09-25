@@ -51,9 +51,11 @@ public class RestaurantDB {
 
         // lista de item menu 
         itemMenuList = new ArrayList<>();
-        itemMenuList.add(new ItemMenu("Lomo Saltado", 20.23, "Carne de pollo","disponible",categoryList.get(1),"cardCategoryEntradas.png"));
-        itemMenuList.add(new ItemMenu("Causa", 16, "Causa de atun","disponible",categoryList.get(2),""));
-        itemMenuList.add(new ItemMenu("Ceviche", 15, "De tilapia", "agotado",categoryList.get(1),""));
+        itemMenuList.add(new ItemMenu("Olluquito con charqui", 39, "Según receta antigua le añadimos su punto de chalona.","Disponible",categoryList.get(1),"olluquitoCharqui.png"));
+        itemMenuList.add(new ItemMenu("Chanfainita", 39, "La servimos con fideos a la criolla, mote, papa a la huancaína y rocoto bravo.","Disponible",categoryList.get(1),"chanfainta.png"));
+        itemMenuList.add(new ItemMenu("Empanada de Pastel de Choclo", 16, "Rellena de choclitos tiernos y carne guisada a fuego lento.","Disponible",categoryList.get(0),"empanadaPastelChoclo.png"));
+        itemMenuList.add(new ItemMenu("Turrón Doña Pancha 1/2 kg", 46, "Con harto cariño y miel de frutos.","Disponible",categoryList.get(2),"turronDoñaPancha.png"));
+        itemMenuList.add(new ItemMenu("Aji de Gallina", 48, "El plato favorito de los limeños.", "Agotado",categoryList.get(1),"ajiDeGallina.png"));
         
         //lista de clientes
         customerList = new ArrayList<>();

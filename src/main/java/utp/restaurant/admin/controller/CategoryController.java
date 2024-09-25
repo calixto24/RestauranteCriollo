@@ -148,11 +148,18 @@ public class CategoryController {
         ArrayList<Category> categoriaList = categoryDAO.getAll();
 
         for (Category y : categoriaList) {
+            
+            //carga de imagen
+            ImageIcon image = new ImageIcon(getClass().getResource("/utp/restaurant/images/" + y.getImage()));
+            
+            //escalar imagen
+            Image scaledImage = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            
             Object[] row = {
                 y.getId(),
                 y.getName(),
                 y.getDescription(),
-                new ImageIcon(getClass().getResource("/utp/restaurant/images/" + y.getImage()))
+                new ImageIcon(scaledImage)
             };
             tableModel.addRow(row);
         }

@@ -4,27 +4,58 @@
  */
 package utp.restaurant.waiter.view;
 
+import javax.swing.ImageIcon;
+import utp.restaurant.dao.ItemMenuDAO;
+import utp.restaurant.model.ItemMenu;
+import utp.restaurant.model.ItemOrder;
 /**
  *
  * @author dalia
  */
 public class MenuDetails extends javax.swing.JDialog {
-
-    /**
-     * Creates new form MenuDetails
-     */
     
     private TakeOrderView root;
-    
+    private long itemMenu_id;
+    private ItemMenuDAO imdao;
+    private double priceMenu;
+    private ItemMenu itemMenu;
     
     public MenuDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        
+        imdao = new ItemMenuDAO();
+        
         initComponents();
+        
     }
 
     public void setRoot( TakeOrderView root){
-        this.root=root;
+        this.root = root;
     }
+    
+    public void setItemMenu_id(long itemMenu_id) {
+        this.itemMenu_id = itemMenu_id;
+    }
+    
+    public void setAtributes() {
+        
+        //obteniendo el objeto item menu a traves del id
+        itemMenu = imdao.get(itemMenu_id);
+        
+        //pintando el Label con el nombre
+        jLBnameMenu.setText(itemMenu.getName());
+        
+        //pintando el label con la descripcion
+        jLBdescripcion.setText(itemMenu.getDescription());
+        
+        //pintando el label con el icono
+        jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + itemMenu.getImage())));
+        
+        //enviando el precio del plato a la variable global
+        priceMenu = itemMenu.getPrice();
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,30 +66,46 @@ public class MenuDetails extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        txtDescription = new javax.swing.JTextField();
-        txtAmount = new javax.swing.JTextField();
+        jTFDescription = new javax.swing.JTextField();
+        jTFAmount = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLBnameMenu = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLBimageMenu = new javax.swing.JLabel();
+        jLBdescripcion = new javax.swing.JLabel();
+        jLBprecioPreview = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtDescription.setBackground(new java.awt.Color(249, 242, 228));
-        txtDescription.setForeground(new java.awt.Color(51, 51, 51));
-        txtDescription.setBorder(null);
-        jPanel1.add(txtDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 320, 30));
+        jTFDescription.setBackground(new java.awt.Color(249, 242, 228));
+        jTFDescription.setForeground(new java.awt.Color(51, 51, 51));
+        jTFDescription.setBorder(null);
+        jPanel1.add(jTFDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 360, 30));
 
-        txtAmount.setBackground(new java.awt.Color(249, 242, 228));
-        txtAmount.setForeground(new java.awt.Color(51, 51, 51));
-        txtAmount.setBorder(null);
-        jPanel1.add(txtAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 320, 30));
+        jTFAmount.setBackground(new java.awt.Color(249, 242, 228));
+        jTFAmount.setForeground(new java.awt.Color(51, 51, 51));
+        jTFAmount.setText("0");
+        jTFAmount.setBorder(null);
+        jTFAmount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTFAmountMouseClicked(evt);
+            }
+        });
+        jTFAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFAmountActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jTFAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 160, 30));
 
         jButton1.setBackground(new java.awt.Color(86, 42, 35));
         jButton1.setForeground(new java.awt.Color(249, 242, 228));
@@ -69,48 +116,72 @@ public class MenuDetails extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 100, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 290, 100, 30));
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
         jButton2.setForeground(new java.awt.Color(249, 242, 228));
-        jButton2.setText("GUARDAR");
+        jButton2.setText("AGREGAR");
         jButton2.setBorder(null);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 90, 30));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 90, 30));
 
         jLabel5.setBackground(new java.awt.Color(86, 42, 35));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(86, 42, 35));
         jLabel5.setText("DESCRIPCION");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, 20));
 
         jLBnameMenu.setBackground(new java.awt.Color(86, 42, 35));
-        jLBnameMenu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLBnameMenu.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLBnameMenu.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel1.add(jLBnameMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 310, 30));
+        jPanel1.add(jLBnameMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator2.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 320, 12));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 360, 12));
 
         jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 320, 12));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 170, 12));
 
-        jLabel7.setBackground(new java.awt.Color(86, 42, 35));
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(86, 42, 35));
-        jLabel7.setText("CANTIDAD");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, 20));
+        jLabel9.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel9.setText("PRECIO A PAGAR");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, -1, 20));
+        jPanel1.add(jLBimageMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 350));
+
+        jLBdescripcion.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(jLBdescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 370, 30));
+
+        jLBprecioPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBprecioPreview.setForeground(new java.awt.Color(86, 42, 35));
+        jLBprecioPreview.setText("S/0");
+        jPanel1.add(jLBprecioPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 170, 30));
+
+        jLabel10.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel10.setText("CANTIDAD");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, -1, 20));
+
+        jSeparator4.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator4.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 160, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -121,6 +192,33 @@ public class MenuDetails extends javax.swing.JDialog {
         dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        //PRECIO
+        int cantidad = Integer.parseInt(jTFAmount.getText());
+        
+        //DESCRIPCION
+        String descripcion = jTFDescription.getText();
+        
+        //Creando nuevo objeto ItemOrder
+        ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTFAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAmountActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_jTFAmountActionPerformed
+
+    private void jTFAmountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFAmountMouseClicked
+        //obteniendo la cantidad
+        double cantidad = Double.parseDouble(jTFAmount.getText());
+        
+        //Pintando en el label
+        jLBprecioPreview.setText("S/" + (cantidad * priceMenu));
+    }//GEN-LAST:event_jTFAmountMouseClicked
 
     /**
      * @param args the command line arguments
@@ -167,13 +265,18 @@ public class MenuDetails extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLBdescripcion;
+    private javax.swing.JLabel jLBimageMenu;
     private javax.swing.JLabel jLBnameMenu;
+    private javax.swing.JLabel jLBprecioPreview;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField txtAmount;
-    private javax.swing.JTextField txtDescription;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTextField jTFAmount;
+    private javax.swing.JTextField jTFDescription;
     // End of variables declaration//GEN-END:variables
 }

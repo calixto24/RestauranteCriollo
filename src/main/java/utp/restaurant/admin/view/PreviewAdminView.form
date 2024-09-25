@@ -78,7 +78,7 @@
             <Component class="javax.swing.JLabel" name="jLBplatillo">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardPlatillo.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardPlatillo.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -98,7 +98,7 @@
             <Component class="javax.swing.JLabel" name="jLBemployee">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardEmpleado.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardEmpleado.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -118,7 +118,7 @@
             <Component class="javax.swing.JLabel" name="jLBrol">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardRol.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardRol.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -139,7 +139,7 @@
             <Component class="javax.swing.JLabel" name="jLBcliente">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardCliente.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardCliente.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -159,7 +159,7 @@
             <Component class="javax.swing.JLabel" name="jLBmesa">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardMesa.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardMesa.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>
@@ -179,7 +179,7 @@
             <Component class="javax.swing.JLabel" name="jLBcategoria">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/utp/restaurant/images/cardCategoria.png"/>
+                  <Image iconType="3" name="/utp/restaurant/images/cards/cardCategoria.png"/>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Hand Cursor"/>

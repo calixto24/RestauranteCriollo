@@ -14,6 +14,7 @@ import utp.restaurant.model.Employee;
  * @author aomine
  */
 public class ResetPassword extends javax.swing.JDialog {
+
     private Register root;
     private long employee_id;
     private EmployeeDAO employeeDAO;
@@ -28,11 +29,11 @@ public class ResetPassword extends javax.swing.JDialog {
         employeeDAO = new EmployeeDAO();
         initComponents();
     }
-    
+
     public void setRoot(Register root) {
         this.root = root;
     }
-    
+
     public void setEmployee_id(long employee_id) {
         this.employee_id = employee_id;
     }
@@ -137,8 +138,6 @@ public class ResetPassword extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -146,8 +145,8 @@ public class ResetPassword extends javax.swing.JDialog {
         String password = tfNewPassword.getText();
 
         vldt.setElement(password)
-            .isRequired("La contraseña es obligatoria")
-            .minLength(8, "La contraseña debe tener minimo 8 caracteres");
+                .isRequired("La contraseña es obligatoria")
+                .minLength(8, "La contraseña debe tener minimo 8 caracteres");
 
         if (!vldt.exec()) {
             root.showMessage(vldt.getMessage());
@@ -157,13 +156,13 @@ public class ResetPassword extends javax.swing.JDialog {
         }
 
         password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
-        
+
         Employee employee = employeeDAO.get(employee_id);
-        
+
         employee.setPassword(password);
-        
+
         root.showMessage("Contraseña actualizada correctamente");
-        
+
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

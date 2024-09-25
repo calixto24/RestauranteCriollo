@@ -76,7 +76,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLBplatillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardPlatillo.png"))); // NOI18N
+        jLBplatillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardPlatillo.png"))); // NOI18N
         jLBplatillo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBplatillo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -91,7 +91,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel2.add(jLBplatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, 180, 210));
 
-        jLBemployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardEmpleado.png"))); // NOI18N
+        jLBemployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardEmpleado.png"))); // NOI18N
         jLBemployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBemployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,7 +106,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel2.add(jLBemployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, 210));
 
-        jLBrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardRol.png"))); // NOI18N
+        jLBrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardRol.png"))); // NOI18N
         jLBrol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBrol.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,7 +124,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel2.add(jLBrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 180, 210));
 
-        jLBcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardCliente.png"))); // NOI18N
+        jLBcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardCliente.png"))); // NOI18N
         jLBcliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBcliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -139,7 +139,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel2.add(jLBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 180, 210));
 
-        jLBmesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardMesa.png"))); // NOI18N
+        jLBmesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardMesa.png"))); // NOI18N
         jLBmesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBmesa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
         });
         jPanel2.add(jLBmesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 180, 210));
 
-        jLBcategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cardCategoria.png"))); // NOI18N
+        jLBcategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardCategoria.png"))); // NOI18N
         jLBcategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBcategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -242,7 +242,7 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBrolMousePressed
 
     private void jLBrolMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseEntered
-        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "carRolSombra.png")));
+        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "carRolSombra.png")));
     }//GEN-LAST:event_jLBrolMouseEntered
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -253,47 +253,47 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jLBrolMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseExited
-        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardRol.png")));
+        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardRol.png")));
     }//GEN-LAST:event_jLBrolMouseExited
 
     private void jLBemployeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseEntered
-        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardEmpleadoSombra.png")));
+        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardEmpleadoSombra.png")));
     }//GEN-LAST:event_jLBemployeeMouseEntered
 
     private void jLBemployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseExited
-        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardEmpleado.png")));
+        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardEmpleado.png")));
     }//GEN-LAST:event_jLBemployeeMouseExited
 
     private void jLBclienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseEntered
-        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardClienteSombra.png")));
+        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardClienteSombra.png")));
     }//GEN-LAST:event_jLBclienteMouseEntered
 
     private void jLBclienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseExited
-        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardCliente.png")));
+        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCliente.png")));
     }//GEN-LAST:event_jLBclienteMouseExited
 
     private void jLBmesaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseEntered
-        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardMesaSombra.png")));
+        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardMesaSombra.png")));
     }//GEN-LAST:event_jLBmesaMouseEntered
 
     private void jLBmesaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseExited
-        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardMesa.png")));
+        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardMesa.png")));
     }//GEN-LAST:event_jLBmesaMouseExited
 
     private void jLBcategoriaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseEntered
-        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardCategorySombra.png")));
+        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCategorySombra.png")));
     }//GEN-LAST:event_jLBcategoriaMouseEntered
 
     private void jLBcategoriaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseExited
-        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardCategoria.png")));
+        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCategoria.png")));
     }//GEN-LAST:event_jLBcategoriaMouseExited
 
     private void jLBplatilloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseEntered
-        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardPlatilloSombra.png")));
+        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardPlatilloSombra.png")));
     }//GEN-LAST:event_jLBplatilloMouseEntered
 
     private void jLBplatilloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseExited
-        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + "cardPlatillo.png")));
+        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardPlatillo.png")));
     }//GEN-LAST:event_jLBplatilloMouseExited
 
     public JLabel getjLBuser() {

@@ -38,7 +38,7 @@ public class ItemMenuRegisterView extends javax.swing.JFrame {
 
     public void renderTable() {
         DefaultTableModel tableModel = itemMenuController.getTableModel();
-        jTItemMenuList.setRowHeight(50);
+        jTItemMenuList.setRowHeight(100);
         jTItemMenuList.setModel(tableModel);
         
         jTItemMenuList.getColumnModel().getColumn(6).setCellRenderer(new ImgTable());

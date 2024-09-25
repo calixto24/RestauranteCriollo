@@ -56,6 +56,13 @@ public class ItemMenuController {
         ArrayList<ItemMenu> itemMenuList = itemMenuDao.getAll();
 
         for (ItemMenu e : itemMenuList) {
+            
+            //obtener y cargar la imagen
+            ImageIcon image = new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + e.getImage()));
+            
+            //imagen escalada
+            Image scaledImage = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+            
             Object row[] = {
                 e.getId(), 
                 e.getName(), 
@@ -63,7 +70,7 @@ public class ItemMenuController {
                 e.getDescription(), 
                 e.getStatus(), 
                 e.getCategory(), 
-                new ImageIcon(getClass().getResource("/utp/restaurant/images/" + e.getImage()))
+                new ImageIcon(scaledImage)
             };
             
             tableModel.addRow(row);
@@ -149,6 +156,19 @@ public class ItemMenuController {
 
             }
 
+        } else if (action.equals("edit")) {
+            
+            try {
+
+                itemMenuDao.update(idPlato, itemMenu);
+                view.showMessage("Plato modificado");
+
+            } catch (Exception e) {
+
+                view.showMessage("Plato no modificado" + e.toString());
+
+            }
+            
         }
 
         handleCleanForm();
@@ -247,9 +267,9 @@ public class ItemMenuController {
         view.getjTFname().setText(view.getjTItemMenuList().getValueAt(view.getRow(), 0).toString());
         view.getjTFprice().setText(view.getjTItemMenuList().getValueAt(view.getRow(), 1).toString());
         view.getjTFdescription().setText(view.getjTItemMenuList().getValueAt(view.getRow(), 2).toString());
-
+        view.getJcate().setSelectedItem(view.getjTItemMenuList().getValueAt(view.getRow(), 4));
         view.getjTFimage().setText(itemMenuDao.get(idPlato).getImage());
-        view.getjLBmostrar().setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + itemMenuDao.get(idPlato).getImage())));
+        view.getjLBmostrar().setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenuDao.get(idPlato).getImage())));
 
     }
 

@@ -14,7 +14,7 @@ import utp.restaurant.waiter.controller.TakeOrderController;
 
 /**
  *
- * @author dalia
+ * @author cristian :D
  */
 public class TakeOrderView extends javax.swing.JFrame {
 
@@ -25,6 +25,8 @@ public class TakeOrderView extends javax.swing.JFrame {
      
         takeOrderController = new TakeOrderController(this);
         initComponents();
+        
+        renderItemOrderTable();
         
         renderTable();
         
@@ -232,7 +234,10 @@ public class TakeOrderView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public void renderItemOrderTable(){
+        DefaultTableModel tableorder = takeOrderController.getTableOrderModel();
+        jTorderList.setModel(tableorder);
+    }
     public void renderTable() {
         
         DefaultTableModel tableModel = takeOrderController.getTableModel();

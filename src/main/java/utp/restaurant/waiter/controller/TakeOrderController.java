@@ -7,10 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.ItemMenuDAO;
+import utp.restaurant.dao.ItemOrderDAO;
 import utp.restaurant.dao.TableDAO;
 import utp.restaurant.waiter.view.TakeOrderView;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.ItemMenu;
+import utp.restaurant.model.ItemOrder;
 import utp.restaurant.store.Store;
 
 public class TakeOrderController {
@@ -20,6 +22,7 @@ public class TakeOrderController {
     private TableDAO tableDAO;
     private Store store;
     private ItemMenuDAO itemMenuDAO;
+    private ItemOrderDAO itemorderdao;
 
     //constructor
     public TakeOrderController(TakeOrderView takeOrderView) {
@@ -27,7 +30,7 @@ public class TakeOrderController {
         this.takeOrderView = takeOrderView;
         tableDAO = new TableDAO();
         itemMenuDAO = new ItemMenuDAO();
-
+        itemorderdao = new ItemOrderDAO();
         store = Store.getInstance();
     }
 
@@ -95,5 +98,29 @@ public class TakeOrderController {
         return tableModel;
 
     }
-
+    
+    public DefaultTableModel getTableOrderModel(){
+        String columns [] = {
+            "Id",
+            "Nombre",
+            "Cantidad",
+            "Total",
+            "Descripcion"        
+        };
+        
+       DefaultTableModel defaulttablemodel = new DefaultTableModel(null, columns);
+       ArrayList <ItemOrder> itemOrderList =  itemorderdao.getAll();
+       
+       for(ItemOrder itemorderxd : itemOrderList){
+          Object row [] = {
+              itemorderxd.getId_itemOrder(),
+              itemorderxd.getItemMenu().getName(),
+              itemorderxd.getAmount(),
+              itemorderxd.getTotal(),
+              itemorderxd.getDescription()    
+          };  
+          defaulttablemodel.addRow(row);
+       }
+       return defaulttablemodel;
+    } 
 }

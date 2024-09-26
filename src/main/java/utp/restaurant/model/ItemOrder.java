@@ -14,7 +14,6 @@ public class ItemOrder {
     public ItemOrder(int amount, String description, ItemMenu itemMenu) {
         this.id_itemOrder = System.currentTimeMillis() + new Random().nextInt(1000);
         this.amount = amount;
-        this.total = total;
         this.description = description;
         this.itemMenu = itemMenu;
     }

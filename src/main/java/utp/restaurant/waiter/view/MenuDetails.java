@@ -7,6 +7,7 @@ package utp.restaurant.waiter.view;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import utp.restaurant.dao.ItemMenuDAO;
+import utp.restaurant.dao.ItemOrderDAO;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.utils.Validate;
@@ -22,11 +23,15 @@ public class MenuDetails extends javax.swing.JDialog {
     private double priceMenu;
     private ItemMenu itemMenu;
     private Validate vldt;
+    private String action;
+    private ItemOrderDAO iodao;
     
     public MenuDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         vldt= new Validate();
         imdao = new ItemMenuDAO();
+        iodao = new ItemOrderDAO();
+        action = "add";
         
         initComponents();
         
@@ -214,7 +219,17 @@ public class MenuDetails extends javax.swing.JDialog {
         //Creando nuevo objeto ItemOrder
         ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
         
+        if(action.equals("add")){
+            try {
+                iodao.add(newItemOrder);
+                showMessage("Platillo ordenado correctamente");
+            } catch (Exception e) {
+                showMessage("Platillo no ordenado");
+            }
+                
+        }
         
+        root.renderItemOrderTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void  showMessage(String msj){

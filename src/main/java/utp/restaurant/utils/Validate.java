@@ -41,7 +41,19 @@ public class Validate {
         customerDAO = new CustomerDAO();
         itemMenuDAO = new ItemMenuDAO();
     }
+   public Validate greaterThan(int n, String msg) {
+        if (!valid) {
+            return this;
+        }
 
+        if (Integer.parseInt(el) <= n ) {
+            valid = false;
+            message = msg;
+        }
+
+        return this;
+    }
+   
     public Validate(String el) {
         message = "";
         valid = true;

@@ -235,7 +235,9 @@ public class MenuDetails extends javax.swing.JDialog {
         String str = jTFAmount.getText();
         vldt.setElement(str)
                 .isRequired("La cantidad es obligatorio")
-                .isInt("tiene que ser numerico");
+                .isInt("tiene que ser numerico")
+                .greaterThan(0, "La cantidad tiene que ser mayor a 0");
+
         if (!vldt.exec()) {
             showMessage(vldt.getMessage());
             jTFAmount.requestFocus();

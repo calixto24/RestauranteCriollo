@@ -242,7 +242,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
         //PRECIO
         String str = jTFAmount.getText();
-        vldt.setElement(str).isRequired("La cantidad es obligatorio").isInt("tiene que ser numerico");
+        vldt.setElement(str).isRequired("La cantidad es obligatorio").isInt("tiene que ser numerico").maxcr(Integer.parseInt(str), "mayor que cero perra");
         if (!vldt.exec()) {
             showMessage(vldt.getMessage());
             jTFAmount.requestFocus();

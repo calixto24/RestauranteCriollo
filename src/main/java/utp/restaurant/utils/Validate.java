@@ -41,7 +41,19 @@ public class Validate {
         customerDAO = new CustomerDAO();
         itemMenuDAO = new ItemMenuDAO();
     }
+   public Validate maxcr( int num ,String msg) {
+        if (!valid) {
+            return this;
+        }
 
+        if (num<=0 ) {
+            valid = false;
+            message = msg;
+        }
+
+        return this;
+    }
+   
     public Validate(String el) {
         message = "";
         valid = true;

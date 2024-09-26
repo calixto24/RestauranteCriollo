@@ -4,11 +4,13 @@
  */
 package utp.restaurant.waiter.view;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Table;
 import utp.restaurant.utils.ImgTable;
 import utp.restaurant.waiter.controller.TakeOrderController;
@@ -31,7 +33,7 @@ public class TakeOrderView extends javax.swing.JFrame {
         renderItemOrderTable();
         
         renderTable();
-        
+                
     }
 
     /**
@@ -48,12 +50,12 @@ public class TakeOrderView extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTsaucers = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jBTNeditar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTorderList = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jBTNguardar = new javax.swing.JButton();
+        jBTNeliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -67,6 +69,11 @@ public class TakeOrderView extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jCBtable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBtableActionPerformed(evt);
+            }
+        });
         jPanel1.add(jCBtable, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 570, 30));
 
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
@@ -97,16 +104,16 @@ public class TakeOrderView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 590, 440));
 
-        jButton1.setBackground(new java.awt.Color(86, 42, 35));
-        jButton1.setForeground(new java.awt.Color(249, 242, 228));
-        jButton1.setText("EDITAR");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBTNeditar.setBackground(new java.awt.Color(86, 42, 35));
+        jBTNeditar.setForeground(new java.awt.Color(249, 242, 228));
+        jBTNeditar.setText("EDITAR");
+        jBTNeditar.setBorder(null);
+        jBTNeditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBTNeditarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 660, 80, 30));
+        jPanel1.add(jBTNeditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 660, 80, 30));
 
         jPanel3.setBackground(new java.awt.Color(249, 242, 228));
         jPanel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -136,27 +143,27 @@ public class TakeOrderView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 570, 520));
 
-        jButton4.setBackground(new java.awt.Color(86, 42, 35));
-        jButton4.setForeground(new java.awt.Color(249, 242, 228));
-        jButton4.setText("GUARDAR");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jBTNguardar.setBackground(new java.awt.Color(86, 42, 35));
+        jBTNguardar.setForeground(new java.awt.Color(249, 242, 228));
+        jBTNguardar.setText("GUARDAR");
+        jBTNguardar.setBorder(null);
+        jBTNguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jBTNguardarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 660, 90, 30));
+        jPanel1.add(jBTNguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 660, 90, 30));
 
-        jButton5.setBackground(new java.awt.Color(86, 42, 35));
-        jButton5.setForeground(new java.awt.Color(249, 242, 228));
-        jButton5.setText("ELIMINAR");
-        jButton5.setBorder(null);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jBTNeliminar.setBackground(new java.awt.Color(86, 42, 35));
+        jBTNeliminar.setForeground(new java.awt.Color(249, 242, 228));
+        jBTNeliminar.setText("ELIMINAR");
+        jBTNeliminar.setBorder(null);
+        jBTNeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jBTNeliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 660, 100, 30));
+        jPanel1.add(jBTNeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 660, 100, 30));
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
         jButton2.setForeground(new java.awt.Color(249, 242, 228));
@@ -222,9 +229,9 @@ public class TakeOrderView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jBTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNguardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jBTNguardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         MenuDetails menu= new MenuDetails(this, true);
@@ -237,38 +244,54 @@ public class TakeOrderView extends javax.swing.JFrame {
 
     private void jTsaucersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTsaucersMouseClicked
         row = jTsaucers.rowAtPoint(evt.getPoint());
+        
     }//GEN-LAST:event_jTsaucersMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBTNeditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNeditarActionPerformed
         MenuDetails menu= new MenuDetails(this, true);
         menu.setRoot(this);
-        menu.setItemOrder_id(Long.parseLong(jTorderList.getModel().getValueAt(rowItemOrder, 0).toString()));
-        menu.setAtributesEdit();
+        menu.setItemOrder(takeOrderController.getItemOrder());
+        menu.setAction("edit");
+        menu.setAtributes();
         
         menu.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBTNeditarActionPerformed
 
+    
     private void jTorderListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTorderListMouseClicked
         rowItemOrder = jTorderList.rowAtPoint(evt.getPoint());
+        
+        jBTNeditar.setVisible(true);
+        jBTNeliminar.setVisible(true);
     }//GEN-LAST:event_jTorderListMouseClicked
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jBTNeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNeliminarActionPerformed
         
         takeOrderController.heandleDeleteClick();
         
         
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jBTNeliminarActionPerformed
+
+    private void jCBtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBtableActionPerformed
+        
+        takeOrderController.setTable();
+        
+    }//GEN-LAST:event_jCBtableActionPerformed
+    
     public void renderItemOrderTable(){
         DefaultTableModel tableorder = takeOrderController.getTableOrderModel();
         jTorderList.setModel(tableorder);
         
         TableColumnModel tcm = jTorderList.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
+        
+        takeOrderController.manageButtonVisibility();
     }
+    
     public void renderTable() {
         
         DefaultTableModel tableModel = takeOrderController.getTableModel();
@@ -281,6 +304,32 @@ public class TakeOrderView extends javax.swing.JFrame {
         tcm.removeColumn(tcm.getColumn(0));
         
     }
+    
+    public void setItemOrder(ItemOrder itemOrder) {
+        
+        takeOrderController.addItemOrder(itemOrder);
+        
+    }
+    
+    public void updateOrderItem(ItemOrder itemOrder) {
+        
+        takeOrderController.updateItemOrder(itemOrder);
+        
+    }
+
+    public JButton getjBTNeditar() {
+        return jBTNeditar;
+    }
+
+    public JButton getjBTNeliminar() {
+        return jBTNeliminar;
+    }
+
+    public JButton getjBTNguardar() {
+        return jBTNguardar;
+    }
+    
+    
     
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
@@ -355,11 +404,11 @@ public class TakeOrderView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBTNeditar;
+    private javax.swing.JButton jBTNeliminar;
+    private javax.swing.JButton jBTNguardar;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<Table> jCBtable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

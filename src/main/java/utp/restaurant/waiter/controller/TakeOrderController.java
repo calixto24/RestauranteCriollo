@@ -13,6 +13,7 @@ import utp.restaurant.waiter.view.TakeOrderView;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
+import utp.restaurant.model.Order;
 import utp.restaurant.store.Store;
 
 public class TakeOrderController {
@@ -23,6 +24,7 @@ public class TakeOrderController {
     private Store store;
     private ItemMenuDAO itemMenuDAO;
     private ItemOrderDAO itemorderdao;
+    private Order order;
 
     private long selectedId;
 
@@ -33,7 +35,11 @@ public class TakeOrderController {
         tableDAO = new TableDAO();
         itemMenuDAO = new ItemMenuDAO();
         itemorderdao = new ItemOrderDAO();
+
+        order = new Order();
         store = Store.getInstance();
+
+        order.setWaiter(store.getEmploye());
 
         selectedId = 0;
     }
@@ -46,13 +52,37 @@ public class TakeOrderController {
 
         for (Table e : tableList) {
 
-            if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee()) {
+            if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
 
                 takeOrderView.getjCBtable().addItem(e);
 
             }
 
         }
+
+    }
+
+    public void setTable() {
+
+        order.setTable((Table) takeOrderView.getjCBtable().getSelectedItem());
+
+    }
+
+    public void addItemOrder(ItemOrder itemOrder) {
+
+        order.getItemOrderList().add(itemOrder);
+
+    }
+
+    public void updateItemOrder(ItemOrder itemOrder) {
+
+        order.getItemOrderList().set(takeOrderView.getRowItemOrder(), itemOrder);
+
+    }
+
+    public ItemOrder getItemOrder() {
+
+        return order.getItemOrderList().get(takeOrderView.getRowItemOrder());
 
     }
 
@@ -111,7 +141,7 @@ public class TakeOrderController {
         };
 
         DefaultTableModel defaulttablemodel = new DefaultTableModel(null, columns);
-        ArrayList<ItemOrder> itemOrderList = itemorderdao.getAll();
+        ArrayList<ItemOrder> itemOrderList = order.getItemOrderList();
 
         for (ItemOrder e : itemOrderList) {
             Object row[] = {
@@ -132,21 +162,17 @@ public class TakeOrderController {
 
     public void heandleDeleteClick() {
 
-        int row = takeOrderView.getRowItemOrder();
-
-        selectedId = Long.parseLong(takeOrderView.getjTorderList().getModel().getValueAt(row, 0).toString());
-
         int op = takeOrderView.showConfirmation("¿Desea eliminar la orden del platillo?");
-        
+
         if (op != 0) {
             return;
         }
 
         try {
 
-            itemorderdao.delete(selectedId);
+            order.getItemOrderList().remove(takeOrderView.getRowItemOrder());
             takeOrderView.showMessage("Orden de platillo eliminado");
-            
+
             takeOrderView.renderItemOrderTable();
 
         } catch (Exception e) {
@@ -154,6 +180,16 @@ public class TakeOrderController {
             takeOrderView.showMessage("Orden de platillo no eliminado");
 
         }
+
+    }
+
+    public void manageButtonVisibility() {
+
+        boolean isEmpty = order.getItemOrderList().isEmpty();
+
+        takeOrderView.getjBTNguardar().setVisible(!isEmpty);
+        takeOrderView.getjBTNeditar().setVisible(!isEmpty);
+        takeOrderView.getjBTNeliminar().setVisible(!isEmpty);
 
     }
 }

@@ -18,17 +18,29 @@ public class Order {
     private Employee waiter;
     private Table table;
 
-    public Order(int number, ArrayList<ItemOrder> itemOrderList, Employee waiter, Table table) {
+    public Order( Employee waiter, Table table) {
+        
         this.id_Order = System.currentTimeMillis() + new Random().nextInt(1000); 
-        this.number = number;
+        //this.number = number;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
         this.status = "Pendiente";
-        this.itemOrderList = itemOrderList;
+        this.itemOrderList = new ArrayList<>();
         this.waiter = waiter;
         this.table = table;
         
         calcTotalPrice();
+    }
+
+    public Order() {
+        
+        this.id_Order = System.currentTimeMillis() + new Random().nextInt(1000); 
+        //this.number = number;
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
+        this.status = "Pendiente";
+        this.itemOrderList = new ArrayList<>();
+        
     }
     
     public void calcTotalPrice() {

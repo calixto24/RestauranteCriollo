@@ -5,9 +5,11 @@
 package utp.restaurant.waiter.view;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import utp.restaurant.dao.ItemMenuDAO;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
+import utp.restaurant.utils.Validate;
 /**
  *
  * @author dalia
@@ -19,10 +21,11 @@ public class MenuDetails extends javax.swing.JDialog {
     private ItemMenuDAO imdao;
     private double priceMenu;
     private ItemMenu itemMenu;
+    private Validate vldt;
     
     public MenuDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        
+        vldt= new Validate();
         imdao = new ItemMenuDAO();
         
         initComponents();
@@ -49,7 +52,7 @@ public class MenuDetails extends javax.swing.JDialog {
         jLBdescripcion.setText(itemMenu.getDescription());
         
         //pintando el label con el icono
-        jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + itemMenu.getImage())));
+        jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
         
         //enviando el precio del plato a la variable global
         priceMenu = itemMenu.getPrice();
@@ -196,7 +199,14 @@ public class MenuDetails extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
         //PRECIO
-        int cantidad = Integer.parseInt(jTFAmount.getText());
+        String str =jTFAmount.getText();
+        vldt.setElement(str).isRequired("La cantidad es obligatorio").isInt("tiene que ser numerico");
+        if (!vldt.exec()) {
+            showMessage(vldt.getMessage());
+            jTFAmount.requestFocus();
+            return;
+        }
+        int cantidad= Integer.parseInt(str);
         
         //DESCRIPCION
         String descripcion = jTFDescription.getText();
@@ -204,8 +214,12 @@ public class MenuDetails extends javax.swing.JDialog {
         //Creando nuevo objeto ItemOrder
         ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
         
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void  showMessage(String msj){
+        JOptionPane.showMessageDialog(rootPane, msj);
+    }
     private void jTFAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAmountActionPerformed
         
         

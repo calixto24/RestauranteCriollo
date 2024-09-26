@@ -30,9 +30,9 @@ public class RestaurantDB {
 
         //lista de empleados
         employeeList = new ArrayList<>();
-        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 123123478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 16 al pincho"));
+        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 123123478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 10"));
         employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Cristian", "De La Cruz", "De La Cruz", 75286131, LocalDate.of(2005, 8, 18), 951761921, "cristian@gmail.com", "Mz. 18 calle los berracos"));
-        employeeList.add(new Employee("Jhordan", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Manuel", "asd", "gdfgd", 12365479, LocalDate.of(2000, 01, 20), 123456799, "cristian@gmail.com", "Mz. 16 al pincho"));
+        employeeList.add(new Employee("Jhordan", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Jhordan", "Calixto", "Laureano", 71597595, LocalDate.of(2005, 6, 24), 934745971, "calix@gmail.com", "Mz. q lt 22"));
         employeeList.add(new Employee("Dalia", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Dalia", "Alberto", "Joaquin", 60749109, LocalDate.of(2006, 06, 06), 935041343, "dalia6@gmail.com", "Mz. 15 lote"));
         employeeList.add(new Employee("Jean", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Jean", "Chamorro", "Granados", 74883675, LocalDate.of(2006, 01, 18), 946087675, "jean6@gmail.com", "Mz. 20 lote C"));
         
@@ -59,8 +59,8 @@ public class RestaurantDB {
 
         //lista de clientes
         customerList = new ArrayList<>();
-        customerList.add(new Customer("Jean", "Chamorro", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912"));
-        customerList.add(new Customer("Cristian", "De La Cruz", "De La Cruz", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913"));
+        customerList.add(new Customer("Manuel", "Dias", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912"));
+        customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913"));
         
         //lista de itemOrder
         itemorderList = new ArrayList<>(); 

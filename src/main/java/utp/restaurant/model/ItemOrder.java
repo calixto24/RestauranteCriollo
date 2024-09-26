@@ -16,11 +16,13 @@ public class ItemOrder {
         this.amount = amount;
         this.description = description;
         this.itemMenu = itemMenu;
+        
+        calcTotal();
     }
     
     public void calcTotal() {
         
-        total = amount * itemMenu.getPrice();
+        this.total = amount * itemMenu.getPrice();
         
     }
 

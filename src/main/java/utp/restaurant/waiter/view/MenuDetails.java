@@ -11,59 +11,96 @@ import utp.restaurant.dao.ItemOrderDAO;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.utils.Validate;
+
 /**
  *
  * @author dalia
  */
 public class MenuDetails extends javax.swing.JDialog {
-    
+
     private TakeOrderView root;
+
     private long itemMenu_id;
+    private long itemOrder_id;
+
     private ItemMenuDAO imdao;
-    private double priceMenu;
+    private ItemOrderDAO iodao;
+
     private ItemMenu itemMenu;
+    private ItemOrder itemOrder;
+
     private Validate vldt;
     private String action;
-    private ItemOrderDAO iodao;
-    
+    private double priceMenu;
+    private double priceMenuOrder;
+
     public MenuDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        vldt= new Validate();
+        vldt = new Validate();
         imdao = new ItemMenuDAO();
         iodao = new ItemOrderDAO();
+
         action = "add";
-        
+
         initComponents();
-        
+
     }
 
-    public void setRoot( TakeOrderView root){
+    public void setRoot(TakeOrderView root) {
         this.root = root;
     }
-    
+
     public void setItemMenu_id(long itemMenu_id) {
         this.itemMenu_id = itemMenu_id;
     }
-    
+
+    public void setItemOrder_id(long itemOrder_id) {
+        this.itemOrder_id = itemOrder_id;
+    }
+
     public void setAtributes() {
-        
+
         //obteniendo el objeto item menu a traves del id
         itemMenu = imdao.get(itemMenu_id);
-        
+
         //pintando el Label con el nombre
         jLBnameMenu.setText(itemMenu.getName());
-        
+
         //pintando el label con la descripcion
         jLBdescripcion.setText(itemMenu.getDescription());
-        
+
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
-        
+
         //enviando el precio del plato a la variable global
         priceMenu = itemMenu.getPrice();
-        
+
     }
-    
+
+    public void setAtributesEdit() {
+
+        itemOrder = iodao.get(itemOrder_id);
+
+        //pintando el label con el icono
+        jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemOrder.getItemMenu().getImage())));
+
+        //pintando el Label con el nombre
+        jLBnameMenu.setText(itemOrder.getItemMenu().getName());
+
+        //pintando el label con la descripcion
+        jLBdescripcion.setText(itemOrder.getItemMenu().getDescription());
+
+        //pintando cantidad
+        jTFAmount.setText(itemOrder.getAmount() + "");
+
+        priceMenuOrder = itemOrder.getItemMenu().getPrice();
+
+        System.out.println(priceMenuOrder);
+
+        action = "edit";
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,7 +205,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
         jLBprecioPreview.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLBprecioPreview.setForeground(new java.awt.Color(86, 42, 35));
-        jLBprecioPreview.setText("S/0");
+        jLBprecioPreview.setText("S/0.0");
         jPanel1.add(jLBprecioPreview, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 140, 170, 30));
 
         jLabel10.setBackground(new java.awt.Color(86, 42, 35));
@@ -198,55 +235,82 @@ public class MenuDetails extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+
         //PRECIO
-        String str =jTFAmount.getText();
+        String str = jTFAmount.getText();
         vldt.setElement(str).isRequired("La cantidad es obligatorio").isInt("tiene que ser numerico");
         if (!vldt.exec()) {
             showMessage(vldt.getMessage());
             jTFAmount.requestFocus();
             return;
         }
-        int cantidad= Integer.parseInt(str);
-        
+        int cantidad = Integer.parseInt(str);
+
         //DESCRIPCION
         String descripcion = jTFDescription.getText();
-        
-        //Creando nuevo objeto ItemOrder
-        ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
-        
-        if(action.equals("add")){
+
+        if (action.equals("add")) {
+
             try {
+                //Creando nuevo objeto ItemOrder
+                ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
+
                 iodao.add(newItemOrder);
                 showMessage("Platillo ordenado correctamente");
+
             } catch (Exception e) {
+
                 showMessage("Platillo no ordenado");
+
             }
-                
+
+        } else if (action.equals("edit")) {
+
+            try {
+                //Creando nuevo objeto ItemOrder
+                ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemOrder.getItemMenu());
+                iodao.update(itemOrder_id, newItemOrder);
+                showMessage("Platillo ordenado actualizado");
+
+            } catch (Exception e) {
+
+                showMessage("Platillo ordenado no actualizado");
+
+            }
+
         }
-        
+
         root.renderItemOrderTable();
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void  showMessage(String msj){
+    public void showMessage(String msj) {
         JOptionPane.showMessageDialog(rootPane, msj);
     }
     private void jTFAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAmountActionPerformed
-        
-        
-        
+
+
     }//GEN-LAST:event_jTFAmountActionPerformed
 
     private void jTFAmountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFAmountMouseClicked
         //obteniendo la cantidad
         double cantidad = Double.parseDouble(jTFAmount.getText());
-        
+
         //Pintando en el label
-        jLBprecioPreview.setText("S/" + (cantidad * priceMenu));
+        if (action.equals("add")) {
+
+            jLBprecioPreview.setText("S/" + (cantidad * priceMenu));
+
+        } else if (action.equals("edit")) {
+
+            jLBprecioPreview.setText("S/" + (cantidad * priceMenuOrder));
+
+        }
+
     }//GEN-LAST:event_jTFAmountMouseClicked
 
     /**

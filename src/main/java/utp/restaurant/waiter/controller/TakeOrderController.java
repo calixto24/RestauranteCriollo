@@ -24,6 +24,8 @@ public class TakeOrderController {
     private ItemMenuDAO itemMenuDAO;
     private ItemOrderDAO itemorderdao;
 
+    private long selectedId;
+
     //constructor
     public TakeOrderController(TakeOrderView takeOrderView) {
 
@@ -32,6 +34,8 @@ public class TakeOrderController {
         itemMenuDAO = new ItemMenuDAO();
         itemorderdao = new ItemOrderDAO();
         store = Store.getInstance();
+
+        selectedId = 0;
     }
 
     public void renderCBTable() {
@@ -86,41 +90,70 @@ public class TakeOrderController {
                     new ImageIcon(scaledImage)
 
                 };
-                
+
                 tableModel.addRow(row);
 
             }
-
-            
 
         }
 
         return tableModel;
 
     }
-    
-    public DefaultTableModel getTableOrderModel(){
-        String columns [] = {
+
+    public DefaultTableModel getTableOrderModel() {
+        String columns[] = {
             "Id",
             "Nombre",
             "Cantidad",
             "Total",
-            "Descripcion"        
+            "Descripcion"
         };
+
+        DefaultTableModel defaulttablemodel = new DefaultTableModel(null, columns);
+        ArrayList<ItemOrder> itemOrderList = itemorderdao.getAll();
+
+        for (ItemOrder e : itemOrderList) {
+            Object row[] = {
+                e.getId_itemOrder(),
+                e.getItemMenu().getName(),
+                e.getAmount(),
+                e.getTotal(),
+                e.getDescription()
+            };
+
+            defaulttablemodel.addRow(row);
+
+        }
+
+        return defaulttablemodel;
+
+    }
+
+    public void heandleDeleteClick() {
+
+        int row = takeOrderView.getRowItemOrder();
+
+        selectedId = Long.parseLong(takeOrderView.getjTorderList().getModel().getValueAt(row, 0).toString());
+
+        int op = takeOrderView.showConfirmation("¿Desea eliminar la orden del platillo?");
         
-       DefaultTableModel defaulttablemodel = new DefaultTableModel(null, columns);
-       ArrayList <ItemOrder> itemOrderList =  itemorderdao.getAll();
-       
-       for(ItemOrder itemorderxd : itemOrderList){
-          Object row [] = {
-              itemorderxd.getId_itemOrder(),
-              itemorderxd.getItemMenu().getName(),
-              itemorderxd.getAmount(),
-              itemorderxd.getTotal(),
-              itemorderxd.getDescription()    
-          };  
-          defaulttablemodel.addRow(row);
-       }
-       return defaulttablemodel;
-    } 
+        if (op != 0) {
+            return;
+        }
+
+        try {
+
+            itemorderdao.delete(selectedId);
+            takeOrderView.showMessage("Orden de platillo eliminado");
+            
+            takeOrderView.renderItemOrderTable();
+
+        } catch (Exception e) {
+
+            takeOrderView.showMessage("Orden de platillo no eliminado");
+
+        }
+
+    }
 }

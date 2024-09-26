@@ -5,6 +5,7 @@
 package utp.restaurant.waiter.view;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -20,6 +21,7 @@ public class TakeOrderView extends javax.swing.JFrame {
 
     TakeOrderController takeOrderController;
     int row;
+    int rowItemOrder;
     
     public TakeOrderView() {
      
@@ -123,6 +125,11 @@ public class TakeOrderView extends javax.swing.JFrame {
 
             }
         ));
+        jTorderList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTorderListMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTorderList);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 550, 500));
@@ -144,6 +151,11 @@ public class TakeOrderView extends javax.swing.JFrame {
         jButton5.setForeground(new java.awt.Color(249, 242, 228));
         jButton5.setText("ELIMINAR");
         jButton5.setBorder(null);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 660, 100, 30));
 
         jButton2.setBackground(new java.awt.Color(86, 42, 35));
@@ -232,11 +244,30 @@ public class TakeOrderView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        MenuDetails menu= new MenuDetails(this, true);
+        menu.setRoot(this);
+        menu.setItemOrder_id(Long.parseLong(jTorderList.getModel().getValueAt(rowItemOrder, 0).toString()));
+        menu.setAtributesEdit();
+        
+        menu.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTorderListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTorderListMouseClicked
+        rowItemOrder = jTorderList.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_jTorderListMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        takeOrderController.heandleDeleteClick();
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
     public void renderItemOrderTable(){
         DefaultTableModel tableorder = takeOrderController.getTableOrderModel();
         jTorderList.setModel(tableorder);
+        
+        TableColumnModel tcm = jTorderList.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
     }
     public void renderTable() {
         
@@ -249,6 +280,22 @@ public class TakeOrderView extends javax.swing.JFrame {
         TableColumnModel tcm = jTsaucers.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
         
+    }
+    
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(rootPane, msg);
+    }
+    
+    public int showConfirmation(String msg) {
+        return JOptionPane.showConfirmDialog(rootPane, msg);
+    }
+
+    public int getRowItemOrder() {
+        return rowItemOrder;
+    }
+
+    public JTable getjTorderList() {
+        return jTorderList;
     }
 
     public int getRow() {

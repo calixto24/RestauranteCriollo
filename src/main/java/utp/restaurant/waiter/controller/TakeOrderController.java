@@ -21,7 +21,7 @@ public class TakeOrderController {
     private TableDAO tableDAO;
     private ItemMenuDAO itemMenuDAO;
     private OrderDAO orderDAO;
-    
+
     private Store store;
     private Order order;
 
@@ -49,14 +49,18 @@ public class TakeOrderController {
 
         takeOrderView.getjCBtable().removeAllItems();
 
-        for (Table e : tableList) {
-
-            if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
-
-                takeOrderView.getjCBtable().addItem(e);
-
+        if (tableList.isEmpty()) {
+            
+            takeOrderView.getjCBtable().addItem(null);
+            
+        } else {
+            
+            for (Table e : tableList) {
+                if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
+                    takeOrderView.getjCBtable().addItem(e);
+                }
             }
-
+            
         }
 
     }
@@ -85,22 +89,35 @@ public class TakeOrderController {
         return order.getItemOrderList().get(takeOrderView.getRowItemOrder());
 
     }
-    
+
     /* ------------------------------------------------------------------------------------------ */
-    
     public void handleSaveClick() {
-        
+
         try {
-            
+
+            //cambiar estado de la mesa
+            order.getTable().setStatus("Ocupado");
+
+            //añade a la lista de ordenes
             orderDAO.add(order);
             takeOrderView.showMessage("Orden guardada correctamente");
+
+            //resetear la tabla
+            DefaultTableModel model = (DefaultTableModel) takeOrderView.getjTorderList().getModel();
+            model.setRowCount(0);
+
+
+            //actualiza el estado dekComBox de las mesas
+            takeOrderView.renderCBTable();
             
+            order = new Order(); 
+
         } catch (Exception e) {
-            
+
             takeOrderView.showMessage("Orden no guardada");
-            
+
         }
-        
+
     }
 
     public DefaultTableModel getTableModel() {

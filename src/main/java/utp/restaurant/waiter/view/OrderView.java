@@ -1,6 +1,7 @@
 package utp.restaurant.waiter.view;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import utp.restaurant.waiter.controller.OrderController;
 
 public class OrderView extends javax.swing.JFrame {
@@ -17,8 +18,11 @@ public class OrderView extends javax.swing.JFrame {
     public void renderTable() {
 
         DefaultTableModel tableModel = orderController.getDefaultTableModel();
-
+        jTOrder.setRowHeight(40);
         jTOrder.setModel(tableModel);
+        
+        TableColumnModel tcm = jTOrder.getColumnModel();
+        tcm.removeColumn(tcm.getColumn(0));
 
     }
 
@@ -38,10 +42,12 @@ public class OrderView extends javax.swing.JFrame {
         jTOrder = new javax.swing.JTable();
         jBTNDetails = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,12 +68,15 @@ public class OrderView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTOrder);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 520));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 490));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 500, 550));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 680, 510));
 
-        jBTNDetails.setText("jButton1");
-        jPanel1.add(jBTNDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 620, 140, 70));
+        jBTNDetails.setBackground(new java.awt.Color(86, 42, 35));
+        jBTNDetails.setForeground(new java.awt.Color(249, 242, 228));
+        jBTNDetails.setText("VER DETALLES");
+        jBTNDetails.setBorder(null);
+        jPanel1.add(jBTNDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 640, 150, 50));
 
         jButton3.setBackground(new java.awt.Color(86, 42, 35));
         jButton3.setForeground(new java.awt.Color(249, 242, 228));
@@ -77,13 +86,21 @@ public class OrderView extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 70, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 50, 70, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerVerPedido.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 720));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel11.setText("¡Ver Pedidos!");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,6 +153,8 @@ public class OrderView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBTNDetails;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

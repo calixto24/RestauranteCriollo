@@ -42,8 +42,9 @@ public class RestaurantDB {
         tableList = new ArrayList<>();
         tableList.add(new Table(1, 15, "Ocupado", employeeList.get(1)));
         tableList.add(new Table(2, 12, "Disponible", employeeList.get(1)));
-        tableList.add(new Table(3, 10, "Disponible", employeeList.get(2)));
-     tableList.add(new Table(5, 2, "Disponible", employeeList.get(5)));
+        tableList.add(new Table(3, 12, "Disponible", employeeList.get(1)));
+        tableList.add(new Table(4, 10, "Disponible", employeeList.get(2)));
+        tableList.add(new Table(5, 2, "Disponible", employeeList.get(5)));
         //lista de categorias
         categoryList = new ArrayList<>();
         categoryList.add(new Category("ENTRADAS", "Deliciosos aperitivos que abren el apetito con sabores auténticos de la cocina criolla.", "cardCategoryEntradas.png"));

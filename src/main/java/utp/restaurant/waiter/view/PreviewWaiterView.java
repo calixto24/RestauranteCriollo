@@ -4,6 +4,7 @@
  */
 package utp.restaurant.waiter.view;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import utp.restaurant.login.view.LoginView;
 import utp.restaurant.waiter.controller.PreviewWaiterController;
@@ -39,27 +40,33 @@ public class PreviewWaiterView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLBTomarPedido = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLBuser = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLBVerPedidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(249, 242, 228));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardTomarPedido.png"))); // NOI18N
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLBTomarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardTomarPedido.png"))); // NOI18N
+        jLBTomarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBTomarPedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                jLBTomarPedidoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBTomarPedidoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBTomarPedidoMouseExited(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 290, -1, 210));
+        jPanel1.add(jLBTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, -1, 210));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerPreviewWaiter.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
@@ -90,13 +97,20 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         jLabel3.setText("Explora las opciones para ver y tomar pedidos, optimizando el servicio y asegurando una atención eficiente.");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 660, 30));
 
-        jButton1.setText("Ver Pedidos");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jLBVerPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPedidos.png"))); // NOI18N
+        jLBVerPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBVerPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBVerPedidosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBVerPedidosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBVerPedidosMouseExited(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 290, 210, 220));
+        jPanel1.add(jLBVerPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 310, -1, 210));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,11 +127,11 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void jLBTomarPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseClicked
         takeOrderView.renderCBTable();
         takeOrderView.setVisible(true);
         
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jLBTomarPedidoMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         LoginView loginView = new LoginView();
@@ -126,10 +140,26 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      orderView.renderTable();
+    private void jLBVerPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseClicked
+        orderView.renderTable();
         orderView.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLBVerPedidosMouseClicked
+
+    private void jLBTomarPedidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseEntered
+        jLBTomarPedido.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardTomarPedidoSombra.png")));
+    }//GEN-LAST:event_jLBTomarPedidoMouseEntered
+
+    private void jLBTomarPedidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseExited
+        jLBTomarPedido.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardTomarPedido.png")));
+    }//GEN-LAST:event_jLBTomarPedidoMouseExited
+
+    private void jLBVerPedidosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseEntered
+        jLBVerPedidos.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPedidosSombra.png")));
+    }//GEN-LAST:event_jLBVerPedidosMouseEntered
+
+    private void jLBVerPedidosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseExited
+        jLBVerPedidos.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPedidos.png")));
+    }//GEN-LAST:event_jLBVerPedidosMouseExited
     
     public JLabel getjLBuser() {
         return jLBuser;
@@ -175,10 +205,10 @@ public class PreviewWaiterView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLBTomarPedido;
+    private javax.swing.JLabel jLBVerPedidos;
     private javax.swing.JLabel jLBuser;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

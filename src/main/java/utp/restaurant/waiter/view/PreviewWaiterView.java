@@ -63,8 +63,8 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
 
         jLBuser.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLBuser.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(jLBuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, -1, -1));
+        jLBuser.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(86, 42, 35));
@@ -86,7 +86,7 @@ public class PreviewWaiterView extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Explora las opciones para ver y tomar pedidos, optimizando el servicio y asegurando una atención eficiente.");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 660, 30));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 200, 660, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

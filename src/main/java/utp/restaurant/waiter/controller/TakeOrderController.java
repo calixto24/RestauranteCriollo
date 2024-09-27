@@ -19,8 +19,10 @@ public class TakeOrderController {
     //atributos
     private TakeOrderView takeOrderView;
     private TableDAO tableDAO;
-    private Store store;
     private ItemMenuDAO itemMenuDAO;
+    private OrderDAO orderDAO;
+    
+    private Store store;
     private Order order;
 
     private long selectedId;
@@ -31,6 +33,7 @@ public class TakeOrderController {
         this.takeOrderView = takeOrderView;
         tableDAO = new TableDAO();
         itemMenuDAO = new ItemMenuDAO();
+        orderDAO = new OrderDAO();
 
         order = new Order();
         store = Store.getInstance();
@@ -87,7 +90,16 @@ public class TakeOrderController {
     
     public void handleSaveClick() {
         
-        
+        try {
+            
+            orderDAO.add(order);
+            takeOrderView.showMessage("Orden guardada correctamente");
+            
+        } catch (Exception e) {
+            
+            takeOrderView.showMessage("Orden no guardada");
+            
+        }
         
     }
 
@@ -197,4 +209,5 @@ public class TakeOrderController {
         takeOrderView.getjBTNeliminar().setVisible(!isEmpty);
 
     }
+
 }

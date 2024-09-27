@@ -33,6 +33,7 @@ public class TakeOrderView extends javax.swing.JFrame {
         renderItemOrderTable();
         
         renderTable();
+        jBTNadd.setEnabled(false);
                 
     }
 
@@ -56,7 +57,7 @@ public class TakeOrderView extends javax.swing.JFrame {
         jTorderList = new javax.swing.JTable();
         jBTNguardar = new javax.swing.JButton();
         jBTNeliminar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBTNadd = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -165,16 +166,16 @@ public class TakeOrderView extends javax.swing.JFrame {
         });
         jPanel1.add(jBTNeliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 660, 100, 30));
 
-        jButton2.setBackground(new java.awt.Color(86, 42, 35));
-        jButton2.setForeground(new java.awt.Color(249, 242, 228));
-        jButton2.setText("AÑADIR");
-        jButton2.setBorder(null);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jBTNadd.setBackground(new java.awt.Color(86, 42, 35));
+        jBTNadd.setForeground(new java.awt.Color(249, 242, 228));
+        jBTNadd.setText("AÑADIR");
+        jBTNadd.setBorder(null);
+        jBTNadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBTNaddActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, 80, 30));
+        jPanel1.add(jBTNadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 670, 80, 30));
 
         jLabel1.setBackground(new java.awt.Color(86, 42, 35));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -235,17 +236,19 @@ public class TakeOrderView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jBTNguardarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBTNaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNaddActionPerformed
         MenuDetails menu= new MenuDetails(this, true);
         menu.setRoot(this);
         
         menu.setItemMenu_id(Long.parseLong(jTsaucers.getModel().getValueAt(row, 0).toString()));
         menu.setAtributes();
         menu.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jBTNaddActionPerformed
 
     private void jTsaucersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTsaucersMouseClicked
         row = jTsaucers.rowAtPoint(evt.getPoint());
+        
+        jBTNadd.setEnabled(true);
         
     }//GEN-LAST:event_jTsaucersMouseClicked
 
@@ -287,6 +290,7 @@ public class TakeOrderView extends javax.swing.JFrame {
     public void renderItemOrderTable(){
         DefaultTableModel tableorder = takeOrderController.getTableOrderModel();
         jTorderList.setModel(tableorder);
+        jTorderList.setRowHeight(40);
         
         TableColumnModel tcm = jTorderList.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
@@ -330,8 +334,10 @@ public class TakeOrderView extends javax.swing.JFrame {
     public JButton getjBTNguardar() {
         return jBTNguardar;
     }
-    
-    
+
+    public JButton getjBTNadd() {
+        return jBTNadd;
+    }
     
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
@@ -406,10 +412,10 @@ public class TakeOrderView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBTNadd;
     private javax.swing.JButton jBTNeditar;
     private javax.swing.JButton jBTNeliminar;
     private javax.swing.JButton jBTNguardar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Table> jCBtable;
     private javax.swing.JLabel jLabel1;

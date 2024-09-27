@@ -64,7 +64,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
         //pintando el label con la descripcion
         jLBdescripcion.setText(itemMenu.getDescription());
-
+        
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
 
@@ -213,6 +213,7 @@ public class MenuDetails extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        root.getjBTNadd().setEnabled(false);
         dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -270,6 +271,7 @@ public class MenuDetails extends javax.swing.JDialog {
         }
 
         root.renderItemOrderTable();
+        root.getjBTNadd().setEnabled(false);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 

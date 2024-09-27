@@ -29,7 +29,6 @@ public class Order {
         this.waiter = waiter;
         this.table = table;
         
-        calcTotalPrice();
     }
 
     public Order() {
@@ -40,7 +39,7 @@ public class Order {
         this.time = LocalTime.now();
         this.status = "Pendiente";
         this.itemOrderList = new ArrayList<>();
-        
+        calcTotalPrice();
     }
     
     public void calcTotalPrice() {

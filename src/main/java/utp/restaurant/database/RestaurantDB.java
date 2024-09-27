@@ -8,7 +8,7 @@ import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.Role;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.Customer;
-import utp.restaurant.model.ItemOrder;
+import utp.restaurant.model.Order;
 
 public class RestaurantDB {
 
@@ -19,7 +19,7 @@ public class RestaurantDB {
     private ArrayList<Category> categoryList;
     private ArrayList<ItemMenu> itemMenuList;
     private ArrayList<Customer> customerList;
-    private ArrayList<ItemOrder> itemorderList;
+    private ArrayList<Order> orderList;
     private RestaurantDB() {
         // lista de roles
         roleList = new ArrayList<>();
@@ -62,8 +62,8 @@ public class RestaurantDB {
         customerList.add(new Customer("Manuel", "Dias", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912"));
         customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913"));
         
-        //lista de itemOrder
-        itemorderList = new ArrayList<>(); 
+        //lista de ordenes
+        orderList = new ArrayList<>(); 
     }
         
     
@@ -76,10 +76,10 @@ public class RestaurantDB {
         return instance;
     }
 
-    public ArrayList<ItemOrder> getItemorderList() {
-        return itemorderList;
+    public ArrayList<Order> getOrderList() {
+        return orderList;
     }
-    
+        
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }

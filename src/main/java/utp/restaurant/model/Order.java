@@ -9,7 +9,7 @@ import java.util.Random;
 public class Order {
     
     private long id_Order;
-    private int number;
+    //private int number;
     private LocalDate date;
     private LocalTime time;
     private String status;
@@ -55,14 +55,6 @@ public class Order {
 
     public long getId_Order() {
         return id_Order;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public LocalDate getDate() {
@@ -120,9 +112,5 @@ public class Order {
     public void setTable(Table table) {
         this.table = table;
     }
-    
-    
-    
-    
     
 }

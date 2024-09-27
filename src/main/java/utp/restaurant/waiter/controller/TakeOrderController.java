@@ -2,12 +2,10 @@ package utp.restaurant.waiter.controller;
 
 import java.awt.Image;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.ItemMenuDAO;
-import utp.restaurant.dao.ItemOrderDAO;
+import utp.restaurant.dao.OrderDAO;
 import utp.restaurant.dao.TableDAO;
 import utp.restaurant.waiter.view.TakeOrderView;
 import utp.restaurant.model.Table;
@@ -23,7 +21,6 @@ public class TakeOrderController {
     private TableDAO tableDAO;
     private Store store;
     private ItemMenuDAO itemMenuDAO;
-    private ItemOrderDAO itemorderdao;
     private Order order;
 
     private long selectedId;
@@ -34,7 +31,6 @@ public class TakeOrderController {
         this.takeOrderView = takeOrderView;
         tableDAO = new TableDAO();
         itemMenuDAO = new ItemMenuDAO();
-        itemorderdao = new ItemOrderDAO();
 
         order = new Order();
         store = Store.getInstance();
@@ -62,6 +58,7 @@ public class TakeOrderController {
 
     }
 
+    /* ------------------------------------------------------------------------------------------ */
     public void setTable() {
 
         order.setTable((Table) takeOrderView.getjCBtable().getSelectedItem());
@@ -84,6 +81,14 @@ public class TakeOrderController {
 
         return order.getItemOrderList().get(takeOrderView.getRowItemOrder());
 
+    }
+    
+    /* ------------------------------------------------------------------------------------------ */
+    
+    public void handleSaveClick() {
+        
+        
+        
     }
 
     public DefaultTableModel getTableModel() {

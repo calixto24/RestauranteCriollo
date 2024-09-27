@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import utp.restaurant.dao.ItemMenuDAO;
-import utp.restaurant.dao.ItemOrderDAO;
+import utp.restaurant.dao.OrderDAO;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.utils.Validate;
@@ -23,24 +23,19 @@ public class MenuDetails extends javax.swing.JDialog {
     private TakeOrderView root;
 
     private long itemMenu_id;
-    private long itemOrder_id;
 
     private ItemMenuDAO imdao;
-    private ItemOrderDAO iodao;
 
     private ItemMenu itemMenu;
     private ItemOrder itemOrder;
 
     private Validate vldt;
     private String action;
-    private double priceMenu;
-    private double priceMenuOrder;
 
     public MenuDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         vldt = new Validate();
         imdao = new ItemMenuDAO();
-        iodao = new ItemOrderDAO();
 
         action = "add";
 
@@ -60,10 +55,6 @@ public class MenuDetails extends javax.swing.JDialog {
         this.itemMenu_id = itemMenu_id;
     }
 
-    public void setItemOrder_id(long itemOrder_id) {
-        this.itemOrder_id = itemOrder_id;
-    }
-
     public void setAtributes() {
 
         itemMenu = action.equals("add") ? imdao.get(itemMenu_id) : itemOrder.getItemMenu();
@@ -76,9 +67,6 @@ public class MenuDetails extends javax.swing.JDialog {
 
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
-
-        //enviando el precio del plato a la variable global
-        priceMenu = itemMenu.getPrice();
 
         jLBprecioPreview.setText("S/" + (action.equals("add") ? itemMenu.getPrice() : itemOrder.getTotal()));
         

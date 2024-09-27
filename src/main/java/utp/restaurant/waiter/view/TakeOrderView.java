@@ -230,7 +230,9 @@ public class TakeOrderView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBTNguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNguardarActionPerformed
-        // TODO add your handling code here:
+        
+        takeOrderController.handleSaveClick();
+        
     }//GEN-LAST:event_jBTNguardarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

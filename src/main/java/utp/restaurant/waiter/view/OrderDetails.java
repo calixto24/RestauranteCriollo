@@ -5,6 +5,7 @@
 package utp.restaurant.waiter.view;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.OrderDAO;
 import utp.restaurant.model.Order;
 import utp.restaurant.waiter.controller.OrderDetailsController;
@@ -45,6 +46,15 @@ public class OrderDetails extends javax.swing.JDialog {
         jLBwaiter.setText(order.getWaiter().toString());
         
     }
+    
+    public void renderTable() {
+        
+        DefaultTableModel tableModel = orderDetailsController.getTableModel();
+        
+        jTplatillos.setModel(tableModel);
+        
+    }
+    
 
     public JTable getjTplatillos() {
         return jTplatillos;

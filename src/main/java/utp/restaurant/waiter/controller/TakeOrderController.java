@@ -86,6 +86,7 @@ public class TakeOrderController {
     public void updateItemOrder(ItemOrder itemOrder) {
 
         order.getItemOrderList().set(takeOrderView.getRowItemOrder(), itemOrder);
+        order.calcTotalPrice();
 
     }
 

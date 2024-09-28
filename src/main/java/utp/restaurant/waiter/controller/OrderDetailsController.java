@@ -1,36 +1,53 @@
-
 package utp.restaurant.waiter.controller;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.OrderDAO;
+import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 import utp.restaurant.waiter.view.OrderDetails;
 
 public class OrderDetailsController {
-    
+
     private OrderDetails orderDetails;
     private OrderDAO orderDAO;
 
     public OrderDetailsController(OrderDetails orderDetails) {
         this.orderDetails = orderDetails;
     }
-    
-    /*public DefaultTableModel getTableModel() {
-        
+
+    public DefaultTableModel getTableModel() {
+
         String columns[] = {
-            "Id",
-            "Nombre",
-            "Imagen",
+            //"Id",
+            "Nombre"
+            /*"Imagen",
             "Precio Unitario",
             "Cantidad",
-            "Precio Total"
+            "Precio Total"*/
         };
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
+
+        ArrayList<Order> orderList = new ArrayList<>();
+
+        for (Order order : orderList) {
+
+            for (ItemOrder i : order.getItemOrderList()) {
+
+                Object row[] = {
+                    i.getItemMenu().getName()
+
+                };
+                
+                tableModel.addRow(row);
+
+            }
+
+        }
         
-        ArrayList<Order> orderList  = new ArrayList<>();
-        
-    }*/
-    
+        return tableModel;
+
+    }
+
 }

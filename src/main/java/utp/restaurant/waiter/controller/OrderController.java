@@ -8,18 +8,22 @@ import utp.restaurant.model.Order;
 import utp.restaurant.store.Store;
 
 public class OrderController {
-    
+
     private OrderView view;
     private OrderDAO orderDao;
     private Store store;
-    
+    private long selectedIdOrder;
+
     public OrderController(OrderView view) {
         this.view = view;
         orderDao = new OrderDAO();
         store = Store.getInstance();
+        
+        selectedIdOrder = 0;
     }
-    
+
     public DefaultTableModel getDefaultTableModel() {
+        
         String columns[] = {
             "Id",
             "Mesa",
@@ -28,11 +32,11 @@ public class OrderController {
             "Estado",
             "Precio Total"
         };
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
         ArrayList<Order> orderList = orderDao.getAll();
         for (Order order : orderList) {
-            
+
             if (store.getEmploye().getId_employee() == order.getWaiter().getId_employee()) {
                 Object row[] = {
                     order.getId_Order(),
@@ -44,10 +48,10 @@ public class OrderController {
                 };
                 tableModel.addRow(row);
             }
-            
+
         }
         return tableModel;
-        
+
     }
-    
+
 }

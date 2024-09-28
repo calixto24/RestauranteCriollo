@@ -33,7 +33,6 @@ public class TakeOrderView extends javax.swing.JFrame {
         renderItemOrderTable();
         
         renderTable();
-        jBTNadd.setEnabled(false);
                 
     }
 

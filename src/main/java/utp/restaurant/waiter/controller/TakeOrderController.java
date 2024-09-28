@@ -50,17 +50,17 @@ public class TakeOrderController {
         takeOrderView.getjCBtable().removeAllItems();
 
         if (tableList.isEmpty()) {
-            
+
             takeOrderView.getjCBtable().addItem(null);
-            
+
         } else {
-            
+
             for (Table e : tableList) {
                 if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
                     takeOrderView.getjCBtable().addItem(e);
                 }
             }
-            
+
         }
 
     }
@@ -68,13 +68,18 @@ public class TakeOrderController {
     /* ------------------------------------------------------------------------------------------ */
     public void setTable() {
 
-        order.setTable((Table) takeOrderView.getjCBtable().getSelectedItem());
+        Table selectedTable = (Table) takeOrderView.getjCBtable().getSelectedItem();
+        
+        if (selectedTable != null) {
+            order.setTable(selectedTable);
+        } 
 
     }
 
     public void addItemOrder(ItemOrder itemOrder) {
 
         order.getItemOrderList().add(itemOrder);
+        order.calcTotalPrice();
 
     }
 
@@ -106,11 +111,10 @@ public class TakeOrderController {
             DefaultTableModel model = (DefaultTableModel) takeOrderView.getjTorderList().getModel();
             model.setRowCount(0);
 
-
             //actualiza el estado dekComBox de las mesas
             takeOrderView.renderCBTable();
-            
-            order = new Order(); 
+
+            order = new Order();
 
         } catch (Exception e) {
 
@@ -226,5 +230,6 @@ public class TakeOrderController {
         takeOrderView.getjBTNeliminar().setVisible(!isEmpty);
 
     }
+    
 
 }

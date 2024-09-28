@@ -1,5 +1,6 @@
 package utp.restaurant.waiter.view;
 
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import utp.restaurant.waiter.controller.OrderController;
@@ -7,11 +8,14 @@ import utp.restaurant.waiter.controller.OrderController;
 public class OrderView extends javax.swing.JFrame {
 
     private OrderController orderController;
+    private int row;
 
     public OrderView() {
         orderController = new OrderController(this);
         initComponents();
         renderTable();
+        
+        jBTNDetails.setEnabled(false);
 
     }
 
@@ -26,6 +30,14 @@ public class OrderView extends javax.swing.JFrame {
 
     }
 
+    public JTable getjTOrder() {
+        return jTOrder;
+    }
+
+    public int getRow() {
+        return row;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,6 +78,11 @@ public class OrderView extends javax.swing.JFrame {
 
             }
         ));
+        jTOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTOrderMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTOrder);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 660, 490));
@@ -76,6 +93,11 @@ public class OrderView extends javax.swing.JFrame {
         jBTNDetails.setForeground(new java.awt.Color(249, 242, 228));
         jBTNDetails.setText("VER DETALLES");
         jBTNDetails.setBorder(null);
+        jBTNDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBTNDetailsActionPerformed(evt);
+            }
+        });
         jPanel1.add(jBTNDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 640, 150, 50));
 
         jButton3.setBackground(new java.awt.Color(86, 42, 35));
@@ -114,6 +136,21 @@ public class OrderView extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTOrderMouseClicked
+        row = jTOrder.rowAtPoint(evt.getPoint());
+        
+        jBTNDetails.setEnabled(true);
+    }//GEN-LAST:event_jTOrderMouseClicked
+
+    private void jBTNDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNDetailsActionPerformed
+        OrderDetails orderDetails = new OrderDetails(this, true);
+        orderDetails.setRoot(this);
+        orderDetails.setIdOrder(Long.parseLong(jTOrder.getModel().getValueAt(row, 0).toString()));
+        orderDetails.setAtributes();
+        
+        orderDetails.setVisible(true);
+    }//GEN-LAST:event_jBTNDetailsActionPerformed
 
     /**
      * @param args the command line arguments

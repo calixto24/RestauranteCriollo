@@ -147,7 +147,9 @@ public class OrderView extends javax.swing.JFrame {
         OrderDetails orderDetails = new OrderDetails(this, true);
         orderDetails.setRoot(this);
         orderDetails.setIdOrder(Long.parseLong(jTOrder.getModel().getValueAt(row, 0).toString()));
+        
         orderDetails.setAtributes();
+        orderDetails.renderTable();
         
         orderDetails.setVisible(true);
     }//GEN-LAST:event_jBTNDetailsActionPerformed

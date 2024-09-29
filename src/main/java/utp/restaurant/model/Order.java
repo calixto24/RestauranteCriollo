@@ -18,15 +18,16 @@ public class Order {
     private Employee waiter;
     private Table table;
 
-    public Order( Employee waiter, Table table) {
+    public Order(Employee waiter, Table table, ArrayList<ItemOrder> itemOrderList) {
         
         this.id_Order = System.currentTimeMillis() + new Random().nextInt(1000); 
         this.date = LocalDate.now();
         this.time = LocalTime.now();
         this.status = "Pendiente";
-        this.itemOrderList = new ArrayList<>();
+        this.itemOrderList = new ArrayList<>(itemOrderList);
         this.waiter = waiter;
         this.table = table;
+        calcTotalPrice();
         
     }
 
@@ -37,10 +38,13 @@ public class Order {
         this.time = LocalTime.now();
         this.status = "Pendiente";
         this.itemOrderList = new ArrayList<>();
-        calcTotalPrice();
+        this.total_Price = 0;
+        
     }
     
     public void calcTotalPrice() {
+        
+        total_Price = 0;
         
         for(ItemOrder e : itemOrderList) {
             
@@ -48,6 +52,10 @@ public class Order {
             
         }
         
+    }
+
+    public void setId_Order(long id_Order) {
+        this.id_Order = id_Order;
     }
 
     public long getId_Order() {

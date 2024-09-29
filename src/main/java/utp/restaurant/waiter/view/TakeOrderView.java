@@ -6,11 +6,13 @@ package utp.restaurant.waiter.view;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import utp.restaurant.model.ItemOrder;
+import utp.restaurant.model.Order;
 import utp.restaurant.model.Table;
 import utp.restaurant.utils.ImgTable;
 import utp.restaurant.waiter.controller.TakeOrderController;
@@ -34,6 +36,20 @@ public class TakeOrderView extends javax.swing.JFrame {
         
         renderTable();
                 
+    }
+    
+    public TakeOrderView(Order order) {
+     
+        initComponents();
+        takeOrderController = new TakeOrderController(this);
+        
+        takeOrderController.setAction("edit");
+        takeOrderController.setOrder(order);
+        
+        renderItemOrderTable();
+        renderTable();
+        renderCBTable();
+        
     }
 
     /**
@@ -63,6 +79,8 @@ public class TakeOrderView extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLBTotal = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -214,6 +232,14 @@ public class TakeOrderView extends javax.swing.JFrame {
         jLabel14.setText("Completa la información requerida");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 270, 30));
 
+        jLBTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLBTotal.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 670, 100, 20));
+
+        jLabel2.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel2.setText("TOTAL:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 650, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -295,6 +321,8 @@ public class TakeOrderView extends javax.swing.JFrame {
         tcm.removeColumn(tcm.getColumn(0));
         
         takeOrderController.manageButtonVisibility();
+        
+        takeOrderController.getTotalPrice();
     }
     
     public void renderTable() {
@@ -320,6 +348,14 @@ public class TakeOrderView extends javax.swing.JFrame {
         
         takeOrderController.updateItemOrder(itemOrder);
         
+    }
+
+    public JLabel getjLBTotal() {
+        return jLBTotal;
+    }
+
+    public void setjLBTotal(JLabel jLBTotal) {
+        this.jLBTotal = jLBTotal;
     }
 
     public JButton getjBTNeditar() {
@@ -417,9 +453,11 @@ public class TakeOrderView extends javax.swing.JFrame {
     private javax.swing.JButton jBTNguardar;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Table> jCBtable;
+    private javax.swing.JLabel jLBTotal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

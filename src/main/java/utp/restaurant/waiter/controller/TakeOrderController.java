@@ -13,6 +13,7 @@ import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 import utp.restaurant.store.Store;
+import utp.restaurant.waiter.view.OrderView;
 
 public class TakeOrderController {
 
@@ -25,7 +26,7 @@ public class TakeOrderController {
     private Store store;
     private Order order;
 
-    private long selectedId;
+    private String action;
 
     //constructor
     public TakeOrderController(TakeOrderView takeOrderView) {
@@ -37,10 +38,7 @@ public class TakeOrderController {
 
         order = new Order();
         store = Store.getInstance();
-
-        order.setWaiter(store.getEmploye());
-
-        selectedId = 0;
+        action = "add";
     }
 
     public void renderCBTable() {
@@ -54,6 +52,12 @@ public class TakeOrderController {
             takeOrderView.getjCBtable().addItem(null);
 
         } else {
+
+            if (action.equals("edit")) {
+
+                takeOrderView.getjCBtable().addItem(order.getTable());
+
+            }
 
             for (Table e : tableList) {
                 if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
@@ -69,10 +73,26 @@ public class TakeOrderController {
     public void setTable() {
 
         Table selectedTable = (Table) takeOrderView.getjCBtable().getSelectedItem();
-        
+
         if (selectedTable != null) {
-            order.setTable(selectedTable);
-        } 
+            
+            if(action.equals("add")) {
+                
+                order.setTable(selectedTable);
+                
+            } else {
+                
+                if(selectedTable.getNumber_table() != order.getTable().getNumber_table()) {
+                    
+                    order.getTable().setStatus("Disponible");
+                    order.setTable(selectedTable);
+                    
+                }
+                
+            }
+
+            System.out.println(selectedTable.getNumber_table());
+        }
 
     }
 
@@ -101,21 +121,40 @@ public class TakeOrderController {
 
         try {
 
-            //cambiar estado de la mesa
-            order.getTable().setStatus("Ocupado");
+            if (action.equals("edit")) {
 
-            //añade a la lista de ordenes
-            orderDAO.add(order);
-            takeOrderView.showMessage("Orden guardada correctamente");
+                order.getTable().setStatus("Ocupado");
+                
+                Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
 
-            //resetear la tabla
-            DefaultTableModel model = (DefaultTableModel) takeOrderView.getjTorderList().getModel();
-            model.setRowCount(0);
+                newOrder.setId_Order(order.getId_Order());
+
+                orderDAO.update(order.getId_Order(), newOrder);
+                takeOrderView.showMessage("Orden actualizada correctamente");
+
+                OrderView orderView = new OrderView();
+                orderView.setVisible(true);
+                takeOrderView.dispose();
+
+            } else {
+
+                //cambiar estado de la mesa
+                order.getTable().setStatus("Ocupado");
+
+                Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
+
+                //añade a la lista de ordenes
+                orderDAO.add(newOrder);
+                takeOrderView.showMessage("Orden guardada correctamente");
+
+            }
+
+            //nuevo objeto para resetear filas
+            order = new Order();
 
             //actualiza el estado dekComBox de las mesas
             takeOrderView.renderCBTable();
-
-            order = new Order();
+            takeOrderView.renderItemOrderTable();
 
         } catch (Exception e) {
 
@@ -171,10 +210,12 @@ public class TakeOrderController {
     }
 
     public DefaultTableModel getTableOrderModel() {
+
         String columns[] = {
             "Id",
             "Nombre",
             "Cantidad",
+            "Precio Unitario",
             "Total",
             "Descripcion"
         };
@@ -187,6 +228,7 @@ public class TakeOrderController {
                 e.getId_itemOrder(),
                 e.getItemMenu().getName(),
                 e.getAmount(),
+                e.getItemMenu().getPrice(),
                 e.getTotal(),
                 e.getDescription()
             };
@@ -231,6 +273,22 @@ public class TakeOrderController {
         takeOrderView.getjBTNeliminar().setVisible(!isEmpty);
 
     }
-    
 
+    public void getTotalPrice() {
+
+        order.calcTotalPrice();
+        takeOrderView.getjLBTotal().setText(order.getTotal_Price() + "");
+
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+
+        takeOrderView.getjBTNguardar().setText("ACTUALIZAR");
+
+    }
 }

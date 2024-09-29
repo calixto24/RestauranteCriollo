@@ -4,10 +4,13 @@
  */
 package utp.restaurant.waiter.view;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.OrderDAO;
 import utp.restaurant.model.Order;
+import utp.restaurant.utils.ImgTable;
 import utp.restaurant.waiter.controller.OrderDetailsController;
 
 /**
@@ -28,6 +31,7 @@ public class OrderDetails extends javax.swing.JDialog {
         orderDetailsController = new OrderDetailsController(this);
         
         initComponents();
+        
     }
     
     public void setRoot(OrderView root) {
@@ -44,17 +48,24 @@ public class OrderDetails extends javax.swing.JDialog {
         
         jLBnumberTable.setText(order.getTable().getNumber_table() + "");
         jLBwaiter.setText(order.getWaiter().toString());
+        jLBtotalPriceOrder.setText("S/" + order.getTotal_Price());
         
     }
     
     public void renderTable() {
         
-        DefaultTableModel tableModel = orderDetailsController.getTableModel();
-        
+        DefaultTableModel tableModel = orderDetailsController.getTableModel(order);
+        jTplatillos.setRowHeight(100);
         jTplatillos.setModel(tableModel);
         
+        jTplatillos.getColumnModel().getColumn(1).setCellRenderer(new ImgTable());
+               
+        
     }
-    
+
+    public JLabel getjLBtotalPriceOrder() {
+        return jLBtotalPriceOrder;
+    }
 
     public JTable getjTplatillos() {
         return jTplatillos;
@@ -79,6 +90,10 @@ public class OrderDetails extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTplatillos = new javax.swing.JTable();
+        jLBtotalPriceOrder = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -138,21 +153,72 @@ public class OrderDetails extends javax.swing.JDialog {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 700, 340));
 
+        jLBtotalPriceOrder.setBackground(new java.awt.Color(86, 42, 35));
+        jLBtotalPriceOrder.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLBtotalPriceOrder.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBtotalPriceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 120, 20));
+
+        jButton1.setText("EDITAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 520, 110, 40));
+
+        jLabel2.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel2.setText("TOTAL:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, -1, -1));
+
+        jButton2.setText("ELIMINAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 520, 90, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        orderDetailsController.handleEditClick(order);
+        dispose();
+        root.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        orderDetailsController.handleDeleteClick(order);
+        root.renderTable();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void showMessage(String msg) {
+        
+        JOptionPane.showMessageDialog(rootPane, msg);
+        
+    }
+    
+    public int showConfirmDialog(String msg) {
+        
+        return JOptionPane.showConfirmDialog(rootPane, msg);
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -196,9 +262,13 @@ public class OrderDetails extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLBnumberTable;
+    private javax.swing.JLabel jLBtotalPriceOrder;
     private javax.swing.JLabel jLBwaiter;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

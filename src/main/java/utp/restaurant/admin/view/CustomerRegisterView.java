@@ -27,6 +27,7 @@ public class CustomerRegisterView extends javax.swing.JFrame {
     public void renderTable() {
         
        DefaultTableModel customerModel = customerController.getCustomerModel();
+       jTList.setRowHeight(40);
        jTList.setModel(customerModel);
        
        TableColumnModel xd = jTList.getColumnModel();

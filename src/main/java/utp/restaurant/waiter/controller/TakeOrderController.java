@@ -90,8 +90,7 @@ public class TakeOrderController {
                 }
                 
             }
-
-            System.out.println(selectedTable.getNumber_table());
+            
         }
 
     }

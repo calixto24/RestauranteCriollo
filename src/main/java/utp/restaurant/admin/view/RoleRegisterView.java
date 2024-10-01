@@ -235,7 +235,7 @@ public class RoleRegisterView extends javax.swing.JFrame {
     public void renderTable() {
         
         DefaultTableModel tableModel = roleController.getTableModel();
-        
+        jTRoleList.setRowHeight(40);
         jTRoleList.setModel(tableModel);
         
         TableColumnModel tcm = jTRoleList.getColumnModel();

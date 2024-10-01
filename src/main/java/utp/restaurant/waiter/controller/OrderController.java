@@ -37,7 +37,7 @@ public class OrderController {
         ArrayList<Order> orderList = orderDao.getAll();
         for (Order order : orderList) {
 
-            if (store.getEmploye().getId_employee() == order.getWaiter().getId_employee()) {
+            if (store.getEmploye().getId_employee() == order.getWaiter().getId_employee() && order.getStatus().equals("Pendiente")) {
                 Object row[] = {
                     order.getId_Order(),
                     order.getTable().getNumber_table(),

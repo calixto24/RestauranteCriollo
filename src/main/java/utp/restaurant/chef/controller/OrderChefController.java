@@ -36,18 +36,39 @@ public class OrderChefController {
         ArrayList<Order> orderList = orderDAO.getAll();
 
         for (Order nol : orderList) {
-            Object[] row = {
-                nol.getId_Order(),
-                nol.getTable().getNumber_table(),
-                nol.getWaiter().toString(),
-                nol.getDate(),
-                nol.getTime(),
-                nol.getStatus(),
-                nol.getTotal_Price()
-            };
-            tableModel.addRow(row);
+
+            if (nol.getStatus().equals("Pendiente")) {
+
+                Object[] row = {
+                    nol.getId_Order(),
+                    nol.getTable().getNumber_table(),
+                    nol.getWaiter().toString(),
+                    nol.getDate(),
+                    nol.getTime(),
+                    nol.getStatus(),
+                    nol.getTotal_Price()
+                };
+                tableModel.addRow(row);
+
+            }
         }
+        
         return tableModel;
+        
+    }
+    
+    public void manageButtonDetails() {
+        
+        boolean isEmpty = true;
+        
+        if(orderChefView.getjTorder().getRowCount() != 0) {
+            
+            isEmpty = false;
+            
+        }
+        
+        orderChefView.getjBTNdetails().setEnabled(!isEmpty);
+        
     }
 
 }

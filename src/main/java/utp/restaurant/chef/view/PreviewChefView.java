@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import utp.restaurant.login.view.LoginView;
 import utp.restaurant.chef.controller.PreviewChefController;
+import utp.restaurant.chef.view.SourcersView;
 
 public class PreviewChefView extends javax.swing.JFrame {
 
@@ -33,7 +34,7 @@ public class PreviewChefView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLBuser = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jLBTomarPedido = new javax.swing.JLabel();
+        jLBVerPlatillos = new javax.swing.JLabel();
         jLBVerPedidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,20 +71,20 @@ public class PreviewChefView extends javax.swing.JFrame {
         });
         jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, 120, 40));
 
-        jLBTomarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPlatillos.png"))); // NOI18N
-        jLBTomarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLBTomarPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLBVerPlatillos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPlatillos.png"))); // NOI18N
+        jLBVerPlatillos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBVerPlatillos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLBTomarPedidoMouseClicked(evt);
+                jLBVerPlatillosMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLBTomarPedidoMouseEntered(evt);
+                jLBVerPlatillosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLBTomarPedidoMouseExited(evt);
+                jLBVerPlatillosMouseExited(evt);
             }
         });
-        jPanel1.add(jLBTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 300, 180, 210));
+        jPanel1.add(jLBVerPlatillos, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 300, 180, 210));
 
         jLBVerPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPedidos.png"))); // NOI18N
         jLBVerPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,21 +123,26 @@ public class PreviewChefView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jLBTomarPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseClicked
+    private void jLBVerPlatillosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPlatillosMouseClicked
         
+        SourcersView sourcersView = new SourcersView();
+        sourcersView.setVisible(true);
 
-    }//GEN-LAST:event_jLBTomarPedidoMouseClicked
+    }//GEN-LAST:event_jLBVerPlatillosMouseClicked
 
-    private void jLBTomarPedidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseEntered
+    private void jLBVerPlatillosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPlatillosMouseEntered
         
-        jLBTomarPedido.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPlatillosSombra.png")));
-    }//GEN-LAST:event_jLBTomarPedidoMouseEntered
+        jLBVerPlatillos.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPlatillosSombra.png")));
+    }//GEN-LAST:event_jLBVerPlatillosMouseEntered
 
-    private void jLBTomarPedidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseExited
-        jLBTomarPedido.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPlatillos.png")));
-    }//GEN-LAST:event_jLBTomarPedidoMouseExited
+    private void jLBVerPlatillosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPlatillosMouseExited
+        jLBVerPlatillos.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPlatillos.png")));
+    }//GEN-LAST:event_jLBVerPlatillosMouseExited
 
     private void jLBVerPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseClicked
+        
+        OrderChefView orderChefView = new OrderChefView();
+        orderChefView.setVisible(true);
         
     }//GEN-LAST:event_jLBVerPedidosMouseClicked
 
@@ -186,8 +192,8 @@ public class PreviewChefView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLBTomarPedido;
     private javax.swing.JLabel jLBVerPedidos;
+    private javax.swing.JLabel jLBVerPlatillos;
     private javax.swing.JLabel jLBuser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

@@ -302,6 +302,7 @@ public class TableRegisterView extends javax.swing.JFrame {
     public void renderTable() {
         
         DefaultTableModel tableModel = tableController.getTableModel();
+        jTtableList.setRowHeight(40);
         jTtableList.setModel(tableModel);
         
         TableColumnModel tcm = jTtableList.getColumnModel();

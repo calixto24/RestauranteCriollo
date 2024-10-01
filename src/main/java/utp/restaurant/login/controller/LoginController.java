@@ -7,6 +7,7 @@ import utp.restaurant.login.view.LoginView;
 import utp.restaurant.model.Employee;
 import utp.restaurant.utils.Validate;
 import utp.restaurant.admin.view.PreviewAdminView;
+import utp.restaurant.chef.view.PreviewChefView;
 import utp.restaurant.store.Store;
 import utp.restaurant.waiter.view.PreviewWaiterView;
 
@@ -18,7 +19,6 @@ public class LoginController {
     private Store store;
     
     private Validate vldt;
-    private PreviewAdminView previewAdminView; //objeto 
 
     public LoginController(LoginView loginView) {
         
@@ -85,6 +85,14 @@ public class LoginController {
                         previewWaiterView.setVisible(true);
                         loginView.dispose();
                     
+                    break;
+                    
+                    case "Cocinero":
+                        
+                        PreviewChefView previewChefView = new PreviewChefView();
+                        previewChefView.setVisible(true);
+                        loginView.dispose();
+                        
                     break;
                     
                 }

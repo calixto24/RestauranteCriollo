@@ -158,7 +158,10 @@ public class OrderDetails extends javax.swing.JDialog {
         jLBtotalPriceOrder.setForeground(new java.awt.Color(86, 42, 35));
         jPanel1.add(jLBtotalPriceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 120, 20));
 
+        jButton1.setBackground(new java.awt.Color(86, 42, 35));
+        jButton1.setForeground(new java.awt.Color(249, 242, 228));
         jButton1.setText("EDITAR");
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -170,7 +173,10 @@ public class OrderDetails extends javax.swing.JDialog {
         jLabel2.setText("TOTAL:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 510, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(86, 42, 35));
+        jButton2.setForeground(new java.awt.Color(249, 242, 228));
         jButton2.setText("ELIMINAR");
+        jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

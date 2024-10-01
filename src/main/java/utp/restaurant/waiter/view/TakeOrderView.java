@@ -35,6 +35,8 @@ public class TakeOrderView extends javax.swing.JFrame {
         renderItemOrderTable();
         
         renderTable();
+        
+        jBTNadd.setEnabled(false);
                 
     }
     
@@ -273,7 +275,7 @@ public class TakeOrderView extends javax.swing.JFrame {
     private void jTsaucersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTsaucersMouseClicked
         row = jTsaucers.rowAtPoint(evt.getPoint());
         
-        jBTNadd.setEnabled(true);
+        takeOrderController.manageButtonAdd();
         
     }//GEN-LAST:event_jTsaucersMouseClicked
 

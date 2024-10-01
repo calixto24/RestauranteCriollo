@@ -53,5 +53,13 @@ public class OrderController {
         return tableModel;
 
     }
+    
+    public void manageButtonDetails() {
+        
+        boolean isEmpty = orderDao.getAll().isEmpty();
+        
+        view.getjBTNDetails().setEnabled(!isEmpty);
+        
+    }
 
 }

@@ -62,7 +62,7 @@ public class TakeOrderController {
             for (Table e : tableList) {
                 if (store.getEmploye().getId_employee() == e.getEmployee().getId_employee() && e.getStatus().equals("Disponible")) {
                     takeOrderView.getjCBtable().addItem(e);
-                }
+                } 
             }
 
         }
@@ -272,6 +272,16 @@ public class TakeOrderController {
         takeOrderView.getjBTNeditar().setVisible(!isEmpty);
         takeOrderView.getjBTNeliminar().setVisible(!isEmpty);
 
+    }
+    
+    public void manageButtonAdd() {
+        
+        if(takeOrderView.getjCBtable().getItemCount() != 0) {
+            
+            takeOrderView.getjBTNadd().setEnabled(true);
+            
+        }
+        
     }
 
     public void getTotalPrice() {

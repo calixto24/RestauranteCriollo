@@ -83,7 +83,7 @@ public class PreviewChefView extends javax.swing.JFrame {
                 jLBTomarPedidoMouseExited(evt);
             }
         });
-        jPanel1.add(jLBTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 330, -1, 210));
+        jPanel1.add(jLBTomarPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(613, 300, 180, 210));
 
         jLBVerPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPedidos.png"))); // NOI18N
         jLBVerPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -98,7 +98,7 @@ public class PreviewChefView extends javax.swing.JFrame {
                 jLBVerPedidosMouseExited(evt);
             }
         });
-        jPanel1.add(jLBVerPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 330, -1, 210));
+        jPanel1.add(jLBVerPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 310, -1, 210));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,6 +128,7 @@ public class PreviewChefView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLBTomarPedidoMouseClicked
 
     private void jLBTomarPedidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBTomarPedidoMouseEntered
+        
         jLBTomarPedido.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardVerPlatillosSombra.png")));
     }//GEN-LAST:event_jLBTomarPedidoMouseEntered
 

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class Person {
+public abstract class Person {
     
     protected long id_person;
     protected String name;
@@ -101,7 +101,6 @@ public class Person {
     public void setAddress(String addres) {
         this.address = addres;
     }
-
    
     public String getEmail() {
         return email;

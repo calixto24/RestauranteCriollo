@@ -47,5 +47,11 @@ public class Customer extends Person {
     public void setRuc(String ruc) {
         this.ruc = ruc;
     }
+    
+    //metodo abstracto
+    @Override
+    public String fullName() {
+        return name + " " + lastname_paternal;
+    }
 
 }

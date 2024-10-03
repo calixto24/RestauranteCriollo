@@ -55,7 +55,7 @@ public class OrderChefDetails extends javax.swing.JDialog {
     public void setAtributtes() {
 
         jLBnumberTable.setText(order.getTable().getNumber_table() + "");
-        jLBwaiter.setText(order.getWaiter().toString());
+        jLBwaiter.setText(order.getWaiter().fullName());
 
     }
 

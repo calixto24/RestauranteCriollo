@@ -33,6 +33,10 @@ public abstract class Person {
     public Person() {
     }
     
+    //metodo abstracto
+    public abstract String fullName();
+    
+    //getters y setters
     public long getId_person() {
         return id_person;
     }

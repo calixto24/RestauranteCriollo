@@ -22,7 +22,8 @@ public class Employee extends Person {
 
     public Employee() {
     }
-
+    
+    //getters y setters
     public long getId_employee() {
         return id_employee;
     }
@@ -53,6 +54,12 @@ public class Employee extends Person {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+    
+    //metodo abstracto
+    @Override
+    public String fullName() {
+        return name + " " + lastname_paternal;
     }
     
     @Override

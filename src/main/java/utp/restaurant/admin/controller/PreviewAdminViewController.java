@@ -16,7 +16,7 @@ public class PreviewAdminViewController {
     
     public void getUser() {
         
-        previewAdminView.getjLBuser().setText(store.getEmploye().toString());
+        previewAdminView.getjLBuser().setText(store.getEmploye().fullName());
         
     }
     

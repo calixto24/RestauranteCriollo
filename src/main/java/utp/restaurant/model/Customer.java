@@ -51,7 +51,12 @@ public class Customer extends Person {
     //metodo abstracto
     @Override
     public String fullName() {
-        return name + " " + lastname_paternal;
+        return name + " " + lastname_paternal + " " + lastname_maternal;
+    }
+    
+    @Override
+    public String toString() {
+        return fullName();
     }
 
 }

@@ -197,15 +197,15 @@ public class OrderChefDetails extends javax.swing.JDialog {
 
             try {
 
-                order.setStatus("Finalizado");
-                showMessage("Pedido finalizado correctamente");
+                order.setStatus("Preparado");
+                showMessage("Pedido preparado correctamente");
                 root.renderTable();
 
                 dispose();
 
             } catch (Exception e) {
 
-                showMessage("Pedido no finalizado");
+                showMessage("Pedido no preparado");
 
             }
 

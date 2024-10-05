@@ -8,10 +8,11 @@ import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.Role;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.Customer;
+import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 
 public class RestaurantDB {
-
+    
     private static RestaurantDB instance;
     private ArrayList<Employee> employeeList;
     private ArrayList<Table> tableList;
@@ -20,7 +21,7 @@ public class RestaurantDB {
     private ArrayList<ItemMenu> itemMenuList;
     private ArrayList<Customer> customerList;
     private ArrayList<Order> orderList;
-
+    
     private RestaurantDB() {
         // lista de roles
         roleList = new ArrayList<>();
@@ -34,7 +35,7 @@ public class RestaurantDB {
         employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 123123478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 10"));
         employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Cristian", "De La Cruz", "De La Cruz", 75286131, LocalDate.of(2005, 8, 18), 951761921, "cristian@gmail.com", "Mz. 18 calle los berracos"));
         employeeList.add(new Employee("Jhordan", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Jhordan", "Calixto", "Laureano", 71597595, LocalDate.of(2005, 6, 24), 934745971, "calix@gmail.com", "Mz. q lt 22"));
-        employeeList.add(new Employee("Dalia", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Dalia", "Alberto", "Joaquin", 60749109, LocalDate.of(2006, 06, 06), 935041343, "dalia6@gmail.com", "Mz. 15 lote"));
+        employeeList.add(new Employee("Dalia", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(3), "Dalia", "Alberto", "Joaquin", 60749109, LocalDate.of(2006, 06, 06), 935041343, "dalia6@gmail.com", "Mz. 15 lote"));
         employeeList.add(new Employee("Jean", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(2), "Jean", "Chamorro", "Granados", 74883675, LocalDate.of(2006, 01, 18), 946087675, "jean6@gmail.com", "Mz. 20 lote C"));
         employeeList.add(new Employee("Leonardo", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Leonardo", "Murillo", "Alejandro", 76454651, LocalDate.of(2006, 01, 19), 946087675, "leonardoelpisado@gmail.com", "Mz. 20 lote C"));
 
@@ -66,7 +67,13 @@ public class RestaurantDB {
         customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913"));
 
         //lista de ordenes
+        ArrayList<ItemOrder> itemOrderList = new ArrayList<>();
+        itemOrderList.add(new ItemOrder(2, "", itemMenuList.get(0)));
+        
+        Order order = new Order(employeeList.get(2), tableList.get(2), itemOrderList);
+        order.setStatus("Preparado");
         orderList = new ArrayList<>();
+        orderList.add(order);
     }
 
     //patron singleton
@@ -74,36 +81,36 @@ public class RestaurantDB {
         if (instance == null) {
             instance = new RestaurantDB();
         }
-
+        
         return instance;
     }
-
+    
     public ArrayList<Order> getOrderList() {
         return orderList;
     }
-
+    
     public ArrayList<Employee> getEmployeeList() {
         return employeeList;
     }
-
+    
     public ArrayList<Table> getTableList() {
         return tableList;
     }
-
+    
     public ArrayList<Role> getRoleList() {
         return roleList;
     }
-
+    
     public ArrayList<ItemMenu> getItemMenuList() {
         return itemMenuList;
     }
-
+    
     public ArrayList<Category> getCategoryList() {
         return categoryList;
     }
-
+    
     public ArrayList<Customer> getCustomerList() {
         return customerList;
     }
-
+    
 }

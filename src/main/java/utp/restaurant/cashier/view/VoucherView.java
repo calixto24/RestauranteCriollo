@@ -113,6 +113,12 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 430, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/btnAnadir.png"))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, 60));
 
         jLabel20.setBackground(new java.awt.Color(86, 42, 35));
@@ -380,6 +386,13 @@ public class VoucherView extends javax.swing.JFrame {
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        CustomerRegisterModalView customerRegisterModalView = new CustomerRegisterModalView(this, true);
+        customerRegisterModalView.setRoot(this);
+        
+        customerRegisterModalView.setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     public JLabel getjLBnumerTable() {
         return jLBnumerTable;

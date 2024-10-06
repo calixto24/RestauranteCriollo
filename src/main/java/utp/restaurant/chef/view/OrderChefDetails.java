@@ -146,7 +146,7 @@ public class OrderChefDetails extends javax.swing.JDialog {
 
         jButton1.setBackground(new java.awt.Color(86, 42, 35));
         jButton1.setForeground(new java.awt.Color(249, 242, 228));
-        jButton1.setText("FINALIZAR");
+        jButton1.setText("PREPARADO");
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +187,7 @@ public class OrderChefDetails extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        int op = showConfirmDialog("¿Desea Finalizar el pedido?");
+        int op = showConfirmDialog("¿El pedido esta preparado?");
 
         if (op != 0) {
 

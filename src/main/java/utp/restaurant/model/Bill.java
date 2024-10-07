@@ -8,36 +8,44 @@ public class Bill extends Voucher implements PaymentApplicable {
     private Customer customer;
     private String paymentType;
 
-    public Bill(Customer customer, String paymentType, Order order, Employee cashier) {
+    public Bill(Customer customer, Order order, Employee cashier) {
         super(order, cashier);
         this.id_Bill = System.currentTimeMillis() + new Random().nextInt(1000);
         this.customer = customer;
         this.paymentType = paymentType;
     }
 
+    /** METODOS ABSTRACTOS**/
+    
     @Override
     public void calculateIgv() {
-        System.out.println("");
+        igv = (order.getTotal_Price() - discount) * 0.18;
     }
 
     @Override
-    public void calculateDiscount() {
-        System.out.println("");
+    public void calculateDiscount(int desc) {
+        discount = order.getTotal_Price() * (desc / 100.0);
     }
 
     @Override
     public void calculateTotalPrice() {
-        System.out.println("");
+        totalPrice = (order.getTotal_Price() - discount) + igv + additionalPayments;
     }
+
+    /** INTERFACE**/
     
     @Override
-    public void paymentType() {
-        
+    public void paymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
-    
+
     @Override
     public void calculateAdditionalPayments() {
-        
+        if ("tarjeta".equalsIgnoreCase(paymentType)) {
+            additionalPayments = order.getTotal_Price() * 0.05;
+        } else {
+            additionalPayments = 0;
+        }
     }
 
     public long getId_Bill() {
@@ -59,11 +67,5 @@ public class Bill extends Voucher implements PaymentApplicable {
     public String getPaymentType() {
         return paymentType;
     }
-
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
-    }
-    
-    
 
 }

@@ -13,6 +13,7 @@ public abstract class Voucher {
     protected double taxed;
     protected double totalPrice;
     protected double discount;
+    protected double additionalPayments;
     protected double igv;
     protected String status;
     protected Order order;
@@ -29,7 +30,7 @@ public abstract class Voucher {
     
     //metodos abstractos
     public abstract void calculateIgv();
-    public abstract void calculateDiscount();
+    public abstract void calculateDiscount(int desc);
     public abstract void calculateTotalPrice();
 
     //getters y setters
@@ -37,6 +38,14 @@ public abstract class Voucher {
         return id_Voucher;
     }
 
+    public double getAdditionalPayments() {
+        return additionalPayments;
+    }
+
+    public void setAdditionalPayments(double additionalPayments) {
+        this.additionalPayments = additionalPayments;
+    }
+    
     public void setId_Voucher(long id_Voucher) {
         this.id_Voucher = id_Voucher;
     }

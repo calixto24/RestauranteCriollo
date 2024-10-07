@@ -10,7 +10,7 @@ package utp.restaurant.model;
  */
 public interface PaymentApplicable {
     
-    public void paymentType();
+    public void paymentType(String paymentType);
     public void calculateAdditionalPayments();
     
 }

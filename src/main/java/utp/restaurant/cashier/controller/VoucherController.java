@@ -6,19 +6,23 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.view.VoucherView;
 import utp.restaurant.dao.CustomerDAO;
+import utp.restaurant.model.Bill;
 import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
+import utp.restaurant.store.Store;
 
 public class VoucherController {
 
     private VoucherView voucherView;
     private CustomerDAO customerDAO;
     private Order order;
+    private Store store;
 
     public VoucherController(VoucherView voucherView) {
         this.voucherView = voucherView;
         customerDAO = new CustomerDAO();
+        store = Store.getInstance();
     }
 
     public void setOrder(Order order) {
@@ -80,6 +84,30 @@ public class VoucherController {
         
         return tableModel;
 
+    }
+    
+    public void handleFinishClick() {
+        
+        String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
+        
+        //cliente
+        Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
+        
+        //tipo de pago
+        String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
+        
+        //guardado
+        if(typeDocument.equals("Factura")) {
+            
+            Bill newBill = new Bill(customer, order, store.getEmploye());
+            newBill.paymentType(paymentType);
+            
+        } else if (typeDocument.equals("Boleta")) {
+            
+            
+            
+        }
+        
     }
 
 }

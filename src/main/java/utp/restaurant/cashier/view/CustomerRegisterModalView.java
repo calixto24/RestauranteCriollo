@@ -16,6 +16,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
 
     private CustomerRegisterModalController customerRegisterModalController;
     private VoucherView root;
+    private String typeDocument;
 
     public CustomerRegisterModalView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,7 +29,29 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         this.root = root;
 
     }
+    
+    public void viewDocument(String typeDocument) {
+        
+        this.typeDocument = typeDocument;
+        
+        if (typeDocument.equals("Factura")) {
+            
+            jTFruc.setEnabled(true);
+            jTFdni.setEnabled(false);
+            
+        } else if (typeDocument.equals("Boleta")){
+            
+            jTFdni.setEnabled(true);
+            jTFruc.setEnabled(false);
+            
+        }
+        
+    }
 
+    public String getTypeDocument() {
+        return typeDocument;
+    }
+    
     public void showMessage(String msg) {
 
         JOptionPane.showMessageDialog(rootPane, msg);
@@ -119,6 +142,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         jTFdni.setBackground(new java.awt.Color(249, 242, 228));
         jTFdni.setForeground(new java.awt.Color(51, 51, 51));
         jTFdni.setBorder(null);
+        jTFdni.setEnabled(false);
         jTFdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFdniActionPerformed(evt);
@@ -169,6 +193,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         jTFruc.setBackground(new java.awt.Color(249, 242, 228));
         jTFruc.setForeground(new java.awt.Color(51, 51, 51));
         jTFruc.setBorder(null);
+        jTFruc.setEnabled(false);
         jTFruc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFrucActionPerformed(evt);

@@ -56,7 +56,7 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jCBcustomer = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jCBTypeDocument = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -67,7 +67,7 @@ public class VoucherView extends javax.swing.JFrame {
         jLBnumerTable = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCBpaymentType = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
@@ -105,12 +105,12 @@ public class VoucherView extends javax.swing.JFrame {
         jCBcustomer.setBorder(null);
         jPanel2.add(jCBcustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 370, 30));
 
-        jComboBox2.setBackground(new java.awt.Color(249, 242, 228));
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(86, 42, 35));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Boleta" }));
-        jComboBox2.setBorder(null);
-        jPanel2.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 430, 40));
+        jCBTypeDocument.setBackground(new java.awt.Color(249, 242, 228));
+        jCBTypeDocument.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCBTypeDocument.setForeground(new java.awt.Color(86, 42, 35));
+        jCBTypeDocument.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Factura", "Boleta" }));
+        jCBTypeDocument.setBorder(null);
+        jPanel2.add(jCBTypeDocument, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 430, 40));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/btnAnadir.png"))); // NOI18N
         jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -174,12 +174,12 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(86, 42, 35)));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox3.setBackground(new java.awt.Color(249, 242, 228));
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(86, 42, 35));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
-        jComboBox3.setBorder(null);
-        jPanel4.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 430, 40));
+        jCBpaymentType.setBackground(new java.awt.Color(249, 242, 228));
+        jCBpaymentType.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jCBpaymentType.setForeground(new java.awt.Color(86, 42, 35));
+        jCBpaymentType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        jCBpaymentType.setBorder(null);
+        jPanel4.add(jCBpaymentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 430, 40));
 
         jLabel17.setBackground(new java.awt.Color(86, 42, 35));
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -306,6 +306,11 @@ public class VoucherView extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(249, 242, 228));
         jButton2.setText("FINALIZAR PAGO");
         jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 640, 140, 40));
 
         jButton4.setBackground(new java.awt.Color(86, 42, 35));
@@ -391,8 +396,16 @@ public class VoucherView extends javax.swing.JFrame {
         CustomerRegisterModalView customerRegisterModalView = new CustomerRegisterModalView(this, true);
         customerRegisterModalView.setRoot(this);
         
+        customerRegisterModalView.viewDocument(jCBTypeDocument.getSelectedItem().toString());
+        
         customerRegisterModalView.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        voucherController.handleFinishClick();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public JLabel getjLBnumerTable() {
         return jLBnumerTable;
@@ -404,6 +417,14 @@ public class VoucherView extends javax.swing.JFrame {
 
     public JTextField getjTFsubTotal() {
         return jTFsubTotal;
+    }
+
+    public JComboBox<String> getjCBTypeDocument() {
+        return jCBTypeDocument;
+    }
+
+    public JComboBox<String> getjCBpaymentType() {
+        return jCBpaymentType;
     }
 
     public static void main(String args[]) {
@@ -442,9 +463,9 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> jCBTypeDocument;
     private javax.swing.JComboBox<Customer> jCBcustomer;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jCBpaymentType;
     private javax.swing.JLabel jLBnumerTable;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

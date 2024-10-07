@@ -31,6 +31,8 @@ public abstract class Person {
     }
 
     public Person() {
+        
+        
     }
     
     //metodo abstracto

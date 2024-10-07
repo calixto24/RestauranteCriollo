@@ -7,7 +7,6 @@ public class Store {
     
     private static Store instance;
     private Employee employe;
-    private long id;
 
     private Store() {
         

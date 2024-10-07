@@ -12,18 +12,17 @@ public class CustomerRegisterModalController {
     private CustomerRegisterModalView view;
     private CustomerDAO customerDAO;
     private Validate vldt;
-    private String action;
 
     public CustomerRegisterModalController(CustomerRegisterModalView view) {
 
         this.view = view;
         customerDAO = new CustomerDAO();
         vldt = new Validate();
-        action = "add";
 
     }
 
     public void handleRegisterClick() {
+
         // nombre 
         String name = view.getjTFName().getText();
         vldt.setElement(name).isRequired("El nombre del cliente es obligarotio");
@@ -43,6 +42,7 @@ public class CustomerRegisterModalController {
             view.getjTFLastNameM().requestFocus();
             return;
         }
+
         // apellido paterno
         String apellidoP = view.getjTFLastNameP().getText();
         vldt.setElement(apellidoP).isRequired("El apellido paterno es obligatorio");
@@ -54,33 +54,18 @@ public class CustomerRegisterModalController {
             return;
         }
 
-        // dni 
-        String dnitx = view.getjTFdni().getText();
-        vldt.setElement(dnitx)
-                .isRequired("El DNI es obligatorio")
-                .isInt("El DNI debe ser numerico")
-                .equalsLength(8, "El DNI debe tener 8 digitos");
-
-        if (!vldt.exec()) {
-            view.showMessage(vldt.getMessage());
-            view.getjTFdni().requestFocus();
-            return;
-        }
-
-        int dni = Integer.parseInt(dnitx);
-
-// fecha de nacimiento
+        // fecha de nacimiento
         String date = view.getjTFBhirtday().getText();
 
-        vldt.setElement(date).isRequired("La fecha es obligatoria")
+        /*vldt.setElement(date)
                 .isDate("formato de fecha invalida");
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFBhirtday().requestFocus();
             return;
-        }
-
+        }*/
+        
         int datev[] = new int[3];
         String[] datePart = date.split("/");
         datev[0] = Integer.parseInt(datePart[0]);
@@ -89,42 +74,80 @@ public class CustomerRegisterModalController {
 
         // telefono
         String phone = view.getjTFTelephone().getText();
-        vldt.setElement(phone).isRequired("El telefono es obligatorio para resivir promociones").isInt("El telefono debe ser numerico").equalsLength(9, "El telefono debe tener 9 digitoss");
+
+        /*vldt.setElement(phone)
+                .isInt("El telefono debe ser numerico")
+                .equalsLength(9, "El telefono debe tener 9 digitoss");
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFTelephone().requestFocus();
             return;
+        }*/
+        int telefono = 0;
+
+        if (!phone.trim().isEmpty()) {
+            telefono = Integer.parseInt(phone);
         }
-        int telefono = Integer.parseInt(phone);
+
         // email
         String email = view.getjTFEmail().getText();
-        // calle
+
+        // direccion
         String address = view.getjTFAddress().getText();
-        vldt.setElement(address)
-                .isRequired("La direccion es obligatorio");
 
-        if (!vldt.exec()) {
-            view.showMessage(vldt.getMessage());
-            view.getjTFAddress().requestFocus();
-            return;
-        }
-//ruc
-        String ruc = view.getjTFruc().getText();
-        vldt.setElement(ruc).isInt("El Ruc debe ser numerico").equalsLength(11," El ruc debe tener 11 digitos");
-        if (!vldt.exec()) {
-            view.showMessage(vldt.getMessage());
-            view.getjTFruc().requestFocus();
-            return;
-        }
+        if (view.getTypeDocument().equals("Factura")) {
 
-        Customer newCustomer = new Customer(name, name, email, dni, LocalDate.of(datev[2], datev[1], datev[0]), telefono, email, address, ruc);
+            //ruc
+            String ruc = view.getjTFruc().getText();
+            vldt.setElement(ruc)
+                    .isLong("El Ruc debe ser numerico")
+                    .equalsLength(11, " El ruc debe tener 11 digitos");
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFruc().requestFocus();
+                return;
+            }
 
-        try {
-            customerDAO.add(newCustomer);
-            view.showMessage("Cliente agregado correctamente");
+            Customer newCustomer = new Customer(name, apellidoP, apellidom, 0, LocalDate.of(datev[2], datev[1], datev[0]), telefono, email, address, ruc);
+            try {
+                customerDAO.add(newCustomer);
+                view.showMessage("Cliente agregado correctamente");
+                view.dispose();
 
-        } catch (Exception e) {
-            view.showMessage("Error al agregar cliente");
+            } catch (Exception e) {
+                view.showMessage("Error al agregar cliente");
+            }
+
+        } else if (view.getTypeDocument().equals("Boleta")) {
+
+            // dni 
+            String dnitx = view.getjTFdni().getText();
+            vldt.setElement(dnitx)
+                .isInt("El DNI debe ser numerico")
+                .equalsLength(8, "El DNI debe tener 8 digitos");
+
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFdni().requestFocus();
+                return;
+            }
+
+            int dni = 0;
+
+            if (!phone.trim().isEmpty()) {
+                dni = Integer.parseInt(dnitx);
+            }
+
+            Customer newCustomer = new Customer(name, apellidoP, apellidom, dni, LocalDate.of(datev[2], datev[1], datev[0]), telefono, email, address, null);
+
+            try {
+                customerDAO.add(newCustomer);
+                view.showMessage("Cliente agregado correctamente");
+                view.dispose();
+
+            } catch (Exception e) {
+                view.showMessage("Error al agregar cliente");
+            }
         }
 
     }

@@ -58,7 +58,7 @@ public class OrderController {
         voucherView.setOrder(orderList.get(orderView.getRow()));
         
         voucherView.renderTable();
-        voucherView.renderCBCustomer();
+        
         voucherView.setVisible(true);
         orderView.dispose();
         

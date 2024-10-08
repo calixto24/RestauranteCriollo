@@ -1,5 +1,6 @@
 package utp.restaurant.cashier.controller;
 
+import java.awt.CardLayout;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -36,17 +37,7 @@ public class VoucherController {
         
     }
     
-    public void renderCBCustomer() {
-        
-        ArrayList<Customer> customerList = customerDAO.getAll();
-        
-        voucherView.getjCBcustomer().removeAllItems();
-        
-        for (Customer c : customerList) {
-            voucherView.getjCBcustomer().addItem(c);
-        }
-        
-    }
+   
     
     public DefaultTableModel getTableModel() {
 
@@ -91,22 +82,54 @@ public class VoucherController {
         String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
         
         //cliente
-        Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
+        //Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
         
         //tipo de pago
         String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
         
-        //guardado
-        if(typeDocument.equals("Factura")) {
+      
+        
+    }
+    
+    public void handleVoucherTypeClick() {
+        
+        CardLayout cl = (CardLayout)voucherView.getjPVaucher().getLayout();
+        
+        switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
             
-            Bill newBill = new Bill(customer, order, store.getEmploye());
-            newBill.paymentType(paymentType);
-            
-        } else if (typeDocument.equals("Boleta")) {
-            
-            
-            
+            case "Factura":
+                cl.show(voucherView.getjPVaucher(), "factura");
+                break;
+            case "Boleta": 
+                cl.show(voucherView.getjPVaucher(), "boleta");
+                break;
         }
+    }
+    
+    public void handleVoucherClick() {
+        String dniStr = voucherView.getjTFdniStr().getText();
+        int dni = 0; 
+        if (!dniStr.trim().isEmpty()) {
+            dni = Integer.parseInt(dniStr); 
+        }
+        
+        ArrayList<Customer> customerList = customerDAO.getAll();
+        Customer customer = null;
+        for (Customer c: customerList) {
+            
+            if (dni == c.getDni()) {
+                customer = c;
+            }
+        }
+        
+        voucherView.getjTFnombreStr().setText(customer.getName());
+        voucherView.getjTFapellidoPstr().setText(customer.getLastname_paternal());
+        voucherView.getjTFapellidoMstr().setText(customer.getLastname_maternal());
+        
+           
+        
+        
+        
         
     }
 

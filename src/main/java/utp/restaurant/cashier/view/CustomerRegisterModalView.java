@@ -501,7 +501,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         customerRegisterModalController.handleRegisterClick();
         
-        root.renderCBCustomer();
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

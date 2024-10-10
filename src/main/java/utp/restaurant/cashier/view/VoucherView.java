@@ -30,13 +30,9 @@ public class VoucherView extends javax.swing.JFrame {
     }
     
     public void setOrder(Order order) {
-        
         voucherController.setOrder(order);
-        voucherController.setAtributtes();
-        
+        voucherController.initAttributes();
     }
-    
-    
     
     public void renderTable() {
         
@@ -101,7 +97,7 @@ public class VoucherView extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTFsubTotal = new javax.swing.JTextField();
+        tfTaxed = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
@@ -385,7 +381,6 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel5.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 90, -1));
 
         jTextField1.setEditable(false);
-        jTextField1.setEnabled(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -393,17 +388,15 @@ public class VoucherView extends javax.swing.JFrame {
         });
         jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 480, 30));
 
-        jTFsubTotal.setEditable(false);
-        jTFsubTotal.setEnabled(false);
-        jTFsubTotal.addActionListener(new java.awt.event.ActionListener() {
+        tfTaxed.setEditable(false);
+        tfTaxed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFsubTotalActionPerformed(evt);
+                tfTaxedActionPerformed(evt);
             }
         });
-        jPanel5.add(jTFsubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 480, 30));
+        jPanel5.add(tfTaxed, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 480, 30));
 
         jTextField5.setEditable(false);
-        jTextField5.setEnabled(false);
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -412,7 +405,6 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel5.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 480, 30));
 
         jTextField6.setEditable(false);
-        jTextField6.setEnabled(false);
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -514,9 +506,9 @@ public class VoucherView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
-    private void jTFsubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFsubTotalActionPerformed
+    private void tfTaxedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTaxedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFsubTotalActionPerformed
+    }//GEN-LAST:event_tfTaxedActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
@@ -595,18 +587,16 @@ public class VoucherView extends javax.swing.JFrame {
         return jLBnumerTable;
     }
 
-    
-
-    public JTextField getjTFsubTotal() {
-        return jTFsubTotal;
-    }
-
     public JComboBox<String> getjCBTypeDocument() {
         return jCBTypeDocument;
     }
 
     public JComboBox<String> getjCBpaymentType() {
         return jCBpaymentType;
+    }
+    
+    public JTextField getTfTaxed() {
+        return tfTaxed;
     }
 
     public static void main(String args[]) {
@@ -693,7 +683,6 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFnombreStr;
     private javax.swing.JTextField jTFruc;
     private javax.swing.JTextField jTFsocialReason;
-    private javax.swing.JTextField jTFsubTotal;
     private javax.swing.JTable jTItemOrder;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -701,5 +690,6 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField tfTaxed;
     // End of variables declaration//GEN-END:variables
 }

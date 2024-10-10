@@ -12,6 +12,7 @@ import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 import utp.restaurant.model.Ticket;
+import utp.restaurant.model.Voucher;
 import utp.restaurant.store.Store;
 
 public class VoucherController {
@@ -21,25 +22,24 @@ public class VoucherController {
     private Order order;
     private Store store;
     private Customer customer = null;
-
-    private Bill bill;
-    private Ticket ticket;
+    private Voucher voucher;
 
     public VoucherController(VoucherView voucherView) {
         this.voucherView = voucherView;
         customerDAO = new CustomerDAO();
         store = Store.getInstance();
+        voucher = new Bill();
     }
 
     public void setOrder(Order order) {
         this.order = order;
+        voucher.setOrder(order);
     }
 
-    public void setAtributtes() {
-
+    public void initAttributes() {
         voucherView.getjLBnumerTable().setText(order.getTable().getNumber_table() + "");
-        voucherView.getjTFsubTotal().setText(order.getTotal_Price() + "");
-
+        voucher.calculateIgv();
+        voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
     }
 
     public DefaultTableModel getTableModel() {
@@ -73,11 +73,9 @@ public class VoucherController {
             };
 
             tableModel.addRow(row);
-
         }
 
         return tableModel;
-
     }
 
     public void handleVoucherTypeClick() {
@@ -87,12 +85,16 @@ public class VoucherController {
         switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
 
             case "Factura":
+                voucher = new Bill();
                 cl.show(voucherView.getjPVaucher(), "factura");
                 break;
             case "Boleta":
+                voucher = new Ticket();
                 cl.show(voucherView.getjPVaucher(), "boleta");
                 break;
         }
+        
+        voucher.setOrder(order);
     }
 
     public void handleDniClick() {

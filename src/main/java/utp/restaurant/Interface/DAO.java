@@ -1,4 +1,4 @@
-package utp.restaurant.dao;
+package utp.restaurant.Interface;
 
 import java.util.ArrayList;
     

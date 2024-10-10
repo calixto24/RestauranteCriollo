@@ -74,6 +74,14 @@ public class LoginView extends javax.swing.JFrame {
         jTFUsername.setText("Ingrese su nombre de usuario");
         jTFUsername.setToolTipText("");
         jTFUsername.setBorder(null);
+        jTFUsername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTFUsernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFUsernameFocusLost(evt);
+            }
+        });
         jTFUsername.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTFUsernameMousePressed(evt);
@@ -107,6 +115,14 @@ public class LoginView extends javax.swing.JFrame {
         jTFPassword.setForeground(new java.awt.Color(102, 102, 102));
         jTFPassword.setText("********");
         jTFPassword.setBorder(null);
+        jTFPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTFPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTFPasswordFocusLost(evt);
+            }
+        });
         jTFPassword.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTFPasswordMousePressed(evt);
@@ -174,50 +190,35 @@ public class LoginView extends javax.swing.JFrame {
 
     private void jTFUsernameMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFUsernameMousePressed
 
-        if (jTFUsername.getText().equals("Ingrese su nombre de usuario")) {
-
-            jTFUsername.setText("");
-
-        }
-
-        if (String.valueOf(jTFPassword.getPassword()).isEmpty()) {
-
-            jTFPassword.setText("********");
-            
-        }
-
-
     }//GEN-LAST:event_jTFUsernameMousePressed
 
     private void jTFPasswordMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFPasswordMousePressed
 
-        if (String.valueOf(jTFPassword.getPassword()).equals("********")) {
-
-            jTFPassword.setText("");
-
-        }
-
-        if (jTFUsername.getText().isEmpty()) {
-
-            jTFUsername.setText("Ingrese su nombre de usuario");
-            
-        }
-
     }//GEN-LAST:event_jTFPasswordMousePressed
 
     private void jCviewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCviewPasswordActionPerformed
-        
         if(jCviewPassword.isSelected()) {
-            
             jTFPassword.setEchoChar((char)0);
-            
-        } else {
-            
-            jTFPassword.setEchoChar(('*'));
-            
+        } else {jTFPassword.setEchoChar(('*'));
         }
         
     }//GEN-LAST:event_jCviewPasswordActionPerformed
+
+    private void jTFPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPasswordFocusGained
+        if (String.valueOf(jTFPassword.getPassword()).equals("********")) jTFPassword.setText("");
+    }//GEN-LAST:event_jTFPasswordFocusGained
+
+    private void jTFPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFPasswordFocusLost
+        if (String.valueOf(jTFPassword.getPassword()).equals("")) jTFPassword.setText("********");
+    }//GEN-LAST:event_jTFPasswordFocusLost
+
+    private void jTFUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFUsernameFocusGained
+        if (jTFUsername.getText().equals("Ingrese su nombre de usuario")) jTFUsername.setText("");
+    }//GEN-LAST:event_jTFUsernameFocusGained
+
+    private void jTFUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTFUsernameFocusLost
+        if (jTFUsername.getText().equals("")) jTFUsername.setText("Ingrese su nombre de usuario");
+    }//GEN-LAST:event_jTFUsernameFocusLost
 
     public void showMessage(String msg) {
 

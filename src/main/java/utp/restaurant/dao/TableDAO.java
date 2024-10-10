@@ -1,5 +1,6 @@
 package utp.restaurant.dao;
 
+import utp.restaurant.Interface.DAO;
 import utp.restaurant.database.RestaurantDB;
 import utp.restaurant.model.Table;
 import java.util.ArrayList;

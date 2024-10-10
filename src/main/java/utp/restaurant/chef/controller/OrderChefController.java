@@ -42,7 +42,7 @@ public class OrderChefController {
                 Object[] row = {
                     nol.getId_Order(),
                     nol.getTable().getNumber_table(),
-                    nol.getWaiter().fullName(),
+                    nol.getWaiter().fullData(),
                     nol.getDate(),
                     nol.getTime(),
                     nol.getStatus(),

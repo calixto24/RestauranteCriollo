@@ -47,7 +47,7 @@ public class OrderDetails extends javax.swing.JDialog {
     public void setAtributes() {
         
         jLBnumberTable.setText(order.getTable().getNumber_table() + "");
-        jLBwaiter.setText(order.getWaiter().fullName());
+        jLBwaiter.setText(order.getWaiter().fullData());
         jLBtotalPriceOrder.setText("S/" + order.getTotal_Price());
         
     }

@@ -10,6 +10,8 @@ import utp.restaurant.model.Role;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
+import utp.restaurant.model.JuridicalCustomer;
+import utp.restaurant.model.NaturalCustomer;
 import utp.restaurant.model.Order;
 import utp.restaurant.model.Ticket;
 
@@ -21,7 +23,8 @@ public class RestaurantDB {
     private ArrayList<Role> roleList;
     private ArrayList<Category> categoryList;
     private ArrayList<ItemMenu> itemMenuList;
-    private ArrayList<Customer> customerList;
+    private ArrayList<NaturalCustomer> naturalCustomerList;
+    private ArrayList<JuridicalCustomer> juridicalCustomerList;
     private ArrayList<Order> orderList;
     private ArrayList<Bill> billList;
     private ArrayList<Ticket> ticketList;
@@ -36,12 +39,12 @@ public class RestaurantDB {
 
         //lista de empleados
         employeeList = new ArrayList<>();
-        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), "Omar", "Carrion", "Alcocer", 123123478, LocalDate.of(2005, 06, 15), 123456789, "omar@gmail.com", "Mz. 10"));
-        employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Cristian", "De La Cruz", "De La Cruz", 75286131, LocalDate.of(2005, 8, 18), 951761921, "cristian@gmail.com", "Mz. 18 calle los berracos"));
-        employeeList.add(new Employee("Jhordan", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Jhordan", "Calixto", "Laureano", 71597595, LocalDate.of(2005, 6, 24), 934745971, "calix@gmail.com", "Mz. q lt 22"));
-        employeeList.add(new Employee("Dalia", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(3), "Dalia", "Alberto", "Joaquin", 60749109, LocalDate.of(2006, 06, 06), 935041343, "dalia6@gmail.com", "Mz. 15 lote"));
-        employeeList.add(new Employee("Jean", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(2), "Jean", "Chamorro", "Granados", 74883675, LocalDate.of(2006, 01, 18), 946087675, "jean6@gmail.com", "Mz. 20 lote C"));
-        employeeList.add(new Employee("Leonardo", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), "Leonardo", "Murillo", "Alejandro", 76454651, LocalDate.of(2006, 01, 19), 946087675, "leonardoelpisado@gmail.com", "Mz. 20 lote C"));
+        employeeList.add(new Employee("Omar", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(0), 74266131, "Omar", "Carrion", "Alcocer", LocalDate.of(2005, 06, 15), 923123478, "omar@gmail.com", "Mz. 10"));
+        employeeList.add(new Employee("Cristian", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), 75286131, "Cristian", "De La Cruz", "De La Cruz", LocalDate.of(2005, 8, 18), 951761921, "cristian@gmail.com", "Mz. 18 calle los berracos"));
+        employeeList.add(new Employee("Jhordan", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), 71597595, "Jhordan", "Calixto", "Laureano", LocalDate.of(2005, 6, 24), 934745971, "calix@gmail.com", "Mz. q lt 22"));
+        employeeList.add(new Employee("Dalia", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(3), 60749109, "Dalia", "Alberto", "Joaquin", LocalDate.of(2006, 06, 06), 935041343, "dalia6@gmail.com", "Mz. 15"));
+        employeeList.add(new Employee("Jean", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(2), 74883675, "Jean", "Chamorro", "Granados", LocalDate.of(2006, 01, 18), 946087675, "jean6@gmail.com", "Mz. 20 lote C"));
+        employeeList.add(new Employee("Leonardo", "$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.", roleList.get(1), 76454651, "Leonardo", "Murillo", "Alejandro", LocalDate.of(2006, 01, 19), 946087675, "leonardoelpisado@gmail.com", "Mz. 20 lote C"));
 
         // lista de mesas
         tableList = new ArrayList<>();
@@ -50,6 +53,7 @@ public class RestaurantDB {
         tableList.add(new Table(3, 12, "Disponible", employeeList.get(1)));
         tableList.add(new Table(4, 10, "Disponible", employeeList.get(2)));
         tableList.add(new Table(5, 2, "Disponible", employeeList.get(5)));
+        
         //lista de categorias
         categoryList = new ArrayList<>();
         categoryList.add(new Category("ENTRADAS", "Deliciosos aperitivos que abren el apetito con sabores auténticos de la cocina criolla.", "cardCategoryEntradas.png"));
@@ -65,10 +69,14 @@ public class RestaurantDB {
         itemMenuList.add(new ItemMenu("Turrón Doña Pancha 1/2 kg", 46, "Con harto cariño y miel de frutos.", "Disponible", categoryList.get(2), "turronDoñaPancha.png"));
         itemMenuList.add(new ItemMenu("Aji de Gallina", 48, "El plato favorito de los limeños.", "Agotado", categoryList.get(1), "ajiDeGallina.png"));
 
-        //lista de clientes
-        customerList = new ArrayList<>();
-        customerList.add(new Customer("Manuel", "Dias", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912", "Manuel Granados"));
-        customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913", "Pepito Huarote"));
+        //Lista de clientes naturales
+        naturalCustomerList = new ArrayList<>();
+        naturalCustomerList.add(new NaturalCustomer(74883675, "Manuel", "Dias", "Granados", LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate"));
+        naturalCustomerList.add(new NaturalCustomer(74613649, "Pepito", "Huarote", "Vieira", LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate"));
+        
+        //lista de clientes Juridicos
+        juridicalCustomerList = new ArrayList<>();
+        juridicalCustomerList.add(new JuridicalCustomer(Long.parseLong("12345678912"), "Company Name", "Sociedad Comercial", "Venta al por mayor de equipos electronicos", "Manuel / mecanizado", 946082375, "pass@gmail.com", "Santa Clara, ate"));
 
         //lista de ordenes
         ArrayList<ItemOrder> itemOrderList = new ArrayList<>();
@@ -83,7 +91,7 @@ public class RestaurantDB {
         billList = new ArrayList<>();
         
         //lista de boletas
-        tableList = new ArrayList<>();
+        ticketList = new ArrayList<>();
     }
 
     //patron singleton
@@ -126,9 +134,13 @@ public class RestaurantDB {
     public ArrayList<Category> getCategoryList() {
         return categoryList;
     }
-    
-    public ArrayList<Customer> getCustomerList() {
-        return customerList;
+
+    public ArrayList<NaturalCustomer> getNaturalCustomerList() {
+        return naturalCustomerList;
+    }
+
+    public ArrayList<JuridicalCustomer> getJuridicalCustomerList() {
+        return juridicalCustomerList;
     }
     
 }

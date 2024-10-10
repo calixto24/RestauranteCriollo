@@ -211,9 +211,7 @@ public class EmployeeController {
         Role role = (Role) view.getjCBRole().getSelectedItem();
 
         //---------------------------------------------- Crear el nuevo empleado
-        Employee newEmployee = new Employee(username, password, role, name,
-                ap, am, dni, LocalDate.of(dateV[2],
-                        dateV[1], dateV[0]), phonenumber, email, direction);
+        Employee newEmployee = new Employee(username, password, role, dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
 
         if (action.equals("add")) {
 

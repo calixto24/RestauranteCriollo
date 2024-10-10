@@ -39,7 +39,7 @@ public class OrderController {
                 Object row[] = {
                     o.getId_Order(),
                     o.getTable().getNumber_table(),
-                    o.getWaiter().fullName(),
+                    o.getWaiter().fullData(),
                     o.getTotal_Price()
                 };
                 

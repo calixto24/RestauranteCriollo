@@ -24,7 +24,7 @@ public class CustomerRegisterModalController {
     public void handleRegisterClick() {
 
         // fecha de nacimiento
-        String date = view.getjTFBhirtday().getText();
+        /*String date = view.getjTFBhirtday().getText();
 
         int[] datev = new int[3];
 
@@ -187,7 +187,7 @@ public class CustomerRegisterModalController {
             } catch (Exception e) {
                 view.showMessage("Error al agregar cliente");
             }
-        }
+        }*/
 
     }
 

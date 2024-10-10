@@ -533,21 +533,21 @@ public class VoucherView extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        voucherController.handleFinishClick();
+        //voucherController.handleFinishClick();
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCBTypeDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTypeDocumentActionPerformed
-       voucherController.handleVoucherTypeClick();
+       //voucherController.handleVoucherTypeClick();
        
     }//GEN-LAST:event_jCBTypeDocumentActionPerformed
 
     private void jTFdniStrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFdniStrActionPerformed
-       voucherController.handleDniClick();
+       //voucherController.handleDniClick();
     }//GEN-LAST:event_jTFdniStrActionPerformed
 
     private void jTFrucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrucActionPerformed
-        voucherController.handleRucClick();
+        //voucherController.handleRucClick();
     }//GEN-LAST:event_jTFrucActionPerformed
     
     public JTextField getjTFdniStr() {

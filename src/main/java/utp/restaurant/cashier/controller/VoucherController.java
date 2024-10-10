@@ -78,7 +78,7 @@ public class VoucherController {
         return tableModel;
     }
 
-    public void handleVoucherTypeClick() {
+    /*public void handleVoucherTypeClick() {
 
         CardLayout cl = (CardLayout) voucherView.getjPVaucher().getLayout();
 
@@ -148,6 +148,6 @@ public class VoucherController {
         //tipo de pago
         String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
 
-    }
+    }*/
 
 }

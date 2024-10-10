@@ -4,17 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
 
-public class NaturalPerson {
+public class NaturalPerson extends Person{
 
-    protected long id_personalNatural;
+    protected long id_naturalPerson;
     protected int dni;
     protected String name;
     protected String lastname_paternal;
     protected String lastname_maternal;
     protected LocalDate birthdate;
 
-    public NaturalPerson(int dni, String name, String lastname_paternal, String lastname_maternal, LocalDate birthdate) {
-        this.id_personalNatural = System.currentTimeMillis() + new Random().nextInt(1000);
+    public NaturalPerson(int dni, String name, String lastname_paternal, String lastname_maternal, LocalDate birthdate, int phoneNumber, String email, String address) {
+        super(phoneNumber, email, address);
+        
+        this.id_naturalPerson = System.currentTimeMillis() + new Random().nextInt(1000);
         this.dni = dni;
         this.name = name;
         this.lastname_paternal = lastname_paternal;
@@ -25,8 +27,8 @@ public class NaturalPerson {
     public NaturalPerson() {
     }
 
-    public long getId_personalNatural() {
-        return id_personalNatural;
+    public long getId_naturalPerson() {
+        return id_naturalPerson;
     }
 
     public int getDni() {
@@ -72,6 +74,17 @@ public class NaturalPerson {
     public String getBirthdateFormatted() {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return df.format(birthdate);
+    }
+    
+    //metodo abstracto
+    @Override
+    public String fullData() {
+        return name + "  " + lastname_paternal + "  " + lastname_maternal;
+    }
+    
+    @Override
+    public String toString() {
+        return fullData();
     }
     
 }

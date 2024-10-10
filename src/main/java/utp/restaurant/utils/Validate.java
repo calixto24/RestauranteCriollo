@@ -11,9 +11,11 @@ import utp.restaurant.model.Employee;
 import utp.restaurant.model.ItemMenu;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.Role;
-import utp.restaurant.dao.CustomerDAO;
-import utp.restaurant.model.Customer;
+import utp.restaurant.dao.JuridicalCustomerDAO;
+import utp.restaurant.dao.NaturalCustomerDAO;
 import utp.restaurant.model.Category;
+import utp.restaurant.model.JuridicalCustomer;
+import utp.restaurant.model.NaturalCustomer;
 
 public class Validate {
 
@@ -22,8 +24,9 @@ public class Validate {
     private TableDAO tableDAO;
     private RoleDAO roleDAO;
     private CategoryDAO categoryDAO;
-    private CustomerDAO customerDAO;
     private ItemMenuDAO itemMenuDAO;
+    private NaturalCustomerDAO naturalCustomerDAO;
+    private JuridicalCustomerDAO juridicalCustomerDAO;
 
     private String message;
     private boolean valid;
@@ -38,22 +41,24 @@ public class Validate {
         employeeDAO = new EmployeeDAO();
         tableDAO = new TableDAO();
         roleDAO = new RoleDAO();
-        customerDAO = new CustomerDAO();
         itemMenuDAO = new ItemMenuDAO();
+        naturalCustomerDAO = new NaturalCustomerDAO();
+        juridicalCustomerDAO = new JuridicalCustomerDAO();
     }
-   public Validate greaterThan(int n, String msg) {
+
+    public Validate greaterThan(int n, String msg) {
         if (!valid) {
             return this;
         }
 
-        if (Integer.parseInt(el) <= n ) {
+        if (Integer.parseInt(el) <= n) {
             valid = false;
             message = msg;
         }
 
         return this;
     }
-   
+
     public Validate(String el) {
         message = "";
         valid = true;
@@ -466,34 +471,28 @@ public class Validate {
         return this;
     }
 
-    //Para el cliente
-    public Validate equalsAtt(String msg, String attribute) {
+    //Para el cliente natural
+    public Validate equalsAttNatural(String msg, String attribute) {
         if (!valid) {
             return this;
         }
 
-        for (Customer customer : customerDAO.getAll()) {
+        for (NaturalCustomer naturalCustomer : naturalCustomerDAO.getAll()) {
             switch (attribute.toLowerCase()) {
                 case "email":
-                    if (el.equals(customer.getEmail())) {
-                        valid = false;
-                        message = msg;
-                    }
-                    break;
-                case "ruc":
-                    if (el.equals(customer.getRuc())) {
+                    if (el.equals(naturalCustomer.getEmail())) {
                         valid = false;
                         message = msg;
                     }
                     break;
                 case "dni":
-                    if (Integer.parseInt(el) == customer.getDni()) {
+                    if (Integer.parseInt(el) == naturalCustomer.getDni()) {
                         valid = false;
                         message = msg;
                     }
                     break;
                 case "phoneNumber":
-                    if (Integer.parseInt(el) == customer.getPhoneNumber()) {
+                    if (Integer.parseInt(el) == naturalCustomer.getPhoneNumber()) {
                         valid = false;
                         message = msg;
                     }
@@ -504,26 +503,16 @@ public class Validate {
         return this;
     }
 
-    public Validate equalsAtt(String msg, String attribute, long id) {
+    public Validate equalsAttNatural(String msg, String attribute, long id) {
         if (!valid) {
             return this;
         }
 
-        for (Customer customer : customerDAO.getAll()) {
+        for (NaturalCustomer naturalCustomer : naturalCustomerDAO.getAll()) {
             switch (attribute.toLowerCase()) {
                 case "email":
-                    if (el.equals(customer.getEmail())) {
-                        if (id != customer.getId_customer()) {
-
-                            valid = false;
-                            message = msg;
-
-                        }
-                    }
-                    break;
-                case "ruc":
-                    if (el.equals(customer.getRuc())) {
-                        if (id != customer.getId_customer()) {
+                    if (el.equals(naturalCustomer.getEmail())) {
+                        if (id != naturalCustomer.getId_naturalCustomer()) {
 
                             valid = false;
                             message = msg;
@@ -532,8 +521,8 @@ public class Validate {
                     }
                     break;
                 case "dni":
-                    if (Integer.parseInt(el) == customer.getDni()) {
-                        if (id != customer.getId_customer()) {
+                    if (Integer.parseInt(el) == naturalCustomer.getDni()) {
+                        if (id != naturalCustomer.getId_naturalCustomer()) {
 
                             valid = false;
                             message = msg;
@@ -542,8 +531,99 @@ public class Validate {
                     }
                     break;
                 case "phoneNumber":
-                    if (Integer.parseInt(el) == customer.getPhoneNumber()) {
-                        if (id != customer.getId_customer()) {
+                    if (Integer.parseInt(el) == naturalCustomer.getPhoneNumber()) {
+                        if (id != naturalCustomer.getId_naturalCustomer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+            }
+        }
+
+        return this;
+    }
+
+    //Para el cliente juridico
+    public Validate equalsAttJuridical(String msg, String attribute) {
+        if (!valid) {
+            return this;
+        }
+
+        for (JuridicalCustomer juridicalCustomer : juridicalCustomerDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (el.equals(juridicalCustomer.getEmail())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "ruc":
+                    if (Long.parseLong(el) == juridicalCustomer.getRuc()) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "phoneNumber":
+                    if (Integer.parseInt(el) == juridicalCustomer.getPhoneNumber()) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+                case "socialReason":
+                    if (el.equals(juridicalCustomer.getSocialReason())) {
+                        valid = false;
+                        message = msg;
+                    }
+                    break;
+            }
+        }
+
+        return this;
+    }
+    
+    public Validate equalsAttJuridical(String msg, String attribute, long id) {
+        if (!valid) {
+            return this;
+        }
+
+        for (JuridicalCustomer juridicalCustomer : juridicalCustomerDAO.getAll()) {
+            switch (attribute.toLowerCase()) {
+                case "email":
+                    if (el.equals(juridicalCustomer.getEmail())) {
+                        if (id != juridicalCustomer.getId_juridicalCustomer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                case "ruc":
+                    if (Long.parseLong(el) == juridicalCustomer.getRuc()) {
+                        if (id != juridicalCustomer.getId_juridicalCustomer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                case "phoneNumber":
+                    if (Integer.parseInt(el) == juridicalCustomer.getPhoneNumber()) {
+                        if (id != juridicalCustomer.getId_juridicalCustomer()) {
+
+                            valid = false;
+                            message = msg;
+
+                        }
+                    }
+                    break;
+                case "socialReason":
+                    if (el.equals(juridicalCustomer.getSocialReason())) {
+                        if (id != juridicalCustomer.getId_juridicalCustomer()) {
 
                             valid = false;
                             message = msg;

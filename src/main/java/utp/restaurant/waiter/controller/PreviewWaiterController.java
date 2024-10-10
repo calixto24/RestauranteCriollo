@@ -25,7 +25,7 @@ public class PreviewWaiterController {
     
     public void getUser() {
         
-        pwv.getjLBuser().setText(store.getEmploye().fullName());
+        pwv.getjLBuser().setText(store.getEmploye().fullData());
         
     }
         

@@ -2,7 +2,7 @@ package utp.restaurant.model;
 
 import java.util.Random;
 
-public class JuridicalPerson {
+public class JuridicalPerson extends Person{
     
     protected long id_juridicalPerson;
     protected long ruc;
@@ -11,7 +11,9 @@ public class JuridicalPerson {
     protected String economicActivity;
     protected String typeBilling;
 
-    public JuridicalPerson(long ruc, String socialReason, String type, String economicActivity, String typeBilling) {
+    public JuridicalPerson(long ruc, String socialReason, String type, String economicActivity, String typeBilling, int phoneNumber, String email, String address) {
+        super(phoneNumber, email, address);
+        
         this.id_juridicalPerson = System.currentTimeMillis() + new Random().nextInt(1000);
         this.ruc = ruc;
         this.socialReason = socialReason;
@@ -67,6 +69,15 @@ public class JuridicalPerson {
         this.typeBilling = typeBilling;
     }
     
+    //metodo abstracto
+    @Override
+    public String fullData() {
+        return socialReason + " - " + address;
+    }
     
+    @Override
+    public String toString() {
+        return fullData();
+    }
 
 }

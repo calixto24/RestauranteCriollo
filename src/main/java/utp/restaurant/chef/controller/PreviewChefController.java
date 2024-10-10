@@ -18,7 +18,7 @@ public class PreviewChefController {
     //metodo para pintar el usuario
     public void getUser() {
         
-        previewChefView.getjLBuser().setText(store.getEmploye().fullName());
+        previewChefView.getjLBuser().setText(store.getEmploye().fullData());
         
     }
     

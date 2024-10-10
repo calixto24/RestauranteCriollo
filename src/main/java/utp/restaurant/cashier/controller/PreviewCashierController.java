@@ -24,7 +24,7 @@ public class PreviewCashierController {
 
     public void getUser() {
 
-        previewCashierView.getjLBuser().setText(store.getEmploye().fullName());
+        previewCashierView.getjLBuser().setText(store.getEmploye().fullData());
 
     }
 

@@ -78,6 +78,9 @@ public class CustomerRegisterView extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jLabel23 = new javax.swing.JLabel();
+        jSeparator11 = new javax.swing.JSeparator();
+        jTFrazonSocial = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
@@ -284,9 +287,9 @@ public class CustomerRegisterView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTList);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 720, 350));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 720, 320));
 
-        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 280, 750, 370));
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 740, 340));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerCliente.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 720));
@@ -340,6 +343,24 @@ public class CustomerRegisterView extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, 90, 30));
+
+        jLabel23.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel23.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel23.setText("RAZON SOCIAL");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, -1, 20));
+
+        jSeparator11.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator11.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 300, 220, 12));
+
+        jTFrazonSocial.setBackground(new java.awt.Color(249, 242, 228));
+        jTFrazonSocial.setBorder(null);
+        jTFrazonSocial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFrazonSocialActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFrazonSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 280, 220, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,6 +435,10 @@ public class CustomerRegisterView extends javax.swing.JFrame {
         customerController.heandleViewEditClick();
     }//GEN-LAST:event_jTListMouseClicked
 
+    private void jTFrazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrazonSocialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFrazonSocialActionPerformed
+
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(rootPane, message);
     }
@@ -424,6 +449,10 @@ public class CustomerRegisterView extends javax.swing.JFrame {
     
     //Metodos Getters
 
+    public JTextField getjTFrazonSocial() {
+        return jTFrazonSocial;
+    }
+    
     public JTextField getjTFName() {
         return jTFName;
     }
@@ -541,11 +570,13 @@ public class CustomerRegisterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -562,6 +593,7 @@ public class CustomerRegisterView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFName;
     private javax.swing.JTextField jTFTelephone;
     private javax.swing.JTextField jTFdni;
+    private javax.swing.JTextField jTFrazonSocial;
     private javax.swing.JTextField jTFruc;
     private javax.swing.JTable jTList;
     // End of variables declaration//GEN-END:variables

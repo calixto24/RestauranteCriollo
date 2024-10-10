@@ -27,6 +27,9 @@ public abstract class Voucher {
         this.order = order;
         this.cashier = cashier;
     }
+
+    public Voucher() {
+    }
     
     //metodos abstractos
     public abstract void calculateIgv();

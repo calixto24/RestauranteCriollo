@@ -15,6 +15,9 @@ public class Ticket extends Voucher implements PaymentApplicable {
         this.paymentType = paymentType;
     }
 
+    public Ticket() {
+    }
+
     /** METODOS ABSTRACTOS**/
     
     @Override

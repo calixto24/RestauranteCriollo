@@ -11,6 +11,7 @@ import utp.restaurant.model.Bill;
 import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
+import utp.restaurant.model.Ticket;
 import utp.restaurant.store.Store;
 
 public class VoucherController {
@@ -19,6 +20,10 @@ public class VoucherController {
     private CustomerDAO customerDAO;
     private Order order;
     private Store store;
+    private Customer customer = null;
+
+    private Bill bill;
+    private Ticket ticket;
 
     public VoucherController(VoucherView voucherView) {
         this.voucherView = voucherView;
@@ -29,16 +34,14 @@ public class VoucherController {
     public void setOrder(Order order) {
         this.order = order;
     }
-    
+
     public void setAtributtes() {
-        
+
         voucherView.getjLBnumerTable().setText(order.getTable().getNumber_table() + "");
         voucherView.getjTFsubTotal().setText(order.getTotal_Price() + "");
-        
+
     }
-    
-   
-    
+
     public DefaultTableModel getTableModel() {
 
         String columns[] = {
@@ -54,7 +57,7 @@ public class VoucherController {
         ArrayList<ItemOrder> itemOrderList = order.getItemOrderList();
 
         for (ItemOrder i : itemOrderList) {
-            
+
             //obtengo y cargo la imagen a traves de su direcciom
             ImageIcon img = new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + i.getItemMenu().getImage()));
 
@@ -68,69 +71,81 @@ public class VoucherController {
                 i.getItemMenu().getPrice(),
                 i.getTotal()
             };
-            
+
             tableModel.addRow(row);
 
         }
-        
+
         return tableModel;
 
     }
-    
-    public void handleFinishClick() {
-        
-        String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
-        
-        //cliente
-        //Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
-        
-        //tipo de pago
-        String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
-        
-      
-        
-    }
-    
+
     public void handleVoucherTypeClick() {
-        
-        CardLayout cl = (CardLayout)voucherView.getjPVaucher().getLayout();
-        
+
+        CardLayout cl = (CardLayout) voucherView.getjPVaucher().getLayout();
+
         switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
-            
+
             case "Factura":
                 cl.show(voucherView.getjPVaucher(), "factura");
                 break;
-            case "Boleta": 
+            case "Boleta":
                 cl.show(voucherView.getjPVaucher(), "boleta");
                 break;
         }
     }
-    
-    public void handleVoucherClick() {
+
+    public void handleDniClick() {
         String dniStr = voucherView.getjTFdniStr().getText();
-        int dni = 0; 
-        if (!dniStr.trim().isEmpty()) {
-            dni = Integer.parseInt(dniStr); 
-        }
         
+        int dni = 0;
+        
+        if (!dniStr.trim().isEmpty()) {
+            dni = Integer.parseInt(dniStr);
+        }
+
         ArrayList<Customer> customerList = customerDAO.getAll();
-        Customer customer = null;
-        for (Customer c: customerList) {
-            
+
+        for (Customer c : customerList) {
+
             if (dni == c.getDni()) {
                 customer = c;
             }
         }
-        
+
         voucherView.getjTFnombreStr().setText(customer.getName());
         voucherView.getjTFapellidoPstr().setText(customer.getLastname_paternal());
         voucherView.getjTFapellidoMstr().setText(customer.getLastname_maternal());
+
+    }
+    
+    public void handleRucClick(){
         
-           
+        String ruc = voucherView.getjTFruc().getText();
+
+        ArrayList<Customer> customerList = customerDAO.getAll();
+
+        for (Customer c : customerList) {
+
+            if (ruc.equals(c.getRuc())) {
+                customer = c;
+            }
+        }
+
+        voucherView.getjTFsocialReason().setText(customer.getSocialReason());
+        voucherView.getjTFdireccion().setText(customer.getAddress());
         
-        
-        
-        
+    }
+    
+    public void handleFinishClick() {
+
+        String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
+
+        //cliente
+        //Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
+        //tipo de pago
+        String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
+
     }
 
 }

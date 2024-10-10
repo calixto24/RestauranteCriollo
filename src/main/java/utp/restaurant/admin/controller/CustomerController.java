@@ -73,7 +73,7 @@ public class CustomerController {
                 .equalsLength(8, "El DNI debe tener 8 digitos");
 
         if (action.equals("add")) {
-            vldt.equalsAttribute("El DNI ya existe", "dni");
+            vldt.equalsAtt("El DNI ya existe", "dni");
         } else if (action.equals("edit")) {
             vldt.equalsAttribute("El DNI ya existe", "dni", selectedId);
         }
@@ -113,9 +113,9 @@ public class CustomerController {
                 .equalsLength(11, "El RUC debe tener 11 digitos");
 
         if (action.equals("add")) {
-            vldt.equalsAttribute("El RUC ya existe", "ruc");
+            vldt.equalsAtt("El RUC ya existe", "ruc");
         } else if (action.equals("edit")) {
-            vldt.equalsAttribute("El RUC ya existe", "ruc", selectedId);
+            vldt.equalsAtt("El RUC ya existe", "ruc", selectedId);
         }
 
         if (!vldt.exec()) {
@@ -176,11 +176,13 @@ public class CustomerController {
             view.getjTFAddress().requestFocus();
             return;
         }
+        
+        String razonSocial = view.getjTFrazonSocial().getText();
 
         //--------------------------- Crear el nuevo cliente
         Customer newCustomer = new Customer(name,
                 ap, am, dni, LocalDate.of(dateV[2],
-                        dateV[1], dateV[0]), phonenumber, email, direction, ruc);
+                        dateV[1], dateV[0]), phonenumber, email, direction, ruc, razonSocial);
 
         if (action.equals("add")) {
 
@@ -221,7 +223,8 @@ public class CustomerController {
             "Telefono",
             "Email",
             "Direccion",
-            "RUC"
+            "RUC",
+            "Razon Social"
         };
         DefaultTableModel customerModel = new DefaultTableModel(null, columns);
 
@@ -239,7 +242,8 @@ public class CustomerController {
                 customer.getPhoneNumber(),
                 customer.getEmail(),
                 customer.getAddress(),
-                customer.getRuc()
+                customer.getRuc(),
+                customer.getSocialReason()
             };
 
             customerModel.addRow(row);
@@ -260,6 +264,7 @@ public class CustomerController {
         view.getjTFTelephone().setText("");
         view.getjTFAddress().setText("");
         view.getjTFruc().setText("");
+        view.getjTFrazonSocial().setText("");
         action = "add";
     }
 
@@ -278,6 +283,7 @@ public class CustomerController {
         view.getjTFEmail().setText(view.getjTList().getValueAt(view.getRow(), 6).toString());
         view.getjTFAddress().setText(view.getjTList().getValueAt(view.getRow(), 7).toString());
         view.getjTFruc().setText(view.getjTList().getValueAt(view.getRow(), 8).toString());
+        view.getjTFrazonSocial().setText(view.getjTList().getValueAt(view.getRow(), 9).toString());
 
         view.getBtnDelete().setVisible(true);
     }

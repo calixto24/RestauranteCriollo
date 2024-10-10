@@ -67,13 +67,20 @@ public class VoucherView extends javax.swing.JFrame {
         jTFdniStr = new javax.swing.JTextField();
         jTFnombreStr = new javax.swing.JTextField();
         jTFapellidoMstr = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        jTFdireccion = new javax.swing.JTextField();
+        jTFruc = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        jTFsocialReason = new javax.swing.JTextField();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTItemOrder = new javax.swing.JTable();
@@ -132,7 +139,7 @@ public class VoucherView extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, -1, 60));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, 60));
 
         jLabel23.setBackground(new java.awt.Color(86, 42, 35));
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -142,61 +149,124 @@ public class VoucherView extends javax.swing.JFrame {
 
         jPVaucher.setLayout(new java.awt.CardLayout());
 
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBackground(new java.awt.Color(249, 242, 228));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setForeground(new java.awt.Color(86, 42, 35));
         jLabel4.setText("APELLIDO MATERNO: ");
-        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 120, 33));
+        jPanel7.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 120, 33));
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(86, 42, 35));
         jLabel6.setText("DNI: ");
-        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 86, 33));
+        jPanel7.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 86, 33));
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setForeground(new java.awt.Color(86, 42, 35));
         jLabel8.setText("NOMBRES: ");
-        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 86, 33));
+        jPanel7.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 86, 33));
 
         jLabel10.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setForeground(new java.awt.Color(86, 42, 35));
         jLabel10.setText("APELLIDO PATERNO: ");
-        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 130, 33));
-        jPanel7.add(jTFapellidoPstr, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 260, 30));
+        jPanel7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 130, 33));
 
+        jTFapellidoPstr.setEditable(false);
+        jTFapellidoPstr.setBackground(new java.awt.Color(249, 242, 228));
+        jTFapellidoPstr.setBorder(null);
+        jTFapellidoPstr.setEnabled(false);
+        jPanel7.add(jTFapellidoPstr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 260, 30));
+
+        jTFdniStr.setBackground(new java.awt.Color(249, 242, 228));
+        jTFdniStr.setBorder(null);
         jTFdniStr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFdniStrActionPerformed(evt);
             }
         });
-        jPanel7.add(jTFdniStr, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 260, 30));
-        jPanel7.add(jTFnombreStr, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 260, 30));
-        jPanel7.add(jTFapellidoMstr, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 260, 30));
+        jPanel7.add(jTFdniStr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 260, 30));
+
+        jTFnombreStr.setEditable(false);
+        jTFnombreStr.setBackground(new java.awt.Color(249, 242, 228));
+        jTFnombreStr.setBorder(null);
+        jTFnombreStr.setEnabled(false);
+        jPanel7.add(jTFnombreStr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 260, 30));
+
+        jTFapellidoMstr.setEditable(false);
+        jTFapellidoMstr.setBackground(new java.awt.Color(249, 242, 228));
+        jTFapellidoMstr.setBorder(null);
+        jTFapellidoMstr.setEnabled(false);
+        jPanel7.add(jTFapellidoMstr, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 260, 30));
+
+        jSeparator1.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator1.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel7.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 260, 12));
+
+        jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator2.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel7.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 260, 12));
+
+        jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel7.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 260, 12));
+
+        jSeparator4.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator4.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel7.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 260, 12));
 
         jPVaucher.add(jPanel7, "boleta");
 
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBackground(new java.awt.Color(249, 242, 228));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setForeground(new java.awt.Color(86, 42, 35));
         jLabel11.setText("DIRECCION: ");
-        jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 100, 33));
+        jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 100, 33));
 
         jLabel16.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setForeground(new java.awt.Color(86, 42, 35));
         jLabel16.setText("RUC: ");
-        jPanel8.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 86, 33));
-        jPanel8.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 250, 30));
-        jPanel8.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 250, 30));
+        jPanel8.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 86, 33));
+
+        jTFdireccion.setEditable(false);
+        jTFdireccion.setBackground(new java.awt.Color(249, 242, 228));
+        jTFdireccion.setBorder(null);
+        jTFdireccion.setEnabled(false);
+        jPanel8.add(jTFdireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 250, 30));
+
+        jTFruc.setBackground(new java.awt.Color(249, 242, 228));
+        jTFruc.setBorder(null);
+        jTFruc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFrucActionPerformed(evt);
+            }
+        });
+        jPanel8.add(jTFruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 250, 30));
 
         jLabel20.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel20.setForeground(new java.awt.Color(86, 42, 35));
         jLabel20.setText("RAZON SOCIAL: ");
-        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 33));
-        jPanel8.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 250, 30));
+        jPanel8.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 100, 33));
+
+        jTFsocialReason.setEditable(false);
+        jTFsocialReason.setBackground(new java.awt.Color(249, 242, 228));
+        jTFsocialReason.setBorder(null);
+        jTFsocialReason.setEnabled(false);
+        jPanel8.add(jTFsocialReason, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 250, 30));
+
+        jSeparator5.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator5.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel8.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 250, 12));
+
+        jSeparator6.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator6.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel8.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 250, 12));
+
+        jSeparator7.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator7.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel8.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 250, 12));
 
         jPVaucher.add(jPanel8, "factura");
 
@@ -481,8 +551,12 @@ public class VoucherView extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBTypeDocumentActionPerformed
 
     private void jTFdniStrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFdniStrActionPerformed
-       voucherController.handleVoucherClick();
+       voucherController.handleDniClick();
     }//GEN-LAST:event_jTFdniStrActionPerformed
+
+    private void jTFrucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrucActionPerformed
+        voucherController.handleRucClick();
+    }//GEN-LAST:event_jTFrucActionPerformed
     
     public JTextField getjTFdniStr() {
         return jTFdniStr;
@@ -490,6 +564,18 @@ public class VoucherView extends javax.swing.JFrame {
 
     public JTextField getjTFapellidoPstr() {
         return jTFapellidoPstr;
+    }
+
+    public JTextField getjTFdireccion() {
+        return jTFdireccion;
+    }
+
+    public JTextField getjTFruc() {
+        return jTFruc;
+    }
+
+    public JTextField getjTFsocialReason() {
+        return jTFsocialReason;
     }
 
     public JTextField getjTFapellidoMstr() {
@@ -593,16 +679,23 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JTextField jTFapellidoMstr;
     private javax.swing.JTextField jTFapellidoPstr;
+    private javax.swing.JTextField jTFdireccion;
     private javax.swing.JTextField jTFdniStr;
     private javax.swing.JTextField jTFnombreStr;
+    private javax.swing.JTextField jTFruc;
+    private javax.swing.JTextField jTFsocialReason;
     private javax.swing.JTextField jTFsubTotal;
     private javax.swing.JTable jTItemOrder;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;

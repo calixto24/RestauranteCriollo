@@ -15,6 +15,9 @@ public class Bill extends Voucher implements PaymentApplicable {
         this.paymentType = paymentType;
     }
 
+    public Bill() {
+    }
+
     /** METODOS ABSTRACTOS**/
     
     @Override

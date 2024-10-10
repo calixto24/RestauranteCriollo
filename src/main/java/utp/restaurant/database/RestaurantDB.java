@@ -67,8 +67,8 @@ public class RestaurantDB {
 
         //lista de clientes
         customerList = new ArrayList<>();
-        customerList.add(new Customer("Manuel", "Dias", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912"));
-        customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913"));
+        customerList.add(new Customer("Manuel", "Dias", "Granados", 74883675, LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate", "12345678912", "Manuel Granados"));
+        customerList.add(new Customer("Pepito", "Huarote", "Vieira", 74613649, LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate", "12345678913", "Pepito Huarote"));
 
         //lista de ordenes
         ArrayList<ItemOrder> itemOrderList = new ArrayList<>();

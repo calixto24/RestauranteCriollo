@@ -43,6 +43,8 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     public abstract void getInfo(T t);
     public abstract void generatePdf(S s);
     
+    //
+    
     public void calculateDiscount(NaturalPerson np) {
         
     }

@@ -38,7 +38,7 @@ public class VoucherController {
         this.voucherView = voucherView;
         vldt = new Validate();
         store = Store.getInstance();
-        
+
         voucher = new Bill();
 
         juridicalCustomerDAO = new JuridicalCustomerDAO();
@@ -56,11 +56,19 @@ public class VoucherController {
 
     public void initAttributes() {
         voucherView.getjLBnumerTable().setText(order.getTable().getNumber_table() + "");
+        
+        //inicializando metodos
         voucher.calculateIgv();
+        voucher.calculateDiscount();
+        voucher.calculateTotalPrice();
+        
+        //pintando
         voucherView.getjTFsubTotal().setText(String.format("S/. %,.2f", voucher.getOrder().getTotal_Price()));
         voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
         voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
-        
+        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
+        voucherView.getjTFtotal().setText(String.format("S/. %,.2f", voucher.getTotalPrice()));
+
     }
 
     public DefaultTableModel getTableModel() {
@@ -108,80 +116,163 @@ public class VoucherController {
             case "Factura":
                 voucher = new Bill();
                 cl.show(voucherView.getjPVaucher(), "factura");
+                handleCleanForm();
                 break;
             case "Boleta":
                 voucher = new Ticket();
                 cl.show(voucherView.getjPVaucher(), "boleta");
+                handleCleanForm();
                 break;
         }
 
         voucher.setOrder(order);
     }
 
-    public void handleDniClick() {
+    public void autoCompletedDocumentClick() {
 
-        //VALIDACION
-        String dniStr = voucherView.getjTFdniStr().getText();
+        switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
 
-        int dni = 0;
+            case "Factura":
 
-        if (!dniStr.trim().isEmpty()) {
-            dni = Integer.parseInt(dniStr);
-        }
+                String rucstr = voucherView.getjTFruc().getText();
+                vldt.setElement(rucstr)
+                        .isRequired("El numero de RUC es obligatorio")
+                        .isLong("El numero de DNI debe ser numerico")
+                        .equalsLength(11, "El RUC tiene 11 digitos");
 
-        ArrayList<NaturalCustomer> naturalCustomerList = naturalCustomerDAO.getAll();
+                if (!vldt.exec()) {
+                    voucherView.showMessage(vldt.getMessage());
+                    voucherView.getjTFruc().requestFocus();
+                    handleCleanForm();
+                    return;
+                }
 
-        for (NaturalCustomer c : naturalCustomerList) {
+                long ruc = Long.parseLong(rucstr);
 
-            if (dni == c.getDni()) {
-                naturalCustomer = c;
-            }
-        }
+                ArrayList<JuridicalCustomer> juridicalCustomerList = juridicalCustomerDAO.getAll();
 
-        try {
+                for (JuridicalCustomer c : juridicalCustomerList) {
 
-            voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
-            voucherView.getjTFapellidoPstr().setText(naturalCustomer.getLastname_paternal());
-            voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
+                    if (ruc == c.getRuc()) {
+                        juridicalCustomer = c;
+                    }
+                }
 
-        } catch (Exception e) {
+                try {
 
-            voucherView.showMessage("No existe el cliente en la BD");
+                    if (juridicalCustomer != null) {
 
+                        voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
+                        voucherView.getjTFdireccion().setText(juridicalCustomer.getAddress());
+
+                    } else {
+
+                        voucherView.showMessage("No existe el cliente en la BD");
+                        handleCleanForm();
+
+                    }
+                } catch (Exception e) {
+
+                    voucherView.showMessage("Ocurrió un error al procesar el cliente.");
+                    handleCleanForm();
+
+                }
+
+                break;
+
+            case "Boleta":
+
+                String dniStr = voucherView.getjTFdniStr().getText();
+                vldt.setElement(dniStr)
+                        .isRequired("El numero DNI es obligatorio")
+                        .isInt("El numero de DNI debe ser numerico")
+                        .equalsLength(8, "El numero de DNI tiene 8 digitos");
+
+                if (!vldt.exec()) {
+                    voucherView.showMessage(vldt.getMessage());
+                    voucherView.getjTFdniStr().requestFocus();
+                    handleCleanForm();
+                    return;
+                }
+
+                int dni = Integer.parseInt(dniStr);
+
+                ArrayList<NaturalCustomer> naturalCustomerList = naturalCustomerDAO.getAll();
+
+                for (NaturalCustomer c : naturalCustomerList) {
+
+                    if (dni == c.getDni()) {
+                        naturalCustomer = c;
+                    }
+                }
+
+                try {
+
+                    if (naturalCustomer != null) {
+
+                        voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
+                        voucherView.getjTFapellidoPstr().setText(naturalCustomer.getLastname_paternal());
+                        voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
+
+                    } else {
+
+                        voucherView.showMessage("No existe el cliente en la BD");
+                        handleCleanForm();
+
+                    }
+                } catch (Exception e) {
+
+                    voucherView.showMessage("Ocurrió un error al procesar el cliente.");
+                    handleCleanForm();
+
+                }
+
+                break;
         }
 
     }
 
-    public void handleRucClick() {
+    public void handleCleanForm() {
 
-        String rucstr = voucherView.getjTFruc().getText();
+        switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
 
-        long ruc = 0;
-
-        if (!rucstr.trim().isEmpty()) {
-            ruc = Long.parseLong(rucstr);
+            case "Factura":
+                voucherView.getjTFruc().setText("");
+                voucherView.getjTFsocialReason().setText("");
+                voucherView.getjTFdireccion().setText("");
+                juridicalCustomer = null;
+                break;
+            case "Boleta":
+                voucherView.getjTFdniStr().setText("");
+                voucherView.getjTFnombreStr().setText("");
+                voucherView.getjTFapellidoPstr().setText("");
+                voucherView.getjTFapellidoMstr().setText("");
+                naturalCustomer = null;
+                break;
         }
 
-        ArrayList<JuridicalCustomer> juridicalCustomerList = juridicalCustomerDAO.getAll();
+    }
+    
+    public void handlePaymentTypeClick() {
+        
+        switch (voucherView.getjCBpaymentType().getSelectedItem().toString()) {
 
-        for (JuridicalCustomer c : juridicalCustomerList) {
-
-            if (ruc == c.getRuc()) {
-                juridicalCustomer = c;
-            }
+            case "Efectivo":
+                
+                voucherView.getjTFvuelto().setVisible(true);
+                voucherView.getjLBvuelto().setVisible(true);
+                
+                break;
+                
+            case "Tarjeta":
+                
+                voucherView.getjTFvuelto().setVisible(false);
+                voucherView.getjLBvuelto().setVisible(false);
+                
+                break;
+                
         }
-
-        try {
-
-            voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
-            voucherView.getjTFdireccion().setText(juridicalCustomer.getAddress());
-
-        } catch (Exception e) {
-
-            voucherView.showMessage("No existe el cliente en la BD");
-
-        }
-
+        
     }
 
     public void handleFinishClick() {

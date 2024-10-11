@@ -33,6 +33,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
         this.order = order;
         this.cashier = cashier;
         IGV = 0.18;
+        discount = 0;
     }
 
     public Voucher() {
@@ -47,9 +48,21 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     
     public void calculateDiscount(NaturalCustomer nc) {
         
+        if (nc.getBirthdate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && nc.getBirthdate().getMonth() == LocalDate.now().getMonth()) {
+            
+            discount += order.getTotal_Price() * 0.03;
+            
+        }
+        
     }
     
     public void calculateDiscount() {
+        
+        if(order.getTotal_Price() >= 300) {
+            
+            discount += order.getTotal_Price() * 0.05;
+            
+        }
         
     }
     

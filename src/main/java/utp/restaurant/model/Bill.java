@@ -2,7 +2,7 @@ package utp.restaurant.model;
 
 import java.util.Random;
 
-public class Bill extends Voucher<Long, JuridicalPerson> {
+public class Bill extends Voucher<Long, JuridicalCustomer> {
     private long id_Bill;
     private JuridicalPerson customer;
 
@@ -23,7 +23,7 @@ public class Bill extends Voucher<Long, JuridicalPerson> {
     }
     
     @Override
-    public void generatePdf(JuridicalPerson jp) {
+    public void generatePdf(JuridicalCustomer jp) {
         
     }
     

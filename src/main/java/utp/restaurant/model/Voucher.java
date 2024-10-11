@@ -45,7 +45,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     
     //
     
-    public void calculateDiscount(NaturalPerson np) {
+    public void calculateDiscount(NaturalCustomer nc) {
         
     }
     

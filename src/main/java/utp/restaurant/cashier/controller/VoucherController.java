@@ -7,28 +7,46 @@ import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.view.VoucherView;
 import utp.restaurant.dao.CustomerDAO;
+import utp.restaurant.dao.JuridicalCustomerDAO;
+import utp.restaurant.dao.NaturalCustomerDAO;
 import utp.restaurant.model.Bill;
 import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
+import utp.restaurant.model.JuridicalCustomer;
+import utp.restaurant.model.NaturalCustomer;
 import utp.restaurant.model.Order;
 import utp.restaurant.model.Ticket;
 import utp.restaurant.model.Voucher;
 import utp.restaurant.store.Store;
+import utp.restaurant.utils.Validate;
 
 public class VoucherController {
 
     private VoucherView voucherView;
-    private CustomerDAO customerDAO;
+    private JuridicalCustomerDAO juridicalCustomerDAO;
+    private NaturalCustomerDAO naturalCustomerDAO;
     private Order order;
     private Store store;
-    private Customer customer = null;
     private Voucher voucher;
+    private Validate vldt;
+
+    //objetos vacios
+    private JuridicalCustomer juridicalCustomer;
+    private NaturalCustomer naturalCustomer;
 
     public VoucherController(VoucherView voucherView) {
         this.voucherView = voucherView;
-        customerDAO = new CustomerDAO();
+        vldt = new Validate();
         store = Store.getInstance();
+        
         voucher = new Bill();
+
+        juridicalCustomerDAO = new JuridicalCustomerDAO();
+        naturalCustomerDAO = new NaturalCustomerDAO();
+
+        juridicalCustomer = null;
+        naturalCustomer = null;
+
     }
 
     public void setOrder(Order order) {
@@ -39,7 +57,10 @@ public class VoucherController {
     public void initAttributes() {
         voucherView.getjLBnumerTable().setText(order.getTable().getNumber_table() + "");
         voucher.calculateIgv();
+        voucherView.getjTFsubTotal().setText(String.format("S/. %,.2f", voucher.getOrder().getTotal_Price()));
         voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
+        voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
+        
     }
 
     public DefaultTableModel getTableModel() {
@@ -78,7 +99,7 @@ public class VoucherController {
         return tableModel;
     }
 
-    /*public void handleVoucherTypeClick() {
+    public void handleVoucherTypeClick() {
 
         CardLayout cl = (CardLayout) voucherView.getjPVaucher().getLayout();
 
@@ -93,52 +114,76 @@ public class VoucherController {
                 cl.show(voucherView.getjPVaucher(), "boleta");
                 break;
         }
-        
+
         voucher.setOrder(order);
     }
 
     public void handleDniClick() {
+
+        //VALIDACION
         String dniStr = voucherView.getjTFdniStr().getText();
-        
+
         int dni = 0;
-        
+
         if (!dniStr.trim().isEmpty()) {
             dni = Integer.parseInt(dniStr);
         }
 
-        ArrayList<Customer> customerList = customerDAO.getAll();
+        ArrayList<NaturalCustomer> naturalCustomerList = naturalCustomerDAO.getAll();
 
-        for (Customer c : customerList) {
+        for (NaturalCustomer c : naturalCustomerList) {
 
             if (dni == c.getDni()) {
-                customer = c;
+                naturalCustomer = c;
             }
         }
 
-        voucherView.getjTFnombreStr().setText(customer.getName());
-        voucherView.getjTFapellidoPstr().setText(customer.getLastname_paternal());
-        voucherView.getjTFapellidoMstr().setText(customer.getLastname_maternal());
+        try {
+
+            voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
+            voucherView.getjTFapellidoPstr().setText(naturalCustomer.getLastname_paternal());
+            voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
+
+        } catch (Exception e) {
+
+            voucherView.showMessage("No existe el cliente en la BD");
+
+        }
 
     }
-    
-    public void handleRucClick(){
-        
-        String ruc = voucherView.getjTFruc().getText();
 
-        ArrayList<Customer> customerList = customerDAO.getAll();
+    public void handleRucClick() {
 
-        for (Customer c : customerList) {
+        String rucstr = voucherView.getjTFruc().getText();
 
-            if (ruc.equals(c.getRuc())) {
-                customer = c;
+        long ruc = 0;
+
+        if (!rucstr.trim().isEmpty()) {
+            ruc = Long.parseLong(rucstr);
+        }
+
+        ArrayList<JuridicalCustomer> juridicalCustomerList = juridicalCustomerDAO.getAll();
+
+        for (JuridicalCustomer c : juridicalCustomerList) {
+
+            if (ruc == c.getRuc()) {
+                juridicalCustomer = c;
             }
         }
 
-        voucherView.getjTFsocialReason().setText(customer.getSocialReason());
-        voucherView.getjTFdireccion().setText(customer.getAddress());
-        
+        try {
+
+            voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
+            voucherView.getjTFdireccion().setText(juridicalCustomer.getAddress());
+
+        } catch (Exception e) {
+
+            voucherView.showMessage("No existe el cliente en la BD");
+
+        }
+
     }
-    
+
     public void handleFinishClick() {
 
         String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
@@ -148,6 +193,6 @@ public class VoucherController {
         //tipo de pago
         String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
 
-    }*/
+    }
 
 }

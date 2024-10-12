@@ -79,7 +79,8 @@ public class NaturalPerson extends Person{
     //metodo abstracto
     @Override
     public String fullData() {
-        return name + "  " + lastname_paternal + "  " + lastname_maternal;
+        return name + "  " + lastname_paternal + "  " 
+                + lastname_maternal;
     }
     
     @Override

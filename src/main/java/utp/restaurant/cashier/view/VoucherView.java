@@ -421,6 +421,7 @@ public class VoucherView extends javax.swing.JFrame {
         jTFdiscount.setEditable(false);
         jTFdiscount.setBackground(new java.awt.Color(249, 242, 228));
         jTFdiscount.setForeground(new java.awt.Color(51, 51, 51));
+        jTFdiscount.setText("S/. 0,00");
         jTFdiscount.setBorder(null);
         jTFdiscount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

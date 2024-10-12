@@ -71,7 +71,7 @@ public class RestaurantDB {
 
         //Lista de clientes naturales
         naturalCustomerList = new ArrayList<>();
-        naturalCustomerList.add(new NaturalCustomer(74883675, "Manuel", "Dias", "Granados", LocalDate.of(2005, 02, 15), 946087675, "jean@gmail.com", "Santa Clara, ate"));
+        naturalCustomerList.add(new NaturalCustomer(74883675, "Manuel", "Dias", "Granados", LocalDate.of(2005, 10, 11), 946087675, "jean@gmail.com", "Santa Clara, ate"));
         naturalCustomerList.add(new NaturalCustomer(74613649, "Pepito", "Huarote", "Vieira", LocalDate.of(2005, 11, 18), 946087675, "cris@gmail.com", "Santa Clara, ate"));
         
         //lista de clientes Juridicos

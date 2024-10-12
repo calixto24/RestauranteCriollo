@@ -1,4 +1,3 @@
-
 package utp.restaurant.model;
 
 import utp.restaurant.Interface.CardPayment;
@@ -9,6 +8,7 @@ import java.time.LocalTime;
 import java.util.Random;
 
 public abstract class Voucher<T, S> implements CardPayment, CashPayment {
+
     protected long id_Voucher;
     protected LocalTime time;
     protected LocalDate date;
@@ -22,7 +22,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     protected Employee cashier;
     private String paymentType;
     private double turned;
-    
+
     protected final double IGV;
 
     public Voucher(Order order, Employee cashier) {
@@ -39,73 +39,74 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     public Voucher() {
         IGV = 0.18;
     }
-    
+
     //metodos abstractos
     public abstract void getInfo(T t);
+
     public abstract void generatePdf(S s);
-    
+
     //
-    
     public void calculateDiscount(NaturalCustomer nc) {
-        
+
         if (nc.getBirthdate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && nc.getBirthdate().getMonth() == LocalDate.now().getMonth()) {
-            
+
             discount += order.getTotal_Price() * 0.03;
-            
+
         }
-        
+
     }
-    
+
     public void calculateDiscount() {
-        
-        if(order.getTotal_Price() >= 300) {
-            
+
+        if (order.getTotal_Price() >= 300) {
+
             discount += order.getTotal_Price() * 0.05;
-            
+
         }
-        
+
     }
-    
+
     public void calculateDiscount(int WeekQuantity) {
-        
+
     }
-    
+
     public double calculateIgv() {
         igv = (order.getTotal_Price() - discount) * IGV;
+
         return igv;
     }
-    
+
     public double calcTaxed() {
-        taxed = order.getTotal_Price() - igv;
-        
+        taxed = (order.getTotal_Price() - discount) - igv;
+
         return taxed;
     }
 
     public double calculateTotalPrice() {
         totalPrice = order.getTotal_Price() - discount;
-        
+
         return totalPrice;
     }
-    
+
     public double calculateTotalPrice(int additionalPayments) {
         totalPrice = calculateTotalPrice() + additionalPayments;
-        
+
         return totalPrice;
     }
-    
+
     // Interfaces
     @Override
     public double calcAddPayment() {
         additionalPayments = order.getTotal_Price() * CARD_ADD_PORCENT;
-        
+
         return additionalPayments;
     }
-    
+
     @Override
     public double calcTurned(double paymentReceived) {
         return paymentReceived - totalPrice;
     }
-    
+
     //getters y setters
     public long getId_Voucher() {
         return id_Voucher;
@@ -118,7 +119,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     public void setAdditionalPayments(double additionalPayments) {
         this.additionalPayments = additionalPayments;
     }
-    
+
     public void setId_Voucher(long id_Voucher) {
         this.id_Voucher = id_Voucher;
     }

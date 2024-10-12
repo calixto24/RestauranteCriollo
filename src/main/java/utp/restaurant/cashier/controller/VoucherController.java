@@ -29,6 +29,8 @@ public class VoucherController {
     private Store store;
     private Voucher voucher;
     private Validate vldt;
+    private boolean discountApplied;
+    private boolean birthdayDiscountApplied;
 
     //objetos vacios
     private JuridicalCustomer juridicalCustomer;
@@ -46,27 +48,28 @@ public class VoucherController {
 
         juridicalCustomer = null;
         naturalCustomer = null;
+        discountApplied = false;
+        birthdayDiscountApplied = false;
 
     }
 
     public void setOrder(Order order) {
         this.order = order;
         voucher.setOrder(order);
+        initAttributes();
     }
 
     public void initAttributes() {
         voucherView.getjLBnumerTable().setText(order.getTable().getNumber_table() + "");
-        
+
         //inicializando metodos
         voucher.calculateIgv();
-        voucher.calculateDiscount();
         voucher.calculateTotalPrice();
-        
+
         //pintando
         voucherView.getjTFsubTotal().setText(String.format("S/. %,.2f", voucher.getOrder().getTotal_Price()));
         voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
         voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
-        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
         voucherView.getjTFtotal().setText(String.format("S/. %,.2f", voucher.getTotalPrice()));
 
     }
@@ -210,9 +213,25 @@ public class VoucherController {
 
                     if (naturalCustomer != null) {
 
+                        //PINTA DATOS DEL COMPROBANTE
                         voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
                         voucherView.getjTFapellidoPstr().setText(naturalCustomer.getLastname_paternal());
                         voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
+
+                        //PINTA DETALLES
+                        if (!birthdayDiscountApplied && naturalCustomer != null) {
+                            voucher.calculateDiscount(naturalCustomer);
+                            birthdayDiscountApplied = true;
+                        }
+
+                        if (!discountApplied && naturalCustomer != null) {
+                            voucher.calculateDiscount();
+                            discountApplied = true;
+                        } else if (naturalCustomer == null) {
+                            voucher.setDiscount(0);
+                        }
+
+                        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
                     } else {
 
@@ -229,6 +248,8 @@ public class VoucherController {
 
                 break;
         }
+
+        initAttributes();
 
     }
 
@@ -251,28 +272,46 @@ public class VoucherController {
                 break;
         }
 
-    }
-    
-    public void handlePaymentTypeClick() {
+        // Limpiar los descuentos si no hay cliente
+        birthdayDiscountApplied = false;
+        discountApplied = false;
+        voucher.setDiscount(0);
         
+        initAttributes();
+
+        /*// Volver a calcular los totales sin descuentos
+        voucher.calculateIgv();
+        voucher.calculateTotalPrice();
+
+        // Actualizar los valores en la vista
+        voucherView.getjTFsubTotal().setText(String.format("S/. %,.2f", voucher.getOrder().getTotal_Price()));
+        voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
+        voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
+        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
+        voucherView.getjTFtotal().setText(String.format("S/. %,.2f", voucher.getTotalPrice()));*/
+
+    }
+
+    public void handlePaymentTypeClick() {
+
         switch (voucherView.getjCBpaymentType().getSelectedItem().toString()) {
 
             case "Efectivo":
-                
+
                 voucherView.getjTFvuelto().setVisible(true);
                 voucherView.getjLBvuelto().setVisible(true);
-                
+
                 break;
-                
+
             case "Tarjeta":
-                
+
                 voucherView.getjTFvuelto().setVisible(false);
                 voucherView.getjLBvuelto().setVisible(false);
-                
+
                 break;
-                
+
         }
-        
+
     }
 
     public void handleFinishClick() {

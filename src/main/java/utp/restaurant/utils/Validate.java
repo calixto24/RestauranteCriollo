@@ -583,7 +583,7 @@ public class Validate {
 
         return this;
     }
-    
+
     public Validate equalsAttJuridical(String msg, String attribute, long id) {
         if (!valid) {
             return this;

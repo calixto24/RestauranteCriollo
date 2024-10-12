@@ -58,6 +58,19 @@ public class Validate {
 
         return this;
     }
+    
+    public Validate greaterThanDouble(double n, String msg) {
+        if (!valid) {
+            return this;
+        }
+
+        if (Double.parseDouble(el) < n) {
+            valid = false;
+            message = msg;
+        }
+
+        return this;
+    }
 
     public Validate(String el) {
         message = "";

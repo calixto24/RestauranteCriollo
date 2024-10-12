@@ -22,33 +22,33 @@ import utp.restaurant.utils.ImgTable;
 public class VoucherView extends javax.swing.JFrame {
 
     private VoucherController voucherController;
-    
+
     public VoucherView() {
-        
+
         voucherController = new VoucherController(this);
-        
+
         initComponents();
     }
-    
+
     public void setOrder(Order order) {
         voucherController.setOrder(order);
         voucherController.initAttributes();
     }
-    
+
     public void renderTable() {
-        
+
         DefaultTableModel tableModel = voucherController.getTableModel();
         jTItemOrder.setRowHeight(100);
         jTItemOrder.setModel(tableModel);
-        
+
         jTItemOrder.getColumnModel().getColumn(1).setCellRenderer(new ImgTable());
-        
+
     }
 
     public void showMessage(String msg) {
         JOptionPane.showMessageDialog(rootPane, msg);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,7 +93,8 @@ public class VoucherView extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jTFvuelto = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTFamount = new javax.swing.JTextField();
+        jSeparator15 = new javax.swing.JSeparator();
         jPanel5 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -106,13 +107,13 @@ public class VoucherView extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         tfTaxed = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jSeparator9 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
         jSeparator13 = new javax.swing.JSeparator();
         jLabel26 = new javax.swing.JLabel();
         jTFsobrecargo = new javax.swing.JTextField();
         jSeparator14 = new javax.swing.JSeparator();
+        jSeparator11 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -355,7 +356,8 @@ public class VoucherView extends javax.swing.JFrame {
         jPanel4.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 20));
 
         jTFvuelto.setEditable(false);
-        jTFvuelto.setEnabled(false);
+        jTFvuelto.setBackground(new java.awt.Color(249, 242, 228));
+        jTFvuelto.setBorder(null);
         jTFvuelto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFvueltoActionPerformed(evt);
@@ -363,12 +365,18 @@ public class VoucherView extends javax.swing.JFrame {
         });
         jPanel4.add(jTFvuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 70, 30));
 
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        jTFamount.setBackground(new java.awt.Color(249, 242, 228));
+        jTFamount.setBorder(null);
+        jTFamount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                jTFamountActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 70, 30));
+        jPanel4.add(jTFamount, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 70, 30));
+
+        jSeparator15.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator15.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel4.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 70, 12));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 490, 210));
 
@@ -461,10 +469,6 @@ public class VoucherView extends javax.swing.JFrame {
         jSeparator6.setForeground(new java.awt.Color(86, 42, 35));
         jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 480, 12));
 
-        jSeparator9.setBackground(new java.awt.Color(86, 42, 35));
-        jSeparator9.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel5.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 480, 12));
-
         jSeparator10.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator10.setForeground(new java.awt.Color(86, 42, 35));
         jPanel5.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 480, 12));
@@ -485,12 +489,17 @@ public class VoucherView extends javax.swing.JFrame {
         jTFsobrecargo.setEditable(false);
         jTFsobrecargo.setBackground(new java.awt.Color(249, 242, 228));
         jTFsobrecargo.setForeground(new java.awt.Color(51, 51, 51));
+        jTFsobrecargo.setText("S/. 0,00");
         jTFsobrecargo.setBorder(null);
         jPanel5.add(jTFsobrecargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 480, 30));
 
         jSeparator14.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator14.setForeground(new java.awt.Color(86, 42, 35));
         jPanel5.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 480, 12));
+
+        jSeparator11.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator11.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel5.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 480, 12));
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 420, 720, 290));
 
@@ -577,7 +586,7 @@ public class VoucherView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTFvueltoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFvueltoActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTFvueltoActionPerformed
 
     private void jTFsubTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFsubTotalActionPerformed
@@ -592,32 +601,32 @@ public class VoucherView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFigvActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    private void jTFamountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFamountActionPerformed
+        voucherController.handleAmountClick();
+    }//GEN-LAST:event_jTFamountActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         CustomerRegisterModalView customerRegisterModalView = new CustomerRegisterModalView(this, true);
         customerRegisterModalView.setRoot(this);
-        
+
         customerRegisterModalView.viewDocument(jCBTypeDocument.getSelectedItem().toString());
-        
+
         customerRegisterModalView.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        //voucherController.handleFinishClick();
-        
+
+        voucherController.handleFinishClick();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCBTypeDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTypeDocumentActionPerformed
-       voucherController.handleVoucherTypeClick();
-       
+        voucherController.handleVoucherTypeClick();
+
     }//GEN-LAST:event_jCBTypeDocumentActionPerformed
 
     private void jTFdniStrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFdniStrActionPerformed
-       voucherController.autoCompletedDocumentClick();
+        voucherController.autoCompletedDocumentClick();
     }//GEN-LAST:event_jTFdniStrActionPerformed
 
     private void jTFrucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrucActionPerformed
@@ -629,19 +638,27 @@ public class VoucherView extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTaxedActionPerformed
 
     private void jTFrucMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFrucMouseClicked
-   
+
     }//GEN-LAST:event_jTFrucMouseClicked
 
     private void jTFdniStrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTFdniStrMouseClicked
-        
+
     }//GEN-LAST:event_jTFdniStrMouseClicked
 
     private void jCBpaymentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBpaymentTypeActionPerformed
         voucherController.handlePaymentTypeClick();
     }//GEN-LAST:event_jCBpaymentTypeActionPerformed
-    
+
     public JTextField getjTFdniStr() {
         return jTFdniStr;
+    }
+
+    public JTextField getjTFsobrecargo() {
+        return jTFsobrecargo;
+    }
+
+    public JTextField getjTFamount() {
+        return jTFamount;
     }
 
     public JTextField getjTFtotal() {
@@ -675,11 +692,11 @@ public class VoucherView extends javax.swing.JFrame {
     public JTextField getjTFnombreStr() {
         return jTFnombreStr;
     }
-    
+
     public JPanel getjPVaucher() {
         return jPVaucher;
     }
-    
+
     public JLabel getjLBnumerTable() {
         return jLBnumerTable;
     }
@@ -785,9 +802,11 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;
     private javax.swing.JSeparator jSeparator13;
     private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -795,7 +814,7 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
-    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextField jTFamount;
     private javax.swing.JTextField jTFapellidoMstr;
     private javax.swing.JTextField jTFapellidoPstr;
     private javax.swing.JTextField jTFdireccion;
@@ -810,7 +829,6 @@ public class VoucherView extends javax.swing.JFrame {
     private javax.swing.JTextField jTFtotal;
     private javax.swing.JTextField jTFvuelto;
     private javax.swing.JTable jTItemOrder;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField tfTaxed;
     // End of variables declaration//GEN-END:variables
 }

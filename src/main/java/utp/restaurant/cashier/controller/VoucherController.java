@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.view.VoucherView;
+import utp.restaurant.dao.BillDAO;
 import utp.restaurant.dao.JuridicalCustomerDAO;
 import utp.restaurant.dao.NaturalCustomerDAO;
+import utp.restaurant.dao.TicketDAO;
 import utp.restaurant.model.Bill;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.JuridicalCustomer;
@@ -23,10 +25,14 @@ public class VoucherController {
     private VoucherView voucherView;
     private JuridicalCustomerDAO juridicalCustomerDAO;
     private NaturalCustomerDAO naturalCustomerDAO;
+    private BillDAO billDAO;
+    private TicketDAO ticketDAO;
+
     private Order order;
     private Store store;
     private Voucher voucher;
     private Validate vldt;
+
     private boolean discountApplied;
     private boolean birthdayDiscountApplied;
 
@@ -43,6 +49,8 @@ public class VoucherController {
 
         juridicalCustomerDAO = new JuridicalCustomerDAO();
         naturalCustomerDAO = new NaturalCustomerDAO();
+        billDAO = new BillDAO();
+        ticketDAO = new TicketDAO();
 
         juridicalCustomer = null;
         naturalCustomer = null;
@@ -220,13 +228,13 @@ public class VoucherController {
                 naturalCustomer = null;
                 break;
         }
-        
-        voucher.setDiscount(0);  
+
+        voucher.setDiscount(0);
         voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
         birthdayDiscountApplied = false;
         discountApplied = false;
-        initAttributes(); 
+        initAttributes();
     }
 
     public void handlePaymentTypeClick() {
@@ -237,6 +245,9 @@ public class VoucherController {
 
                 voucherView.getjTFvuelto().setVisible(true);
                 voucherView.getjLBvuelto().setVisible(true);
+                voucherView.getjTFamount().setEditable(true);
+
+                voucher.setAdditionalPayments(0);
 
                 break;
 
@@ -245,9 +256,17 @@ public class VoucherController {
                 voucherView.getjTFvuelto().setVisible(false);
                 voucherView.getjLBvuelto().setVisible(false);
 
+                voucherView.getjTFamount().setEditable(false);
+                voucherView.getjTFamount().setText(voucher.getTotalPrice() + "");
+
+                voucher.calcAddPayment();
+
                 break;
 
         }
+
+        voucherView.getjTFsobrecargo().setText(String.format("S/. %,.2f", voucher.getAdditionalPayments()));
+        initAttributes();
 
     }
 
@@ -296,27 +315,102 @@ public class VoucherController {
             case "Factura":
                 voucher = new Bill();
                 cl.show(voucherView.getjPVaucher(), "factura");
-                handleCleanForm();
                 break;
             case "Boleta":
                 voucher = new Ticket();
                 cl.show(voucherView.getjPVaucher(), "boleta");
-                handleCleanForm();
                 break;
         }
 
         voucher.setOrder(order);
     }
 
+    public void handleAmountClick() {
+
+        String amountstr = voucherView.getjTFamount().getText();
+        double amount = 0;
+
+        switch (voucherView.getjCBpaymentType().getSelectedItem().toString()) {
+
+            case "Efectivo":
+
+                vldt.setElement(amountstr)
+                        .isRequired("El monto es obligatorio")
+                        .isDouble("El monto debe ser numerico")
+                        .greaterThanDouble(voucher.getTotalPrice(), "El monto no puede ser menor que el total");
+
+                if (!vldt.exec()) {
+                    voucherView.showMessage(vldt.getMessage());
+                    voucherView.getjTFamount().requestFocus();
+                    return;
+                }
+
+                amount = Double.parseDouble(amountstr);
+
+                voucher.calcTurned(amount);
+                voucherView.getjTFvuelto().setText(String.format("S/. %,.2f", voucher.getTurned()));
+
+                break;
+
+        }
+
+    }
+
     public void handleFinishClick() {
 
-        String typeDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
+        String selectedDocument = voucherView.getjCBTypeDocument().getSelectedItem().toString();
 
-        //cliente
-        //Customer customer = (Customer) voucherView.getjCBcustomer().getSelectedItem();
-        //tipo de pago
-        String paymentType = voucherView.getjCBpaymentType().getSelectedItem().toString();
+        switch (selectedDocument) {
 
+            case "Factura":
+                if (juridicalCustomer == null) {
+                    voucherView.showMessage("Debe seleccionar un cliente jurídico antes de finalizar la factura");
+                    return;  // Salir del método si no hay cliente
+                }
+
+                Bill newBill = new Bill(juridicalCustomer, order, store.getEmploye());
+
+                try {
+                    //añade una factura
+                    billDAO.add(newBill);
+                    
+                    //cambia estado el pedido
+                    newBill.getOrder().setStatus("Finalizado");
+                    newBill.getOrder().getTable().setStatus("Disponible");
+                    
+                    voucherView.showMessage("Factura finalizada correctamente");
+                    voucherView.dispose();
+
+                } catch (Exception e) {
+                    voucherView.showMessage("Error al finalizar la factura");
+                }
+
+                break;
+
+            case "Boleta":
+                if (naturalCustomer == null) {
+                    voucherView.showMessage("Debe seleccionar un cliente natural antes de finalizar la boleta");
+                    return;  // Salir del método si no hay cliente
+                }
+
+                Ticket newTicket = new Ticket(naturalCustomer, order, store.getEmploye());
+
+                try {
+                    ticketDAO.add(newTicket);
+                    
+                    //cambia estado el pedido
+                    newTicket.getOrder().setStatus("Finalizado");
+                    newTicket.getOrder().getTable().setStatus("Disponible");
+                    
+                    voucherView.showMessage("Boleta finalizada correctamente");
+                    voucherView.dispose();
+
+                } catch (Exception e) {
+                    voucherView.showMessage("Error al finalizar la boleta");
+                }
+
+                break;
+        }
     }
 
 }

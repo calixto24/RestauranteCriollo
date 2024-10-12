@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.view.VoucherView;
-import utp.restaurant.dao.CustomerDAO;
 import utp.restaurant.dao.JuridicalCustomerDAO;
 import utp.restaurant.dao.NaturalCustomerDAO;
 import utp.restaurant.model.Bill;
-import utp.restaurant.model.Customer;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.JuridicalCustomer;
 import utp.restaurant.model.NaturalCustomer;
@@ -56,7 +54,6 @@ public class VoucherController {
     public void setOrder(Order order) {
         this.order = order;
         voucher.setOrder(order);
-        initAttributes();
     }
 
     public void initAttributes() {
@@ -72,63 +69,6 @@ public class VoucherController {
         voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
         voucherView.getjTFtotal().setText(String.format("S/. %,.2f", voucher.getTotalPrice()));
 
-    }
-
-    public DefaultTableModel getTableModel() {
-
-        String columns[] = {
-            "Nombre",
-            "Imagen",
-            "Cantidad",
-            "Precio Unitario",
-            "Total"
-        };
-
-        DefaultTableModel tableModel = new DefaultTableModel(null, columns);
-
-        ArrayList<ItemOrder> itemOrderList = order.getItemOrderList();
-
-        for (ItemOrder i : itemOrderList) {
-
-            //obtengo y cargo la imagen a traves de su direcciom
-            ImageIcon img = new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + i.getItemMenu().getImage()));
-
-            //le agrego dimensiones
-            Image scaledImage = img.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-
-            Object row[] = {
-                i.getItemMenu().getName(),
-                new ImageIcon(scaledImage),
-                i.getAmount(),
-                i.getItemMenu().getPrice(),
-                i.getTotal()
-            };
-
-            tableModel.addRow(row);
-        }
-
-        return tableModel;
-    }
-
-    public void handleVoucherTypeClick() {
-
-        CardLayout cl = (CardLayout) voucherView.getjPVaucher().getLayout();
-
-        switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
-
-            case "Factura":
-                voucher = new Bill();
-                cl.show(voucherView.getjPVaucher(), "factura");
-                handleCleanForm();
-                break;
-            case "Boleta":
-                voucher = new Ticket();
-                cl.show(voucherView.getjPVaucher(), "boleta");
-                handleCleanForm();
-                break;
-        }
-
-        voucher.setOrder(order);
     }
 
     public void autoCompletedDocumentClick() {
@@ -165,8 +105,19 @@ public class VoucherController {
 
                     if (juridicalCustomer != null) {
 
+                        //PINTANDO COMPROBANTE
                         voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
                         voucherView.getjTFdireccion().setText(juridicalCustomer.getAddress());
+
+                        //PINTANDO DETALLES
+                        if (!discountApplied && juridicalCustomer != null) {
+                            voucher.calculateDiscount();
+                            discountApplied = true;
+                        } else if (naturalCustomer == null) {
+                            voucher.setDiscount(0);
+                        }
+
+                        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
                     } else {
 
@@ -254,9 +205,7 @@ public class VoucherController {
     }
 
     public void handleCleanForm() {
-
         switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
-
             case "Factura":
                 voucherView.getjTFruc().setText("");
                 voucherView.getjTFsocialReason().setText("");
@@ -271,25 +220,13 @@ public class VoucherController {
                 naturalCustomer = null;
                 break;
         }
+        
+        voucher.setDiscount(0);  
+        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
-        // Limpiar los descuentos si no hay cliente
         birthdayDiscountApplied = false;
         discountApplied = false;
-        voucher.setDiscount(0);
-        
-        initAttributes();
-
-        /*// Volver a calcular los totales sin descuentos
-        voucher.calculateIgv();
-        voucher.calculateTotalPrice();
-
-        // Actualizar los valores en la vista
-        voucherView.getjTFsubTotal().setText(String.format("S/. %,.2f", voucher.getOrder().getTotal_Price()));
-        voucherView.getTfTaxed().setText(String.format("S/. %,.2f", voucher.calcTaxed()));
-        voucherView.getjTFigv().setText(String.format("S/. %,.2f", voucher.getIgv()));
-        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
-        voucherView.getjTFtotal().setText(String.format("S/. %,.2f", voucher.getTotalPrice()));*/
-
+        initAttributes(); 
     }
 
     public void handlePaymentTypeClick() {
@@ -312,6 +249,63 @@ public class VoucherController {
 
         }
 
+    }
+
+    public DefaultTableModel getTableModel() {
+
+        String columns[] = {
+            "Nombre",
+            "Imagen",
+            "Cantidad",
+            "Precio Unitario",
+            "Total"
+        };
+
+        DefaultTableModel tableModel = new DefaultTableModel(null, columns);
+
+        ArrayList<ItemOrder> itemOrderList = order.getItemOrderList();
+
+        for (ItemOrder i : itemOrderList) {
+
+            //obtengo y cargo la imagen a traves de su direcciom
+            ImageIcon img = new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + i.getItemMenu().getImage()));
+
+            //le agrego dimensiones
+            Image scaledImage = img.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+
+            Object row[] = {
+                i.getItemMenu().getName(),
+                new ImageIcon(scaledImage),
+                i.getAmount(),
+                i.getItemMenu().getPrice(),
+                i.getTotal()
+            };
+
+            tableModel.addRow(row);
+        }
+
+        return tableModel;
+    }
+
+    public void handleVoucherTypeClick() {
+
+        CardLayout cl = (CardLayout) voucherView.getjPVaucher().getLayout();
+
+        switch (voucherView.getjCBTypeDocument().getSelectedItem().toString()) {
+
+            case "Factura":
+                voucher = new Bill();
+                cl.show(voucherView.getjPVaucher(), "factura");
+                handleCleanForm();
+                break;
+            case "Boleta":
+                voucher = new Ticket();
+                cl.show(voucherView.getjPVaucher(), "boleta");
+                handleCleanForm();
+                break;
+        }
+
+        voucher.setOrder(order);
     }
 
     public void handleFinishClick() {

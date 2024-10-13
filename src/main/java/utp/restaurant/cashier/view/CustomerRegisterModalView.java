@@ -59,8 +59,33 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jPanelTypeCustomer = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        jPtypeCustomer = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jTFrazonSocial = new javax.swing.JTextField();
+        jSeparator11 = new javax.swing.JSeparator();
+        jLabel21 = new javax.swing.JLabel();
+        jTFruc = new javax.swing.JTextField();
+        jSeparator10 = new javax.swing.JSeparator();
+        jLabel25 = new javax.swing.JLabel();
+        jTFtype = new javax.swing.JTextField();
+        jSeparator12 = new javax.swing.JSeparator();
+        jLabel26 = new javax.swing.JLabel();
+        jTFactivityEconomic = new javax.swing.JTextField();
+        jSeparator13 = new javax.swing.JSeparator();
+        jLabel27 = new javax.swing.JLabel();
+        jTFtypeBilling = new javax.swing.JTextField();
+        jSeparator14 = new javax.swing.JSeparator();
+        jLabel28 = new javax.swing.JLabel();
+        jTFThelephoneJuridical = new javax.swing.JTextField();
+        jSeparator15 = new javax.swing.JSeparator();
+        jLabel29 = new javax.swing.JLabel();
+        jTFEmailJuridical = new javax.swing.JTextField();
+        jSeparator16 = new javax.swing.JSeparator();
+        jLabel30 = new javax.swing.JLabel();
+        jTFAddressJuridical = new javax.swing.JTextField();
+        jSeparator17 = new javax.swing.JSeparator();
+        jPanel2 = new javax.swing.JPanel();
         jTFLastNameP = new javax.swing.JTextField();
         jTFBhirtday = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
@@ -85,7 +110,6 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         jLabel19 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,7 +122,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 110, 40));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 110, 40));
 
         jButton2.setText("AGREGAR ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -106,17 +130,173 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 430, 100, 40));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 100, 40));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(86, 42, 35));
         jLabel12.setText("Registro del Cliente");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jPanelTypeCustomer.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelTypeCustomer.setLayout(new java.awt.CardLayout());
+        jPtypeCustomer.setLayout(new java.awt.CardLayout());
 
-        jPanel5.setBackground(new java.awt.Color(0, 255, 0));
+        jPanel3.setBackground(new java.awt.Color(249, 242, 228));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel23.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel23.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel23.setText("RAZON SOCIAL");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
+
+        jTFrazonSocial.setBackground(new java.awt.Color(249, 242, 228));
+        jTFrazonSocial.setBorder(null);
+        jTFrazonSocial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFrazonSocialActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFrazonSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, 20));
+
+        jSeparator11.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator11.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 220, 12));
+
+        jLabel21.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel21.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel21.setText("RUC");
+        jPanel3.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 20));
+
+        jTFruc.setBackground(new java.awt.Color(249, 242, 228));
+        jTFruc.setForeground(new java.awt.Color(51, 51, 51));
+        jTFruc.setBorder(null);
+        jTFruc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFrucActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFruc, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 220, 20));
+
+        jSeparator10.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator10.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 220, 12));
+
+        jLabel25.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel25.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel25.setText("TIPO");
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 10, -1, 20));
+
+        jTFtype.setBackground(new java.awt.Color(249, 242, 228));
+        jTFtype.setForeground(new java.awt.Color(51, 51, 51));
+        jTFtype.setBorder(null);
+        jTFtype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFtypeActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 220, 20));
+
+        jSeparator12.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator12.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 220, 12));
+
+        jLabel26.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel26.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel26.setText("ACTIVIDAD ECONOMICA");
+        jPanel3.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
+
+        jTFactivityEconomic.setBackground(new java.awt.Color(249, 242, 228));
+        jTFactivityEconomic.setForeground(new java.awt.Color(51, 51, 51));
+        jTFactivityEconomic.setBorder(null);
+        jTFactivityEconomic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFactivityEconomicActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFactivityEconomic, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 220, 20));
+
+        jSeparator13.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator13.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 220, 12));
+
+        jLabel27.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel27.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel27.setText("TIPO DE FACTURACION");
+        jPanel3.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, 20));
+
+        jTFtypeBilling.setBackground(new java.awt.Color(249, 242, 228));
+        jTFtypeBilling.setForeground(new java.awt.Color(51, 51, 51));
+        jTFtypeBilling.setBorder(null);
+        jTFtypeBilling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFtypeBillingActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFtypeBilling, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 220, 20));
+
+        jSeparator14.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator14.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 220, 12));
+
+        jLabel28.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel28.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel28.setText("TELEFONO");
+        jPanel3.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, -1, 20));
+
+        jTFThelephoneJuridical.setBackground(new java.awt.Color(249, 242, 228));
+        jTFThelephoneJuridical.setForeground(new java.awt.Color(51, 51, 51));
+        jTFThelephoneJuridical.setBorder(null);
+        jTFThelephoneJuridical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFThelephoneJuridicalActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFThelephoneJuridical, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 220, 20));
+
+        jSeparator15.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator15.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 220, 12));
+
+        jLabel29.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel29.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel29.setText("EMAIL");
+        jPanel3.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 20));
+
+        jTFEmailJuridical.setBackground(new java.awt.Color(249, 242, 228));
+        jTFEmailJuridical.setForeground(new java.awt.Color(51, 51, 51));
+        jTFEmailJuridical.setBorder(null);
+        jTFEmailJuridical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFEmailJuridicalActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFEmailJuridical, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 220, 20));
+
+        jSeparator16.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator16.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 220, 12));
+
+        jLabel30.setBackground(new java.awt.Color(86, 42, 35));
+        jLabel30.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel30.setText("DIRECCION");
+        jPanel3.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, -1, 20));
+
+        jTFAddressJuridical.setBackground(new java.awt.Color(249, 242, 228));
+        jTFAddressJuridical.setForeground(new java.awt.Color(51, 51, 51));
+        jTFAddressJuridical.setBorder(null);
+        jTFAddressJuridical.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFAddressJuridicalActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jTFAddressJuridical, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 220, 20));
+
+        jSeparator17.setBackground(new java.awt.Color(86, 42, 35));
+        jSeparator17.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel3.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 220, 12));
+
+        jPtypeCustomer.add(jPanel3, "Factura");
+
+        jPanel2.setBackground(new java.awt.Color(249, 242, 228));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTFLastNameP.setBackground(new java.awt.Color(249, 242, 228));
         jTFLastNameP.setForeground(new java.awt.Color(51, 51, 51));
@@ -126,6 +306,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFLastNamePActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFLastNameP, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 210, 20));
 
         jTFBhirtday.setBackground(new java.awt.Color(249, 242, 228));
         jTFBhirtday.setForeground(new java.awt.Color(51, 51, 51));
@@ -135,13 +316,16 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFBhirtdayActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFBhirtday, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 210, 20));
 
         jLabel22.setBackground(new java.awt.Color(86, 42, 35));
         jLabel22.setForeground(new java.awt.Color(86, 42, 35));
         jLabel22.setText("DIRECCION");
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 140, -1));
 
         jSeparator5.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator5.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 200, 12));
 
         jTFLastNameM.setBackground(new java.awt.Color(249, 242, 228));
         jTFLastNameM.setForeground(new java.awt.Color(51, 51, 51));
@@ -151,12 +335,15 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFLastNameMActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFLastNameM, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 220, 20));
 
         jSeparator4.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator4.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, 220, 12));
 
         jSeparator6.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator6.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 210, 10));
 
         jTFTelephone.setBackground(new java.awt.Color(249, 242, 228));
         jTFTelephone.setForeground(new java.awt.Color(51, 51, 51));
@@ -166,14 +353,17 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFTelephoneActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFTelephone, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 220, 20));
 
         jLabel17.setBackground(new java.awt.Color(86, 42, 35));
         jLabel17.setForeground(new java.awt.Color(86, 42, 35));
         jLabel17.setText("DNI");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, 20));
 
         jLabel15.setBackground(new java.awt.Color(86, 42, 35));
         jLabel15.setForeground(new java.awt.Color(86, 42, 35));
         jLabel15.setText("APELLIDO PATERNO");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 140, -1));
 
         jTFAddress.setBackground(new java.awt.Color(249, 242, 228));
         jTFAddress.setForeground(new java.awt.Color(51, 51, 51));
@@ -183,16 +373,20 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFAddressActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 210, 20));
 
         jSeparator7.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator7.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, 220, 12));
 
         jLabel18.setBackground(new java.awt.Color(86, 42, 35));
         jLabel18.setForeground(new java.awt.Color(86, 42, 35));
         jLabel18.setText("TELEFONO");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, 20));
 
         jSeparator2.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator2.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, 12));
 
         jTFEmail.setBackground(new java.awt.Color(249, 242, 228));
         jTFEmail.setForeground(new java.awt.Color(51, 51, 51));
@@ -202,6 +396,7 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFEmailActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 200, -1));
 
         jTFName.setBackground(new java.awt.Color(249, 242, 228));
         jTFName.setForeground(new java.awt.Color(51, 51, 51));
@@ -211,13 +406,16 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFNameActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, 20));
 
         jSeparator8.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator8.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, 12));
 
         jLabel20.setBackground(new java.awt.Color(86, 42, 35));
         jLabel20.setForeground(new java.awt.Color(86, 42, 35));
         jLabel20.setText("EMAIL");
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, 20));
 
         jTFdni.setBackground(new java.awt.Color(249, 242, 228));
         jTFdni.setForeground(new java.awt.Color(51, 51, 51));
@@ -227,165 +425,44 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
                 jTFdniActionPerformed(evt);
             }
         });
+        jPanel2.add(jTFdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, 20));
 
         jLabel16.setBackground(new java.awt.Color(86, 42, 35));
         jLabel16.setForeground(new java.awt.Color(86, 42, 35));
         jLabel16.setText("APELLIDO MATERNO");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 20));
 
         jLabel13.setBackground(new java.awt.Color(86, 42, 35));
         jLabel13.setForeground(new java.awt.Color(86, 42, 35));
         jLabel13.setText("NOMBRE");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         jLabel19.setBackground(new java.awt.Color(86, 42, 35));
         jLabel19.setForeground(new java.awt.Color(86, 42, 35));
         jLabel19.setText("FECHA DE NACIMIENTO");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 140, -1));
 
         jSeparator9.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator9.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 210, 10));
 
         jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 210, 10));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jLabel13)
-                            .addGap(198, 198, 198)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(110, 110, 110)
-                            .addComponent(jLabel16))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(50, 50, 50)
-                            .addComponent(jTFLastNameP, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(jTFLastNameM, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel17)
-                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(50, 50, 50)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel18)))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(50, 50, 50)
-                            .addComponent(jTFBhirtday, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(jTFTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel20)
-                                .addComponent(jTFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(50, 50, 50)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTFAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(40, 40, 40)
-                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(50, 50, 50)
-                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTFName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFLastNameP, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFLastNameM, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel19))
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jTFdni, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFBhirtday, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTFTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addGap(28, 28, 28)
-                            .addComponent(jTFEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel5Layout.createSequentialGroup()
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel22)
-                            .addGap(4, 4, 4)
-                            .addComponent(jTFAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jPtypeCustomer.add(jPanel2, "Boleta");
 
-        jPanelTypeCustomer.add(jPanel5, "Boleta\n");
-
-        jPanel4.setBackground(new java.awt.Color(0, 0, 153));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-
-        jPanelTypeCustomer.add(jPanel4, "Factura\n");
-
-        jPanel1.add(jPanelTypeCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 850, 200));
+        jPanel1.add(jPtypeCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 750, 170));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
         );
 
         pack();
@@ -395,6 +472,10 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
     public CustomerRegisterModalController getCustomerRegisterModalController() {
         return customerRegisterModalController;
 
+    }
+
+    public JPanel getjPtypeCustomer() {
+        return jPtypeCustomer;
     }
 
     public JButton getjButton1() {
@@ -446,12 +527,6 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
     public JPanel getjPanel1() {
         return jPanel1;
     }
-
-    public JPanel getjPanelTypeCustomer() {
-        return jPanelTypeCustomer;
-    }
-
-   
 
     public JSeparator getjSeparator2() {
         return jSeparator2;
@@ -517,23 +592,37 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
         return jTFdni;
     }
 
-    public JPanel getjPanel4() {
-        return jPanel4;
+    public JTextField getjTFAddressJuridical() {
+        return jTFAddressJuridical;
     }
 
-    public void setjPanel4(JPanel jPanel4) {
-        this.jPanel4 = jPanel4;
+    public JTextField getjTFEmailJuridical() {
+        return jTFEmailJuridical;
     }
 
-    public JPanel getjPanel5() {
-        return jPanel5;
+    public JTextField getjTFThelephoneJuridical() {
+        return jTFThelephoneJuridical;
     }
 
-    public void setjPanel5(JPanel jPanel5) {
-        this.jPanel5 = jPanel5;
+    public JTextField getjTFactivityEconomic() {
+        return jTFactivityEconomic;
     }
 
-  
+    public JTextField getjTFrazonSocial() {
+        return jTFrazonSocial;
+    }
+
+    public JTextField getjTFruc() {
+        return jTFruc;
+    }
+
+    public JTextField getjTFtype() {
+        return jTFtype;
+    }
+
+    public JTextField getjTFtypeBilling() {
+        return jTFtypeBilling;
+    }
 
 
     private void jTFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNameActionPerformed
@@ -570,15 +659,43 @@ public class CustomerRegisterModalView extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         dispose();
-
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         customerRegisterModalController.handleRegisterClick();
-
-
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTFrazonSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrazonSocialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFrazonSocialActionPerformed
+
+    private void jTFrucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFrucActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFrucActionPerformed
+
+    private void jTFtypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFtypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFtypeActionPerformed
+
+    private void jTFactivityEconomicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFactivityEconomicActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFactivityEconomicActionPerformed
+
+    private void jTFtypeBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFtypeBillingActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFtypeBillingActionPerformed
+
+    private void jTFThelephoneJuridicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFThelephoneJuridicalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFThelephoneJuridicalActionPerformed
+
+    private void jTFEmailJuridicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEmailJuridicalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFEmailJuridicalActionPerformed
+
+    private void jTFAddressJuridicalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFAddressJuridicalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFAddressJuridicalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -634,11 +751,27 @@ look and feel */
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanelTypeCustomer;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPtypeCustomer;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JSeparator jSeparator13;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator17;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -648,12 +781,20 @@ look and feel */
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField jTFAddress;
+    private javax.swing.JTextField jTFAddressJuridical;
     private javax.swing.JTextField jTFBhirtday;
     private javax.swing.JTextField jTFEmail;
+    private javax.swing.JTextField jTFEmailJuridical;
     private javax.swing.JTextField jTFLastNameM;
     private javax.swing.JTextField jTFLastNameP;
     private javax.swing.JTextField jTFName;
     private javax.swing.JTextField jTFTelephone;
+    private javax.swing.JTextField jTFThelephoneJuridical;
+    private javax.swing.JTextField jTFactivityEconomic;
     private javax.swing.JTextField jTFdni;
+    private javax.swing.JTextField jTFrazonSocial;
+    private javax.swing.JTextField jTFruc;
+    private javax.swing.JTextField jTFtype;
+    private javax.swing.JTextField jTFtypeBilling;
     // End of variables declaration//GEN-END:variables
 }

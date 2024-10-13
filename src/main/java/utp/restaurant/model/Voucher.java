@@ -34,6 +34,12 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
         this.cashier = cashier;
         IGV = 0.18;
         discount = 0;
+        
+        calculateDiscount();
+        calculateIgv();
+        calcTaxed();
+        calculateTotalPrice();
+        
     }
 
     public Voucher() {
@@ -42,6 +48,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
 
     //metodos abstractos
     public abstract void getInfo(T t);
+
     public abstract void generatePdf(S s);
 
     //
@@ -65,8 +72,6 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
 
     }
 
-    //public void calculateDiscount(int WeekQuantity) {}
-
     public double calculateIgv() {
         igv = (order.getTotal_Price() - discount) * IGV;
 
@@ -80,6 +85,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     }
 
     public double calculateTotalPrice() {
+
         totalPrice = (order.getTotal_Price() - discount) + additionalPayments;
 
         return totalPrice;
@@ -96,7 +102,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     @Override
     public double calcTurned(double paymentReceived) {
         turned = paymentReceived - totalPrice;
-        
+
         return turned;
     }
 

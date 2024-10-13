@@ -367,7 +367,7 @@ public class VoucherController {
             case "Factura":
                 if (juridicalCustomer == null) {
                     voucherView.showMessage("Debe seleccionar un cliente jurídico antes de finalizar la factura");
-                    return;  // Salir del método si no hay cliente
+                    return; 
                 }
 
                 Bill newBill = new Bill(juridicalCustomer, order, store.getEmploye());
@@ -392,7 +392,7 @@ public class VoucherController {
             case "Boleta":
                 if (naturalCustomer == null) {
                     voucherView.showMessage("Debe seleccionar un cliente natural antes de finalizar la boleta");
-                    return;  // Salir del método si no hay cliente
+                    return; 
                 }
 
                 Ticket newTicket = new Ticket(naturalCustomer, order, store.getEmploye());
@@ -413,6 +413,8 @@ public class VoucherController {
 
                 break;
         }
+        
+        voucher = null;
     }
     
 

@@ -37,6 +37,7 @@ public class PreviewCashierView extends javax.swing.JFrame {
         jLBuser = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLBVerComprobante = new javax.swing.JLabel();
         jLBVerPedidos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +74,21 @@ public class PreviewCashierView extends javax.swing.JFrame {
         jLabel3.setText("Explora las opciones para finalizar los pedidos, asegurando una atención eficiente.");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 200, 660, 30));
 
+        jLBVerComprobante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardComprobante.png"))); // NOI18N
+        jLBVerComprobante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBVerComprobante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBVerComprobanteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBVerComprobanteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBVerComprobanteMouseExited(evt);
+            }
+        });
+        jPanel1.add(jLBVerComprobante, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 320, -1, 210));
+
         jLBVerPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardVerPedidos.png"))); // NOI18N
         jLBVerPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLBVerPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,7 +102,7 @@ public class PreviewCashierView extends javax.swing.JFrame {
                 jLBVerPedidosMouseExited(evt);
             }
         });
-        jPanel1.add(jLBVerPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 320, -1, 210));
+        jPanel1.add(jLBVerPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, 210));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,12 +126,26 @@ public class PreviewCashierView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jLBVerPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseClicked
+    private void jLBVerComprobanteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerComprobanteMouseClicked
 
+        VoucherDetailsView view = new VoucherDetailsView();
+        
+        view.setVisible(true);
+
+    }//GEN-LAST:event_jLBVerComprobanteMouseClicked
+
+    private void jLBVerComprobanteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerComprobanteMouseEntered
+        jLBVerComprobante.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardComprobanteSombra.png")));
+    }//GEN-LAST:event_jLBVerComprobanteMouseEntered
+
+    private void jLBVerComprobanteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerComprobanteMouseExited
+        jLBVerComprobante.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardComprobante.png")));
+    }//GEN-LAST:event_jLBVerComprobanteMouseExited
+
+    private void jLBVerPedidosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseClicked
         OrderView orderView = new OrderView();
         
         orderView.setVisible(true);
-
     }//GEN-LAST:event_jLBVerPedidosMouseClicked
 
     private void jLBVerPedidosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBVerPedidosMouseEntered
@@ -163,6 +193,7 @@ public class PreviewCashierView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLBVerComprobante;
     private javax.swing.JLabel jLBVerPedidos;
     private javax.swing.JLabel jLBuser;
     private javax.swing.JLabel jLabel1;

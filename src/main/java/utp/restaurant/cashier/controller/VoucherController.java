@@ -45,7 +45,7 @@ public class VoucherController {
         vldt = new Validate();
         store = Store.getInstance();
 
-        voucher = new Bill();
+        voucher = new Ticket();
 
         juridicalCustomerDAO = new JuridicalCustomerDAO();
         naturalCustomerDAO = new NaturalCustomerDAO();
@@ -158,6 +158,7 @@ public class VoucherController {
                 }
 
                 int dni = Integer.parseInt(dniStr);
+                naturalCustomer = null;
 
                 ArrayList<NaturalCustomer> naturalCustomerList = naturalCustomerDAO.getAll();
 
@@ -193,15 +194,30 @@ public class VoucherController {
                         voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
                     } else {
+                        System.out.println("no hay cliente en bd");
+                        naturalCustomer = (NaturalCustomer) ((Ticket) voucher).getCustomerData(dni);
+                        System.out.println("despues de la peticion");
+                        System.out.println(naturalCustomer.getName());
+                        voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
+                        voucherView.getjTFapellidoPstr().setText(naturalCustomer.getLastname_paternal());
+                        voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
 
-                        voucherView.showMessage("No existe el cliente en la BD");
-                        handleCleanForm();
+                        //PINTA DETALLES
+                        if (!discountApplied && naturalCustomer != null) {
+                            voucher.calculateDiscount();
+                            discountApplied = true;
+                        } else if (naturalCustomer == null) {
+                            voucher.setDiscount(0);
+                        }
+
+                        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
                     }
                 } catch (Exception e) {
 
                     voucherView.showMessage("Ocurrió un error al procesar el cliente.");
                     handleCleanForm();
+                    e.printStackTrace();
 
                 }
 
@@ -399,6 +415,7 @@ public class VoucherController {
 
                 try {
                     ticketDAO.add(newTicket);
+                    newTicket.generateTicket(naturalCustomer);
                     
                     //cambia estado el pedido
                     newTicket.getOrder().setStatus("Finalizado");
@@ -409,6 +426,7 @@ public class VoucherController {
 
                 } catch (Exception e) {
                     voucherView.showMessage("Error al finalizar la boleta");
+                    e.printStackTrace();
                 }
 
                 break;

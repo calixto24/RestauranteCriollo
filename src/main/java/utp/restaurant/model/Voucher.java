@@ -47,9 +47,9 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     }
 
     //metodos abstractos
-    public abstract void getInfo(T t);
+    public abstract S getCustomerData(T t) throws Exception;
 
-    public abstract void generatePdf(S s);
+    public abstract void generateTicket(S s) throws Exception;
 
     //
     public void calculateDiscount(NaturalCustomer nc) {

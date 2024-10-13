@@ -4,6 +4,10 @@
  */
 package utp.restaurant.cashier.view;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.controller.VoucherDetailsController;
 
@@ -14,6 +18,7 @@ import utp.restaurant.cashier.controller.VoucherDetailsController;
 public class VoucherDetailsView extends javax.swing.JFrame {
 
     private VoucherDetailsController voucherDetailsController;
+    private int row;
     
     public VoucherDetailsView() {
         voucherDetailsController = new VoucherDetailsController(this);
@@ -108,6 +113,11 @@ public class VoucherDetailsView extends javax.swing.JFrame {
 
             }
         ));
+        jTTypeVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTTypeVoucherMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTTypeVoucher);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 710, 440));
@@ -150,18 +160,39 @@ public class VoucherDetailsView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void showMessage(String msg) {
+        JOptionPane.showMessageDialog(rootPane, msg);
+    }
+    
     private void jCBTypeDocumentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTypeDocumentActionPerformed
         renderTable();
     }//GEN-LAST:event_jCBTypeDocumentActionPerformed
 
     private void jBTNvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNvoucherActionPerformed
-        //orderController.handleClick();
+        voucherDetailsController.handleViewDetailsClick(row);
     }//GEN-LAST:event_jBTNvoucherActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTTypeVoucherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTTypeVoucherMouseClicked
+        row = jTTypeVoucher.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_jTTypeVoucherMouseClicked
+
+    public JButton getjBTNvoucher() {
+        return jBTNvoucher;
+    }
+
+    public JComboBox<String> getjCBTypeDocument() {
+        return jCBTypeDocument;
+    }
+
+    public JTable getjTTypeVoucher() {
+        return jTTypeVoucher;
+    }
+
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

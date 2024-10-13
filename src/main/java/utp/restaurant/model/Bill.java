@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class Bill extends Voucher<Long, JuridicalCustomer> {
     private long id_Bill;
-    private JuridicalPerson customer;
+    private JuridicalCustomer customer;
 
-    public Bill(JuridicalPerson customer, Order order, Employee cashier) {
+    public Bill(JuridicalCustomer customer, Order order, Employee cashier) {
         super(order, cashier);
         this.id_Bill = System.currentTimeMillis() + new Random().nextInt(1000);
         this.customer = customer;
@@ -18,12 +18,12 @@ public class Bill extends Voucher<Long, JuridicalCustomer> {
 
     /** METODOS ABSTRACTOS**/
     @Override
-    public void getInfo(Long ruc) {
-
+    public JuridicalCustomer getCustomerData(Long ruc) throws Exception {
+        return null;
     }
     
     @Override
-    public void generatePdf(JuridicalCustomer jp) {
+    public void generateTicket(JuridicalCustomer jp) throws Exception {
         
     }
     
@@ -35,11 +35,11 @@ public class Bill extends Voucher<Long, JuridicalCustomer> {
         this.id_Bill = id_Bill;
     }
 
-    public JuridicalPerson getCustomer() {
+    public JuridicalCustomer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(JuridicalPerson customer) {
+    public void setCustomer(JuridicalCustomer customer) {
         this.customer = customer;
     }
 }

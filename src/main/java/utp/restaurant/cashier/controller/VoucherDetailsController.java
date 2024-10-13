@@ -1,6 +1,9 @@
 
 package utp.restaurant.cashier.controller;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.cashier.view.VoucherDetailsView;
@@ -83,6 +86,24 @@ public class VoucherDetailsController {
         
         return tableModel;
         
+    }
+    
+    public void handleViewDetailsClick(int row) {
+        long selectedId = Long.parseLong(voucherDetailsView.getjTTypeVoucher().getModel().getValueAt(row, 0).toString());
+        
+        File ticket = new File("uploads/tickets/ticket_" + selectedId + ".pdf");
+        
+        if (ticket.exists() && Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().browse(ticket.toURI());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            
+        } else {
+            voucherDetailsView.showMessage("el archivo no existe");
+        }
     }
     
 }

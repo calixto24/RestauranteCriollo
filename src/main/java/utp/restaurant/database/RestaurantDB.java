@@ -77,18 +77,14 @@ public class RestaurantDB {
         //lista de clientes Juridicos
         juridicalCustomerList = new ArrayList<>();
         juridicalCustomerList.add(new JuridicalCustomer(Long.parseLong("12345678912"), "Company Name", "Sociedad Comercial", "Venta al por mayor de equipos electronicos", "Manuel / mecanizado", 946082375, "pass@gmail.com", "Santa Clara, ate"));
-
-        /*
+        
         ArrayList<ItemOrder> itemOrderList = new ArrayList<>();
         itemOrderList.add(new ItemOrder(10, "", itemMenuList.get(0)));
         
         Order order = new Order(employeeList.get(2), tableList.get(2), itemOrderList);
         order.setStatus("Preparado");
         orderList = new ArrayList<>();
-        orderList.add(order);*/
-        
-        //lista de ordenes
-        orderList = new ArrayList<>();      
+        orderList.add(order);
         
         //lista de facturas
         billList = new ArrayList<>();

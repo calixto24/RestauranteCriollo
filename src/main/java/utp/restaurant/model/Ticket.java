@@ -1,33 +1,127 @@
 package utp.restaurant.model;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+
+import java.io.FileOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import javax.imageio.ImageIO;
+import utp.restaurant.service.CustomerService;
+import utp.restaurant.service.model.ReniecCustomer;
 
 public class Ticket extends Voucher<Integer, NaturalCustomer> {
 
     private long id_Ticket;
-    private NaturalPerson naturalPerson;
+    private NaturalCustomer customer;
 
-    public Ticket(NaturalPerson naturalPerson, Order order, Employee cashier) {
+    public Ticket(NaturalCustomer customer, Order order, Employee cashier) {
         super(order, cashier);
         this.id_Ticket = System.currentTimeMillis() + new Random().nextInt(1000);
-        this.naturalPerson = naturalPerson;
+        this.customer = customer;
     }
 
     public Ticket() {
         this.id_Ticket = System.currentTimeMillis() + new Random().nextInt(1000);
     }
 
-    /** METODOS ABSTRACTOS**/
+    /**
+     * METODOS ABSTRACTOS*
+     */
     @Override
-    public void getInfo(Integer dni) {
-
-    }
-    
-    @Override
-    public void generatePdf(NaturalCustomer nc) {
+    public NaturalCustomer getCustomerData(Integer dni) throws Exception {
+        customer = new NaturalCustomer();
+        System.out.println("metodo get Customer");
+        ReniecCustomer rc = CustomerService.getCustomer(dni);
         
+        customer.setDni(dni);
+        customer.setName(rc.getNombres());
+        customer.setLastname_maternal(rc.getApellidoMaterno());
+        customer.setLastname_paternal(rc.getApellidoPaterno());
+        
+        return customer;
     }
-    
+
+    @Override
+    public void generateTicket(NaturalCustomer nc) throws Exception {
+        float maring = 10;
+        Rectangle ticketSize = new Rectangle(227, 400);
+        Document document = new Document(ticketSize, maring, maring, maring, maring);
+
+        PdfWriter.getInstance(document, new FileOutputStream("uploads/tickets/ticket_" + id_Ticket + ".pdf"));
+        document.open();
+        
+        Paragraph title = p("Ticket");
+        title.setAlignment(Element.ALIGN_CENTER);
+        document.add(title);
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm:ss");
+        
+        document.add(p("-".repeat(34)));
+
+        document.add(p("Cliente: " + nc.getName() + " " + nc.getLastname_paternal()));
+        document.add(p("DNI: " + nc.getDni()));
+        
+        document.add(p("Fecha: " + df.format(date)));
+        document.add(p("Hora: " + tf.format(time)));
+
+        document.add(p("-".repeat(34)));
+
+        document.add(p(String.format("%-15s Cant P.unit Precio", "Producto")));
+        for (ItemOrder io : order.getItemOrderList()) {
+            document.add(p(String.format("%-15s %4d %6.2f %6.2f", io.getItemMenu().getName(), io.getAmount(), io.getItemMenu().getPrice(), io.getTotal())));
+        }
+
+        String ttlPrice = String.format("S/. %,.2f", totalPrice);
+        document.add(p(String.format("Total: %27s", ttlPrice)));
+
+        Image qrImage = Image.getInstance(generateQrCode());
+        qrImage.setAlignment(Element.ALIGN_CENTER);
+        document.add(qrImage);
+
+        document.close();
+    }
+
+    public byte[] generateQrCode() throws Exception {
+        String qrData = customer.getDni() + "|" + date.toString();
+        QRCodeWriter qRCodeWriter = new QRCodeWriter();
+
+        BitMatrix bitMatrix = qRCodeWriter.encode(qrData, BarcodeFormat.QR_CODE, 150, 150);
+
+        BufferedImage bufferedImage = MatrixToImageWriter.toBufferedImage(bitMatrix);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        ImageIO.write(bufferedImage, "png", baos);
+
+        baos.flush();
+
+        byte[] qrImageData = baos.toByteArray();
+
+        baos.close();
+
+        return qrImageData;
+    }
+
+    private Paragraph p(String txt) {
+        Font font = new Font(Font.FontFamily.COURIER, 10);
+
+        return new Paragraph(txt, font);
+    }
+
     public long getId_Ticket() {
         return id_Ticket;
     }
@@ -36,11 +130,11 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
         this.id_Ticket = id_Ticket;
     }
 
-    public NaturalPerson getNaturalPerson() {
-        return naturalPerson;
+    public NaturalCustomer getNaturalPerson() {
+        return customer;
     }
 
-    public void setNaturalPerson(NaturalPerson naturalPerson) {
-        this.naturalPerson = naturalPerson;
+    public void setNaturalPerson(NaturalCustomer customer) {
+        this.customer = customer;
     }
 }

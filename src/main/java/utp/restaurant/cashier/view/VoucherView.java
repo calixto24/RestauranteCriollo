@@ -29,6 +29,8 @@ public class VoucherView extends javax.swing.JFrame {
 
         initComponents();
     }
+    
+    
 
     public void setOrder(Order order) {
         voucherController.setOrder(order);
@@ -608,8 +610,10 @@ public class VoucherView extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         CustomerRegisterModalView customerRegisterModalView = new CustomerRegisterModalView(this, true);
         customerRegisterModalView.setRoot(this);
-
-        customerRegisterModalView.viewDocument(jCBTypeDocument.getSelectedItem().toString());
+        
+        customerRegisterModalView.setTypeDocument(jCBTypeDocument.getSelectedItem().toString());
+        
+        customerRegisterModalView.execTypeDocument();
 
         customerRegisterModalView.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked

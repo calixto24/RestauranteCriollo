@@ -257,9 +257,11 @@ public class VoucherController {
                 voucherView.getjLBvuelto().setVisible(false);
 
                 voucherView.getjTFamount().setEditable(false);
-                voucherView.getjTFamount().setText(voucher.getTotalPrice() + "");
-
+                
                 voucher.calcAddPayment();
+                voucher.calculateTotalPrice();
+                
+                voucherView.getjTFamount().setText(voucher.getTotalPrice() + "");
 
                 break;
 

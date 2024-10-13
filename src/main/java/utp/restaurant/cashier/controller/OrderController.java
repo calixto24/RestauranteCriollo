@@ -11,11 +11,12 @@ public class OrderController {
 
     private OrderView orderView;
     private OrderDAO orderDAO;
-    private ArrayList<Order> orderList;
+    private ArrayList<Order> filterOrderList;
 
     public OrderController(OrderView orderView) {
         this.orderView = orderView;
         orderDAO = new OrderDAO();
+        this.filterOrderList = new ArrayList<>();
     }
 
     public DefaultTableModel getTableModel() {
@@ -29,11 +30,12 @@ public class OrderController {
 
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
 
-        orderList = orderDAO.getAll();
+        ArrayList<Order> orderList = orderDAO.getAll();
 
         for (Order o : orderList) {
 
             if (o.getStatus().equals("Preparado")) {
+                filterOrderList.add(o);
 
                 Object row[] = {
                     o.getId_Order(),
@@ -54,7 +56,7 @@ public class OrderController {
 
     public void handleClick() {
         VoucherView voucherView = new VoucherView();
-        voucherView.setOrder(orderList.get(orderView.getRow()));
+        voucherView.setOrder(filterOrderList.get(orderView.getRow()));
 
         voucherView.renderTable();
 

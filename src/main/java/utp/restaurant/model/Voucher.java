@@ -21,7 +21,8 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     protected Order order;
     protected Employee cashier;
     private String paymentType;
-    private double turned;
+    protected double turned;
+    protected double paymentReceived;
 
     protected final double IGV;
 
@@ -73,13 +74,13 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     }
 
     public double calculateIgv() {
-        igv = (order.getTotal_Price() - discount) * IGV;
+        igv = order.getTotal_Price() * IGV;
 
         return igv;
     }
 
     public double calcTaxed() {
-        taxed = (order.getTotal_Price() - discount) - igv;
+        taxed = order.getTotal_Price() - igv;
 
         return taxed;
     }
@@ -101,6 +102,7 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
 
     @Override
     public double calcTurned(double paymentReceived) {
+        this.paymentReceived = paymentReceived;
         turned = paymentReceived - totalPrice;
 
         return turned;

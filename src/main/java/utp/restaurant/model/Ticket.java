@@ -57,23 +57,32 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
     @Override
     public void generateTicket(NaturalCustomer nc) throws Exception {
         float maring = 10;
-        Rectangle ticketSize = new Rectangle(227, 400);
+        Rectangle ticketSize = new Rectangle(227, 800);
         Document document = new Document(ticketSize, maring, maring, maring, maring);
 
         PdfWriter.getInstance(document, new FileOutputStream("uploads/tickets/ticket_" + id_Ticket + ".pdf"));
         document.open();
         
-        Paragraph title = p("Ticket");
-        title.setAlignment(Element.ALIGN_CENTER);
-        document.add(title);
+        document.add(p("Anticuchos del Peru S.A.C", Element.ALIGN_CENTER));
+        document.add(p("Avenida Primavera 557 San Borja", Element.ALIGN_CENTER));
+        document.add(p("\n"));
+        document.add(p("RUC: 20514680401", Element.ALIGN_CENTER));
+        document.add(p("Telef: (01) 2425957", Element.ALIGN_CENTER));
 
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm:ss");
-        
         document.add(p("-".repeat(34)));
 
         document.add(p("Cliente: " + nc.getName() + " " + nc.getLastname_paternal()));
         document.add(p("DNI: " + nc.getDni()));
+        
+        document.add(p("-".repeat(34)));
+        
+        document.add(p("BOLETA DE VENTA ELECTRONICA", Element.ALIGN_CENTER));
+        document.add(p("BA-" + id_Ticket, Element.ALIGN_CENTER));
+        
+        document.add(p("-".repeat(34)));
+        
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm:ss");
         
         document.add(p("Fecha: " + df.format(date)));
         document.add(p("Hora: " + tf.format(time)));
@@ -85,12 +94,35 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
             document.add(p(String.format("%-15s %4d %6.2f %6.2f", io.getItemMenu().getName(), io.getAmount(), io.getItemMenu().getPrice(), io.getTotal())));
         }
 
-        String ttlPrice = String.format("S/. %,.2f", totalPrice);
-        document.add(p(String.format("Total: %27s", ttlPrice)));
+        document.add(p("-".repeat(34)));
+        
+        document.add(p(String.format("SUB TOTAL: %23s", formatPrice(order.getTotal_Price()))));
+        document.add(p(String.format("OP. GRAVADAS: %20s", formatPrice(taxed))));
+        document.add(p(String.format("IGV: %29s", formatPrice(igv))));
+        document.add(p(String.format("DESC. TOTAL: %21s", formatPrice(discount))));
+        document.add(p(String.format("PAGO ADICIONAL: %18s", formatPrice(additionalPayments))));
+        document.add(p("\n"));
+        document.add(p(String.format("TOTAL: %27s", formatPrice(totalPrice))));
+        
+        document.add(p("-".repeat(34)));
+        
+        document.add(p("Cajero: " + cashier.getName() + " " + cashier.getLastname_paternal()));
 
+        document.add(p("-".repeat(34)));
+        
+//        document.add(p(String.format("EFECTIVO: %24s", formatPrice(paymentReceived))));
+//        document.add(p(String.format("VUELTO: %26s", formatPrice(turned))));
+//        document.add(p("-".repeat(34)));
+        
         Image qrImage = Image.getInstance(generateQrCode());
         qrImage.setAlignment(Element.ALIGN_CENTER);
         document.add(qrImage);
+        
+        document.add(p("-".repeat(34)));
+
+        document.add(p("GRACIAS POR SU COMPRA", Element.ALIGN_CENTER));
+        
+        document.add(p("-".repeat(34)));
 
         document.close();
     }
@@ -120,6 +152,18 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
         Font font = new Font(Font.FontFamily.COURIER, 10);
 
         return new Paragraph(txt, font);
+    }
+    
+    private Paragraph p(String txt, int alignmet) {
+        Font font = new Font(Font.FontFamily.COURIER, 10);
+        Paragraph paragraph = new Paragraph(txt, font);
+        paragraph.setAlignment(alignmet);
+        
+        return paragraph;
+    }
+    
+    private String formatPrice(double price) {
+        return String.format("S/. %,.2f", price);
     }
 
     public long getId_Ticket() {

@@ -6,14 +6,18 @@ import java.time.Month;
 import utp.restaurant.cashier.view.CustomerRegisterModalView;
 import utp.restaurant.dao.JuridicalCustomerDAO;
 import utp.restaurant.dao.NaturalCustomerDAO;
+import utp.restaurant.model.Bill;
 import utp.restaurant.model.JuridicalCustomer;
 import utp.restaurant.model.NaturalCustomer;
+import utp.restaurant.model.Ticket;
+import utp.restaurant.model.Voucher;
 import utp.restaurant.utils.Validate;
 
 public class CustomerRegisterModalController {
 
     private CustomerRegisterModalView view;
     private Validate vldt;
+    private Voucher voucher;
     private NaturalCustomerDAO naturalCustomerDao;
     private JuridicalCustomerDAO juridicalCustomerDAO;
 
@@ -24,6 +28,8 @@ public class CustomerRegisterModalController {
         naturalCustomerDao = new NaturalCustomerDAO();
         juridicalCustomerDAO = new JuridicalCustomerDAO();
 
+        voucher = new Ticket();
+
     }
 
     public void handleCustomerTypeClick() {
@@ -33,9 +39,11 @@ public class CustomerRegisterModalController {
         switch (view.getTypeDocument()) {
 
             case "Boleta":
+                voucher = new Ticket();
                 cl.show(view.getjPtypeCustomer(), "Boleta");
                 break;
             case "Factura":
+                voucher = new Bill();
                 cl.show(view.getjPtypeCustomer(), "Factura");
                 break;
 
@@ -43,9 +51,93 @@ public class CustomerRegisterModalController {
 
     }
 
+    public void autoCompletedData() {
+
+        if (view.getTypeDocument().equals("Boleta")) {
+
+            String dnitx = view.getjTFdni().getText();
+            vldt.setElement(dnitx)
+                    .isRequired("El DNI es obligatorio")
+                    .isInt("El DNI debe ser numerico")
+                    .equalsLength(8, "El DNI debe tener 8 digitos")
+                    .equalsAttNatural("El dni ya existe", "dni");
+
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFdni().requestFocus();
+                return;
+            }
+
+            int dni = Integer.parseInt(dnitx);
+
+            try {
+                
+                NaturalCustomer naturalCustomer = (NaturalCustomer) ((Ticket) voucher).getCustomerData(dni);
+                view.getjTFName().setText(naturalCustomer.getName());
+                view.getjTFLastNameP().setText(naturalCustomer.getLastname_paternal());
+                view.getjTFLastNameM().setText(naturalCustomer.getLastname_maternal());
+                
+            } catch (Exception e) {
+                
+                view.showMessage("No existe el numero de DNI");
+            }
+
+        } else if (view.getTypeDocument().equals("Factura")) {
+            
+            //VALIDACION DE RUC
+            String rucstr = view.getjTFruc().getText();
+            vldt.setElement(rucstr)
+                    .isRequired("El RUC es obligatorio")
+                    .isLong("El RUC debe ser numerico")
+                    .equalsLength(11, "El RUC debe tener 11 digitos")
+                    .equalsAttJuridical("El ruc ya existe", "ruc");
+
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFruc().requestFocus();
+                return;
+            }
+
+            long ruc = Long.parseLong(rucstr);
+            
+            try {
+                
+                JuridicalCustomer juridicalCustomer = (JuridicalCustomer) ((Bill) voucher).getCustomerData(ruc);
+                view.getjTFrazonSocial().setText(juridicalCustomer.getSocialReason());
+                view.getjTFAddress().setText(juridicalCustomer.getAddress());
+                view.getjTFtypeBilling().setText(juridicalCustomer.getTypeBilling());
+                view.getjTFtype().setText(juridicalCustomer.getType());
+                view.getjTFactivityEconomic().setText(juridicalCustomer.getEconomicActivity());
+                view.getjTFEmail().setText(juridicalCustomer.getEmail());
+                
+            } catch (Exception e) {
+                
+                view.showMessage("No existe el numero de RUC");
+            }
+            
+        }
+
+    }
+
     public void handleRegisterClick() {
 
         if (view.getTypeDocument().equals("Boleta")) {
+
+            // dni 
+            String dnitx = view.getjTFdni().getText();
+            vldt.setElement(dnitx)
+                    .isRequired("El DNI es obligatorio")
+                    .isInt("El DNI debe ser numerico")
+                    .equalsLength(8, "El DNI debe tener 8 digitos")
+                    .equalsAttNatural("El dni ya existe", "dni");
+
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFdni().requestFocus();
+                return;
+            }
+
+            int dni = Integer.parseInt(dnitx);
 
             //nombre
             String name = view.getjTFName().getText();
@@ -77,22 +169,6 @@ public class CustomerRegisterModalController {
                 view.getjTFLastNameP().requestFocus();
                 return;
             }
-
-            // dni 
-            String dnitx = view.getjTFdni().getText();
-            vldt.setElement(dnitx)
-                    .isRequired("El DNI es obligatorio")
-                    .isInt("El DNI debe ser numerico")
-                    .equalsLength(8, "El DNI debe tener 8 digitos")
-                    .equalsAttNatural("El dni ya existe", "dni");
-
-            if (!vldt.exec()) {
-                view.showMessage(vldt.getMessage());
-                view.getjTFdni().requestFocus();
-                return;
-            }
-
-            int dni = Integer.parseInt(dnitx);
 
             // fecha de nacimiento
             String date = view.getjTFBhirtday().getText();
@@ -211,7 +287,7 @@ public class CustomerRegisterModalController {
 
             //VALIDACION TELEFONO
             String phoneNumber = view.getjTFThelephoneJuridical().getText();
-            
+
             if (!phoneNumber.isEmpty()) {
 
                 vldt.setElement(phoneNumber)
@@ -233,7 +309,7 @@ public class CustomerRegisterModalController {
 
             //VALIDACION CORREO
             String email = view.getjTFEmailJuridical().getText();
-            
+
             if (!email.isEmpty()) {
 
                 vldt.setElement(email)

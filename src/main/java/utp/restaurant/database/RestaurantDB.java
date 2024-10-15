@@ -68,7 +68,13 @@ public class RestaurantDB {
         itemMenuList.add(new ItemMenu("Empanada de Pastel de Choclo", 16, "Rellena de choclitos tiernos y carne guisada a fuego lento.", "Disponible", categoryList.get(0), "empanadaPastelChoclo.png"));
         itemMenuList.add(new ItemMenu("Turrón Doña Pancha 1/2 kg", 46, "Con harto cariño y miel de frutos.", "Disponible", categoryList.get(2), "turronDoñaPancha.png"));
         itemMenuList.add(new ItemMenu("Aji de Gallina", 48, "El plato favorito de los limeños.", "Agotado", categoryList.get(1), "ajiDeGallina.png"));
-
+        itemMenuList.add(new ItemMenu("Papa a la Huancaina", 29, "Con su huevo y aceituna.", "Disponible", categoryList.get(0), "papaHuancaina.png"));
+        itemMenuList.add(new ItemMenu("Papa Rellena", 29, "Una papa rellena acompañada de crema de rocoto y sarza criolla.", "Disponible", categoryList.get(0), "papaRellena.png"));
+        itemMenuList.add(new ItemMenu("Tamalito Verde", 19, "Con jugo de seco y sarza criolla.", "Disponible", categoryList.get(0), "tamalVerde.png"));
+        itemMenuList.add(new ItemMenu("San Luis", 7.5, "Con harto gas.", "Disponible", categoryList.get(3), "sanLuis.png"));
+        itemMenuList.add(new ItemMenu("Arroz con leche", 23, "Tradicional postre con arroz, leche y canela.", "Disponible", categoryList.get(2), "arrozConLeche.png"));
+        itemMenuList.add(new ItemMenu("Mazamorra morada", 23, "Típico en nuestra repostería limeña con piña, durazno y guindones.", "Disponible", categoryList.get(3), "mazamorraMorada.png"));
+        
         //Lista de clientes naturales
         naturalCustomerList = new ArrayList<>();
         naturalCustomerList.add(new NaturalCustomer(74883475, "Manuel", "Dias", "Granados", LocalDate.of(2005, 10, 12), 946087675, "jean@gmail.com", "Santa Clara, ate"));

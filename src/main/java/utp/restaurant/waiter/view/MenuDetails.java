@@ -63,7 +63,7 @@ public class MenuDetails extends javax.swing.JDialog {
         jLBnameMenu.setText(itemMenu.getName());
 
         //pintando el label con la descripcion
-        jLBdescripcion.setText(itemMenu.getDescription());
+        jTFDescription.setText(itemMenu.getDescription());
         
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));

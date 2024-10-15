@@ -35,12 +35,12 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
         this.cashier = cashier;
         IGV = 0.18;
         discount = 0;
-        
+
         calculateDiscount();
         calculateIgv();
         calcTaxed();
         calculateTotalPrice();
-        
+
     }
 
     public Voucher() {
@@ -55,9 +55,13 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     //
     public void calculateDiscount(NaturalCustomer nc) {
 
-        if (nc.getBirthdate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && nc.getBirthdate().getMonth() == LocalDate.now().getMonth()) {
+        if (nc != null && nc.getBirthdate() != null) {
 
-            discount += order.getTotal_Price() * 0.03;
+            if (nc.getBirthdate().getDayOfMonth() == LocalDate.now().getDayOfMonth() && nc.getBirthdate().getMonth() == LocalDate.now().getMonth()) {
+
+                discount += order.getTotal_Price() * 0.03;
+
+            }
 
         }
 

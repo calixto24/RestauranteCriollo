@@ -19,6 +19,7 @@ public class VoucherDetailsView extends javax.swing.JFrame {
 
     private VoucherDetailsController voucherDetailsController;
     private int row;
+    private String typeVoucher;
     
     public VoucherDetailsView() {
         voucherDetailsController = new VoucherDetailsController(this);
@@ -32,11 +33,13 @@ public class VoucherDetailsView extends javax.swing.JFrame {
         
         DefaultTableModel tableModel = null;
         
-        if(jCBTypeDocument.getSelectedItem().toString().equals("Boleta")) {
+        typeVoucher = jCBTypeDocument.getSelectedItem().toString();
+        
+        if(typeVoucher.equals("Boleta")) {
             
             tableModel = voucherDetailsController.getTableModelTicket();
             
-        } else if (jCBTypeDocument.getSelectedItem().toString().equals("Factura")) {
+        } else if (typeVoucher.equals("Factura")) {
             
             tableModel = voucherDetailsController.getTableModelBill();
             
@@ -169,7 +172,7 @@ public class VoucherDetailsView extends javax.swing.JFrame {
     }//GEN-LAST:event_jCBTypeDocumentActionPerformed
 
     private void jBTNvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBTNvoucherActionPerformed
-        voucherDetailsController.handleViewDetailsClick(row);
+        voucherDetailsController.handleViewDetailsClick(row, typeVoucher);
     }//GEN-LAST:event_jBTNvoucherActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

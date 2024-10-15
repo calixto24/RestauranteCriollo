@@ -129,8 +129,22 @@ public class VoucherController {
 
                     } else {
 
-                        voucherView.showMessage("No existe el cliente en la BD");
-                        handleCleanForm();
+                        System.out.println("no hay cliente en bd");
+                        juridicalCustomer = (JuridicalCustomer) ((Bill) voucher).getCustomerData(ruc);
+                        System.out.println("despues de la peticion");
+                        System.out.println(juridicalCustomer.getSocialReason());
+                        voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
+                        voucherView.getjTFdireccion().setText(juridicalCustomer.getAddress());
+
+                        //PINTANDO DETALLES
+                        if (!discountApplied && juridicalCustomer != null) {
+                            voucher.calculateDiscount();
+                            discountApplied = true;
+                        } else if (naturalCustomer == null) {
+                            voucher.setDiscount(0);
+                        }
+
+                        voucherView.getjTFdiscount().setText(String.format("S/. %,.2f", voucher.getDiscount()));
 
                     }
                 } catch (Exception e) {
@@ -203,6 +217,11 @@ public class VoucherController {
                         voucherView.getjTFapellidoMstr().setText(naturalCustomer.getLastname_maternal());
 
                         //PINTA DETALLES
+                        if (!birthdayDiscountApplied && naturalCustomer != null) {
+                            voucher.calculateDiscount(naturalCustomer);
+                            birthdayDiscountApplied = true;
+                        }
+
                         if (!discountApplied && naturalCustomer != null) {
                             voucher.calculateDiscount();
                             discountApplied = true;
@@ -391,6 +410,7 @@ public class VoucherController {
                 try {
                     //añade una factura
                     billDAO.add(newBill);
+                    newBill.generateTicket(juridicalCustomer);
                     
                     //cambia estado el pedido
                     newBill.getOrder().setStatus("Finalizado");

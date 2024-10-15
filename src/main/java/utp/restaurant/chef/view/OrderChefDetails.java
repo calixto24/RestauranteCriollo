@@ -199,6 +199,7 @@ public class OrderChefDetails extends javax.swing.JDialog {
 
                 order.setStatus("Preparado");
                 showMessage("Pedido preparado correctamente");
+                root.callManageButton();
                 root.renderTable();
 
                 dispose();

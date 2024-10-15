@@ -35,6 +35,10 @@ public class OrderChefView extends javax.swing.JFrame {
        tcm.removeColumn(tcm.getColumn(0));
         
     }
+    
+    public void callManageButton() {
+        orderChefController.manageButtonDetails();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

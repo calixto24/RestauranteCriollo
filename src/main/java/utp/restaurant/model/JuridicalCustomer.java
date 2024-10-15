@@ -16,6 +16,9 @@ public class JuridicalCustomer extends JuridicalPerson{
         this.register = LocalDate.now();
     }
 
+    public JuridicalCustomer() {
+    }
+
     public long getId_juridicalCustomer() {
         return id_juridicalCustomer;
     }

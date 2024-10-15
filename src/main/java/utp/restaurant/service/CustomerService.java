@@ -17,20 +17,25 @@ public class CustomerService {
     private static final String URL = "https://api.apis.net.pe/v2/";
     
     public static ReniecCustomer getCustomer(int dni) throws Exception {
-        System.out.println("peticion");
         token = getToken();
         
+        //objeto para enviar solicitudes
         client = HttpClient.newHttpClient();
         
+        //define los detalles de la solicitud
         request = HttpRequest.newBuilder()
                 .uri(URI.create(URL + "/reniec/dni?numero=" + dni))
+                //el tipo de respuesta sera JSON
                 .header("accept", "application/json")
+                //token de autenticacion para hacer la peticion
                 .header("Authorization", "Bearer " + token)
                 .GET()
                 .build();
         
+        //el BodyHandlers maneja la respuesta, que indica que la respuesta será recibida como una cadena de texto.
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         
+        //el cuerpo de la respuesta es una cadena JSON
         ReniecCustomer customer = new ObjectMapper().readValue(response.body(), ReniecCustomer.class);
         
         return customer;

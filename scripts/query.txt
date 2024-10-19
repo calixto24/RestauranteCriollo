@@ -1,113 +1,153 @@
-create database restaurant;
-
 create table person (
-	id SERIAL not null primary key,
-	name varchar(100),
-	lastname_paternal varchar (100) not null,
-	lastname_maternal varchar (100) not null,
-	dni char(8) unique not null check (dni ~ '^[0-9]+$'),
-	birthdate date not null,
-	phoneNumber char(9) unique not null check (phoneNumber ~ '^[0-9]+$'),
-	address varchar(100) not null,
-	email varchar(100) unique not null
+	id_person SERIAL not null PRIMARY KEY,
+	address varchar(100),
+	phoneNumber int,
+	email varchar(100) 
 );
 
-create table role(
-	id serial not null primary key,
-	name varchar(100) unique not null
+create table naturalPerson (
+	id_naturalPerson SERIAL not null PRIMARY KEY,
+	dni int,
+	name varchar(100),
+	last_paternal varchar(100),
+	last_maternal varchar(100),
+	birthdate Date,
+	id_person int not null,
+
+	CONSTRAINT fk_person_naturalPerson FOREIGN KEY (id_person) REFERENCES person(id_person) ON DELETE CASCADE
+);
+
+create table juridicalPerson (
+	id_juridicalPerson SERIAL not null PRIMARY KEY,
+	ruc varchar(11),
+	socialReason varchar(100),
+	type varchar(100),
+	economicActivity varchar(100),
+	typeBilling varchar(100),
+	id_person int not null,
+
+	CONSTRAINT fk_person FOREIGN KEY (id_person) REFERENCES person(id_person) ON DELETE CASCADE
+);
+
+create table juridicalCustomer(
+	id_juridicalCustomer SERIAL not null PRIMARY KEY,
+	register Date,
+	id_juridicalPerson int not null,
+	
+	CONSTRAINT fk_juridicalPerson FOREIGN KEY (id_juridicalPerson) REFERENCES juridicalPerson(id_juridicalPerson) ON DELETE CASCADE
+);
+
+create table "role" (
+	id_role SERIAL not null PRIMARY KEY,
+	name_role varchar(100)
 );
 
 create table employee (
-	id serial not null primary key,
-	username varchar(100) unique not null,
-	password varchar(100) not null,
-	role_id int not null,
-	person_id int not null,
+	id_employee SERIAL not null PRIMARY KEY,
+	username varchar(100),
+	password varchar(100),
+	id_naturalPerson int not null,
+	id_role int not null,
+
+	CONSTRAINT fk_naturalPerson FOREIGN KEY (id_naturalPerson) REFERENCES naturalPerson(id_naturalPerson) ON DELETE CASCADE,
+	CONSTRAINT fk_role FOREIGN KEY (id_role) REFERENCES role(id_role)
+);
+
+create table naturalCustomer (
+	id_naturalCustomer SERIAL not null PRIMARY KEY,
+	register Date,
+	id_naturalPerson int not null,
 	
-	constraint fk_role foreign key (role_id) references role(id),
-	constraint fk_person foreign key (person_id) references person(id) on delete cascade
+	CONSTRAINT fk_naturalPerson FOREIGN KEY (id_naturalPerson) REFERENCES naturalPerson(id_naturalPerson) ON DELETE CASCADE
 );
 
 create table "table" (
-	id SERIAL not null primary key,
-	number int unique not null,
-	capacity int not null,
-	status varchar(100) not null,
-	employee_id int,
+	id_table SERIAL not null PRIMARY KEY,
+	numger_table int,
+	capacity int,
+	status varchar(100),
+	id_employee int not null,
 
-	constraint fk_employee foreign key (employee_id) references employee(id) on delete set null
-
+	CONSTRAINT fk_employee FOREIGN KEY (id_employee) REFERENCES employee(id_employee)
 );
 
-create or replace procedure add_employee(
+create table category (
+	id_category SERIAL not null PRIMARY KEY,
+	name_category varchar(100),
+	description varchar (100)
+);
 
-	name varchar,
-	lastname_paternal varchar,
-	lastname_maternal varchar,
-	dni char(8),
-	birthdate date,
-	phoneNumber char(9),
-	address varchar,
-	email varchar,
-	username varchar,
-	password varchar,
-	role_id int
-)
+create table itemMenu (
+	id_itemMenu SERIAL not null PRIMARY KEY,
+	name_itemMenu varchar(100),
+	priceUnit decimal(10,2),
+	description varchar(100),
+	status varchar(100),
+	image varchar(100),
+	id_category int not null,
 
-LANGUAGE plpgsql as $$
-declare
-	person_id int;
-begin
-	insert into person(name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email)
-	values (name, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email) returning id INTO person_id;
+	CONSTRAINT fk_category FOREIGN KEY (id_category) REFERENCES category(id_category)	
+);
 
-	insert into employee(username, password, role_id, person_id)
-	values (username, password, role_id, person_id);
+create table itemOrder (
+	id_itemOrder SERIAL not null PRIMARY KEY,
+	amount int,
+	total decimal(10,2),
+	description varchar(100),
+	id_itemMenu int not null,
+
+	CONSTRAINT fk_itemMenu FOREIGN KEY (id_itemMenu) REFERENCES itemMenu(id_itemMenu)	
+);
+
+create table "order" (
+	id_order SERIAL not null PRIMARY KEY,
+	"date" Date,
+	"time" Time,
+	status varchar(100),
+	totalPrice decimal(10,2),
+	id_employee int not null,
+	id_table int not null,
+	id_itemOrder int not null,
+
+	CONSTRAINT fk_employee FOREIGN KEY (id_employee) REFERENCES employee(id_employee),
+	CONSTRAINT fk_itemOrder FOREIGN KEY (id_itemOrder) REFERENCES itemOrder(id_itemOrder),
+	CONSTRAINT fk_table FOREIGN KEY (id_table) REFERENCES "table"(id_table)
+);
+
+create table voucher (
+	id_voucher SERIAL not null PRIMARY KEY,
+	"date" Date,
+	"time" Time,
+	status varchar(100),
+	totalPrice decimal(10,2),
+	discount decimal(10,2),
+	additionalPayments decimal(10,2),
+	igv decimal(10,2),
+	paymentType varchar(100),
+	turned decimal(10,2),
+	id_employee int not null,
+	id_order int not null,
+
+	CONSTRAINT fk_employee FOREIGN KEY (id_employee) REFERENCES employee(id_employee),
+	CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES "order"(id_order)
+);
+
+create table ticket (
+	id_ticket SERIAL not null PRIMARY KEY,
+	id_voucher int not null,
+	id_naturalCustomer int not null,
 	
-end;	
-$$;
+	CONSTRAINT fk_voucher FOREIGN KEY (id_voucher) REFERENCES voucher(id_voucher),
+	CONSTRAINT fk_naturalCustomer FOREIGN KEY (id_naturalCustomer) REFERENCES naturalCustomer(id_naturalCustomer)
+	
+);
 
-create or REPLACE PROCEDURE update_employee (
-	name_p varchar,
-	lastname_paternal_n varchar,
-	lastname_maternal_n varchar,
-	dni_n char(8),
-	birthdate_n date,
-	phoneNumber_n char(9),
-	address_n varchar,
-	email_n varchar,
-	username_n varchar,
-	role_id_n int,
-	person_id_n int,
-	employee_id_n int
-)
-
-LANGUAGE plpgsql as $$
-
-BEGIN
-	update person SET
-	name = name_p,
-	lastname_paternal = lastname_paternal_n,
-	lastname_maternal = lastname_maternal_n,
-	dni = dni_n,
-	birthdate = birthdate_n,
-	phoneNumber = phoneNumber_n,
-	address = address_n,
-	email = email_n
-	where id = person_id_n;
-
-	update employee set
-	username = username_n,
-	role_id = role_id_n
-	where id = employee_id_n;
-END;
-$$;
-
-create view get_employees as SELECT r.name AS role_name, p.name as person_name, e.id as employee_id, e.role_id as role_id, p.id as person_id, lastname_paternal, lastname_maternal, dni, birthdate, phoneNumber, address, email, username, password FROM employee e INNER JOIN person p ON p.id = e.person_id INNER JOIN role r ON e.role_id = r.id
-
-insert into role(name) values ('Administrador'), ('Mesero'), ('Cocinero'), ('Cajero')
-call add_employee('Pepito', 'Diaz', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 'admin', 2)
-call update_employee('Manuel', 'Gracia', 'Garcia', '71597295', '2003-06-24', '934123471','Mz s lt 1', 'pep@gmail.com', 'pepito123', 2, 4, 4)
-
-insert into "table"(number, capacity,status, employee_id) values (1, 5, 'Disponible', 3)
-
+create table bill (
+	id_bill SERIAL not null PRIMARY KEY,
+	id_voucher int not null,
+	id_juridicalCustomer int not null,
+	
+	CONSTRAINT fk_voucher FOREIGN KEY (id_voucher) REFERENCES voucher(id_voucher),
+	CONSTRAINT fk_juridicalCustomer FOREIGN KEY (id_juridicalCustomer) REFERENCES juridicalCustomer(id_juridicalCustomer)
+	
+);

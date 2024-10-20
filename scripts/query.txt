@@ -1,7 +1,7 @@
 create table person (
 	id_person SERIAL not null PRIMARY KEY,
 	address varchar(100),
-	phoneNumber int,
+	phone_number int,
 	email varchar(100) 
 );
 
@@ -151,3 +151,53 @@ create table bill (
 	CONSTRAINT fk_juridicalCustomer FOREIGN KEY (id_juridicalCustomer) REFERENCES juridicalCustomer(id_juridicalCustomer)
 	
 );
+
+
+
+-- procedimientos
+
+create or replace procedure add_employee (
+	dni int ,
+	name varchar , 
+last_paternal varchar,
+last_maternal varchar,
+ birthdate date,
+address varchar,
+phone_number int,
+email varchar,
+username varchar,
+password varchar,
+id_role int
+)
+language plpgsql as $$
+declare 
+_id_person int ;
+_id_naturalPerson int;
+
+begin
+	insert into person(address,phone_number,email)
+	values (address,phone_number,email)
+	returning id_person into _id_person;
+	
+	insert into naturalPerson(dni,name,last_maternal,last_paternal,birthdate,id_person)
+	values (dni,name,last_maternal,last_paternal,birthdate,_id_person)
+	returning id_naturalPerson into _id_naturalPerson;
+
+	insert into employee (username,password,id_naturalPerson,id_role)
+	values (username,password,_id_naturalPerson,id_role);
+end;
+$$;
+
+--Ejecutar el procedimiento
+call add_employee (76454651,'leonardo','murillo','apellido','2006-01-19','Huaycan',936197832,'leo@xd','leo14','leonardo11',1);
+
+insert into "role"(name_role) values 
+('administrador'),('mesero'),('cocinero'),('cajero');
+
+-- Obtener todos los datos del empleado
+create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username,r.name_role from employee e 
+inner join naturalPerson np on e.id_naturalPerson=np.id_naturalPerson 
+inner join person p on np.id_person=p.id_person
+inner join "role" r on r.id_role= e.id_role ;
+-- mostrar los datos 
+select * from getEmployee

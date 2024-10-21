@@ -330,3 +330,83 @@ inner join naturalPerson np on nc.id_naturalperson = np.id_naturalperson
 inner join person p on np.id_person = p.id_person
 
 select * from getNaturalCustomer
+
+-- PROCEDIMIENTO CLIENTE JURIDICO
+create or replace procedure add_juridicalCustomer (
+    ruc varchar, 
+    socialReason varchar, 
+    type varchar, 
+    economicActivity varchar, 
+    typeBilling varchar, 
+    address varchar, 
+    phone_number int, 
+    email varchar,
+    register Date
+)
+language plpgsql as $$
+declare
+    _id_person int;
+    _id_juridicalPerson int;
+begin
+    insert into person (address, phone_number, email)
+    values (address, phone_number, email)
+    returning id_person into _id_person;
+
+    insert into juridicalPerson (ruc, socialReason, type, economicActivity, typeBilling, id_person)
+    values (ruc, socialReason, type, economicActivity, typeBilling, _id_person)
+    returning id_juridicalPerson into _id_juridicalPerson;
+
+	insert into juridicalCustomer(register, id_juridicalPerson)
+	values (register, _id_juridicalPerson);
+end;
+$$;	
+
+create or replace procedure update_juridicalCustomer (
+
+	ruc_n varchar ,
+	socialReason_n varchar,
+	type_n varchar,
+	economicActivity_n varchar ,
+	typeBilling_n varchar,
+	address_n varchar,
+	phone_number_n int, 
+	email_n varchar,
+	register_n date,
+	id_person_n int ,
+	id_juridicalPerson_n int ,
+	id_juridicalCustomer_n int 
+)
+
+language plpgsql as $$ 
+begin
+	update person set 
+	address = address_n,
+	phone_number=phone_number_n,
+	email=email_n
+	where id_person = id_person_n ;
+	
+	update juridicalPerson set
+	ruc=ruc_n,
+	socialReason=socialReason_n,
+	type=type_n,
+	economicActivity=economicActivity_n,
+	typeBilling=typeBilling_n
+	where id_juridicalPerson= id_juridicalPerson_n;
+	
+	update juridicalCustomer set 
+	register = register_n
+	where id_juridicalCustomer=id_juridicalCustomer_n;
+end;
+$$;
+
+--EJECUCION DE LOS PROCEDIMIENTOS
+call add_juridicalCustomer('12345678912', 'a','a','a','l','l',935041343,'nol','1997-09-01')
+call update_juridicalCustomer('12345678912', 'cccc','a','a','l','l',935041343,'nol','1997-09-01',6,1,1)
+
+--CONSULTAS CLIENTE JURIDICO
+create or replace view getJuricalCustomer as select p.id_person,jp.id_juridicalperson,jc.id_juridicalcustomer ,jp.ruc,jp.socialreason,jp."type",jp.economicactivity,jp.typebilling,p.address,p.email,p.phone_number,jc.register
+from juridicalCustomer jc 
+inner join juridicalPerson jp on jc.id_juridicalperson = jp.id_juridicalperson
+inner join person p on p.id_person = jp.id_person
+
+select * from getJuricalCustomer

@@ -280,6 +280,7 @@ begin
 end;
 $$;
 
+
 create or replace procedure update_naturalCustomer(
 	dni_m int ,
     name_m varchar , 
@@ -300,7 +301,7 @@ begin
     update person set
 	address= address_m,
 	phone_number= phone_number_m,
-	email=email_n 
+	email=email_m 
 	where id_person = id_person_m;
 
 	update naturalPerson set
@@ -320,6 +321,7 @@ $$;
 
 -- EJECUCION DE LOS PROCEDIMIENTOS
 call add_naturalCustomer(76454551,'leonardo','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com','2022-10-20');
+call update_naturalCustomer(76454551,'xd','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com','2022-10-20',5,3,2);
 
 -- CONSULTA CLIENTE NATURAL
 create or replace  view getNaturalCustomer as select p.id_person, np.id_naturalperson, nc.id_naturalcustomer, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,nc.register
@@ -328,4 +330,3 @@ inner join naturalPerson np on nc.id_naturalperson = np.id_naturalperson
 inner join person p on np.id_person = p.id_person
 
 select * from getNaturalCustomer
-

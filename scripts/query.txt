@@ -1,3 +1,4 @@
+-- PRIMERA EJECUCION (TABLAS)
 create table person (
 	id_person SERIAL not null PRIMARY KEY,
 	address varchar(100),
@@ -152,22 +153,26 @@ create table bill (
 	
 );
 
+-- SEGUNDA EJECUCION (INSER)
+insert into "role"(name_role) values 
+('administrador'),
+('mesero'),
+('cocinero'),
+('cajero');
 
-
--- procedimientos
-
+-- PROCEDIMIENTO EMPLEADO
 create or replace procedure add_employee (
 	dni int ,
 	name varchar , 
-last_paternal varchar,
-last_maternal varchar,
- birthdate date,
-address varchar,
-phone_number int,
-email varchar,
-username varchar,
-password varchar,
-id_role int
+	last_paternal varchar,
+	last_maternal varchar,
+	birthdate date,
+	address varchar,
+	phone_number int,
+	email varchar,
+	username varchar,
+	password varchar,
+	id_role int
 )
 language plpgsql as $$
 declare 
@@ -188,16 +193,139 @@ begin
 end;
 $$;
 
---Ejecutar el procedimiento
+create or replace procedure update_employee(
+	dni_n int ,
+	name_n varchar , 
+	last_paternal_n varchar,
+	last_maternal_n varchar,
+	 birthdate_n date,
+	address_n varchar,
+	phone_number_n int,
+	email_n varchar,
+	username_n varchar,
+	password_n varchar,
+	id_role_n int,
+	id_employee_n int,
+	id_naturalPerson_n int,
+	id_person_n int
+)
+language plpgsql as $$ 
+begin 
+	update person set 
+	address= address_n,
+	phone_number= phone_number_n,
+	email=email_n 
+	where id_person = id_person_n;
+
+	update naturalPerson set
+	dni= dni_n,
+	name= name_n,
+	last_paternal= last_paternal_n,
+	last_maternal=last_maternal_n,
+	birthdate= birthdate_n
+    where id_naturalPerson= id_naturalPerson_n;
+
+	update employee set
+	username= username_n,
+	password= password_n,
+	id_role= id_role_n
+	where id_employee= id_employee_n;
+
+end;
+$$;
+
+-- EJECUCION DE LOS PROCEDIMIENTOS
 call add_employee (76454651,'leonardo','murillo','apellido','2006-01-19','Huaycan',936197832,'leo@xd','leo14','leonardo11',1);
+call update_employee(60749109,'Dalia','Alberto','Joaquin','2006-06-06','Huachipa',935041343,'dalia@gmail.com','Dalia','nolan',3,2,2,2);
 
-insert into "role"(name_role) values 
-('administrador'),('mesero'),('cocinero'),('cajero');
-
--- Obtener todos los datos del empleado
-create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username,r.name_role from employee e 
+-- CONSULTA EMPLEADO
+create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username,r.name_role 
+from employee e 
 inner join naturalPerson np on e.id_naturalPerson=np.id_naturalPerson 
 inner join person p on np.id_person=p.id_person
 inner join "role" r on r.id_role= e.id_role ;
+
 -- mostrar los datos 
 select * from getEmployee
+
+
+-- PROCEDIMIENTO CLIENTE NATURAL
+create or replace procedure add_naturalCustomer (
+	dni int ,
+	name varchar , 
+	last_paternal varchar,
+	last_maternal varchar,
+	 birthdate Date,
+	address varchar,
+	phone_number int,
+	email varchar,
+	register Date 
+)
+language plpgsql as $$
+declare 
+_id_person int ;
+_id_naturalPerson int ;
+
+begin
+	insert into person(address,phone_number,email)
+	values (address,phone_number,email)
+	returning id_person into _id_person;
+
+	insert into naturalPerson(dni,name,last_paternal,last_maternal,birthdate,id_person)
+	values(dni,name,last_paternal,last_maternal,birthdate,_id_person)
+	returning id_naturalPerson into _id_naturalPerson;
+
+	insert into naturalCustomer(register,id_naturalPerson)
+	values (register,_id_naturalPerson);
+end;
+$$;
+
+create or replace procedure update_naturalCustomer(
+	dni_m int ,
+    name_m varchar , 
+	last_paternal_m varchar,
+	last_maternal_m varchar,
+	birthdate_m date,
+	address_m varchar,
+	phone_number_m int,
+	email_m varchar,
+	register_m date,
+	id_person_m int,
+	id_naturalPerson_m int,
+	id_naturalCustomer_m int
+) 
+language plpgsql as $$ 
+begin
+
+    update person set
+	address= address_m,
+	phone_number= phone_number_m,
+	email=email_n 
+	where id_person = id_person_m;
+
+	update naturalPerson set
+	dni = dni_m,
+	name= name_m,
+	last_paternal=last_paternal_m,
+	last_maternal=last_maternal_m, 
+	birthdate= birthdate_m
+    where id_naturalPerson= id_naturalPerson_m;
+
+	update naturalCustomer set
+	register= register_m
+	where id_naturalCustomer= id_naturalCustomer_m;
+	
+end;
+$$;
+
+-- EJECUCION DE LOS PROCEDIMIENTOS
+call add_naturalCustomer(76454551,'leonardo','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com','2022-10-20');
+
+-- CONSULTA CLIENTE NATURAL
+create or replace  view getNaturalCustomer as select p.id_person, np.id_naturalperson, nc.id_naturalcustomer, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,nc.register
+from naturalCustomer nc 
+inner join naturalPerson np on nc.id_naturalperson = np.id_naturalperson
+inner join person p on np.id_person = p.id_person
+
+select * from getNaturalCustomer
+

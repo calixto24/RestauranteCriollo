@@ -64,7 +64,7 @@ create table naturalCustomer (
 
 create table "table" (
 	id_table SERIAL not null PRIMARY KEY,
-	numger_table int,
+	number_table int,
 	capacity int,
 	status varchar(100),
 	id_employee int not null,

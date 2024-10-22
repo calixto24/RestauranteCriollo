@@ -6,13 +6,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.admin.view.Register;
+import utp.restaurant.dao.RoleDAO;
 import utp.restaurant.model.Employee;
+import utp.restaurant.model.Role;
 import utp.restaurant.utils.Validate;
 
 public class EmployeeController {
-
+    
     //atributos
     private EmployeeDAO employeeDAO;
+    private RoleDAO roleDao;
     private Register view;
     private String action;
     private Validate vldt;
@@ -23,10 +26,12 @@ public class EmployeeController {
         this.view = view;
         action = "add";
         selectedId = 0;
-        
+
         //instancia de los objetos a utilizar
         employeeDAO = new EmployeeDAO();
+        roleDao = new RoleDAO();
         vldt = new Validate();
+
     }
 
     public void handleRegisterClick() {
@@ -91,8 +96,11 @@ public class EmployeeController {
                 .isInt("El DNI debe ser numerico")
                 .equalsLength(8, "El DNI debe tener 8 digitos");
 
-        if (action.equals("add")) vldt.equalsAttribute("El DNI ya existe", "dni");
-        else if (action.equals("edit")) vldt.equalsAttribute("El DNI ya existe", "dni", selectedId);
+        if (action.equals("add")) {
+            vldt.equalsAttribute("El DNI ya existe", "dni");
+        } else if (action.equals("edit")) {
+            vldt.equalsAttribute("El DNI ya existe", "dni", selectedId);
+        }
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
@@ -108,11 +116,14 @@ public class EmployeeController {
                 .isRequired("El telefono es obligatorio")
                 .isInt("El telefono debe ser numero")
                 .equalsLength(9, "El telefono debe tener 9 digitos");
-        
-        if(action.equals("add")) vldt.equalsAttribute("El numero ya existe", "phoneNumber");
-            else if (action.equals("edit")) vldt.equalsAttribute("El numero ya existe tarao", "phoneNumber", selectedId); 
-        
-         if (!vldt.exec()) {
+
+        if (action.equals("add")) {
+            vldt.equalsAttribute("El numero ya existe", "phoneNumber");
+        } else if (action.equals("edit")) {
+            vldt.equalsAttribute("El numero ya existe tarao", "phoneNumber", selectedId);
+        }
+
+        if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
             view.getjTFphoneNumber().requestFocus();
             return;
@@ -127,9 +138,12 @@ public class EmployeeController {
                 .isRequired("El email es obligatorio")
                 .isEmail("Email invalido");
 
-        if(action.equals("add")) vldt.equalsAttribute("El email ya existe", "email");
-        else if (action.equals("edit")) vldt.equalsAttribute("El email ya existe", "email", selectedId);
-        
+        if (action.equals("add")) {
+            vldt.equalsAttribute("El email ya existe", "email");
+        } else if (action.equals("edit")) {
+            vldt.equalsAttribute("El email ya existe", "email", selectedId);
+        }
+
         if (!vldt.exec()) {
 
             view.showMessage(vldt.getMessage());
@@ -148,17 +162,18 @@ public class EmployeeController {
             view.getjTFaddress().requestFocus();
             return;
         }
-        
+
         //VALIDACION USERNAME
         String username = view.getjTFUser().getText();
 
         vldt.setElement(username)
                 .isRequired("El usuario es obligatorio");
-        
-        if(action.equals("add")) 
+
+        if (action.equals("add")) {
             vldt.equalsAttribute("El username ya existe", "username");
-        else if (action.equals("edit")) 
+        } else if (action.equals("edit")) {
             vldt.equalsAttribute("El username ya existe", "username", selectedId);
+        }
 
         if (!vldt.exec()) {
             view.showMessage(vldt.getMessage());
@@ -167,50 +182,58 @@ public class EmployeeController {
         }
 
         //VALIDACION CONTRASEÑA
-        String password = view.getjTFPass().getText();
+        String password;
 
-        vldt.setElement(password)
-                .isRequired("La contraseña es obligatoria")
-                .minLength(8, "La contraseña debe tener minimo 8 caracteres");
+        if (!action.equals("edit")) {
 
-        if (!vldt.exec()) {
-            view.showMessage(vldt.getMessage());
-            view.getjTFPass().requestFocus();
-            return;
+            password = view.getjTFPass().getText();
+
+            vldt.setElement(password)
+                    .isRequired("La contraseña es obligatoria")
+                    .minLength(8, "La contraseña debe tener minimo 8 caracteres");
+
+            if (!vldt.exec()) {
+                view.showMessage(vldt.getMessage());
+                view.getjTFPass().requestFocus();
+                return;
+
+            }
+
+            password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+
+        } else {
+
+            password = view.getjTUserList().getModel().getValueAt(view.getRow(), 2).toString();
 
         }
-        
-        password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 
         //ROL
-        String role = (String) view.getjCBRole().getSelectedItem();
+        Role role = (Role) view.getjCBRole().getSelectedItem();
 
         //---------------------------------------------- Crear el nuevo empleado
-        Employee newEmployee = new Employee(username, password, role, name, 
-                ap, am, dni, LocalDate.of(dateV[2], 
-                        dateV[1], dateV[0]), phonenumber, email, direction);
+        Employee newEmployee = new Employee(username, password, role, dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
 
         if (action.equals("add")) {
 
             try {
                 employeeDAO.add(newEmployee);
                 view.showMessage("Usuario creado");
-                
+
             } catch (Exception e) {
 
                 view.showMessage("Usuario no creado" + e.toString());
-                
+
             }
         } else if (action.equals("edit")) {
 
             try {
                 employeeDAO.update(selectedId, newEmployee);
                 view.showMessage("Usuario actualizado");
-                
+
             } catch (Exception e) {
 
                 view.showMessage("Usuario no actualizado" + e.toString());
-                
+
             }
 
         }
@@ -221,9 +244,10 @@ public class EmployeeController {
 
     public DefaultTableModel getEmployeeModel() {
         String[] columns = {
-            "Id",
-            "Usuario",
+            "employee_id",
+            "person_id",
             "Contraseña",
+            "Usuario",
             "Rol",
             "Nombre",
             "A. Paterno",
@@ -240,9 +264,10 @@ public class EmployeeController {
 
         for (Employee employee : employeeList) {
             Object[] row = {
-                employee.getId(),
-                employee.getUsername(),
+                employee.getId_employee(),
+                employee.getId_person(),
                 employee.getPassword(),
+                employee.getUsername(),
                 employee.getRole(),
                 employee.getName(),
                 employee.getLastname_paternal(),
@@ -260,10 +285,21 @@ public class EmployeeController {
         return employeeModel;
     }
 
-    public void handleCleanForm() {
-        action = "add";
+    public void renderCBRole() {
         
-        view.getjBDelete().setEnabled(false);
+        ArrayList<Role> roleList = roleDao.getAll();
+        
+        view.getjCBRole().removeAllItems();
+        
+        for (Role r : roleList) {
+            view.getjCBRole().addItem(r);
+        }
+    }
+
+    public void handleCleanForm() {
+
+        view.getjBDelete().setVisible(false);
+        view.getBtnUpdatePassword().setVisible(false);
 
         view.getjTFUser().setText("");
         view.getjTFAM().setText("");
@@ -274,40 +310,47 @@ public class EmployeeController {
         view.getjTFName().setText("");
         view.getjTFPass().setText("");
         view.getjTFRuc().setText("");
+        view.getjTFaddress().setText("");
+
+        action = "add";
+        view.getjTFPass().setEnabled(true);
     }
 
     public void heandleViewEditClick() {
         selectedId = Long.parseLong(view.getjTUserList().getModel().getValueAt(view.getRow(), 0).toString());
 
+        action = "edit";
+
         //pintando la columna con la informacion de la fila
         view.getjTFUser().setText(view.getjTUserList().getValueAt(view.getRow(), 0).toString());
-        view.getjTFPass().setText(view.getjTUserList().getValueAt(view.getRow(), 1).toString());
-        view.getjCBRole().setSelectedItem(view.getjTUserList().getValueAt(view.getRow(), 2).toString());
-        view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
-        view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
-        view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
-        view.getjTFDni().setText(view.getjTUserList().getValueAt(view.getRow(), 6).toString());
-        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
-        view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
-        view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
-
-        action = "edit";
+        view.getjCBRole().setSelectedItem((Role) view.getjTUserList().getValueAt(view.getRow(), 1));
+        view.getjTFName().setText(view.getjTUserList().getValueAt(view.getRow(), 2).toString());
+        view.getjTFAP().setText(view.getjTUserList().getValueAt(view.getRow(), 3).toString());
+        view.getjTFAM().setText(view.getjTUserList().getValueAt(view.getRow(), 4).toString());
+        view.getjTFDni().setText(view.getjTUserList().getValueAt(view.getRow(), 5).toString());
+        view.getjTFBirthdate().setText(view.getjTUserList().getValueAt(view.getRow(), 6).toString());
+        view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
+        view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
+        view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
         
-        view.getjBDelete().setEnabled(true);
+        view.getjBDelete().setVisible(true);
+        view.getBtnUpdatePassword().setVisible(true);
+
+        view.getjTFPass().setEnabled(false);
     }
 
     public void heandleDeleteClick() {
-        
+
         selectedId = Long.parseLong(view.getjTUserList().getModel().getValueAt(view.getRow(), 0).toString());
 
         int op = view.showConfirmation("¿Desea eliminar este empleado?");
-        
+
         if (op != 0) {
-            
+
             return;
-            
+
         }
-        
+
         try {
             employeeDAO.delete(selectedId);
 
@@ -319,6 +362,5 @@ public class EmployeeController {
         } catch (Exception e) {
             view.showMessage("Error al eliminar el usuario" + e.toString());
         }
-
     }
 }

@@ -4,6 +4,12 @@
  */
 package utp.restaurant.admin.view;
 
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import utp.restaurant.admin.controller.PreviewAdminViewController;
+import utp.restaurant.login.view.LoginView;
+
 /**
  *
  * @author PC
@@ -12,14 +18,26 @@ public class PreviewAdminView extends javax.swing.JFrame {
 
     private Register register;
     private TableRegisterView tableRegisterView;
+    private RoleRegisterView roleRegisterView;
+    private ItemMenuRegisterView itemMenuRegisterView;
+    private CategoryRegisterView categoryRegisterView;
+    private CustomerRegisterView customerRegisterView;
+    private PreviewAdminViewController previewAdminViewController;
     
     public PreviewAdminView() {
         
         register = new Register();
         tableRegisterView = new TableRegisterView();
+        roleRegisterView = new RoleRegisterView();
+        itemMenuRegisterView = new ItemMenuRegisterView();
+        categoryRegisterView = new CategoryRegisterView();
+        customerRegisterView = new CustomerRegisterView();
+        
+        previewAdminViewController = new PreviewAdminViewController(this);
         
         initComponents();
         
+        previewAdminViewController.getUser();
         
     }
 
@@ -33,107 +51,259 @@ public class PreviewAdminView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLBuser = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLBplatillo = new javax.swing.JLabel();
+        jLBemployee = new javax.swing.JLabel();
+        jLBrol = new javax.swing.JLabel();
+        jLBcliente = new javax.swing.JLabel();
+        jLBmesa = new javax.swing.JLabel();
+        jLBcategoria = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(249, 242, 228));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 112, 121));
-        jLabel1.setText("Bienvenido Administrador ");
+        jLBuser.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLBuser.setForeground(new java.awt.Color(86, 42, 35));
+        jPanel1.add(jLBuser, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 180, -1, -1));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(249, 242, 228));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLBplatillo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardPlatillo.png"))); // NOI18N
+        jLBplatillo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBplatillo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBplatilloMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBplatilloMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBplatilloMouseExited(evt);
+            }
+        });
+        jPanel2.add(jLBplatillo, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 240, 180, 210));
+
+        jLBemployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardEmpleado.png"))); // NOI18N
+        jLBemployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBemployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBemployeeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBemployeeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBemployeeMouseExited(evt);
+            }
+        });
+        jPanel2.add(jLBemployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 180, 210));
+
+        jLBrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardRol.png"))); // NOI18N
+        jLBrol.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBrol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBrolMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBrolMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBrolMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLBrolMousePressed(evt);
+            }
+        });
+        jPanel2.add(jLBrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 180, 210));
+
+        jLBcliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardCliente.png"))); // NOI18N
+        jLBcliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBcliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBclienteMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBclienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBclienteMouseExited(evt);
+            }
+        });
+        jPanel2.add(jLBcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 10, 180, 210));
+
+        jLBmesa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardMesa.png"))); // NOI18N
+        jLBmesa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBmesa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBmesaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBmesaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBmesaMouseExited(evt);
+            }
+        });
+        jPanel2.add(jLBmesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 180, 210));
+
+        jLBcategoria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/cards/cardCategoria.png"))); // NOI18N
+        jLBcategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBcategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBcategoriaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLBcategoriaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLBcategoriaMouseExited(evt);
+            }
+        });
+        jPanel2.add(jLBcategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 240, 180, 210));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 1280, 460));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerPreview.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Gestión");
+        jLabel3.setText(" Explora las opciones a continuación para realizar tareas, optimizar procesos y asegurar el éxito en cada área de gestión.");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 740, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 112, 121));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Mesa");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setBackground(new java.awt.Color(86, 42, 35));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(249, 242, 228));
+        jButton4.setText("CERRAR SESION");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 190, -1, 40));
 
-        jButton3.setBackground(new java.awt.Color(0, 112, 121));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton3.setForeground(java.awt.Color.white);
-        jButton3.setText("Empleado");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(334, 334, 334)
-                        .addComponent(jLabel3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(67, 67, 67)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(180, Short.MAX_VALUE))
-        );
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel4.setText("Bienvenid@ ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, 220, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    private void jLBplatilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseClicked
+        itemMenuRegisterView.renderCBCategory();
+        itemMenuRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBplatilloMouseClicked
+
+    private void jLBemployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseClicked
+        register.renderCBRole();
         register.setVisible(true);
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jLBemployeeMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void jLBrolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseClicked
+        roleRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBrolMouseClicked
+
+    private void jLBclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseClicked
+        customerRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBclienteMouseClicked
+
+    private void jLBmesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseClicked
+        tableRegisterView.renderCBWaiter();
         tableRegisterView.setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLBmesaMouseClicked
 
-   
+    private void jLBcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseClicked
+        categoryRegisterView.setVisible(true);
+    }//GEN-LAST:event_jLBcategoriaMouseClicked
+
+    private void jLBrolMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMousePressed
+        
+    }//GEN-LAST:event_jLBrolMousePressed
+
+    private void jLBrolMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseEntered
+        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "carRolSombra.png")));
+    }//GEN-LAST:event_jLBrolMouseEntered
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        LoginView loginView = new LoginView();
+        
+        loginView.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jLBrolMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseExited
+        jLBrol.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardRol.png")));
+    }//GEN-LAST:event_jLBrolMouseExited
+
+    private void jLBemployeeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseEntered
+        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardEmpleadoSombra.png")));
+    }//GEN-LAST:event_jLBemployeeMouseEntered
+
+    private void jLBemployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseExited
+        jLBemployee.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardEmpleado.png")));
+    }//GEN-LAST:event_jLBemployeeMouseExited
+
+    private void jLBclienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseEntered
+        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardClienteSombra.png")));
+    }//GEN-LAST:event_jLBclienteMouseEntered
+
+    private void jLBclienteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseExited
+        jLBcliente.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCliente.png")));
+    }//GEN-LAST:event_jLBclienteMouseExited
+
+    private void jLBmesaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseEntered
+        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardMesaSombra.png")));
+    }//GEN-LAST:event_jLBmesaMouseEntered
+
+    private void jLBmesaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseExited
+        jLBmesa.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardMesa.png")));
+    }//GEN-LAST:event_jLBmesaMouseExited
+
+    private void jLBcategoriaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseEntered
+        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCategorySombra.png")));
+    }//GEN-LAST:event_jLBcategoriaMouseEntered
+
+    private void jLBcategoriaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseExited
+        jLBcategoria.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardCategoria.png")));
+    }//GEN-LAST:event_jLBcategoriaMouseExited
+
+    private void jLBplatilloMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseEntered
+        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardPlatilloSombra.png")));
+    }//GEN-LAST:event_jLBplatilloMouseEntered
+
+    private void jLBplatilloMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseExited
+        jLBplatillo.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/cards/" + "cardPlatillo.png")));
+    }//GEN-LAST:event_jLBplatilloMouseExited
+
+    public JLabel getjLBuser() {
+        return jLBuser;
+    }
+
+    public void setjLBuser(JLabel jLBuser) {
+        this.jLBuser = jLBuser;
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -168,10 +338,18 @@ public class PreviewAdminView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLBcategoria;
+    private javax.swing.JLabel jLBcliente;
+    private javax.swing.JLabel jLBemployee;
+    private javax.swing.JLabel jLBmesa;
+    private javax.swing.JLabel jLBplatillo;
+    private javax.swing.JLabel jLBrol;
+    private javax.swing.JLabel jLBuser;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

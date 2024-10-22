@@ -7,23 +7,28 @@ import utp.restaurant.login.view.LoginView;
 import utp.restaurant.model.Employee;
 import utp.restaurant.utils.Validate;
 import utp.restaurant.admin.view.PreviewAdminView;
+import utp.restaurant.cashier.view.PreviewCashierView;
+import utp.restaurant.chef.view.PreviewChefView;
+import utp.restaurant.store.Store;
+import utp.restaurant.waiter.view.PreviewWaiterView;
 
 public class LoginController {
     
     //atributos
     private LoginView loginView;
     private EmployeeDAO employeeDao;
+    private Store store;
     
     private Validate vldt;
-    private PreviewAdminView previewAdminView; //objeto 
 
     public LoginController(LoginView loginView) {
         
         this.loginView = loginView;
         
         employeeDao = new EmployeeDAO();
-        previewAdminView = new PreviewAdminView();
         vldt = new Validate();
+        
+        store = Store.getInstance();
         
     }
     
@@ -63,18 +68,40 @@ public class LoginController {
             
             if(verifyPass) {
                 
-                switch(user.getRole()) {
+                store.setEmploye(user);
+                
+                switch(user.getRole().getName()) {
                     
                     case "Administrador": 
-                     previewAdminView.setVisible(true); 
-                        loginView.setVisible(false);
+                        
+                        PreviewAdminView previewAdminView = new PreviewAdminView();
+                        previewAdminView.setVisible(true);
+                        loginView.dispose();
                     
                     break;
                     
                     case "Mesero": 
                         
-                        loginView.showMessage("Usted es mesero"); 
+                        PreviewWaiterView previewWaiterView = new PreviewWaiterView();
+                        previewWaiterView.setVisible(true);
+                        loginView.dispose();
                     
+                    break;
+                    
+                    case "Cocinero":
+                        
+                        PreviewChefView previewChefView = new PreviewChefView();
+                        previewChefView.setVisible(true);
+                        loginView.dispose();
+                        
+                    break;
+                    
+                    case "Cajero":
+                        
+                        PreviewCashierView previewCashierView = new PreviewCashierView();
+                        previewCashierView.setVisible(true);
+                        loginView.dispose();
+                        
                     break;
                     
                 }

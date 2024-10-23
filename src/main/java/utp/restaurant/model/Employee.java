@@ -27,6 +27,10 @@ public class Employee extends NaturalPerson {
         return id_employee;
     }
 
+    public void setId_employee(long id_employee) {
+        this.id_employee = id_employee;
+    }
+
     public String getUsername() {
         return username;
     }

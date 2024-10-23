@@ -444,7 +444,7 @@ public class CustomerController {
 
                 if (typeCustomer.equals("NATURAL")) {
 
-                    naturalCustomerDAO.update(naturalSelectedId, newNaturalCustomer);
+                    naturalCustomerDAO.update( newNaturalCustomer);
                     view.showMessage("Cliente Natural actualizado");
 
                 } else if (typeCustomer.equals("JURIDICO")) {

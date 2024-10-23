@@ -1,6 +1,10 @@
 
 package utp.restaurant.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import utp.restaurant.Interface.DAO;
 import utp.restaurant.database.RestaurantDB;
@@ -8,15 +12,30 @@ import utp.restaurant.model.JuridicalCustomer;
 
 public class JuridicalCustomerDAO implements DAO<JuridicalCustomer>{
     
+    private Connection conn;
+    private String query;
+    private Statement st;
+    private PreparedStatement ps;
+    private ResultSet rs;
     private ArrayList<JuridicalCustomer> juridicalCustomerList;
     
     //constructor vacio
     public JuridicalCustomerDAO() {
-        juridicalCustomerList = RestaurantDB.getInstance().getJuridicalCustomerList();
+        conn = RestaurantDB.getInstance().getConn();
     }
     
     @Override
     public ArrayList<JuridicalCustomer> getAll() {
+        
+        query = "SELECT * FROM getJuricalCustomer";
+        
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            
+        } catch (Exception e) {
+        }
+        
         return juridicalCustomerList;  
     }
     
@@ -30,21 +49,23 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer>{
     
     @Override 
     public void add(JuridicalCustomer juridicalCustomer) {
-        juridicalCustomerList.add(juridicalCustomer);
+        
+        
+        
     }
     
     @Override
-    public void update(long id, JuridicalCustomer juridicalCustomer) {
-        juridicalCustomerList.set(getIndex(id), juridicalCustomer);
+    public void update(JuridicalCustomer juridicalCustomer) {
+        
+        
+        
     }
 
     @Override
     public void delete(long id) {
-       juridicalCustomerList.remove(getIndex(id));
-    }
-
-    public int getIndex(long id) {
-        return juridicalCustomerList.indexOf(get(id));
+       
+        
+        
     }
     
 }

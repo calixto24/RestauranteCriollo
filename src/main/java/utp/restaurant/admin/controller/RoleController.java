@@ -70,7 +70,7 @@ public class RoleController {
 
             try {
 
-                roleDao.update(selectedId, newRole);
+                roleDao.update(newRole);
                 roleRegisterView.showMessage("Rol actualizado correctamente");
 
             } catch (Exception e) {

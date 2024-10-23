@@ -73,7 +73,7 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
         try {
 
             ps = conn.prepareStatement(query);
-            ps.setLong(1, id);
+            ps.setInt(1, (int) id);
             
             rs = ps.executeQuery();
 

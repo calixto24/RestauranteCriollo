@@ -227,7 +227,7 @@ public class EmployeeController {
         } else if (action.equals("edit")) {
 
             try {
-                employeeDAO.update(selectedId, newEmployee);
+                employeeDAO.update(newEmployee);
                 view.showMessage("Usuario actualizado");
 
             } catch (Exception e) {

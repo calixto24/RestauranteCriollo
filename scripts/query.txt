@@ -239,7 +239,7 @@ call add_employee (76454651,'leonardo','murillo','apellido','2006-01-19','Huayca
 call update_employee(60749109,'Dalia','Alberto','Joaquin','2006-06-06','Huachipa',935041343,'dalia@gmail.com','Dalia','nolan',3,2,2,2);
 
 -- CONSULTA EMPLEADO
-create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username,r.name_role 
+create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username, r.id_role,r.name_role 
 from employee e 
 inner join naturalPerson np on e.id_naturalPerson=np.id_naturalPerson 
 inner join person p on np.id_person=p.id_person
@@ -258,8 +258,7 @@ create or replace procedure add_naturalCustomer (
 	 birthdate Date,
 	address varchar,
 	phone_number int,
-	email varchar,
-	register Date 
+	email varchar
 )
 language plpgsql as $$
 declare 
@@ -276,7 +275,7 @@ begin
 	returning id_naturalPerson into _id_naturalPerson;
 
 	insert into naturalCustomer(register,id_naturalPerson)
-	values (register,_id_naturalPerson);
+	values (CURRENT_DATE,_id_naturalPerson);
 end;
 $$;
 
@@ -290,7 +289,6 @@ create or replace procedure update_naturalCustomer(
 	address_m varchar,
 	phone_number_m int,
 	email_m varchar,
-	register_m date,
 	id_person_m int,
 	id_naturalPerson_m int,
 	id_naturalCustomer_m int
@@ -313,7 +311,7 @@ begin
     where id_naturalPerson= id_naturalPerson_m;
 
 	update naturalCustomer set
-	register= register_m
+	register= CURRENT_DATE
 	where id_naturalCustomer= id_naturalCustomer_m;
 	
 end;
@@ -340,8 +338,7 @@ create or replace procedure add_juridicalCustomer (
     typeBilling varchar, 
     address varchar, 
     phone_number int, 
-    email varchar,
-    register Date
+    email varchar
 )
 language plpgsql as $$
 declare
@@ -357,7 +354,7 @@ begin
     returning id_juridicalPerson into _id_juridicalPerson;
 
 	insert into juridicalCustomer(register, id_juridicalPerson)
-	values (register, _id_juridicalPerson);
+	values (CURRENT_DATE, _id_juridicalPerson);
 end;
 $$;	
 
@@ -371,7 +368,6 @@ create or replace procedure update_juridicalCustomer (
 	address_n varchar,
 	phone_number_n int, 
 	email_n varchar,
-	register_n date,
 	id_person_n int ,
 	id_juridicalPerson_n int ,
 	id_juridicalCustomer_n int 
@@ -394,7 +390,7 @@ begin
 	where id_juridicalPerson= id_juridicalPerson_n;
 	
 	update juridicalCustomer set 
-	register = register_n
+	register = CURRENT_DATE
 	where id_juridicalCustomer=id_juridicalCustomer_n;
 end;
 $$;

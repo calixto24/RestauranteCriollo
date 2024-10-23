@@ -128,15 +128,53 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
 
     @Override
     public void update(JuridicalCustomer juridicalCustomer) {
-        
-        
-        
-        
+
+        query = "CALL update_juridicalCustomer(?,?,?,?,?,?,?,?,?,?,?)";
+
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, juridicalCustomer.getRuc() + "");
+            ps.setString(2, juridicalCustomer.getSocialReason());
+            ps.setString(3, juridicalCustomer.getType());
+            ps.setString(4, juridicalCustomer.getEconomicActivity());
+            ps.setString(5, juridicalCustomer.getTypeBilling());
+            ps.setString(6, juridicalCustomer.getAddress());
+            ps.setInt(7, juridicalCustomer.getPhoneNumber());
+            ps.setString(8, juridicalCustomer.getEmail());
+            ps.setInt(9, (int) juridicalCustomer.getId_person());
+            ps.setInt(10, (int) juridicalCustomer.getId_juridicalPerson());
+            ps.setInt(11, (int) juridicalCustomer.getId_juridicalCustomer());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+
+            e.printStackTrace(); // para que salga el error
+
+        }
 
     }
 
     @Override
     public void delete(long id) {
+        
+        
+        
+        query = "DELET FROM juridicalCustomer WHERE id_juridicalCustomer=? ";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (int) id);
+            
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            
+        }
+        
+        
+        
 
     }
 

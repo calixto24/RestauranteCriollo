@@ -406,3 +406,41 @@ inner join juridicalPerson jp on jc.id_juridicalperson = jp.id_juridicalperson
 inner join person p on p.id_person = jp.id_person
 
 select * from getJuricalCustomer
+
+--PROCEDIMIENTO FACTURA
+create or replace procedure add_bill (
+  id_employee int,
+  id_juridicalCustomer int,
+  id_order int
+)
+language plpgsql as $$
+declare 
+_id_voucher int;
+begin 
+   insert into voucher (date, time, id_employee, id_order)
+   values (CURRENT_DATE, CURRENT_TIME, id_employee, id_order)
+   returning id_voucher into _id_voucher;
+ 
+   insert into bill (id_juridicalCustomer, id_voucher)
+   values (id_juridicalCustomer, _id_voucher);
+end;
+$$;
+
+--PROCEDIMIENTO BOLETO
+create or replace procedure add_ticket (
+  id_employee int,
+  id_naturalCustomer int,
+  id_order int
+)
+language plpgsql as $$ 
+declare
+_id_voucher int;
+begin 
+   insert into voucher (date, time, id_employee, id_order)
+   values (CURRENT_DATE, CURRENT_TIME, id_employee, id_order)
+   returning id_voucher into _id_voucher;
+   
+   insert into ticket (id_naturalCustomer, id_voucher)
+   values (id_naturalCustomer, _id_voucher);
+ end;
+ $$;

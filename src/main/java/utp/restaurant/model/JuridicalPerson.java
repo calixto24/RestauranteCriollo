@@ -21,6 +21,7 @@ public class JuridicalPerson extends Person{
         this.economicActivity = economicActivity;
         this.typeBilling = typeBilling;
     }
+    
 
     public JuridicalPerson() {
     }
@@ -64,6 +65,12 @@ public class JuridicalPerson extends Person{
     public String getTypeBilling() {
         return typeBilling;
     }
+
+    public void setId_juridicalPerson(long id_juridicalPerson) {
+        this.id_juridicalPerson = id_juridicalPerson;
+    }
+    
+    
 
     public void setTypeBilling(String typeBilling) {
         this.typeBilling = typeBilling;

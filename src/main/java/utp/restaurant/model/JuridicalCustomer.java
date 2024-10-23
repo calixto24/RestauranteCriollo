@@ -26,5 +26,14 @@ public class JuridicalCustomer extends JuridicalPerson{
     public LocalDate getRegister() {
         return register;
     }
+
+    public void setId_juridicalCustomer(long id_juridicalCustomer) {
+        this.id_juridicalCustomer = id_juridicalCustomer;
+    }
+
+    public void setRegister(LocalDate register) {
+        this.register = register;
+    }
+    
     
 }

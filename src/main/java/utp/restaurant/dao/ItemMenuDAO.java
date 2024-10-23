@@ -1,53 +1,170 @@
 package utp.restaurant.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
 import utp.restaurant.database.RestaurantDB;
-import utp.restaurant.model.ItemMenu;
+import utp.restaurant.model.*;
 
-public class ItemMenuDAO
-        implements DAO<ItemMenu> {
+public class ItemMenuDAO implements DAO<ItemMenu> {
 
+    private Connection conn;
+    private String query;
+    private Statement st;
+    private PreparedStatement ps;
+    private ResultSet rs;
     private ArrayList<ItemMenu> itemMenuList;
 
     // constructor 
     public ItemMenuDAO() {
-        itemMenuList = RestaurantDB.getInstance().getItemMenuList();
+        conn = RestaurantDB.getInstance().getConn();
     }
 
     @Override
     public ArrayList<ItemMenu> getAll() {
+
+        query = "SELECT * FROM getItemMenu";
+
+        itemMenuList = new ArrayList<>();
+
+        try {
+
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                ItemMenu itemMenu = new ItemMenu();
+
+                itemMenu.setId(rs.getInt("id_itemmenu"));
+                itemMenu.setName(rs.getString("name_itemmenu"));
+                itemMenu.setPrice(rs.getDouble("priceunit"));
+                itemMenu.setDescription(rs.getString("description_itemmenu"));
+                itemMenu.setStatus(rs.getString("status"));
+                itemMenu.setImage(rs.getString("image"));
+
+                Category category = new Category();
+
+                category.setId(rs.getInt("id_category"));
+                category.setName(rs.getString("name_category"));
+                category.setDescription(rs.getString("description_category"));
+
+                itemMenu.setCategory(category);
+
+                itemMenuList.add(itemMenu);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return itemMenuList;
     }
 
     @Override
     public ItemMenu get(long id) {
-        for (ItemMenu e : itemMenuList){
-        if (e.getId()==id)
-            return e ; 
+
+        query = "SELECT * FROM getItemMenu WHERE id_itemmenu = ?";
+
+        ItemMenu itemMenu = new ItemMenu();
+
+        try {
+
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (int) id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                itemMenu.setId(rs.getInt("id_itemmenu"));
+                itemMenu.setName(rs.getString("name_itemmenu"));
+                itemMenu.setPrice(rs.getDouble("priceunit"));
+                itemMenu.setDescription(rs.getString("description_itemmenu"));
+                itemMenu.setStatus(rs.getString("status"));
+                itemMenu.setImage(rs.getString("image"));
+
+                Category category = new Category();
+                category.setId(rs.getInt("id_category"));
+                category.setName(rs.getString("name_category"));
+                category.setDescription(rs.getString("description_category"));
+
+                itemMenu.setCategory(category);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null; 
+
+        return itemMenu;
+
     }
 
     @Override
     public void add(ItemMenu item_Menu) {
-        itemMenuList.add(item_Menu);
+
+        query = "INSERT INTO itemMenu(name_itemMenu, priceUnit, description, status, image, id_category) VALUES (?,?,?,?,?,?)";
+
+        try {
+
+            ps = conn.prepareStatement(query);
+            ps.setString(1, item_Menu.getName());
+            ps.setDouble(2, item_Menu.getPrice());
+            ps.setString(3, item_Menu.getDescription());
+            ps.setString(4, item_Menu.getStatus());
+            ps.setString(5, item_Menu.getImage());
+            ps.setInt(6, (int) item_Menu.getCategory().getId());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
-    public void update(long id, ItemMenu item_Menu) {
-        itemMenuList.set(getIndex(id), item_Menu);
+    public void update(ItemMenu item_Menu) {
+
+        query = "UPDATE itemMenu SET name_itemMenu = ?, priceUnit = ?, description = ?, status = ?, image = ?, id_category = ? WHERE id_itemMenu = ?";
+
+        try {
+
+            ps = conn.prepareStatement(query);
+            ps.setString(1, item_Menu.getName());
+            ps.setDouble(2, item_Menu.getPrice());
+            ps.setString(3, item_Menu.getDescription());
+            ps.setString(4, item_Menu.getStatus());
+            ps.setString(5, item_Menu.getImage());
+            ps.setInt(6, (int) item_Menu.getCategory().getId());
+            ps.setInt(7, (int) item_Menu.getId());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void delete(long id) {
-        itemMenuList.remove(getIndex(id));
+
+        query = "DELETE FROM itemMenu WHERE id_itemMenu = ?";
+
+        try {
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, (int) id);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
-    public int getIndex(long id) {
-        return itemMenuList.indexOf(get(id));
-    }
 }

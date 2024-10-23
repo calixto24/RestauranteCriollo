@@ -22,6 +22,10 @@ public class Table {
         return number_table;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setNumber_table(int number_table) {
         this.number_table = number_table;
     }

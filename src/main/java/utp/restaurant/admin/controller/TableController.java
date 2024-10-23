@@ -85,7 +85,7 @@ public class TableController {
 
             try {
 
-                tableDao.update(selectedId, newTable);
+                tableDao.update(newTable);
                 tableRegisterView.showMessage("Mesa modificada");
 
             } catch (Exception e) {

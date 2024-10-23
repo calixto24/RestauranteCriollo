@@ -32,16 +32,16 @@ public class EmployeeDAO implements DAO<Employee> {
         employeList = new ArrayList<>();
 
         try {
-            
-            Employee employee = new Employee();
 
             st = conn.createStatement();
             rs = st.executeQuery(query);
 
             while (rs.next()) {
                 
+                Employee employee = new Employee();
+                
                 employee.setId_person(rs.getInt("id_person"));
-                employee.setId_naturalPerson(rs.getInt("id_naturalPerson"));
+                employee.setId_naturalPerson(rs.getInt("id_naturalperson"));
                 employee.setId_employee(rs.getInt("id_employee"));
                 employee.setDni(rs.getInt("dni"));
                 employee.setName(rs.getString("name"));
@@ -88,7 +88,7 @@ public class EmployeeDAO implements DAO<Employee> {
             while (rs.next()) {
                 
                 employee.setId_person(rs.getInt("id_person"));
-                employee.setId_naturalPerson(rs.getInt("id_naturalPerson"));
+                employee.setId_naturalPerson(rs.getInt("id_naturalperson"));
                 employee.setId_employee(rs.getInt("id_employee"));
                 employee.setDni(rs.getInt("dni"));
                 employee.setName(rs.getString("name"));

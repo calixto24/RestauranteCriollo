@@ -30,25 +30,29 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
         query = "SELECT * FROM getJuricalCustomer";
         juridicalCustomerList = new ArrayList<>();
         try {
-            JuridicalCustomer juridicalCustomer = new JuridicalCustomer();
+
             st = conn.createStatement();
             rs = st.executeQuery(query);
 
             while (rs.next()) {
+
+                JuridicalCustomer juridicalCustomer = new JuridicalCustomer();
+
                 juridicalCustomer.setId_person(rs.getInt("id_person"));
-                juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalPerson"));
-                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalCustomer"));
+                juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalperson"));
+                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalcustomer"));
                 juridicalCustomer.setRuc(Long.parseLong(rs.getString("ruc")));
-                juridicalCustomer.setSocialReason(rs.getString("socialReason"));
+                juridicalCustomer.setSocialReason(rs.getString("socialreason"));
                 juridicalCustomer.setType(rs.getString("type"));
-                juridicalCustomer.setEconomicActivity(rs.getString("economicActivity"));
-                juridicalCustomer.setTypeBilling(rs.getString("typeBilling"));
+                juridicalCustomer.setEconomicActivity(rs.getString("economicactivity"));
+                juridicalCustomer.setTypeBilling(rs.getString("typebilling"));
                 juridicalCustomer.setAddress(rs.getString("address"));
                 juridicalCustomer.setPhoneNumber(rs.getInt("phone_number"));
                 juridicalCustomer.setEmail(rs.getString("email"));
                 juridicalCustomer.setRegister(rs.getDate("register").toLocalDate());
 
                 juridicalCustomerList.add(juridicalCustomer);
+
             }
 
         } catch (Exception e) {
@@ -61,7 +65,7 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
     @Override
     public JuridicalCustomer get(long id) {
 
-        query = "SELECT * FROM getJuricalCustomer WHERE id_juridicalCustomer= ?";
+        query = "SELECT * FROM getJuricalCustomer WHERE id_juridicalcustomer= ?";
 
         JuridicalCustomer juridicalCustomer = new JuridicalCustomer();
 
@@ -76,13 +80,13 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
             while (rs.next()) {
 
                 juridicalCustomer.setId_person(rs.getInt("id_person"));
-                juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalPerson"));
-                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalCustomer"));
+                juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalperson"));
+                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalcustomer"));
                 juridicalCustomer.setRuc(Long.parseLong(rs.getString("ruc")));
-                juridicalCustomer.setSocialReason(rs.getString("socialReason"));
+                juridicalCustomer.setSocialReason(rs.getString("socialreason"));
                 juridicalCustomer.setType(rs.getString("type"));
-                juridicalCustomer.setEconomicActivity(rs.getString("economicActivity"));
-                juridicalCustomer.setTypeBilling(rs.getString("typeBilling"));
+                juridicalCustomer.setEconomicActivity(rs.getString("economicactivity"));
+                juridicalCustomer.setTypeBilling(rs.getString("typebilling"));
                 juridicalCustomer.setAddress(rs.getString("address"));
                 juridicalCustomer.setPhoneNumber(rs.getInt("phone_number"));
                 juridicalCustomer.setEmail(rs.getString("email"));
@@ -157,24 +161,19 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
 
     @Override
     public void delete(long id) {
-        
-        
-        
-        query = "DELET FROM juridicalCustomer WHERE id_juridicalCustomer=? ";
+
+        query = "DELET FROM juridicalCustomer WHERE id_juridicalcustomer = ? ";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, (int) id);
-            
+
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
-            
+
             e.printStackTrace();
-            
+
         }
-        
-        
-        
 
     }
 

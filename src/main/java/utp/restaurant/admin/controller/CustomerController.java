@@ -449,7 +449,7 @@ public class CustomerController {
 
                 } else if (typeCustomer.equals("JURIDICO")) {
 
-                    juridicalCustomerDAO.update(juridicalSelectedId, newJuridicalCustomer);
+                    juridicalCustomerDAO.update(newJuridicalCustomer);
                     view.showMessage("Cliente Juridico actualizado");
 
                 }

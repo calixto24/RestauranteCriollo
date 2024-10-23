@@ -79,7 +79,7 @@ public class JuridicalPerson extends Person{
     //metodo abstracto
     @Override
     public String fullData() {
-        return socialReason + " - " + address;
+        return socialReason;
     }
     
     @Override

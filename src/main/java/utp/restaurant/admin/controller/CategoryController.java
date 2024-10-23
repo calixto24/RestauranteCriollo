@@ -1,14 +1,9 @@
 package utp.restaurant.admin.controller;
 
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import java.awt.Image;
 import java.io.File;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.admin.view.CategoryRegisterView;
 import utp.restaurant.dao.CategoryDAO;
@@ -68,7 +63,7 @@ public class CategoryController {
         }
 
         //imagen
-        String image = categoryView.getjTFimage().getText();
+        /*String image = categoryView.getjTFimage().getText();
         vld.setElement(image)
                 .isRequired("La imagen es obligatoria");
 
@@ -76,10 +71,10 @@ public class CategoryController {
             categoryView.showMessage(vld.getMessage());
             categoryView.getjTFimage().requestFocus();
             return;
-        }
+        }*/
 
         //creacion del objeto
-        Category newCategory = new Category(name, descrip, image);
+        Category newCategory = new Category(name, descrip);
 
         if (action.equals("add")) {
 
@@ -92,7 +87,7 @@ public class CategoryController {
 
         } else if (action.equals("edit")) {
             try {
-                categoryDAO.update(selectedId, newCategory);
+                categoryDAO.update(newCategory);
                 categoryView.showMessage("categoria editada");
 
             } catch (Exception e) {
@@ -106,7 +101,7 @@ public class CategoryController {
     public void heandleExplorerClick() {
 
         //visualizacion del explorador
-        int result = jFileChooser.showOpenDialog(null);
+        /*int result = jFileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
 
@@ -134,7 +129,7 @@ public class CategoryController {
                 categoryView.showMessage("No se pudo agregar imagen");
 
             }
-        }
+        }*/
 
     }
 
@@ -149,17 +144,10 @@ public class CategoryController {
 
         for (Category y : categoriaList) {
             
-            //carga de imagen
-            ImageIcon image = new ImageIcon(getClass().getResource("/utp/restaurant/images/" + y.getImage()));
-            
-            //escalar imagen
-            Image scaledImage = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-            
             Object[] row = {
                 y.getId(),
                 y.getName(),
-                y.getDescription(),
-                new ImageIcon(scaledImage)
+                y.getDescription()
             };
             tableModel.addRow(row);
         }
@@ -186,8 +174,6 @@ public class CategoryController {
         
         categoryView.getTxtName().setText(name);
         categoryView.getTxtDescrip().setText(description);
-        categoryView.getjTFimage().setText(categoryDAO.get(selectedId).getImage());
-        categoryView.getjLBmostrar().setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/" + categoryDAO.get(selectedId).getImage())));
 
         categoryView.getjBDelete().setVisible(true);
 

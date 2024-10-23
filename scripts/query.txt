@@ -236,7 +236,7 @@ $$;
 
 -- EJECUCION DE LOS PROCEDIMIENTOS
 call add_employee (76454651,'leonardo','murillo','apellido','2006-01-19','Huaycan',936197832,'leo@xd','leo14','leonardo11',1);
-call update_employee(60749109,'Dalia','Alberto','Joaquin','2006-06-06','Huachipa',935041343,'dalia@gmail.com','Dalia','nolan',3,2,2,2);
+call update_employee(60749109,'Dalia','Alberto','Joaquin','2006-06-06','Huachipa',935041343,'dalia@gmail.com','Dalia','$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.',1,1,1,1);
 
 -- CONSULTA EMPLEADO
 create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username, r.id_role,r.name_role 
@@ -318,8 +318,8 @@ end;
 $$;
 
 -- EJECUCION DE LOS PROCEDIMIENTOS
-call add_naturalCustomer(76454551,'leonardo','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com','2022-10-20');
-call update_naturalCustomer(76454551,'xd','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com','2022-10-20',5,3,2);
+call add_naturalCustomer(76454551,'leonardo','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com');
+call update_naturalCustomer(76454551,'xd','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com', 5,3,2);
 
 -- CONSULTA CLIENTE NATURAL
 create or replace  view getNaturalCustomer as select p.id_person, np.id_naturalperson, nc.id_naturalcustomer, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,nc.register
@@ -396,8 +396,8 @@ end;
 $$;
 
 --EJECUCION DE LOS PROCEDIMIENTOS
-call add_juridicalCustomer('12345678912', 'a','a','a','l','l',935041343,'nol','1997-09-01')
-call update_juridicalCustomer('12345678912', 'cccc','a','a','l','l',935041343,'nol','1997-09-01',6,1,1)
+call add_juridicalCustomer('12345678912', 'a','a','a','l','l',935041343,'nol')
+call update_juridicalCustomer('12345678912', 'cccc','a','a','l','l',935041343,'nol',6,1,1)
 
 --CONSULTAS CLIENTE JURIDICO
 create or replace view getJuricalCustomer as select p.id_person,jp.id_juridicalperson,jc.id_juridicalcustomer ,jp.ruc,jp.socialreason,jp."type",jp.economicactivity,jp.typebilling,p.address,p.email,p.phone_number,jc.register
@@ -426,6 +426,17 @@ begin
 end;
 $$;
 
+-- VISTA FACTURA
+create or replace view getBill as SELECT v.id_voucher, b.id_bill, v.date, v."time", jc.id_juridicalcustomer, jp.socialreason, e.id_employee, np."name", np.last_paternal, np.last_maternal, v.totalprice
+from bill b
+INNER JOIN juridicalCustomer jc ON b.id_juridicalcustomer = jc.id_juridicalcustomer
+INNER JOIN juridicalPerson jp ON jp.id_juridicalperson = jc.id_juridicalperson
+INNER JOIN voucher v ON b.id_voucher = v.id_voucher
+INNER JOIN employee e ON v.id_employee = e.id_employee
+INNER JOIN naturalPerson np ON np.id_naturalperson = e.id_naturalperson
+
+SELECT * from getBill
+
 --PROCEDIMIENTO BOLETO
 create or replace procedure add_ticket (
   id_employee int,
@@ -444,3 +455,19 @@ begin
    values (id_naturalCustomer, _id_voucher);
  end;
  $$;
+
+ -- VISTA ITEMMENU
+ create or replace view getItemMenu as SELECT im.id_itemmenu, im.name_itemmenu, im.priceunit, im.description as description_itemMenu, im.status, im.image, c.id_category, c.name_category, c.description as description_category
+ from itemMenu im
+ INNER JOIN category c ON c.id_category = im.id_category
+
+ select * from getItemMenu
+
+ --VISTA TABLE
+ create or replace view getTable as SELECT tb.id_table, tb.number_table, tb.capacity, tb.status, e.id_employee, np."name", np.last_paternal, np.last_maternal
+ FROM "table" tb
+ INNER JOIN employee e ON e.id_employee = tb.id_employee
+ INNER JOIN naturalperson np ON np.id_naturalperson = e.id_naturalperson
+
+ select * from getTable
+

@@ -11,13 +11,11 @@ public class Category {
     private long id;
     private String name;
     private String description;
-    private String image;
 
-    public Category(String name, String description, String image) {
+    public Category(String name, String description) {
         this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
         this.description = description;
-        this.image = image;
     }
 
     public Category() {
@@ -26,6 +24,10 @@ public class Category {
 
     public String getName() {
         return name;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -38,14 +40,6 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public long getId() {

@@ -160,7 +160,7 @@ public class ItemMenuController {
             
             try {
 
-                itemMenuDao.update(idPlato, itemMenu);
+                itemMenuDao.update(itemMenu);
                 view.showMessage("Plato modificado");
 
             } catch (Exception e) {

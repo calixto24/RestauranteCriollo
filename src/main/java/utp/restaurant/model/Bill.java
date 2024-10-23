@@ -182,7 +182,7 @@ public class Bill extends Voucher<Long, JuridicalCustomer> {
     public void setId_Bill(long id_Bill) {
         this.id_Bill = id_Bill;
     }
-
+    
     public JuridicalCustomer getCustomer() {
         return customer;
     }

@@ -40,8 +40,8 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
                 NaturalCustomer naturalCustomer = new NaturalCustomer();
 
                 naturalCustomer.setId_person(rs.getInt("id_person"));
-                naturalCustomer.setId_naturalPerson(rs.getInt("id_naturalPerson"));
-                naturalCustomer.setId_naturalCustomer(rs.getInt("id_naturalCustomer"));
+                naturalCustomer.setId_naturalPerson(rs.getInt("id_naturalperson"));
+                naturalCustomer.setId_naturalCustomer(rs.getInt("id_naturalcustomer"));
                 naturalCustomer.setDni(rs.getInt("dni"));
                 naturalCustomer.setName(rs.getString("name"));
                 naturalCustomer.setLastname_paternal(rs.getString("last_paternal"));
@@ -66,7 +66,7 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
     @Override
     public NaturalCustomer get(long id) {
 
-        query = "SELECT * FROM getNaturalCustomer WHERE id_naturalCustomer = ?";
+        query = "SELECT * FROM getNaturalCustomer WHERE id_naturalcustomer = ?";
 
         NaturalCustomer naturalCustomer = new NaturalCustomer();
 
@@ -80,8 +80,8 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
             while (rs.next()) {
 
                 naturalCustomer.setId_person(rs.getInt("id_person"));
-                naturalCustomer.setId_naturalPerson(rs.getInt("id_naturalPerson"));
-                naturalCustomer.setId_naturalCustomer(rs.getInt("id_naturalCustomer"));
+                naturalCustomer.setId_naturalPerson(rs.getInt("id_naturalperson"));
+                naturalCustomer.setId_naturalCustomer(rs.getInt("id_naturalcustomer"));
                 naturalCustomer.setDni(rs.getInt("dni"));
                 naturalCustomer.setName(rs.getString("name"));
                 naturalCustomer.setLastname_paternal(rs.getString("last_paternal"));
@@ -163,7 +163,7 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
     @Override
     public void delete(long id) {
 
-        query = "DELETE FROM naturalCustomer WHERE id_naturalCustomer = ?";
+        query = "DELETE FROM naturalCustomer WHERE id_naturalcustomer = ?";
 
         try {
 

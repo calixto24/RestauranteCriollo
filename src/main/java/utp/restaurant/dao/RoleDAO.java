@@ -3,6 +3,7 @@ package utp.restaurant.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
@@ -32,12 +33,12 @@ public class RoleDAO implements DAO<Role> {
 
         try {
 
-            Role role = new Role();
-
             st = conn.createStatement();
             rs = st.executeQuery(query);
 
             while (rs.next()) {
+                
+                Role role = new Role();
 
                 role.setId(rs.getInt("id_role"));
                 role.setName(rs.getString("name_role"));
@@ -116,7 +117,7 @@ public class RoleDAO implements DAO<Role> {
 
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
 

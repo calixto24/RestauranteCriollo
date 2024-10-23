@@ -92,7 +92,7 @@ public class RoleDAO implements DAO<Role> {
         try {
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, "name_role");
+            ps.setString(1, role.getName());
             ps.executeUpdate();
 
         } catch (Exception e) {

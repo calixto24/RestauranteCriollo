@@ -75,7 +75,7 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public Employee get(long id) {
         
-        query = "SELECT * FROM employee WHERE id_employee = ?";
+        query = "SELECT * FROM getEmployee WHERE id_employee = ?";
         
         Employee employee = new Employee();
         

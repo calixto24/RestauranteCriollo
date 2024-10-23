@@ -19,12 +19,20 @@ public class NaturalCustomer extends NaturalPerson {
     public NaturalCustomer() {
     }
 
+    public void setId_naturalCustomer(long id_naturalCustomer) {
+        this.id_naturalCustomer = id_naturalCustomer;
+    }
+
     public long getId_naturalCustomer() {
         return id_naturalCustomer;
     }
 
     public LocalDate getRegister() {
         return register;
+    }
+
+    public void setRegister(LocalDate register) {
+        this.register = register;
     }
     
 }

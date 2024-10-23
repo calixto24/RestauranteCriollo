@@ -27,6 +27,10 @@ public class NaturalPerson extends Person{
     public NaturalPerson() {
     }
 
+    public void setId_naturalPerson(long id_naturalPerson) {
+        this.id_naturalPerson = id_naturalPerson;
+    }
+
     public long getId_naturalPerson() {
         return id_naturalPerson;
     }

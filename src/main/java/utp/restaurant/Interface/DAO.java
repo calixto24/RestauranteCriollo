@@ -6,6 +6,6 @@ public interface DAO<T> {
     ArrayList<T> getAll();
     T get(long id);
     void add(T t);
-    void update(long id, T t);
+    void update(T t);
     void delete(long id);
 }

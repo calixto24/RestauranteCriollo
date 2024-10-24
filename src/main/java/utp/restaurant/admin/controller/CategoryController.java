@@ -62,17 +62,6 @@ public class CategoryController {
             return;
         }
 
-        //imagen
-        /*String image = categoryView.getjTFimage().getText();
-        vld.setElement(image)
-                .isRequired("La imagen es obligatoria");
-
-        if (!vld.exec()) {
-            categoryView.showMessage(vld.getMessage());
-            categoryView.getjTFimage().requestFocus();
-            return;
-        }*/
-
         //creacion del objeto
         Category newCategory = new Category(name, descrip);
 
@@ -98,52 +87,19 @@ public class CategoryController {
         categoryView.renderTable();
     }
 
-    public void heandleExplorerClick() {
-
-        //visualizacion del explorador
-        /*int result = jFileChooser.showOpenDialog(null);
-
-        if (result == JFileChooser.APPROVE_OPTION) {
-
-            //ruta de la imagen seleccionada
-            selectedFile = jFileChooser.getSelectedFile();
-
-            categoryView.getjTFimage().setText(selectedFile.getName());
-
-            try {
-
-                //creacion de la imagen
-                Image img = ImageIO.read(selectedFile);
-                ImageIcon imageIcon = new ImageIcon(img);
-
-                //establecer tamaño a la imagen
-                int width = categoryView.getjLBmostrar().getWidth();
-                int height = categoryView.getjLBmostrar().getHeight();
-
-                Image scaledImage = imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-
-                categoryView.getjLBmostrar().setIcon(new ImageIcon(scaledImage));
-
-            } catch (Exception e) {
-
-                categoryView.showMessage("No se pudo agregar imagen");
-
-            }
-        }*/
-
-    }
-
     public DefaultTableModel getTableModel() {
 
         String column[] = {
-            "id", "Nombre", " Descripcion", "imagen"
+            "id",
+            "Nombre",
+            "Descripcion"
         };
         DefaultTableModel tableModel = new DefaultTableModel(null, column);
 
         ArrayList<Category> categoriaList = categoryDAO.getAll();
 
         for (Category y : categoriaList) {
-            
+
             Object[] row = {
                 y.getId(),
                 y.getName(),
@@ -159,8 +115,6 @@ public class CategoryController {
         categoryView.getjBDelete().setVisible(false);
         categoryView.getTxtName().setText("");
         categoryView.getTxtDescrip().setText("");
-        categoryView.getjTFimage().setText("");
-        categoryView.getjLBmostrar().setIcon(new ImageIcon(""));
 
         action = "add";
     }
@@ -171,7 +125,7 @@ public class CategoryController {
 
         String name = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 1).toString();
         String description = categoryView.getjTableC().getModel().getValueAt(categoryView.getRow(), 2).toString();
-        
+
         categoryView.getTxtName().setText(name);
         categoryView.getTxtDescrip().setText(description);
 

@@ -64,14 +64,16 @@ public class MenuDetails extends javax.swing.JDialog {
 
         //pintando el label con la descripcion
         jTFDescription.setText(itemMenu.getDescription());
-        
+
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
 
         jLBprecioPreview.setText("S/" + (action.equals("add") ? itemMenu.getPrice() : itemOrder.getTotal()));
-        
-        if(action.equals("edit")) jTFAmount.setText(itemOrder.getAmount() + "");
-        
+
+        if (action.equals("edit")) {
+            jTFAmount.setText(itemOrder.getAmount() + "");
+        }
+
         jTFamountAddAmountListener();
     }
 
@@ -239,7 +241,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
         if (action.equals("add")) {
 
-            try {
+            /*try {
                 //Creando nuevo objeto ItemOrder
                 ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
 
@@ -250,11 +252,11 @@ public class MenuDetails extends javax.swing.JDialog {
 
                 showMessage("Platillo no ordenado");
 
-            }
+            }*/
 
         } else if (action.equals("edit")) {
 
-            try {
+            /*try {
                 //Creando nuevo objeto ItemOrder
                 ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemOrder.getItemMenu());
 
@@ -266,8 +268,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
                 showMessage("Platillo ordenado no actualizado");
 
-            }
-
+            }*/
         }
 
         root.renderItemOrderTable();

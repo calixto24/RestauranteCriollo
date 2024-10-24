@@ -9,7 +9,6 @@ import java.util.Random;
 public class Order {
     
     private long id_Order;
-    //private int number;
     private LocalDate date;
     private LocalTime time;
     private String status;

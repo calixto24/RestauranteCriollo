@@ -70,9 +70,7 @@ public class RoleController {
             
             Role updateRole = roleDao.get(selectedId);
             updateRole.setName(name);
-            
-            System.out.println(updateRole.getName());
-            
+                        
             try {
 
                 roleDao.update(updateRole);

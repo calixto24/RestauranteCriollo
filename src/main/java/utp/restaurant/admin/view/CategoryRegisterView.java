@@ -26,7 +26,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
     public CategoryRegisterView() {
         categoryController = new CategoryController(this);
         initComponents();
-        
+
         jBDelete.setVisible(false);
         renderTable();
     }
@@ -50,12 +50,6 @@ public class CategoryRegisterView extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel20 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLBmostrar = new javax.swing.JLabel();
-        jTFimage = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -116,7 +110,7 @@ public class CategoryRegisterView extends javax.swing.JFrame {
                 txtDescripActionPerformed(evt);
             }
         });
-        jPanel2.add(txtDescrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 310, -1));
+        jPanel2.add(txtDescrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 310, -1));
 
         txtName.setBackground(new java.awt.Color(249, 242, 228));
         txtName.setBorder(null);
@@ -135,48 +129,17 @@ public class CategoryRegisterView extends javax.swing.JFrame {
         jLabel19.setBackground(new java.awt.Color(86, 42, 35));
         jLabel19.setForeground(new java.awt.Color(86, 42, 35));
         jLabel19.setText("DESCRIPCION");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, 20));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, 20));
 
         jSeparator3.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator3.setForeground(new java.awt.Color(86, 42, 35));
         jPanel2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 310, 12));
 
-        jSeparator5.setBackground(new java.awt.Color(86, 42, 35));
-        jSeparator5.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 300, 10));
-
-        jLabel20.setBackground(new java.awt.Color(86, 42, 35));
-        jLabel20.setForeground(new java.awt.Color(86, 42, 35));
-        jLabel20.setText("IMAGEN");
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, -1, 30));
-
-        jButton4.setBackground(new java.awt.Color(86, 42, 35));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(249, 242, 228));
-        jButton4.setText("EXPLORAR");
-        jButton4.setBorder(null);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 300, 40));
-
-        jLabel1.setText("Imagen Seleccionada");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
-        jPanel2.add(jLBmostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, 300, 130));
-
-        jTFimage.setEditable(false);
-        jTFimage.setBackground(new java.awt.Color(249, 242, 228));
-        jTFimage.setForeground(new java.awt.Color(51, 51, 51));
-        jTFimage.setBorder(null);
-        jPanel2.add(jTFimage, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 300, 20));
-
         jSeparator6.setBackground(new java.awt.Color(86, 42, 35));
         jSeparator6.setForeground(new java.awt.Color(86, 42, 35));
-        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 310, 20));
+        jPanel2.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 310, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 720, 260));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 110, 720, 90));
 
         jTableC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,11 +172,11 @@ public class CategoryRegisterView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 720, 290));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 720, 430));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utp/restaurant/images/bannerCategoria.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, -1));
@@ -287,16 +250,10 @@ public class CategoryRegisterView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        categoryController.heandleExplorerClick();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     public void renderTable() {
         DefaultTableModel tableModel = categoryController.getTableModel();
-        jTableC.setRowHeight(100);
+        jTableC.setRowHeight(40);
         jTableC.setModel(tableModel);
-        
-        jTableC.getColumnModel().getColumn(3).setCellRenderer(new ImgTable());
 
         TableColumnModel tqm = jTableC.getColumnModel();
         tqm.removeColumn(tqm.getColumn(0));
@@ -316,18 +273,6 @@ public class CategoryRegisterView extends javax.swing.JFrame {
 
     public JTextField getTxtName() {
         return txtName;
-    }
-
-    public JTextField getjTFimage() {
-        return jTFimage;
-    }
-
-    public JLabel getjLBmostrar() {
-        return jLBmostrar;
-    }
-
-    public void setjLBmostrar(JLabel jLBmostrar) {
-        this.jLBmostrar = jLBmostrar;
     }
 
     public JTable getjTableC() {
@@ -383,23 +328,17 @@ public class CategoryRegisterView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLBmostrar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JTextField jTFimage;
     private javax.swing.JTable jTableC;
     private javax.swing.JTextField txtDescrip;
     private javax.swing.JTextField txtName;

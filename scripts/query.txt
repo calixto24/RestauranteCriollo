@@ -46,7 +46,7 @@ create table "role" (
 create table employee (
 	id_employee SERIAL not null PRIMARY KEY,
 	username varchar(100),
-	password varchar(100),
+	password varchar(250),
 	id_naturalPerson int not null,
 	id_role int not null,
 
@@ -96,8 +96,10 @@ create table itemOrder (
 	total decimal(10,2),
 	description varchar(100),
 	id_itemMenu int not null,
+	id_order int not null,
 
-	CONSTRAINT fk_itemMenu FOREIGN KEY (id_itemMenu) REFERENCES itemMenu(id_itemMenu)	
+	CONSTRAINT fk_itemMenu FOREIGN KEY (id_itemMenu) REFERENCES itemMenu(id_itemMenu),
+	CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES "order"(id_order)
 );
 
 create table "order" (
@@ -108,10 +110,8 @@ create table "order" (
 	totalPrice decimal(10,2),
 	id_employee int not null,
 	id_table int not null,
-	id_itemOrder int not null,
 
 	CONSTRAINT fk_employee FOREIGN KEY (id_employee) REFERENCES employee(id_employee),
-	CONSTRAINT fk_itemOrder FOREIGN KEY (id_itemOrder) REFERENCES itemOrder(id_itemOrder),
 	CONSTRAINT fk_table FOREIGN KEY (id_table) REFERENCES "table"(id_table)
 );
 
@@ -239,7 +239,7 @@ call add_employee (76454651,'leonardo','murillo','apellido','2006-01-19','Huayca
 call update_employee(60749109,'Dalia','Alberto','Joaquin','2006-06-06','Huachipa',935041343,'dalia@gmail.com','Dalia','$2a$12$xB0S0mPQGM6p96Qiz6tHUuIdsiOMNi4jkziajkY4Aghsb4wx0M9j.',1,1,1,1);
 
 -- CONSULTA EMPLEADO
-create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username, r.id_role,r.name_role 
+create or replace  view getEmployee as select p.id_person, np.id_naturalperson, e.id_employee, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,e.username, e."password",r.id_role,r.name_role 
 from employee e 
 inner join naturalPerson np on e.id_naturalPerson=np.id_naturalPerson 
 inner join person p on np.id_person=p.id_person
@@ -456,18 +456,33 @@ begin
  end;
  $$;
 
- -- VISTA ITEMMENU
- create or replace view getItemMenu as SELECT im.id_itemmenu, im.name_itemmenu, im.priceunit, im.description as description_itemMenu, im.status, im.image, c.id_category, c.name_category, c.description as description_category
- from itemMenu im
- INNER JOIN category c ON c.id_category = im.id_category
+-- VISTA ITEMMENU
+create or replace view getItemMenu as SELECT im.id_itemmenu, im.name_itemmenu, im.priceunit, im.description as description_itemMenu, im.status, im.image, c.id_category, c.name_category, c.description as description_category
+from itemMenu im
+INNER JOIN category c ON c.id_category = im.id_category
 
- select * from getItemMenu
+select * from getItemMenu
 
- --VISTA TABLE
- create or replace view getTable as SELECT tb.id_table, tb.number_table, tb.capacity, tb.status, e.id_employee, np."name", np.last_paternal, np.last_maternal
- FROM "table" tb
- INNER JOIN employee e ON e.id_employee = tb.id_employee
- INNER JOIN naturalperson np ON np.id_naturalperson = e.id_naturalperson
+--VISTA TABLE
+create or replace view getTable as SELECT tb.id_table, tb.number_table, tb.capacity, tb.status, e.id_employee, np."name", np.last_paternal, np.last_maternal
+FROM "table" tb
+INNER JOIN employee e ON e.id_employee = tb.id_employee
+INNER JOIN naturalperson np ON np.id_naturalperson = e.id_naturalperson
 
- select * from getTable
+select * from getTable
 
+--VISTA ITEMORDER
+create or replace view getItemOrder as SELECT io.id_itemorder, im.id_itemmenu, io.id_order,im.name_itemmenu, im.priceunit, im.description as description_itemmenu, io.amount, io.description as description_itemorder, io.total
+FROM itemOrder io
+INNER JOIN itemMenu im ON im.id_itemmenu = io.id_itemmenu
+
+select * from getItemOrder
+
+--VISTA ORDER
+create or replace view getOrder as SELECT o.id_order, o.date, o."time", o.status, o.totalprice, e.id_employee, np."name", np.last_paternal, np.last_maternal, tb.id_table, tb.number_table
+FROM "order" o 
+INNER JOIN "table" tb ON o.id_table = tb.id_table
+INNER JOIN employee e ON e.id_employee = o.id_employee
+INNER JOIN naturalPerson np ON np.id_naturalperson = e.id_naturalperson
+
+select * from getOrder

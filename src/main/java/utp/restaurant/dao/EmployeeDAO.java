@@ -52,6 +52,8 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setPhoneNumber(rs.getInt("phone_number"));
                 employee.setEmail(rs.getString("email"));
                 employee.setUsername(rs.getString("username"));
+                employee.setPassword(rs.getString("password"));
+                
                 
                 Role role = new Role();
                 role.setId(rs.getInt("id_role"));
@@ -99,6 +101,7 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setPhoneNumber(rs.getInt("phone_number"));
                 employee.setEmail(rs.getString("email"));
                 employee.setUsername(rs.getString("username"));
+                employee.setPassword(rs.getString("password"));
                 
                 Role role = new Role();
                 role.setId(rs.getInt("id_role"));
@@ -130,7 +133,7 @@ public class EmployeeDAO implements DAO<Employee> {
             ps.setString(2, employee.getName());
             ps.setString(3, employee.getLastname_paternal());
             ps.setString(4, employee.getLastname_maternal());
-            ps.setString(5, employee.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(employee.getBirthdate()));
             ps.setString(6, employee.getAddress());
             ps.setInt(7, employee.getPhoneNumber());
             ps.setString(8, employee.getEmail());
@@ -160,7 +163,7 @@ public class EmployeeDAO implements DAO<Employee> {
             ps.setString(2, employee.getName());
             ps.setString(3, employee.getLastname_paternal());
             ps.setString(4, employee.getLastname_maternal());
-            ps.setString(5, employee.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(employee.getBirthdate()));
             ps.setString(6, employee.getAddress());
             ps.setInt(7, employee.getPhoneNumber());
             ps.setString(8, employee.getEmail());

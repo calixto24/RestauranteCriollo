@@ -31,15 +31,15 @@ public class CategoryDAO implements DAO<Category> {
 
         try {
 
-            Category category = new Category();
-
             st = conn.createStatement();
             rs = st.executeQuery(query);
 
             while (rs.next()) {
+                
+                Category category = new Category();
 
                 category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category "));
+                category.setName(rs.getString("name_category"));
                 category.setDescription(rs.getString("description"));
 
                 categoryList.add(category);

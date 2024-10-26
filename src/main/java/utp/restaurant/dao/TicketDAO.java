@@ -1,6 +1,10 @@
 
 package utp.restaurant.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
 import utp.restaurant.database.RestaurantDB;
@@ -8,10 +12,15 @@ import utp.restaurant.model.Ticket;
 
 public class TicketDAO implements DAO<Ticket>{
     
+    private Connection conn;
+    private String query;
+    private Statement st;
+    private PreparedStatement ps;
+    private ResultSet rs;
     private ArrayList<Ticket> ticketList;
 
     public TicketDAO() {
-        ticketList = RestaurantDB.getInstance().getTicketList();
+        conn = RestaurantDB.getInstance().getConn();
     }
 
     @Override
@@ -36,20 +45,13 @@ public class TicketDAO implements DAO<Ticket>{
     }
 
     @Override
-    public void update(long id, Ticket ticket) {
-        int index = getIndex(id);
-        ticketList.set(index, ticket);
+    public void update(Ticket ticket) {
+        
     }
 
     @Override
     public void delete(long id) {
-        int index = getIndex(id);
-        ticketList.remove(index);
-    }
-
-    public int getIndex(long id) {
-        Ticket ticket = get(id);
-        return ticketList.indexOf(ticket);
+        
     }
     
 }

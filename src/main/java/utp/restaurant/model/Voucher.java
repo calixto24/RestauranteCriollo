@@ -27,7 +27,6 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     protected final double IGV;
 
     public Voucher(Order order, Employee cashier) {
-        this.id_Voucher = System.currentTimeMillis() + new Random().nextInt(1000);
         this.time = LocalTime.now();
         this.date = LocalDate.now();
         this.status = "Pendiente";

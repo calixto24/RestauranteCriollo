@@ -9,7 +9,6 @@ public class Table {
     private Employee employee;
     
     public Table(int number_table, int capacity, String status, Employee employee) {
-        this.id = System.currentTimeMillis()+new Random().nextInt(1000);
         this.number_table = number_table; 
         this.capacity = capacity; 
         this.status = status;
@@ -20,6 +19,10 @@ public class Table {
 
     public int getNumber_table() {
         return number_table;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public void setNumber_table(int number_table) {

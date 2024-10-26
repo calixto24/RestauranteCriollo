@@ -128,7 +128,7 @@ public class TakeOrderController {
 
                 newOrder.setId_Order(order.getId_Order());
 
-                orderDAO.update(order.getId_Order(), newOrder);
+                orderDAO.update(newOrder);
                 takeOrderView.showMessage("Orden actualizada correctamente");
 
                 OrderView orderView = new OrderView();

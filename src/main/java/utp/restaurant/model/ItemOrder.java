@@ -12,18 +12,24 @@ public class ItemOrder {
     private ItemMenu itemMenu;
 
     public ItemOrder(int amount, String description, ItemMenu itemMenu) {
-        this.id_itemOrder = System.currentTimeMillis() + new Random().nextInt(1000);
         this.amount = amount;
         this.description = description;
         this.itemMenu = itemMenu;
         
         calcTotal();
     }
+
+    public ItemOrder() {
+    }
     
     public void calcTotal() {
         
         this.total = amount * itemMenu.getPrice();
         
+    }
+
+    public void setId_itemOrder(long id_itemOrder) {
+        this.id_itemOrder = id_itemOrder;
     }
 
     public long getId_itemOrder() {

@@ -13,14 +13,13 @@ public class JuridicalPerson extends Person{
 
     public JuridicalPerson(long ruc, String socialReason, String type, String economicActivity, String typeBilling, int phoneNumber, String email, String address) {
         super(phoneNumber, email, address);
-        
-        this.id_juridicalPerson = System.currentTimeMillis() + new Random().nextInt(1000);
         this.ruc = ruc;
         this.socialReason = socialReason;
         this.type = type;
         this.economicActivity = economicActivity;
         this.typeBilling = typeBilling;
     }
+    
 
     public JuridicalPerson() {
     }
@@ -65,6 +64,12 @@ public class JuridicalPerson extends Person{
         return typeBilling;
     }
 
+    public void setId_juridicalPerson(long id_juridicalPerson) {
+        this.id_juridicalPerson = id_juridicalPerson;
+    }
+    
+    
+
     public void setTypeBilling(String typeBilling) {
         this.typeBilling = typeBilling;
     }
@@ -72,7 +77,7 @@ public class JuridicalPerson extends Person{
     //metodo abstracto
     @Override
     public String fullData() {
-        return socialReason + " - " + address;
+        return socialReason;
     }
     
     @Override

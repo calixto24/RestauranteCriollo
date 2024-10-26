@@ -16,11 +16,13 @@ public class EmployeeDAO implements DAO<Employee> {
     private Statement st;
     private PreparedStatement ps;
     private ResultSet rs;
+    private RoleDAO roleDAO;
     private ArrayList<Employee> employeList;
 
     //constructor vacio
     public EmployeeDAO() {
         conn = RestaurantDB.getInstance().getConn();
+        roleDAO = new RoleDAO();
     }
 
     //metodos
@@ -32,16 +34,16 @@ public class EmployeeDAO implements DAO<Employee> {
         employeList = new ArrayList<>();
 
         try {
-            
-            Employee employee = new Employee();
 
             st = conn.createStatement();
             rs = st.executeQuery(query);
 
             while (rs.next()) {
                 
+                Employee employee = new Employee();
+                
                 employee.setId_person(rs.getInt("id_person"));
-                employee.setId_naturalPerson(rs.getInt("id_naturalPerson"));
+                employee.setId_naturalPerson(rs.getInt("id_naturalperson"));
                 employee.setId_employee(rs.getInt("id_employee"));
                 employee.setDni(rs.getInt("dni"));
                 employee.setName(rs.getString("name"));
@@ -52,11 +54,11 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setPhoneNumber(rs.getInt("phone_number"));
                 employee.setEmail(rs.getString("email"));
                 employee.setUsername(rs.getString("username"));
+                employee.setPassword(rs.getString("password"));
                 
-                Role role = new Role();
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
+                int id_role = rs.getInt("id_role");
                 
+                Role role = roleDAO.get((int) id_role);
                 employee.setRole(role);
                 
                 employeList.add(employee);
@@ -75,7 +77,7 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public Employee get(long id) {
         
-        query = "SELECT * FROM employee WHERE id_employee = ?";
+        query = "SELECT * FROM getEmployee WHERE id_employee = ?";
         
         Employee employee = new Employee();
         
@@ -88,7 +90,7 @@ public class EmployeeDAO implements DAO<Employee> {
             while (rs.next()) {
                 
                 employee.setId_person(rs.getInt("id_person"));
-                employee.setId_naturalPerson(rs.getInt("id_naturalPerson"));
+                employee.setId_naturalPerson(rs.getInt("id_naturalperson"));
                 employee.setId_employee(rs.getInt("id_employee"));
                 employee.setDni(rs.getInt("dni"));
                 employee.setName(rs.getString("name"));
@@ -99,11 +101,11 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setPhoneNumber(rs.getInt("phone_number"));
                 employee.setEmail(rs.getString("email"));
                 employee.setUsername(rs.getString("username"));
+                employee.setPassword(rs.getString("password"));
                 
-                Role role = new Role();
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
+                int id_role = rs.getInt("id_role");
                 
+                Role role = roleDAO.get((int) id_role);
                 employee.setRole(role);
 
             }
@@ -130,7 +132,7 @@ public class EmployeeDAO implements DAO<Employee> {
             ps.setString(2, employee.getName());
             ps.setString(3, employee.getLastname_paternal());
             ps.setString(4, employee.getLastname_maternal());
-            ps.setString(5, employee.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(employee.getBirthdate()));
             ps.setString(6, employee.getAddress());
             ps.setInt(7, employee.getPhoneNumber());
             ps.setString(8, employee.getEmail());
@@ -160,7 +162,7 @@ public class EmployeeDAO implements DAO<Employee> {
             ps.setString(2, employee.getName());
             ps.setString(3, employee.getLastname_paternal());
             ps.setString(4, employee.getLastname_maternal());
-            ps.setString(5, employee.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(employee.getBirthdate()));
             ps.setString(6, employee.getAddress());
             ps.setInt(7, employee.getPhoneNumber());
             ps.setString(8, employee.getEmail());

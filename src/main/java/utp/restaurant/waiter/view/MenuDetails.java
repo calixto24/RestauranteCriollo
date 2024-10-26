@@ -64,14 +64,16 @@ public class MenuDetails extends javax.swing.JDialog {
 
         //pintando el label con la descripcion
         jTFDescription.setText(itemMenu.getDescription());
-        
+
         //pintando el label con el icono
         jLBimageMenu.setIcon(new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + itemMenu.getImage())));
 
         jLBprecioPreview.setText("S/" + (action.equals("add") ? itemMenu.getPrice() : itemOrder.getTotal()));
-        
-        if(action.equals("edit")) jTFAmount.setText(itemOrder.getAmount() + "");
-        
+
+        if (action.equals("edit")) {
+            jTFAmount.setText(itemOrder.getAmount() + "");
+        }
+
         jTFamountAddAmountListener();
     }
 

@@ -9,7 +9,6 @@ import java.util.Random;
 public class Order {
     
     private long id_Order;
-    //private int number;
     private LocalDate date;
     private LocalTime time;
     private String status;
@@ -19,8 +18,6 @@ public class Order {
     private Table table;
 
     public Order(Employee waiter, Table table, ArrayList<ItemOrder> itemOrderList) {
-        
-        this.id_Order = System.currentTimeMillis() + new Random().nextInt(1000); 
         this.date = LocalDate.now();
         this.time = LocalTime.now();
         this.status = "Pendiente";

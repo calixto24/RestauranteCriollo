@@ -148,7 +148,7 @@ public class CustomerController {
     }
 
     public void handleRegisterClick() {
-                
+
         NaturalCustomer newNaturalCustomer = null;
         JuridicalCustomer newJuridicalCustomer = null;
 
@@ -443,13 +443,17 @@ public class CustomerController {
             try {
 
                 if (typeCustomer.equals("NATURAL")) {
-
-                    naturalCustomerDAO.update( newNaturalCustomer);
+                    NaturalCustomer updateNaturalCustomer = naturalCustomerDAO.get(naturalSelectedId);
+                    //dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction
+                    updateNaturalCustomer.setName(name);
+                    updateNaturalCustomer.setLastname_paternal(ap);
+                    updatee
+                    naturalCustomerDAO.update(newNaturalCustomer);
                     view.showMessage("Cliente Natural actualizado");
 
                 } else if (typeCustomer.equals("JURIDICO")) {
 
-                    juridicalCustomerDAO.update(juridicalSelectedId, newJuridicalCustomer);
+                    juridicalCustomerDAO.update(newJuridicalCustomer);
                     view.showMessage("Cliente Juridico actualizado");
 
                 }
@@ -535,21 +539,21 @@ public class CustomerController {
         try {
 
             if (typeCustomer.equals("NATURAL")) {
-                
+
                 naturalSelectedId = Long.parseLong(view.getjTnaturalList().getModel().getValueAt(view.getNaturalRow(), 0).toString());
 
                 naturalCustomerDAO.delete(naturalSelectedId);
                 view.showMessage("Cliente Natural eliminado");
 
             } else if (typeCustomer.equals("JURIDICO")) {
-                
+
                 juridicalSelectedId = Long.parseLong(view.getjTjuridicalList().getModel().getValueAt(view.getJuridicalRow(), 0).toString());
 
                 juridicalCustomerDAO.delete(juridicalSelectedId);
                 view.showMessage("Cliente Juridico eliminado");
 
             }
-            
+
             view.renderTable();
             handleCleanForm();
 

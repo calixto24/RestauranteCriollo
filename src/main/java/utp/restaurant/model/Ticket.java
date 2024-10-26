@@ -29,7 +29,6 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
 
     public Ticket(NaturalCustomer customer, Order order, Employee cashier) {
         super(order, cashier);
-        this.id_Ticket = System.currentTimeMillis() + new Random().nextInt(1000);
         this.customer = customer;
     }
 

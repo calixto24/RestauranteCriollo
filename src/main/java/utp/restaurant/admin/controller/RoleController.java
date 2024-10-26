@@ -67,10 +67,13 @@ public class RoleController {
             }
 
         } else if (action.equals("edit")) {
-
+            
+            Role updateRole = roleDao.get(selectedId);
+            updateRole.setName(name);
+                        
             try {
 
-                roleDao.update(newRole);
+                roleDao.update(updateRole);
                 roleRegisterView.showMessage("Rol actualizado correctamente");
 
             } catch (Exception e) {

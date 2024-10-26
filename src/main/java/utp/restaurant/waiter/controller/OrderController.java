@@ -34,7 +34,9 @@ public class OrderController {
         };
 
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
+        
         ArrayList<Order> orderList = orderDao.getAll();
+        
         for (Order order : orderList) {
 
             if (store.getEmploye().getId_employee() == order.getWaiter().getId_employee() && order.getStatus().equals("Pendiente")) {

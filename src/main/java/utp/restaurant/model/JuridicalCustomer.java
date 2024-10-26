@@ -11,8 +11,6 @@ public class JuridicalCustomer extends JuridicalPerson{
 
     public JuridicalCustomer(long ruc, String socialReason, String type, String economicActivity, String typeBilling, int phoneNumber, String email, String address) {
         super(ruc, socialReason, type, economicActivity, typeBilling, phoneNumber, email, address);
-        
-        this.id_juridicalCustomer = System.currentTimeMillis() + new Random().nextInt(1000);
         this.register = LocalDate.now();
     }
 
@@ -26,5 +24,14 @@ public class JuridicalCustomer extends JuridicalPerson{
     public LocalDate getRegister() {
         return register;
     }
+
+    public void setId_juridicalCustomer(long id_juridicalCustomer) {
+        this.id_juridicalCustomer = id_juridicalCustomer;
+    }
+
+    public void setRegister(LocalDate register) {
+        this.register = register;
+    }
+    
     
 }

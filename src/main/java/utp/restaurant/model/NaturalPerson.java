@@ -15,8 +15,6 @@ public class NaturalPerson extends Person{
 
     public NaturalPerson(int dni, String name, String lastname_paternal, String lastname_maternal, LocalDate birthdate, int phoneNumber, String email, String address) {
         super(phoneNumber, email, address);
-        
-        this.id_naturalPerson = System.currentTimeMillis() + new Random().nextInt(1000);
         this.dni = dni;
         this.name = name;
         this.lastname_paternal = lastname_paternal;

@@ -31,7 +31,7 @@ public class TableController {
     }
 
     public void handleRegisterClick() {
-        System.out.println(((Employee) tableRegisterView.getJCBEmployees().getSelectedItem()).getId_employee());
+
         //validacion de numero de mesa
         String nTablestr = tableRegisterView.getjTFNmesa().getText();
         vld.setElement(nTablestr)
@@ -66,10 +66,11 @@ public class TableController {
 
         // Empleado
         Employee employee = ((Employee) tableRegisterView.getJCBEmployees().getSelectedItem());
-        //creando nuevas mesa
-        Table newTable = new Table(nTable, nCapaci, status, employee);
 
         if (action.equals("add")) {
+
+            //creando nuevas mesa
+            Table newTable = new Table(nTable, nCapaci, status, employee);
 
             try {
                 tableDao.add(newTable);
@@ -82,10 +83,16 @@ public class TableController {
             }
 
         } else if (action.equals("edit")) {
+            
+            Table updateTable = tableDao.get(selectedId);
+            updateTable.setNumber_table(nTable);
+            updateTable.setCapacity(nCapaci);
+            updateTable.setStatus(status);
+            updateTable.setEmployee(employee);
 
             try {
 
-                tableDao.update(selectedId, newTable);
+                tableDao.update(updateTable);
                 tableRegisterView.showMessage("Mesa modificada");
 
             } catch (Exception e) {
@@ -115,7 +122,7 @@ public class TableController {
         ArrayList<Table> tableList = tableDao.getAll();
 
         for (Table table : tableList) {
-            
+
             Object[] row = {
                 table.getId(),
                 table.getNumber_table(),
@@ -137,7 +144,7 @@ public class TableController {
         tableRegisterView.getJCBEmployees().removeAllItems();
 
         for (Employee e : EmployeeList) {
-            if (e.getRole().getName().equals("Mesero")) {
+            if (e.getRole().getName().equals("mesero")) {
                 tableRegisterView.getJCBEmployees().addItem(e);
             }
         }

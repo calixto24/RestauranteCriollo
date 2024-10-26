@@ -42,12 +42,12 @@ public class ItemMenuController {
     public DefaultTableModel getTableModel() {
 
         String columns[] = {
-            "Id", 
-            "Nombre", 
-            "Precio", 
-            "Descripcion", 
-            "Estado", 
-            "Categoria", 
+            "Id",
+            "Nombre",
+            "Precio",
+            "Descripcion",
+            "Estado",
+            "Categoria",
             "Imagen"
 
         };
@@ -56,23 +56,23 @@ public class ItemMenuController {
         ArrayList<ItemMenu> itemMenuList = itemMenuDao.getAll();
 
         for (ItemMenu e : itemMenuList) {
-            
+
             //obtener y cargar la imagen
             ImageIcon image = new ImageIcon(getClass().getResource("/utp/restaurant/images/platillos/" + e.getImage()));
-            
+
             //imagen escalada
             Image scaledImage = image.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-            
+
             Object row[] = {
-                e.getId(), 
-                e.getName(), 
-                e.getPrice(), 
-                e.getDescription(), 
-                e.getStatus(), 
-                e.getCategory(), 
+                e.getId(),
+                e.getName(),
+                e.getPrice(),
+                e.getDescription(),
+                e.getStatus(),
+                e.getCategory(),
                 new ImageIcon(scaledImage)
             };
-            
+
             tableModel.addRow(row);
 
         }
@@ -81,7 +81,7 @@ public class ItemMenuController {
     }
 
     public void handleRegisterClick() {
-        //guardar datos ingresados
+
         // validacion Nombre del platos (ingresado y exisitente )
         String name = view.getjTFname().getText();
         vldt.setElement(name)
@@ -140,10 +140,10 @@ public class ItemMenuController {
             return;
         }
 
-        //crear nuevo plato y agregar ala tabla
-        ItemMenu itemMenu = new ItemMenu(name, price, description, status, category, image);
-
         if (action.equals("add")) {
+
+            //crear nuevo plato y agregar ala tabla
+            ItemMenu itemMenu = new ItemMenu(name, price, description, status, category, image);
 
             try {
 
@@ -158,9 +158,17 @@ public class ItemMenuController {
 
         } else if (action.equals("edit")) {
             
+            ItemMenu updateItemMenu = itemMenuDao.get(idPlato);
+            updateItemMenu.setName(name);
+            updateItemMenu.setPrice(price);
+            updateItemMenu.setDescription(description);
+            updateItemMenu.setStatus(status);
+            updateItemMenu.setCategory(category);
+            updateItemMenu.setImage(image);
+
             try {
 
-                itemMenuDao.update(itemMenu);
+                itemMenuDao.update(updateItemMenu);
                 view.showMessage("Plato modificado");
 
             } catch (Exception e) {
@@ -168,7 +176,7 @@ public class ItemMenuController {
                 view.showMessage("Plato no modificado" + e.toString());
 
             }
-            
+
         }
 
         handleCleanForm();
@@ -178,9 +186,9 @@ public class ItemMenuController {
 
     public void renderCBCate() {
         ArrayList<Category> categoryList = categoryDao.getAll();
-        
+
         view.getJcate().removeAllItems();
-                
+
         for (Category x : categoryList) {
             view.getJcate().addItem(x);
         }

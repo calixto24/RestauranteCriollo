@@ -12,7 +12,7 @@ import utp.restaurant.model.Role;
 import utp.restaurant.utils.Validate;
 
 public class EmployeeController {
-    
+
     //atributos
     private EmployeeDAO employeeDAO;
     private RoleDAO roleDao;
@@ -210,10 +210,10 @@ public class EmployeeController {
         //ROL
         Role role = (Role) view.getjCBRole().getSelectedItem();
 
-        //---------------------------------------------- Crear el nuevo empleado
-        Employee newEmployee = new Employee(username, password, role, dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
-
         if (action.equals("add")) {
+
+            //Crear el nuevo empleado
+            Employee newEmployee = new Employee(username, password, role, dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
 
             try {
                 employeeDAO.add(newEmployee);
@@ -225,9 +225,22 @@ public class EmployeeController {
 
             }
         } else if (action.equals("edit")) {
+            
+            Employee updateEmployee = employeeDAO.get(selectedId);
+            updateEmployee.setUsername(username);
+            updateEmployee.setPassword(password);
+            updateEmployee.setRole(role);
+            updateEmployee.setDni(dni);
+            updateEmployee.setName(name);
+            updateEmployee.setLastname_paternal(ap);
+            updateEmployee.setLastname_maternal(am);
+            updateEmployee.setBirthdate(LocalDate.of(dateV[2], dateV[1], dateV[0]));
+            updateEmployee.setPhoneNumber(phonenumber);
+            updateEmployee.setEmail(email);
+            updateEmployee.setAddress(direction);
 
             try {
-                employeeDAO.update(newEmployee);
+                employeeDAO.update(updateEmployee);
                 view.showMessage("Usuario actualizado");
 
             } catch (Exception e) {
@@ -286,11 +299,11 @@ public class EmployeeController {
     }
 
     public void renderCBRole() {
-        
+
         ArrayList<Role> roleList = roleDao.getAll();
-        
+
         view.getjCBRole().removeAllItems();
-        
+
         for (Role r : roleList) {
             view.getjCBRole().addItem(r);
         }
@@ -332,7 +345,7 @@ public class EmployeeController {
         view.getjTFRuc().setText(view.getjTUserList().getValueAt(view.getRow(), 7).toString());
         view.getjTFEmail().setText(view.getjTUserList().getValueAt(view.getRow(), 8).toString());
         view.getjTFaddress().setText(view.getjTUserList().getValueAt(view.getRow(), 9).toString());
-        
+
         view.getjBDelete().setVisible(true);
         view.getBtnUpdatePassword().setVisible(true);
 

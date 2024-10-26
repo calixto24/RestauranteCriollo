@@ -90,18 +90,6 @@ create table itemMenu (
 	CONSTRAINT fk_category FOREIGN KEY (id_category) REFERENCES category(id_category)	
 );
 
-create table itemOrder (
-	id_itemOrder SERIAL not null PRIMARY KEY,
-	amount int,
-	total decimal(10,2),
-	description varchar(100),
-	id_itemMenu int not null,
-	id_order int not null,
-
-	CONSTRAINT fk_itemMenu FOREIGN KEY (id_itemMenu) REFERENCES itemMenu(id_itemMenu),
-	CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES "order"(id_order)
-);
-
 create table "order" (
 	id_order SERIAL not null PRIMARY KEY,
 	"date" Date,
@@ -113,6 +101,18 @@ create table "order" (
 
 	CONSTRAINT fk_employee FOREIGN KEY (id_employee) REFERENCES employee(id_employee),
 	CONSTRAINT fk_table FOREIGN KEY (id_table) REFERENCES "table"(id_table)
+);
+
+create table itemOrder (
+	id_itemOrder SERIAL not null PRIMARY KEY,
+	amount int,
+	total decimal(10,2),
+	description varchar(100),
+	id_itemMenu int not null,
+	id_order int not null,
+
+	CONSTRAINT fk_itemMenu FOREIGN KEY (id_itemMenu) REFERENCES itemMenu(id_itemMenu),
+	CONSTRAINT fk_order FOREIGN KEY (id_order) REFERENCES "order"(id_order) ON DELETE CASCADE
 );
 
 create table voucher (
@@ -456,33 +456,4 @@ begin
  end;
  $$;
 
--- VISTA ITEMMENU
-create or replace view getItemMenu as SELECT im.id_itemmenu, im.name_itemmenu, im.priceunit, im.description as description_itemMenu, im.status, im.image, c.id_category, c.name_category, c.description as description_category
-from itemMenu im
-INNER JOIN category c ON c.id_category = im.id_category
-
-select * from getItemMenu
-
---VISTA TABLE
-create or replace view getTable as SELECT tb.id_table, tb.number_table, tb.capacity, tb.status, e.id_employee, np."name", np.last_paternal, np.last_maternal
-FROM "table" tb
-INNER JOIN employee e ON e.id_employee = tb.id_employee
-INNER JOIN naturalperson np ON np.id_naturalperson = e.id_naturalperson
-
-select * from getTable
-
---VISTA ITEMORDER
-create or replace view getItemOrder as SELECT io.id_itemorder, im.id_itemmenu, io.id_order,im.name_itemmenu, im.priceunit, im.description as description_itemmenu, io.amount, io.description as description_itemorder, io.total
-FROM itemOrder io
-INNER JOIN itemMenu im ON im.id_itemmenu = io.id_itemmenu
-
-select * from getItemOrder
-
---VISTA ORDER
-create or replace view getOrder as SELECT o.id_order, o.date, o."time", o.status, o.totalprice, e.id_employee, np."name", np.last_paternal, np.last_maternal, tb.id_table, tb.number_table
-FROM "order" o 
-INNER JOIN "table" tb ON o.id_table = tb.id_table
-INNER JOIN employee e ON e.id_employee = o.id_employee
-INNER JOIN naturalPerson np ON np.id_naturalperson = e.id_naturalperson
-
-select * from getOrder
+update "order" set id_employee = 2 where id_order = 1;

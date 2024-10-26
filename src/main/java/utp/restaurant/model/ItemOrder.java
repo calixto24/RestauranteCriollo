@@ -10,14 +10,11 @@ public class ItemOrder {
     private double total;
     private String description;
     private ItemMenu itemMenu;
-    private Order order;
 
-    public ItemOrder(int amount, String description, ItemMenu itemMenu, Order order) {
-        this.id_itemOrder = System.currentTimeMillis() + new Random().nextInt(1000);
+    public ItemOrder(int amount, String description, ItemMenu itemMenu) {
         this.amount = amount;
         this.description = description;
         this.itemMenu = itemMenu;
-        this.order = order;
         
         calcTotal();
     }
@@ -33,14 +30,6 @@ public class ItemOrder {
 
     public void setId_itemOrder(long id_itemOrder) {
         this.id_itemOrder = id_itemOrder;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Order getOrder() {
-        return order;
     }
 
     public long getId_itemOrder() {

@@ -16,11 +16,13 @@ public class EmployeeDAO implements DAO<Employee> {
     private Statement st;
     private PreparedStatement ps;
     private ResultSet rs;
+    private RoleDAO roleDAO;
     private ArrayList<Employee> employeList;
 
     //constructor vacio
     public EmployeeDAO() {
         conn = RestaurantDB.getInstance().getConn();
+        roleDAO = new RoleDAO();
     }
 
     //metodos
@@ -54,11 +56,9 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setUsername(rs.getString("username"));
                 employee.setPassword(rs.getString("password"));
                 
+                int id_role = rs.getInt("id_role");
                 
-                Role role = new Role();
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
-                
+                Role role = roleDAO.get((int) id_role);
                 employee.setRole(role);
                 
                 employeList.add(employee);
@@ -103,10 +103,9 @@ public class EmployeeDAO implements DAO<Employee> {
                 employee.setUsername(rs.getString("username"));
                 employee.setPassword(rs.getString("password"));
                 
-                Role role = new Role();
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
+                int id_role = rs.getInt("id_role");
                 
+                Role role = roleDAO.get((int) id_role);
                 employee.setRole(role);
 
             }

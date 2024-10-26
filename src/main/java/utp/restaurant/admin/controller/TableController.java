@@ -115,7 +115,7 @@ public class TableController {
         ArrayList<Table> tableList = tableDao.getAll();
 
         for (Table table : tableList) {
-            
+
             Object[] row = {
                 table.getId(),
                 table.getNumber_table(),
@@ -137,7 +137,7 @@ public class TableController {
         tableRegisterView.getJCBEmployees().removeAllItems();
 
         for (Employee e : EmployeeList) {
-            if (e.getRole().getName().equals("Mesero")) {
+            if (e.getRole().getName().equals("mesero")) {
                 tableRegisterView.getJCBEmployees().addItem(e);
             }
         }

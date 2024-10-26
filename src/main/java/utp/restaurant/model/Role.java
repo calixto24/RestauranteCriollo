@@ -7,7 +7,6 @@ public class Role {
     private String name;
 
     public Role(String name) {
-        this.id = System.currentTimeMillis() + new Random().nextInt(1000);
         this.name = name;
     }
     

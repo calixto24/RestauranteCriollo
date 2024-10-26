@@ -96,7 +96,7 @@ public class RoleDAO implements DAO<Role> {
             ps.setString(1, role.getName());
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
 
@@ -136,7 +136,7 @@ public class RoleDAO implements DAO<Role> {
             ps.setInt(1, (int) id);
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
 

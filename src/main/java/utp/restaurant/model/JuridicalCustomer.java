@@ -11,8 +11,6 @@ public class JuridicalCustomer extends JuridicalPerson{
 
     public JuridicalCustomer(long ruc, String socialReason, String type, String economicActivity, String typeBilling, int phoneNumber, String email, String address) {
         super(ruc, socialReason, type, economicActivity, typeBilling, phoneNumber, email, address);
-        
-        this.id_juridicalCustomer = System.currentTimeMillis() + new Random().nextInt(1000);
         this.register = LocalDate.now();
     }
 

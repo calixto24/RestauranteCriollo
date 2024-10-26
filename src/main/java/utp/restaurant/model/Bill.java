@@ -27,7 +27,6 @@ public class Bill extends Voucher<Long, JuridicalCustomer> {
 
     public Bill(JuridicalCustomer customer, Order order, Employee cashier) {
         super(order, cashier);
-        this.id_Bill = System.currentTimeMillis() + new Random().nextInt(1000);
         this.customer = customer;
     }
 

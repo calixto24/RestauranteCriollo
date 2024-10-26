@@ -241,7 +241,7 @@ public class MenuDetails extends javax.swing.JDialog {
 
         if (action.equals("add")) {
 
-            /*try {
+            try {
                 //Creando nuevo objeto ItemOrder
                 ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemMenu);
 
@@ -252,11 +252,11 @@ public class MenuDetails extends javax.swing.JDialog {
 
                 showMessage("Platillo no ordenado");
 
-            }*/
+            }
 
         } else if (action.equals("edit")) {
 
-            /*try {
+            try {
                 //Creando nuevo objeto ItemOrder
                 ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemOrder.getItemMenu());
 
@@ -268,7 +268,8 @@ public class MenuDetails extends javax.swing.JDialog {
 
                 showMessage("Platillo ordenado no actualizado");
 
-            }*/
+            }
+
         }
 
         root.renderItemOrderTable();

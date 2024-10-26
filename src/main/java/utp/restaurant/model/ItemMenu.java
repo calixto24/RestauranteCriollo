@@ -14,7 +14,6 @@ public class ItemMenu {
     private Category category;
 
     public ItemMenu(String name, double price, String description, String status, Category category, String image) {
-        this.id = System.currentTimeMillis() + new Random().nextInt(1000); //ID AUTOMATICO
         this.image = image;
         this.name = name;
         this.price = price;

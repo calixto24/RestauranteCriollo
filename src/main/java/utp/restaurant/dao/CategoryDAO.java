@@ -70,7 +70,7 @@ public class CategoryDAO implements DAO<Category> {
             while (rs.next()) {
 
                 category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category "));
+                category.setName(rs.getString("name_category"));
                 category.setDescription(rs.getString("description"));
 
             }

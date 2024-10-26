@@ -13,8 +13,6 @@ public class JuridicalPerson extends Person{
 
     public JuridicalPerson(long ruc, String socialReason, String type, String economicActivity, String typeBilling, int phoneNumber, String email, String address) {
         super(phoneNumber, email, address);
-        
-        this.id_juridicalPerson = System.currentTimeMillis() + new Random().nextInt(1000);
         this.ruc = ruc;
         this.socialReason = socialReason;
         this.type = type;

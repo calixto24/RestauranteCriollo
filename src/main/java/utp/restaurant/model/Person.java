@@ -10,7 +10,6 @@ public abstract class Person {
     protected String address;
 
     public Person(int phoneNumber, String email, String address) {
-        this.id_person = System.currentTimeMillis() + new Random().nextInt(1000);
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;

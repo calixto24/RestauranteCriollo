@@ -16,17 +16,19 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
     private Statement st;
     private PreparedStatement ps;
     private ResultSet rs;
+    private CategoryDAO categoryDAO;
     private ArrayList<ItemMenu> itemMenuList;
 
     // constructor 
     public ItemMenuDAO() {
         conn = RestaurantDB.getInstance().getConn();
+        categoryDAO = new CategoryDAO();
     }
 
     @Override
     public ArrayList<ItemMenu> getAll() {
 
-        query = "SELECT * FROM getItemMenu";
+        query = "SELECT * FROM itemMenu";
 
         itemMenuList = new ArrayList<>();
 
@@ -42,16 +44,13 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
                 itemMenu.setId(rs.getInt("id_itemmenu"));
                 itemMenu.setName(rs.getString("name_itemmenu"));
                 itemMenu.setPrice(rs.getDouble("priceunit"));
-                itemMenu.setDescription(rs.getString("description_itemmenu"));
+                itemMenu.setDescription(rs.getString("description"));
                 itemMenu.setStatus(rs.getString("status"));
                 itemMenu.setImage(rs.getString("image"));
 
-                Category category = new Category();
-
-                category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category"));
-                category.setDescription(rs.getString("description_category"));
-
+                int id_category = rs.getInt("id_category");
+                
+                Category category = categoryDAO.get((long) id_category);
                 itemMenu.setCategory(category);
 
                 itemMenuList.add(itemMenu);
@@ -67,7 +66,7 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
     @Override
     public ItemMenu get(long id) {
 
-        query = "SELECT * FROM getItemMenu WHERE id_itemmenu = ?";
+        query = "SELECT * FROM itemMenu WHERE id_itemMenu = ?";
 
         ItemMenu itemMenu = new ItemMenu();
 
@@ -82,15 +81,13 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
                 itemMenu.setId(rs.getInt("id_itemmenu"));
                 itemMenu.setName(rs.getString("name_itemmenu"));
                 itemMenu.setPrice(rs.getDouble("priceunit"));
-                itemMenu.setDescription(rs.getString("description_itemmenu"));
+                itemMenu.setDescription(rs.getString("description"));
                 itemMenu.setStatus(rs.getString("status"));
                 itemMenu.setImage(rs.getString("image"));
 
-                Category category = new Category();
-                category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category"));
-                category.setDescription(rs.getString("description_category"));
-
+                int id_category = rs.getInt("id_category");
+                
+                Category category = categoryDAO.get((long) id_category);
                 itemMenu.setCategory(category);
 
             }

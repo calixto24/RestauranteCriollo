@@ -13,7 +13,6 @@ public class Employee extends NaturalPerson {
     public Employee(String username, String password, Role role, int dni, String name, String lastname_paternal, String lastname_maternal, LocalDate birthdate, int phoneNumber, String email, String address) {
         super( dni, name, lastname_paternal, lastname_maternal, birthdate, phoneNumber, email, address);
         
-        this.id_employee = System.currentTimeMillis() + new Random().nextInt(1000);
         this.username = username;
         this.password = password;
         this.role = role;

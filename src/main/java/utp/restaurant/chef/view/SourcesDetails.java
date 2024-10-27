@@ -124,6 +124,8 @@ public class SourcesDetails extends javax.swing.JDialog {
         try {
             
             itemMenu.setStatus(estado);
+            itemMenuDAO.update(itemMenu);
+            
             showMessage("Estado actualizado correctamente");
             
             root.getjBTNStatus().setEnabled(false);

@@ -9,6 +9,8 @@ import utp.restaurant.cashier.view.VoucherView;
 import utp.restaurant.dao.BillDAO;
 import utp.restaurant.dao.JuridicalCustomerDAO;
 import utp.restaurant.dao.NaturalCustomerDAO;
+import utp.restaurant.dao.OrderDAO;
+import utp.restaurant.dao.TableDAO;
 import utp.restaurant.dao.TicketDAO;
 import utp.restaurant.model.Bill;
 import utp.restaurant.model.ItemOrder;
@@ -292,10 +294,10 @@ public class VoucherController {
                 voucherView.getjLBvuelto().setVisible(false);
 
                 voucherView.getjTFamount().setEditable(false);
-                
+
                 voucher.calcAddPayment();
                 voucher.calculateTotalPrice();
-                
+
                 voucherView.getjTFamount().setText(voucher.getTotalPrice() + "");
 
                 break;
@@ -402,25 +404,37 @@ public class VoucherController {
             case "Factura":
                 if (juridicalCustomer == null) {
                     voucherView.showMessage("Debe seleccionar un cliente jurídico antes de finalizar la factura");
-                    return; 
+                    return;
                 }
 
-                Bill newBill = new Bill(juridicalCustomer, order, store.getEmploye());
+                Bill newBill = new Bill();
+                
+                newBill.setCustomer(juridicalCustomer);
+                newBill.setOrder(order);
+                newBill.setCashier(store.getEmploye());
+
+                //cambia estado el pedido
+                newBill.getOrder().setStatus("Finalizado");
+                newBill.getOrder().getTable().setStatus("Disponible");
+
+                OrderDAO orderDAO = new OrderDAO();
+                orderDAO.update(newBill.getOrder());
+
+                TableDAO tableDAO = new TableDAO();
+                tableDAO.update(newBill.getOrder().getTable());
 
                 try {
+
                     //añade una factura
                     billDAO.add(newBill);
                     newBill.generateTicket(juridicalCustomer);
-                    
-                    //cambia estado el pedido
-                    newBill.getOrder().setStatus("Finalizado");
-                    newBill.getOrder().getTable().setStatus("Disponible");
-                    
+
                     voucherView.showMessage("Factura finalizada correctamente");
                     voucherView.dispose();
 
                 } catch (Exception e) {
                     voucherView.showMessage("Error al finalizar la factura");
+                    System.out.println(e);
                 }
 
                 break;
@@ -428,7 +442,7 @@ public class VoucherController {
             case "Boleta":
                 if (naturalCustomer == null) {
                     voucherView.showMessage("Debe seleccionar un cliente natural antes de finalizar la boleta");
-                    return; 
+                    return;
                 }
 
                 Ticket newTicket = new Ticket(naturalCustomer, order, store.getEmploye());
@@ -436,11 +450,17 @@ public class VoucherController {
                 try {
                     ticketDAO.add(newTicket);
                     newTicket.generateTicket(naturalCustomer);
-                    
+
                     //cambia estado el pedido
                     newTicket.getOrder().setStatus("Finalizado");
                     newTicket.getOrder().getTable().setStatus("Disponible");
-                    
+
+                    /*OrderDAO orderDAO = new OrderDAO();
+                    orderDAO.update(newTicket.getOrder());
+
+                    TableDAO tableDAO = new TableDAO();
+                    tableDAO.update(newTicket.getOrder().getTable());*/
+
                     voucherView.showMessage("Boleta finalizada correctamente");
                     voucherView.dispose();
 
@@ -451,9 +471,8 @@ public class VoucherController {
 
                 break;
         }
-        
+
         voucher = null;
     }
-    
 
 }

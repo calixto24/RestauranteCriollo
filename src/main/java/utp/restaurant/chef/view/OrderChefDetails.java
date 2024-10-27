@@ -198,6 +198,8 @@ public class OrderChefDetails extends javax.swing.JDialog {
             try {
 
                 order.setStatus("Preparado");
+                orderDAO.update(order);
+                
                 showMessage("Pedido preparado correctamente");
                 root.callManageButton();
                 root.renderTable();

@@ -282,8 +282,46 @@ public class CustomerController {
                 return;
             }
 
-            //creando objeto cliente natural
-            newNaturalCustomer = new NaturalCustomer(dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
+            if (action.equals("add")) {
+
+                //creando objeto cliente natural
+                newNaturalCustomer = new NaturalCustomer(dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction);
+
+                try {
+
+                    naturalCustomerDAO.add(newNaturalCustomer);
+                    view.showMessage("Cliente Natural creado");
+
+                } catch (Exception e) {
+
+                    view.showMessage("Cliente no creado" + e.toString());
+
+                }
+
+            } else if (action.equals("edit")) {
+
+                NaturalCustomer updateNc = naturalCustomerDAO.get(naturalSelectedId);
+                updateNc.setDni(dni);
+                updateNc.setName(name);
+                updateNc.setLastname_paternal(ap);
+                updateNc.setLastname_maternal(am);
+                updateNc.setBirthdate(LocalDate.of(dateV[2], dateV[1], dateV[0]));
+                updateNc.setPhoneNumber(phonenumber);
+                updateNc.setEmail(email);
+                updateNc.setAddress(direction);
+
+                try {
+
+                    naturalCustomerDAO.update(updateNc);
+                    view.showMessage("Cliente Natural actualizado");
+
+                } catch (Exception e) {
+
+                    view.showMessage("Cliente no actualizado" + e.toString());
+
+                }
+
+            }
 
         } else if (typeCustomer.equals("JURIDICO")) {
 
@@ -411,59 +449,49 @@ public class CustomerController {
                 return;
             }
 
-            //creando objeto cliente juridico
-            newJuridicalCustomer = new JuridicalCustomer(ruc, razonSocial, type, activityEco, typeBilling, phonenumber, email, direction);
+            if (action.equals("add")) {
 
-        }
+                //creando objeto cliente juridico
+                newJuridicalCustomer = new JuridicalCustomer(ruc, razonSocial, type, activityEco, typeBilling, phonenumber, email, direction);
 
-        //--------------------------- Agregar al nuevo cliente -------------------
-        if (action.equals("add")) {
-
-            try {
-
-                if (typeCustomer.equals("NATURAL")) {
-
-                    naturalCustomerDAO.add(newNaturalCustomer);
-                    view.showMessage("Cliente Natural creado");
-
-                } else if (typeCustomer.equals("JURIDICO")) {
+                try {
 
                     juridicalCustomerDAO.add(newJuridicalCustomer);
                     view.showMessage("Cliente Juridico creado");
 
+                } catch (Exception e) {
+
+                    view.showMessage("Cliente no creado" + e.toString());
+
                 }
 
-            } catch (Exception e) {
+            } else if (action.equals("edit")) {
 
-                view.showMessage("Cliente no creado" + e.toString());
+                JuridicalCustomer updateJc = juridicalCustomerDAO.get(juridicalSelectedId);
+                updateJc.setRuc(ruc);
+                updateJc.setSocialReason(razonSocial);
+                updateJc.setType(type);
+                updateJc.setEconomicActivity(activityEco);
+                updateJc.setTypeBilling(typeBilling);
+                updateJc.setPhoneNumber(phonenumber);
+                updateJc.setEmail(email);
+                updateJc.setAddress(direction);
 
-            }
-        } else if (action.equals("edit")) {
+                try {
 
-            try {
-
-                if (typeCustomer.equals("NATURAL")) {
-                    NaturalCustomer updateNaturalCustomer = naturalCustomerDAO.get(naturalSelectedId);
-                    //dni, name, ap, am, LocalDate.of(dateV[2], dateV[1], dateV[0]), phonenumber, email, direction
-                    updateNaturalCustomer.setName(name);
-                    updateNaturalCustomer.setLastname_paternal(ap);
-                    updatee
-                    naturalCustomerDAO.update(newNaturalCustomer);
-                    view.showMessage("Cliente Natural actualizado");
-
-                } else if (typeCustomer.equals("JURIDICO")) {
-
-                    juridicalCustomerDAO.update(newJuridicalCustomer);
+                    juridicalCustomerDAO.update(updateJc);
                     view.showMessage("Cliente Juridico actualizado");
 
+                } catch (Exception e) {
+
+                    view.showMessage("Cliente no actualizado" + e.toString());
+
                 }
 
-            } catch (Exception e) {
-
-                view.showMessage("Cliente no actualizado" + e.toString());
-
             }
+
         }
+
         handleCleanForm();
         view.renderTable();
     }

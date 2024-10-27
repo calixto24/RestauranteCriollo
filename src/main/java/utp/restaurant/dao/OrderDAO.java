@@ -239,7 +239,7 @@ public class OrderDAO implements DAO<Order> {
             ps.setInt(5, (int) order.getWaiter().getId_employee());
             ps.setInt(6, (int) order.getTable().getId());
             ps.setInt(7, (int) order.getId_Order());
-
+            ps.executeUpdate();
             String queryIO = "UPDATE itemOrder SET amount = ?, total = ?, description = ?, id_itemmenu = ? WHERE id_itemorder = ?";
 
             try (PreparedStatement psIO = conn.prepareStatement(queryIO)) {

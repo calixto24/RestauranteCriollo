@@ -40,7 +40,7 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
 
                 juridicalCustomer.setId_person(rs.getInt("id_person"));
                 juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalperson"));
-                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalcustomer"));
+                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridicalcustomer"));
                 juridicalCustomer.setRuc(Long.parseLong(rs.getString("ruc")));
                 juridicalCustomer.setSocialReason(rs.getString("socialreason"));
                 juridicalCustomer.setType(rs.getString("type"));

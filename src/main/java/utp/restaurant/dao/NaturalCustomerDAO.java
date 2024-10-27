@@ -115,7 +115,7 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
             ps.setString(2, naturalCustomer.getName());
             ps.setString(3, naturalCustomer.getLastname_paternal());
             ps.setString(4, naturalCustomer.getLastname_maternal());
-            ps.setString(5, naturalCustomer.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(naturalCustomer.getBirthdate()));
             ps.setString(6, naturalCustomer.getAddress());
             ps.setInt(7, naturalCustomer.getPhoneNumber());
             ps.setString(8, naturalCustomer.getEmail());
@@ -142,7 +142,7 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
             ps.setString(2, naturalCustomer.getName());
             ps.setString(3, naturalCustomer.getLastname_paternal());
             ps.setString(4, naturalCustomer.getLastname_maternal());
-            ps.setString(5, naturalCustomer.getBirthdate().toString());
+            ps.setDate(5, java.sql.Date.valueOf(naturalCustomer.getBirthdate()));
             ps.setString(6, naturalCustomer.getAddress());
             ps.setInt(7, naturalCustomer.getPhoneNumber());
             ps.setString(8, naturalCustomer.getEmail());

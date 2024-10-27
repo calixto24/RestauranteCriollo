@@ -258,10 +258,10 @@ public class MenuDetails extends javax.swing.JDialog {
 
             try {
                 //Creando nuevo objeto ItemOrder
-                ItemOrder newItemOrder = new ItemOrder(cantidad, descripcion, itemOrder.getItemMenu());
+                ItemOrder updateItemOrder = new ItemOrder(cantidad, descripcion, itemOrder.getItemMenu());
 
                 //iodao.update(itemOrder_id, newItemOrder);
-                root.updateOrderItem(newItemOrder);
+                root.updateOrderItem(updateItemOrder);
                 showMessage("Platillo ordenado actualizado");
 
             } catch (Exception e) {

@@ -32,10 +32,11 @@ public class ItemMenuController {
         action = "add";
         idPlato = 0;
 
-        jFileChooser = new JFileChooser();
         itemMenuDao = new ItemMenuDAO();
         vldt = new Validate();
         categoryDao = new CategoryDAO();
+        
+        jFileChooser = new JFileChooser("src\\main\\resources\\utp\\restaurant\\images");
 
     }
 
@@ -195,7 +196,7 @@ public class ItemMenuController {
     }
 
     public void heandleExplorerClick() {
-
+        
         int result = jFileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {

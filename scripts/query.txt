@@ -319,11 +319,7 @@ $$;
 
 -- EJECUCION DE LOS PROCEDIMIENTOS
 call add_naturalCustomer(76454551,'leonardo','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com');
-<<<<<<< HEAD
-call update_naturalCustomer(76454551,'xd','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com',5,3,2);
-=======
 call update_naturalCustomer(76454551,'xd','murillo','apellido','2006-01-19','chosica',936197832,'leod@gmail.com', 5,3,2);
->>>>>>> f6bed69ac71b6145e813a5c9e7c7717eaac8a37a
 
 -- CONSULTA CLIENTE NATURAL
 create or replace  view getNaturalCustomer as select p.id_person, np.id_naturalperson, nc.id_naturalcustomer, np.dni , np."name",np.last_paternal,np.last_maternal,np.birthdate,p.address,p.phone_number,p.email,nc.register
@@ -412,59 +408,99 @@ inner join person p on p.id_person = jp.id_person
 select * from getJuricalCustomer
 
 --PROCEDIMIENTO FACTURA
-create or replace procedure add_bill (
-  id_employee int,
-  id_juridicalCustomer int,
-  id_order int
-)
-language plpgsql as $$
-declare 
-_id_voucher int;
-begin 
-   insert into voucher (date, time, id_employee, id_order)
-   values (CURRENT_DATE, CURRENT_TIME, id_employee, id_order)
-   returning id_voucher into _id_voucher;
- 
-   insert into bill (id_juridicalCustomer, id_voucher)
-   values (id_juridicalCustomer, _id_voucher);
-end;
+CREATE OR REPLACE PROCEDURE add_bill(
+	date date,
+	"time" time without time zone,
+	status character varying,
+	totalprice numeric,
+	discount numeric,
+	additionalpayments numeric,
+	igv numeric,
+	paymenttype character varying,
+	turned numeric,
+	id_employee integer,
+	id_order integer,
+	id_juridicalcustomer integer
+) LANGUAGE 'plpgsql'
+AS $$
+DECLARE 
+    _id_voucher INT;
+BEGIN 
+    INSERT INTO voucher ("date", "time", status, totalPrice, discount, additionalPayments, igv, paymentType, turned, id_employee, id_order)
+    VALUES ("date", "time", status, totalPrice, discount, additionalPayments, igv, paymentType, turned, id_employee, id_order)
+    RETURNING id_voucher INTO _id_voucher;
+
+    INSERT INTO bill (id_voucher, id_juridicalCustomer)
+    VALUES (_id_voucher, id_juridicalCustomer);
+END;
 $$;
 
-<<<<<<< HEAD
-=======
 -- VISTA FACTURA
-create or replace view getBill as SELECT v.id_voucher, b.id_bill, v.date, v."time", jc.id_juridicalcustomer, jp.socialreason, e.id_employee, np."name", np.last_paternal, np.last_maternal, v.totalprice
-from bill b
-INNER JOIN juridicalCustomer jc ON b.id_juridicalcustomer = jc.id_juridicalcustomer
-INNER JOIN juridicalPerson jp ON jp.id_juridicalperson = jc.id_juridicalperson
-INNER JOIN voucher v ON b.id_voucher = v.id_voucher
-INNER JOIN employee e ON v.id_employee = e.id_employee
-INNER JOIN naturalPerson np ON np.id_naturalperson = e.id_naturalperson
+CREATE OR REPLACE VIEW getbill AS SELECT 
+	b.id_bill,
+    b.id_juridicalcustomer,
+    v.id_voucher,
+    v.date,
+    v."time",
+    v.status,
+    v.totalprice,
+    v.discount,
+    v.additionalpayments,
+    v.igv,
+    v.paymenttype,
+    v.turned,
+    v.id_employee,
+    v.id_order
+FROM bill b
+INNER JOIN voucher v ON b.id_voucher = v.id_voucher;
 
 SELECT * from getBill
 
->>>>>>> f6bed69ac71b6145e813a5c9e7c7717eaac8a37a
 --PROCEDIMIENTO BOLETO
-create or replace procedure add_ticket (
-  id_employee int,
-  id_naturalCustomer int,
-  id_order int
-)
-language plpgsql as $$ 
-declare
-_id_voucher int;
-begin 
-   insert into voucher (date, time, id_employee, id_order)
-   values (CURRENT_DATE, CURRENT_TIME, id_employee, id_order)
-   returning id_voucher into _id_voucher;
-   
-   insert into ticket (id_naturalCustomer, id_voucher)
-   values (id_naturalCustomer, _id_voucher);
- end;
-<<<<<<< HEAD
- $$;
-=======
- $$;
+ CREATE OR REPLACE PROCEDURE add_ticket(
+	date date,
+	"time" time without time zone,
+	status character varying,
+	totalprice numeric,
+	discount numeric,
+	additionalpayments numeric,
+	igv numeric,
+	paymenttype character varying,
+	turned numeric,
+	id_employee integer,
+	id_order integer,
+	id_naturalcustomer integer
+) LANGUAGE 'plpgsql'
+AS $$
+DECLARE 
+    _id_voucher INT;
+BEGIN 
+    INSERT INTO voucher ("date", "time", status, totalPrice, discount, additionalPayments, igv, paymentType, turned, id_employee, id_order)
+    VALUES ("date", "time", status, totalPrice, discount, additionalPayments, igv, paymentType, turned, id_employee, id_order)
+    RETURNING id_voucher INTO _id_voucher;
 
-update "order" set id_employee = 2 where id_order = 1;
->>>>>>> f6bed69ac71b6145e813a5c9e7c7717eaac8a37a
+    INSERT INTO ticket (id_voucher, id_naturalCustomer)
+    VALUES (_id_voucher, id_naturalcustomer);
+END;
+$$;
+
+-- VISTA BOLETA
+CREATE OR REPLACE VIEW getTicket AS SELECT 
+	tk.id_ticket,
+    tk.id_naturalcustomer,
+    v.id_voucher,
+    v.date,
+    v."time",
+    v.status,
+    v.totalprice,
+    v.discount,
+    v.additionalpayments,
+    v.igv,
+    v.paymenttype,
+    v.turned,
+    v.id_employee,
+    v.id_order
+FROM ticket tk
+INNER JOIN voucher v ON tk.id_voucher = v.id_voucher;
+
+SELECT * from getTicket 

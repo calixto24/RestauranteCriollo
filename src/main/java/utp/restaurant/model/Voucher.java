@@ -43,6 +43,8 @@ public abstract class Voucher<T, S> implements CardPayment, CashPayment {
     }
 
     public Voucher() {
+        this.time = LocalTime.now();
+        this.date = LocalDate.now();
         IGV = 0.18;
     }
 

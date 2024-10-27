@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.dao.OrderDAO;
+import utp.restaurant.dao.TableDAO;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 import utp.restaurant.waiter.view.OrderDetails;
@@ -74,8 +75,11 @@ public class OrderDetailsController {
             return;
             
         } else {
+            TableDAO tableDAO = new TableDAO();
             
             order.getTable().setStatus("Disponible");
+            tableDAO.update(order.getTable());
+            
             orderDAO.delete(order.getId_Order());
             orderDetails.showMessage("Orden eliminada correctamente");
             

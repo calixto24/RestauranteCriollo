@@ -115,7 +115,10 @@ public class TakeOrderController {
 
     }
 
-    /* ------------------------------------------------------------------------------------------ */
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+    
     public void handleSaveClick() {
 
         try {
@@ -123,12 +126,21 @@ public class TakeOrderController {
             if (action.equals("edit")) {
 
                 order.getTable().setStatus("Ocupado");
+                tableDAO.update(order.getTable());
                 
-                Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
+                //updater order
+                
+                
+                //Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
+                
+                //newOrder.setId_Order(order.getId_Order());
 
-                newOrder.setId_Order(order.getId_Order());
-
-                orderDAO.update(newOrder);
+                /*Order updateOrder = orderDAO.get(order.getId_Order());
+                updateOrder.setWaiter(store.getEmploye());
+                updateOrder.setTable(order.getTable());
+                updateOrder.setItemOrderList(order.getItemOrderList());*/
+                
+                orderDAO.update(order);
                 takeOrderView.showMessage("Orden actualizada correctamente");
 
                 OrderView orderView = new OrderView();
@@ -139,6 +151,7 @@ public class TakeOrderController {
 
                 //cambiar estado de la mesa
                 order.getTable().setStatus("Ocupado");
+                tableDAO.update(order.getTable());
 
                 Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
 
@@ -288,10 +301,6 @@ public class TakeOrderController {
         order.calcTotalPrice();
         takeOrderView.getjLBTotal().setText(order.getTotal_Price() + "");
 
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public void setAction(String action) {

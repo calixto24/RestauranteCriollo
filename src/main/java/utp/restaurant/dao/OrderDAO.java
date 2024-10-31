@@ -202,20 +202,9 @@ public class OrderDAO implements DAO<Order> {
                 if (rs.next()) {
                     id_order = rs.getInt("id_order");
                 }
+                
+                add_itemOrder(order, id_order);
 
-                // Añadir los ItemOrders asociados
-                String queryItemOrder = "INSERT INTO itemOrder(amount, total, description, id_itemmenu, id_order) VALUES (?,?,?,?,?)";
-
-                try (PreparedStatement psIO = conn.prepareStatement(queryItemOrder)) {
-                    for (ItemOrder io : order.getItemOrderList()) {
-                        psIO.setInt(1, io.getAmount());
-                        psIO.setDouble(2, io.getTotal());
-                        psIO.setString(3, io.getDescription());
-                        psIO.setInt(4, (int) io.getItemMenu().getId());
-                        psIO.setInt(5, id_order);
-                        psIO.executeUpdate();
-                    }
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -240,21 +229,11 @@ public class OrderDAO implements DAO<Order> {
             ps.setInt(6, (int) order.getTable().getId());
             ps.setInt(7, (int) order.getId_Order());
             ps.executeUpdate();
-            String queryIO = "UPDATE itemOrder SET amount = ?, total = ?, description = ?, id_itemmenu = ? WHERE id_itemorder = ?";
 
-            try (PreparedStatement psIO = conn.prepareStatement(queryIO)) {
-
-                for (ItemOrder io : order.getItemOrderList()) {
-                    psIO.setInt(1, io.getAmount());
-                    psIO.setDouble(2, io.getTotal());
-                    psIO.setString(3, io.getDescription());
-                    psIO.setInt(4, (int) io.getItemMenu().getId());
-                    psIO.setInt(5, (int) io.getId_itemOrder());
-                    psIO.executeUpdate();
-                }
-
-            }
-
+            delete_itemOrder((int) order.getId_Order());
+            
+            add_itemOrder(order, (int) order.getId_Order());
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -276,6 +255,42 @@ public class OrderDAO implements DAO<Order> {
             e.printStackTrace();
         }
 
+    }
+
+    public void add_itemOrder(Order order, int id_order) {
+
+        // Añadir los ItemOrders asociados
+        String queryItemOrder = "INSERT INTO itemOrder(amount, total, description, id_itemmenu, id_order) VALUES (?,?,?,?,?)";
+
+        try (PreparedStatement psIO = conn.prepareStatement(queryItemOrder)) {
+            for (ItemOrder io : order.getItemOrderList()) {
+                psIO.setInt(1, io.getAmount());
+                psIO.setDouble(2, io.getTotal());
+                psIO.setString(3, io.getDescription());
+                psIO.setInt(4, (int) io.getItemMenu().getId());
+                psIO.setInt(5, id_order);
+                psIO.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    
+    public void delete_itemOrder(int id_order) {
+        
+        query = "DELETE FROM itemOrder WHERE id_order = ?";
+        
+        try {
+            
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id_order);
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
     }
 
 }

@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import utp.restaurant.service.CustomerService;
 import utp.restaurant.service.model.SunatCustomer;
@@ -31,7 +30,7 @@ public class Bill extends Voucher<Long, JuridicalCustomer> {
     }
 
     public Bill() {
-        this.id_Bill = System.currentTimeMillis() + new Random().nextInt(1000);
+        
     }
 
     /**

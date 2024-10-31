@@ -3,6 +3,7 @@ package utp.restaurant.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import utp.restaurant.Interface.DAO;
@@ -81,7 +82,7 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
 
                 juridicalCustomer.setId_person(rs.getInt("id_person"));
                 juridicalCustomer.setId_juridicalPerson(rs.getInt("id_juridicalperson"));
-                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridcalcustomer"));
+                juridicalCustomer.setId_juridicalCustomer(rs.getInt("id_juridicalcustomer"));
                 juridicalCustomer.setRuc(Long.parseLong(rs.getString("ruc")));
                 juridicalCustomer.setSocialReason(rs.getString("socialreason"));
                 juridicalCustomer.setType(rs.getString("type"));
@@ -106,7 +107,7 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
     @Override
     public void add(JuridicalCustomer juridicalCustomer) {
 
-        query = "CALL add_juridicalCustomer (?,?,?,?,?,?,?,?,?)";
+        query = "CALL add_juridicalCustomer (?,?,?,?,?,?,?,?)";
 
         try {
 
@@ -123,10 +124,36 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
 
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace(); // para que salga el error
 
         }
+
+    }
+
+    public int getLastID() {
+
+        query = "select id_juridicalCustomer from juridicalCustomer order by id_juridicalCustomer desc limit 1";
+        
+        int id_juridicalCustomer = -1;
+
+        try {
+
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                
+                id_juridicalCustomer = rs.getInt("id_juridicalcustomer");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // para que salga el error
+
+        }
+        
+        return id_juridicalCustomer;
 
     }
 

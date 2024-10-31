@@ -41,6 +41,7 @@ public class VoucherController {
     //objetos vacios
     private JuridicalCustomer juridicalCustomer;
     private NaturalCustomer naturalCustomer;
+    private boolean userExist;
 
     public VoucherController(VoucherView voucherView) {
         this.voucherView = voucherView;
@@ -48,6 +49,7 @@ public class VoucherController {
         store = Store.getInstance();
 
         voucher = new Ticket();
+        voucher.setPaymentType("Efectivo");
 
         juridicalCustomerDAO = new JuridicalCustomerDAO();
         naturalCustomerDAO = new NaturalCustomerDAO();
@@ -56,6 +58,7 @@ public class VoucherController {
 
         juridicalCustomer = null;
         naturalCustomer = null;
+        userExist = false;
         discountApplied = false;
         birthdayDiscountApplied = false;
 
@@ -112,8 +115,9 @@ public class VoucherController {
                 }
 
                 try {
+                    userExist = juridicalCustomer != null;
 
-                    if (juridicalCustomer != null) {
+                    if (userExist) {
 
                         //PINTANDO COMPROBANTE
                         voucherView.getjTFsocialReason().setText(juridicalCustomer.getSocialReason());
@@ -285,6 +289,7 @@ public class VoucherController {
                 voucherView.getjTFamount().setEditable(true);
 
                 voucher.setAdditionalPayments(0);
+                voucher.setPaymentType("Efectivo");
 
                 break;
 
@@ -294,6 +299,7 @@ public class VoucherController {
                 voucherView.getjLBvuelto().setVisible(false);
 
                 voucherView.getjTFamount().setEditable(false);
+                voucher.setPaymentType("Tarjeta");
 
                 voucher.calcAddPayment();
                 voucher.calculateTotalPrice();
@@ -407,11 +413,20 @@ public class VoucherController {
                     return;
                 }
 
-                Bill newBill = new Bill();
-                
+                //creamos el usuario en bd
+                if (!userExist) {
+
+                    juridicalCustomerDAO.add(juridicalCustomer);
+                    int id_juridicalCustomer = juridicalCustomerDAO.getLastID();
+                    juridicalCustomer.setId_juridicalCustomer(id_juridicalCustomer);
+
+                }
+
+                Bill newBill = cloneBill();
                 newBill.setCustomer(juridicalCustomer);
                 newBill.setOrder(order);
                 newBill.setCashier(store.getEmploye());
+                newBill.setStatus("Pagado");
 
                 //cambia estado el pedido
                 newBill.getOrder().setStatus("Finalizado");
@@ -427,6 +442,8 @@ public class VoucherController {
 
                     //añade una factura
                     billDAO.add(newBill);
+                    newBill.setId_Bill(billDAO.getLastID());
+                    
                     newBill.generateTicket(juridicalCustomer);
 
                     voucherView.showMessage("Factura finalizada correctamente");
@@ -460,7 +477,6 @@ public class VoucherController {
 
                     TableDAO tableDAO = new TableDAO();
                     tableDAO.update(newTicket.getOrder().getTable());*/
-
                     voucherView.showMessage("Boleta finalizada correctamente");
                     voucherView.dispose();
 
@@ -473,6 +489,22 @@ public class VoucherController {
         }
 
         voucher = null;
+    }
+
+    public Bill cloneBill() {
+
+        Bill newBill = new Bill();
+
+        newBill.setTurned(voucher.getTurned());
+        newBill.setAdditionalPayments(voucher.getAdditionalPayments());
+        newBill.setTaxed(voucher.getTaxed());
+        newBill.setTotalPrice(voucher.getTotalPrice());
+        newBill.setIgv(voucher.getIgv());
+        newBill.setDiscount(voucher.getDiscount());
+        newBill.setPaymentType(voucher.getPaymentType());
+
+        return newBill;
+
     }
 
 }

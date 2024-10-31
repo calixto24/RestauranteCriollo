@@ -129,17 +129,6 @@ public class TakeOrderController {
                 tableDAO.update(order.getTable());
                 
                 //updater order
-                
-                
-                //Order newOrder = new Order(store.getEmploye(), order.getTable(), order.getItemOrderList());
-                
-                //newOrder.setId_Order(order.getId_Order());
-
-                /*Order updateOrder = orderDAO.get(order.getId_Order());
-                updateOrder.setWaiter(store.getEmploye());
-                updateOrder.setTable(order.getTable());
-                updateOrder.setItemOrderList(order.getItemOrderList());*/
-                
                 orderDAO.update(order);
                 takeOrderView.showMessage("Orden actualizada correctamente");
 

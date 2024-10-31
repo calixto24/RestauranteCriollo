@@ -46,6 +46,7 @@ public class BillDAO implements DAO<Bill> {
 
                 Bill bill = new Bill();
 
+                bill.setId_Bill(rs.getInt("id_bill"));
                 bill.setId_Voucher(rs.getInt("id_voucher"));
                 bill.setDate(rs.getDate("date").toLocalDate());
                 bill.setTime(rs.getTime("time").toLocalTime());
@@ -158,6 +159,32 @@ public class BillDAO implements DAO<Bill> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+    }
+    
+    public int getLastID() {
+
+        query = "select id_bill from bill order by id_bill desc limit 1";
+        
+        int id_bill = -1;
+
+        try {
+
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                
+                id_bill = rs.getInt("id_bill");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // para que salga el error
+
+        }
+        
+        return id_bill;
 
     }
 

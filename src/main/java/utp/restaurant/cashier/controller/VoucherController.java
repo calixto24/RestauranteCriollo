@@ -29,6 +29,8 @@ public class VoucherController {
     private NaturalCustomerDAO naturalCustomerDAO;
     private BillDAO billDAO;
     private TicketDAO ticketDAO;
+    OrderDAO orderDAO;
+    TableDAO tableDAO;
 
     private Order order;
     private Store store;
@@ -55,6 +57,8 @@ public class VoucherController {
         naturalCustomerDAO = new NaturalCustomerDAO();
         billDAO = new BillDAO();
         ticketDAO = new TicketDAO();
+        orderDAO = new OrderDAO();
+        tableDAO = new TableDAO();
 
         juridicalCustomer = null;
         naturalCustomer = null;
@@ -191,7 +195,9 @@ public class VoucherController {
 
                 try {
 
-                    if (naturalCustomer != null) {
+                    userExist = naturalCustomer != null;
+
+                    if (userExist) {
 
                         //PINTA DATOS DEL COMPROBANTE
                         voucherView.getjTFnombreStr().setText(naturalCustomer.getName());
@@ -432,10 +438,7 @@ public class VoucherController {
                 newBill.getOrder().setStatus("Finalizado");
                 newBill.getOrder().getTable().setStatus("Disponible");
 
-                OrderDAO orderDAO = new OrderDAO();
                 orderDAO.update(newBill.getOrder());
-
-                TableDAO tableDAO = new TableDAO();
                 tableDAO.update(newBill.getOrder().getTable());
 
                 try {
@@ -443,7 +446,7 @@ public class VoucherController {
                     //añade una factura
                     billDAO.add(newBill);
                     newBill.setId_Bill(billDAO.getLastID());
-                    
+
                     newBill.generateTicket(juridicalCustomer);
 
                     voucherView.showMessage("Factura finalizada correctamente");
@@ -462,21 +465,32 @@ public class VoucherController {
                     return;
                 }
 
-                Ticket newTicket = new Ticket(naturalCustomer, order, store.getEmploye());
+                if (!userExist) {
+
+                    naturalCustomerDAO.add(naturalCustomer);
+                    int id_naturalcustomer = naturalCustomerDAO.getLastID();
+                    naturalCustomer.setId_naturalCustomer(id_naturalcustomer);
+
+                }
+
+                Ticket newTicket = cloneTicket();
+                newTicket.setNaturalPerson(naturalCustomer);
+                newTicket.setCashier(store.getEmploye());
+                newTicket.setOrder(order);
+                newTicket.setStatus("Pagado");
+
+                //cambia estado el pedido
+                newTicket.getOrder().setStatus("Finalizado");
+                newTicket.getOrder().getTable().setStatus("Disponible");
+
+                orderDAO.update(newTicket.getOrder());
+                tableDAO.update(newTicket.getOrder().getTable());
 
                 try {
                     ticketDAO.add(newTicket);
+                    newTicket.setId_Ticket(ticketDAO.getLastID());
                     newTicket.generateTicket(naturalCustomer);
-
-                    //cambia estado el pedido
-                    newTicket.getOrder().setStatus("Finalizado");
-                    newTicket.getOrder().getTable().setStatus("Disponible");
-
-                    /*OrderDAO orderDAO = new OrderDAO();
-                    orderDAO.update(newTicket.getOrder());
-
-                    TableDAO tableDAO = new TableDAO();
-                    tableDAO.update(newTicket.getOrder().getTable());*/
+                    
                     voucherView.showMessage("Boleta finalizada correctamente");
                     voucherView.dispose();
 
@@ -504,6 +518,22 @@ public class VoucherController {
         newBill.setPaymentType(voucher.getPaymentType());
 
         return newBill;
+
+    }
+
+    public Ticket cloneTicket() {
+
+        Ticket newTicket = new Ticket();
+
+        newTicket.setTurned(voucher.getTurned());
+        newTicket.setAdditionalPayments(voucher.getAdditionalPayments());
+        newTicket.setTaxed(voucher.getTaxed());
+        newTicket.setTotalPrice(voucher.getTotalPrice());
+        newTicket.setIgv(voucher.getIgv());
+        newTicket.setDiscount(voucher.getDiscount());
+        newTicket.setPaymentType(voucher.getPaymentType());
+
+        return newTicket;
 
     }
 

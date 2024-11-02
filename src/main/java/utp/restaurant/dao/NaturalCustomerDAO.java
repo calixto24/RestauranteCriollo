@@ -1,8 +1,10 @@
 package utp.restaurant.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import utp.restaurant.Interface.DAO;
@@ -46,18 +48,22 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
                 naturalCustomer.setName(rs.getString("name"));
                 naturalCustomer.setLastname_paternal(rs.getString("last_paternal"));
                 naturalCustomer.setLastname_maternal(rs.getString("last_maternal"));
-                naturalCustomer.setBirthdate(rs.getDate("birthdate").toLocalDate());
                 naturalCustomer.setAddress(rs.getString("address"));
                 naturalCustomer.setPhoneNumber(rs.getInt("phone_number"));
                 naturalCustomer.setEmail(rs.getString("email"));
                 naturalCustomer.setRegister(rs.getDate("register").toLocalDate());
+                
+                Date birthdate = rs.getDate("birthdate");
+                naturalCustomer.setBirthdate(birthdate != null ? birthdate.toLocalDate() : null);
 
                 naturalCustomerList.add(naturalCustomer);
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
+
             e.printStackTrace();
+
         }
 
         return naturalCustomerList;
@@ -86,15 +92,17 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
                 naturalCustomer.setName(rs.getString("name"));
                 naturalCustomer.setLastname_paternal(rs.getString("last_paternal"));
                 naturalCustomer.setLastname_maternal(rs.getString("last_maternal"));
-                naturalCustomer.setBirthdate(rs.getDate("birthdate").toLocalDate());
                 naturalCustomer.setAddress(rs.getString("address"));
                 naturalCustomer.setPhoneNumber(rs.getInt("phone_number"));
                 naturalCustomer.setEmail(rs.getString("email"));
                 naturalCustomer.setRegister(rs.getDate("register").toLocalDate());
                 
+                Date birthdate = rs.getDate("birthdate");
+                naturalCustomer.setBirthdate(birthdate != null ? birthdate.toLocalDate() : null);
+                
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
 
@@ -115,19 +123,52 @@ public class NaturalCustomerDAO implements DAO<NaturalCustomer> {
             ps.setString(2, naturalCustomer.getName());
             ps.setString(3, naturalCustomer.getLastname_paternal());
             ps.setString(4, naturalCustomer.getLastname_maternal());
-            ps.setDate(5, java.sql.Date.valueOf(naturalCustomer.getBirthdate()));
+            
+            if(naturalCustomer.getBirthdate() == null) {
+                ps.setNull(5, java.sql.Types.DATE);
+            } else {
+                ps.setDate(5, java.sql.Date.valueOf(naturalCustomer.getBirthdate()));
+            }
+            
             ps.setString(6, naturalCustomer.getAddress());
             ps.setInt(7, naturalCustomer.getPhoneNumber());
             ps.setString(8, naturalCustomer.getEmail());
 
             ps.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
 
             e.printStackTrace();
 
         }
 
+    }
+    
+    public int getLastID() {
+        
+        query = "SELECT id_naturalCustomer FROM naturalCustomer ORDER BY id_naturalCustomer DESC LIMIT 1";
+        
+        int id_naturalCustomer = -1;
+        
+        try {
+            
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            
+            if (rs.next()) {
+                
+                id_naturalCustomer = rs.getInt("id_naturalcustomer");
+                
+            }
+            
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+        
+        return id_naturalCustomer;
+        
     }
 
     @Override

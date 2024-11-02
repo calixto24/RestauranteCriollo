@@ -47,6 +47,7 @@ public class TicketDAO implements DAO<Ticket> {
 
                 Ticket ticket = new Ticket();
 
+                ticket.setId_Ticket(rs.getInt("id_ticket"));
                 ticket.setId_Voucher(rs.getInt("id_voucher"));
                 ticket.setDate(rs.getDate("date").toLocalDate());
                 ticket.setTime(rs.getTime("time").toLocalTime());
@@ -98,6 +99,7 @@ public class TicketDAO implements DAO<Ticket> {
 
             while (rs.next()) {
 
+                ticket.setId_Ticket(rs.getInt("id_ticket"));
                 ticket.setId_Voucher(rs.getInt("id_voucher"));
                 ticket.setDate(rs.getDate("date").toLocalDate());
                 ticket.setTime(rs.getTime("time").toLocalTime());
@@ -158,6 +160,32 @@ public class TicketDAO implements DAO<Ticket> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public int getLastID() {
+
+        query = "select id_ticket from ticket order by id_ticket desc limit 1";
+        
+        int id_ticket = -1;
+
+        try {
+
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            if (rs.next()) {
+                
+                id_ticket = rs.getInt("id_ticket");
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // para que salga el error
+
+        }
+        
+        return id_ticket;
+
     }
 
     @Override

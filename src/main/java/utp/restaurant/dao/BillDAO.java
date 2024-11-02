@@ -99,6 +99,7 @@ public class BillDAO implements DAO<Bill> {
 
             while (rs.next()) {
 
+                bill.setId_Bill(rs.getInt("id_bill"));
                 bill.setId_Voucher(rs.getInt("id_voucher"));
                 bill.setDate(rs.getDate("date").toLocalDate());
                 bill.setTime(rs.getTime("time").toLocalTime());

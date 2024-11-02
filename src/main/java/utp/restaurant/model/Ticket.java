@@ -33,7 +33,6 @@ public class Ticket extends Voucher<Integer, NaturalCustomer> {
     }
 
     public Ticket() {
-        this.id_Ticket = System.currentTimeMillis() + new Random().nextInt(1000);
     }
 
     /**

@@ -189,7 +189,7 @@ public class JuridicalCustomerDAO implements DAO<JuridicalCustomer> {
     @Override
     public void delete(long id) {
 
-        query = "DELET FROM juridicalCustomer WHERE id_juridicalcustomer = ? ";
+        query = "DELETE FROM juridicalCustomer WHERE id_juridicalcustomer = ? ";
         try {
             ps = conn.prepareStatement(query);
             ps.setInt(1, (int) id);

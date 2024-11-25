@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import utp.restaurant.model.Category;
 import utp.restaurant.model.ItemOrder;
 import utp.restaurant.model.Order;
 import utp.restaurant.model.Table;
@@ -51,7 +52,8 @@ public class TakeOrderView extends javax.swing.JFrame {
         renderItemOrderTable();
         renderTable();
         renderCBTable();
-        
+        renderCBCategory();
+       
     }
 
     /**
@@ -83,6 +85,8 @@ public class TakeOrderView extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLBTotal = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cbCategory = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,7 +98,7 @@ public class TakeOrderView extends javax.swing.JFrame {
                 jCBtableActionPerformed(evt);
             }
         });
-        jPanel1.add(jCBtable, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 570, 30));
+        jPanel1.add(jCBtable, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 230, 30));
 
         jPanel2.setBackground(new java.awt.Color(249, 242, 228));
         jPanel2.setForeground(new java.awt.Color(51, 51, 51));
@@ -205,7 +209,7 @@ public class TakeOrderView extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(86, 42, 35));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(86, 42, 35));
-        jLabel4.setText("MESAS ASIGNADAS");
+        jLabel4.setText("MESA");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, 20));
 
         jLabel5.setBackground(new java.awt.Color(86, 42, 35));
@@ -241,6 +245,18 @@ public class TakeOrderView extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(86, 42, 35));
         jLabel2.setText("TOTAL:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 650, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(86, 42, 35));
+        jLabel3.setText("CATEGORIA");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, -1, -1));
+
+        cbCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCategoryActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbCategory, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 270, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -313,6 +329,10 @@ public class TakeOrderView extends javax.swing.JFrame {
         takeOrderController.setTable();
         
     }//GEN-LAST:event_jCBtableActionPerformed
+
+    private void cbCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoryActionPerformed
+        takeOrderController.handleCategoryChange();
+    }//GEN-LAST:event_cbCategoryActionPerformed
     
     public void renderItemOrderTable(){
         DefaultTableModel tableorder = takeOrderController.getTableOrderModel();
@@ -327,9 +347,9 @@ public class TakeOrderView extends javax.swing.JFrame {
         takeOrderController.getTotalPrice();
     }
     
-    public void renderTable() {
+    public void renderTable(String category) {
         
-        DefaultTableModel tableModel = takeOrderController.getTableModel();
+        DefaultTableModel tableModel = takeOrderController.getTableModel(category);
         jTsaucers.setRowHeight(100);
         jTsaucers.setModel(tableModel);
         
@@ -338,6 +358,10 @@ public class TakeOrderView extends javax.swing.JFrame {
         TableColumnModel tcm = jTsaucers.getColumnModel();
         tcm.removeColumn(tcm.getColumn(0));
         
+    }
+    
+    public void renderTable() {
+        renderTable("Todos");
     }
     
     public void setItemOrder(ItemOrder itemOrder) {
@@ -400,6 +424,10 @@ public class TakeOrderView extends javax.swing.JFrame {
         takeOrderController.renderCBTable();
     }
     
+    public void renderCBCategory() {
+        takeOrderController.renderCBCategory();
+    }
+    
     public JComboBox<Table> getjCBtable() {
         return jCBtable;
     }
@@ -411,6 +439,12 @@ public class TakeOrderView extends javax.swing.JFrame {
     public void setjTsaucers(JTable jTsaucers) {
         this.jTsaucers = jTsaucers;
     }
+
+    public JComboBox<Category> getCbCategory() {
+        return cbCategory;
+    }
+    
+    
     
     /**
      * @param args the command line arguments
@@ -449,6 +483,7 @@ public class TakeOrderView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Category> cbCategory;
     private javax.swing.JButton jBTNadd;
     private javax.swing.JButton jBTNeditar;
     private javax.swing.JButton jBTNeliminar;
@@ -460,6 +495,7 @@ public class TakeOrderView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;

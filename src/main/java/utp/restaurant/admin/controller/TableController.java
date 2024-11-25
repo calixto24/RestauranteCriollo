@@ -142,12 +142,10 @@ public class TableController {
         ArrayList<Employee> EmployeeList = employeeDao.getAll();
 
         tableRegisterView.getJCBEmployees().removeAllItems();
-
-        for (Employee e : EmployeeList) {
-            if (e.getRole().getName().equals("mesero")) {
-                tableRegisterView.getJCBEmployees().addItem(e);
-            }
-        }
+        
+        EmployeeList.stream()
+                .filter((e) -> e.getRole().getName().equals("mesero"))
+                .forEach((e) -> tableRegisterView.getJCBEmployees().addItem(e));
     }
 
     public void handleCleanForm() {

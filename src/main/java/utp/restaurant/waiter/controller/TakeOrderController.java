@@ -2,11 +2,15 @@ package utp.restaurant.waiter.controller;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+
+import utp.restaurant.dao.CategoryDAO;
 import utp.restaurant.dao.ItemMenuDAO;
 import utp.restaurant.dao.OrderDAO;
 import utp.restaurant.dao.TableDAO;
+import utp.restaurant.model.Category;
 import utp.restaurant.waiter.view.TakeOrderView;
 import utp.restaurant.model.Table;
 import utp.restaurant.model.ItemMenu;
@@ -22,7 +26,8 @@ public class TakeOrderController {
     private TableDAO tableDAO;
     private ItemMenuDAO itemMenuDAO;
     private OrderDAO orderDAO;
-
+    private CategoryDAO categoryDAO;
+    
     private Store store;
     private Order order;
 
@@ -35,6 +40,7 @@ public class TakeOrderController {
         tableDAO = new TableDAO();
         itemMenuDAO = new ItemMenuDAO();
         orderDAO = new OrderDAO();
+        categoryDAO = new CategoryDAO();
 
         order = new Order();
         store = Store.getInstance();
@@ -165,7 +171,7 @@ public class TakeOrderController {
 
     }
 
-    public DefaultTableModel getTableModel() {
+    public DefaultTableModel getTableModel(String category) {
 
         String columns[] = {
             "Id",
@@ -179,6 +185,12 @@ public class TakeOrderController {
         DefaultTableModel tableModel = new DefaultTableModel(null, columns);
 
         ArrayList<ItemMenu> itemMenuList = itemMenuDAO.getAll();
+        
+        if (!category.equals("Todos")) {
+            itemMenuList = itemMenuList.stream()
+                    .filter(itemMenu -> itemMenu.getCategory().getName().equals(category))
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
 
         for (ItemMenu itemMenu : itemMenuList) {
 
@@ -297,5 +309,22 @@ public class TakeOrderController {
 
         takeOrderView.getjBTNguardar().setText("ACTUALIZAR");
 
+    }
+    
+    public void renderCBCategory() {
+        ArrayList<Category> categoryList = categoryDAO.getAll();
+        
+        
+        takeOrderView.getCbCategory().removeAllItems();
+        takeOrderView.getCbCategory().addItem(new Category("Todos", ""));
+        
+        categoryList.stream()
+                .forEach(category -> takeOrderView.getCbCategory().addItem(category));
+    }
+    
+    public void handleCategoryChange() {
+        Category category = (Category) takeOrderView.getCbCategory().getSelectedItem();
+        
+        takeOrderView.renderTable(category.getName());
     }
 }

@@ -137,7 +137,8 @@ public class LoginController {
 
     public boolean verifyPassword(String password, Employee employee) {
 
-        BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), employee.getPassword());
+        BCrypt.Result result = BCrypt.verifyer()
+                .verify(password.toCharArray(), employee.getPassword());
         return result.verified;
 
     }

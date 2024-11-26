@@ -74,8 +74,14 @@ public class NaturalPerson extends Person{
     }
     
     public String getBirthdateFormatted() {
+        
+        if(birthdate == null) {
+            return "";
+        } 
+        
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return df.format(birthdate);
+        
     }
     
     //metodo abstracto

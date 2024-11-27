@@ -1,146 +1,71 @@
 package utp.restaurant.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
-import utp.restaurant.database.RestaurantDB;
 import utp.restaurant.model.*;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.EntityManager;
 
 public class RoleDAO implements DAO<Role> {
 
-    private Connection conn;
     private String query;
-    private Statement st;
-    private PreparedStatement ps;
-    private ResultSet rs;
     private ArrayList<Role> roleList;
+    
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("utp_restaurant_jar_1.0-SNAPSHOTPU");
+    private EntityManager em = emf.createEntityManager();
 
     //constructor vacio
     public RoleDAO() {
-        conn = RestaurantDB.getInstance().getConn();
+        
     }
 
     @Override
     public ArrayList<Role> getAll() {
-
-        query = "SELECT * FROM role";
-
-        roleList = new ArrayList<>();
-
-        try {
-
-            st = conn.createStatement();
-            rs = st.executeQuery(query);
-
-            while (rs.next()) {
-                
-                Role role = new Role();
-
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
-                roleList.add(role);
-
-            }
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-        return roleList;
+        
+        query = "SELECT r FROM Role r";
+        
+        return new ArrayList<>(em.createQuery(query, Role.class).getResultList());
     }
 
     @Override
     public Role get(long id) {
 
-        query = "SELECT * FROM role WHERE id_role = ?";
-
-        Role role = new Role();
-
-        try {
-
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, (int) id);
-
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-
-                role.setId(rs.getInt("id_role"));
-                role.setName(rs.getString("name_role"));
-
-            }
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-
-        }
-
-        return role;
+        return em.find(Role.class, id);
     }
 
     @Override
     public void add(Role role) {
 
-        query = "INSERT INTO role(name_role) VALUES (?)";
-
-        try {
-
-            ps = conn.prepareStatement(query);
-            ps.setString(1, role.getName());
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
-        }
+        em.getTransaction().begin();
+        em.persist(role);
+        em.getTransaction().commit();
 
     }
 
     @Override
-    public void update(Role role) {
+    public void update(Role rolee) {
 
-        query = "UPDATE role SET name_role = ? WHERE id_role = ?";
-
-        try {
-
-            ps = conn.prepareStatement(query);
-            ps.setString(1, role.getName());
-            ps.setInt(2, (int) role.getId());
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
+        em.getTransaction().begin();
+        Role role = em.find(Role.class, rolee.getId());
+        if (role != null) {
+            role.setName(rolee.getName());
         }
+        em.getTransaction().commit();
 
     }
 
     @Override
     public void delete(long id) {
 
-        query = "DELETE FROM role WHERE id_role = ?";
-
-        try {
-
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, (int) id);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-
-            e.printStackTrace();
-
+        em.getTransaction().begin();
+        Role role = em.find(Role.class, id);
+        if (role != null) {
+            em.remove(role);
         }
+        em.getTransaction().commit();
 
     }
 

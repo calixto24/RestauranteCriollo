@@ -1,8 +1,10 @@
 package utp.restaurant.dao;
 
 
+import io.github.cdimascio.dotenv.Dotenv;
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
+import java.util.HashMap;
 import utp.restaurant.model.*;
 
 import javax.persistence.EntityManagerFactory;
@@ -12,14 +14,20 @@ import javax.persistence.EntityManager;
 public class RoleDAO implements DAO<Role> {
 
     private String query;
-    private ArrayList<Role> roleList;
     
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("utp_restaurant_jar_1.0-SNAPSHOTPU");
-    private EntityManager em = emf.createEntityManager();
+    private EntityManagerFactory emf;
+    private EntityManager em;
 
     //constructor vacio
     public RoleDAO() {
+        Dotenv dotenv = Dotenv.load();
+        HashMap<String, String> properties = new HashMap<>();        
+        properties.put("javax.persistence.jdbc.url", dotenv.get("DB_URL"));
+        properties.put("javax.persistence.jdbc.user", dotenv.get("DB_USER"));
+        properties.put("javax.persistence.jdbc.password", dotenv.get("DB_PASSWORD"));
         
+        emf = Persistence.createEntityManagerFactory("utp_restaurant_jar_1.0-SNAPSHOTPU", properties);
+        em = emf.createEntityManager();
     }
 
     @Override

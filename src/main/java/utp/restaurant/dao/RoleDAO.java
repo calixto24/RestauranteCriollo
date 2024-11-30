@@ -4,77 +4,55 @@ package utp.restaurant.dao;
 import io.github.cdimascio.dotenv.Dotenv;
 import utp.restaurant.Interface.DAO;
 import java.util.ArrayList;
-import java.util.HashMap;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import utp.restaurant.model.*;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.EntityManager;
-
 public class RoleDAO implements DAO<Role> {
+    private SessionFactory factory;
+    private Session session;
 
-    private String query;
-    
-    private EntityManagerFactory emf;
-    private EntityManager em;
-
-    //constructor vacio
     public RoleDAO() {
         Dotenv dotenv = Dotenv.load();
-        HashMap<String, String> properties = new HashMap<>();        
-        properties.put("javax.persistence.jdbc.url", dotenv.get("DB_URL"));
-        properties.put("javax.persistence.jdbc.user", dotenv.get("DB_USER"));
-        properties.put("javax.persistence.jdbc.password", dotenv.get("DB_PASSWORD"));
+        System.setProperty("DB_URL", dotenv.get("DB_URL"));
+        System.setProperty("DB_USER", dotenv.get("DB_USER"));
+        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
         
-        emf = Persistence.createEntityManagerFactory("utp_restaurant_jar_1.0-SNAPSHOTPU", properties);
-        em = emf.createEntityManager();
+        factory = new Configuration().configure().buildSessionFactory();
+        session = factory.openSession();
     }
 
     @Override
     public ArrayList<Role> getAll() {
-        
-        query = "SELECT r FROM Role r";
-        
-        return new ArrayList<>(em.createQuery(query, Role.class).getResultList());
+        return new ArrayList<>(session.createQuery("FROM Role", Role.class).list());
     }
 
     @Override
     public Role get(long id) {
-
-        return em.find(Role.class, id);
+        return session.get(Role.class, id);
     }
 
     @Override
     public void add(Role role) {
-
-        em.getTransaction().begin();
-        em.persist(role);
-        em.getTransaction().commit();
-
+        session.beginTransaction();
+        session.save(role);
+        session.getTransaction().commit();
     }
 
     @Override
-    public void update(Role rolee) {
-
-        em.getTransaction().begin();
-        Role role = em.find(Role.class, rolee.getId());
-        if (role != null) {
-            role.setName(rolee.getName());
-        }
-        em.getTransaction().commit();
-
+    public void update(Role role) {
+        session.beginTransaction();
+        session.update(role);
+        session.getTransaction().commit();
     }
 
     @Override
     public void delete(long id) {
-
-        em.getTransaction().begin();
-        Role role = em.find(Role.class, id);
-        if (role != null) {
-            em.remove(role);
-        }
-        em.getTransaction().commit();
-
+        session.beginTransaction();
+        Role role = session.get(Role.class, id);
+        session.delete(role);
+        session.getTransaction().commit();
     }
-
 }

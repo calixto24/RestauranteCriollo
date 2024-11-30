@@ -113,7 +113,7 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
             ps.setString(3, item_Menu.getDescription());
             ps.setString(4, item_Menu.getStatus());
             ps.setString(5, item_Menu.getImage());
-            ps.setInt(6, (int) item_Menu.getCategory().getId());
+            ps.setInt(6, (int) item_Menu.getCategory().id());
 
             ps.executeUpdate();
 
@@ -136,7 +136,7 @@ public class ItemMenuDAO implements DAO<ItemMenu> {
             ps.setString(3, item_Menu.getDescription());
             ps.setString(4, item_Menu.getStatus());
             ps.setString(5, item_Menu.getImage());
-            ps.setInt(6, (int) item_Menu.getCategory().getId());
+            ps.setInt(6, (int) item_Menu.getCategory().id());
             ps.setInt(7, (int) item_Menu.getId());
 
             ps.executeUpdate();

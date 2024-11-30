@@ -3,6 +3,7 @@ package utp.restaurant.admin.controller;
 import utp.restaurant.dao.EmployeeDAO;
 import utp.restaurant.dao.TableDAO;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import javax.swing.table.DefaultTableModel;
 import utp.restaurant.model.Table;
@@ -140,17 +141,18 @@ public class TableController {
     }
 
     public void renderCBWaiter() {
-        ArrayList<Employee> EmployeeList = employeeDao.getAll();
-
-        Predicate<Employee> isWaiter = e -> 
-             e.getRole().getName().equals("mesero");
-        
+        ArrayList<Employee> EmployeeList = employeeDao.getAll();     
         
         tableRegisterView.getJCBEmployees().removeAllItems();
         
+        Predicate<Employee> isWaiter = e -> 
+             e.getRole().getName().equals("mesero");
+        
+        Consumer<Employee> addWaiterToCB = e -> tableRegisterView.getJCBEmployees().addItem(e);
+        
         EmployeeList.stream()
                 .filter(isWaiter)
-                .forEach((e) -> tableRegisterView.getJCBEmployees().addItem(e));
+                .forEach(addWaiterToCB);
     }
 
     public void handleCleanForm() {

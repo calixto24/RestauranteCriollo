@@ -324,7 +324,7 @@ public class Validate {
             switch (attribute.toLowerCase()) {
 
                 case "name":
-                    if (el.equals(category.getName())) {
+                    if (el.equals(category.name())) {
 
                         valid = false;
                         message = msg;
@@ -351,9 +351,9 @@ public class Validate {
             switch (attribute.toLowerCase()) {
 
                 case "name":
-                    if (el.equals(category.getName())) {
+                    if (el.equals(category.name())) {
 
-                        if (id != category.getId()) {
+                        if (id != category.id()) {
 
                             valid = false;
                             message = msg;

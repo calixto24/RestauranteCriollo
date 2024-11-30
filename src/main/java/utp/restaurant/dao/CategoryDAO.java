@@ -36,11 +36,11 @@ public class CategoryDAO implements DAO<Category> {
 
             while (rs.next()) {
                 
-                Category category = new Category();
-
-                category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category"));
-                category.setDescription(rs.getString("description"));
+                Category category = new Category(
+                        rs.getInt("id_category"),
+                        rs.getString("name_category"),
+                        rs.getString("description")
+                );
 
                 categoryList.add(category);
 
@@ -59,7 +59,7 @@ public class CategoryDAO implements DAO<Category> {
 
         query = "SELECT * FROM category WHERE id_category = ?";
 
-        Category category = new Category();
+        Category category = null;
 
         try {
 
@@ -67,13 +67,13 @@ public class CategoryDAO implements DAO<Category> {
             ps.setInt(1, (int) id);
             rs = ps.executeQuery();
 
-            while (rs.next()) {
+            rs.next();
 
-                category.setId(rs.getInt("id_category"));
-                category.setName(rs.getString("name_category"));
-                category.setDescription(rs.getString("description"));
-
-            }
+            category = new Category(
+                        rs.getInt("id_category"),
+                        rs.getString("name_category"),
+                        rs.getString("description")
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,8 +91,8 @@ public class CategoryDAO implements DAO<Category> {
         try {
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, category.getName());
-            ps.setString(2, category.getDescription());
+            ps.setString(1, category.name());
+            ps.setString(2, category.description());
 
             ps.executeUpdate();
 
@@ -110,9 +110,9 @@ public class CategoryDAO implements DAO<Category> {
         try {
 
             ps = conn.prepareStatement(query);
-            ps.setString(1, category.getName());
-            ps.setString(2, category.getDescription());
-            ps.setInt(3, (int) category.getId());
+            ps.setString(1, category.name());
+            ps.setString(2, category.description());
+            ps.setInt(3, (int) category.id());
             ps.executeUpdate();
 
         } catch (Exception e) {

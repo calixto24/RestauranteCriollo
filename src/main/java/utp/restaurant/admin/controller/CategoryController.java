@@ -64,7 +64,7 @@ public class CategoryController {
 
         if (action.equals("add")) {
             //creacion del objeto
-            Category newCategory = new Category(name, descrip);
+            Category newCategory = new Category(1, name, descrip);
             try {
                 categoryDAO.add(newCategory);
                 categoryView.showMessage("categoria creada");
@@ -73,12 +73,8 @@ public class CategoryController {
             }
 
         } else if (action.equals("edit")) {
-            Category updateCategory = categoryDAO.get(selectedId);
-            updateCategory.setName(name);
-            updateCategory.setDescription(descrip);
-            
             try {
-                categoryDAO.update(updateCategory);  
+                categoryDAO.update(new Category(selectedId, name, descrip));  
                 categoryView.showMessage("categoria editada");
 
             } catch (Exception e) {
@@ -100,12 +96,12 @@ public class CategoryController {
 
         ArrayList<Category> categoriaList = categoryDAO.getAll();
 
-        for (Category y : categoriaList) {
+        for (Category category : categoriaList) {
 
             Object[] row = {
-                y.getId(),
-                y.getName(),
-                y.getDescription()
+                category.id(),
+                category.name(),
+                category.description()
             };
             tableModel.addRow(row);
         }

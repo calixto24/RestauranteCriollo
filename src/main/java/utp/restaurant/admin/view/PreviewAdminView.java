@@ -212,28 +212,34 @@ public class PreviewAdminView extends javax.swing.JFrame {
 
     private void jLBplatilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBplatilloMouseClicked
         itemMenuRegisterView.renderCBCategory();
+        itemMenuRegisterView.renderTable();
         itemMenuRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBplatilloMouseClicked
 
     private void jLBemployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBemployeeMouseClicked
         register.renderCBRole();
+        register.renderTable();
         register.setVisible(true);
     }//GEN-LAST:event_jLBemployeeMouseClicked
 
     private void jLBrolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBrolMouseClicked
+        roleRegisterView.renderTable();
         roleRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBrolMouseClicked
 
     private void jLBclienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBclienteMouseClicked
+        customerRegisterView.renderTable();
         customerRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBclienteMouseClicked
 
     private void jLBmesaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBmesaMouseClicked
         tableRegisterView.renderCBWaiter();
+        tableRegisterView.renderTable();
         tableRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBmesaMouseClicked
 
     private void jLBcategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBcategoriaMouseClicked
+        categoryRegisterView.renderTable();
         categoryRegisterView.setVisible(true);
     }//GEN-LAST:event_jLBcategoriaMouseClicked
 

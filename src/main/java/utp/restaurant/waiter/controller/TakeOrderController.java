@@ -188,7 +188,7 @@ public class TakeOrderController {
         
         if (!category.equals("Todos")) {
             itemMenuList = itemMenuList.stream()
-                    .filter(itemMenu -> itemMenu.getCategory().getName().equals(category))
+                    .filter(itemMenu -> itemMenu.getCategory().name().equals(category))
                     .collect(Collectors.toCollection(ArrayList::new));
         }
 
@@ -316,7 +316,7 @@ public class TakeOrderController {
         
         
         takeOrderView.getCbCategory().removeAllItems();
-        takeOrderView.getCbCategory().addItem(new Category("Todos", ""));
+        takeOrderView.getCbCategory().addItem(new Category(1, "Todos", ""));
         
         categoryList.stream()
                 .forEach(category -> takeOrderView.getCbCategory().addItem(category));
@@ -325,6 +325,6 @@ public class TakeOrderController {
     public void handleCategoryChange() {
         Category category = (Category) takeOrderView.getCbCategory().getSelectedItem();
         
-        takeOrderView.renderTable(category.getName());
+        takeOrderView.renderTable(category.name());
     }
 }
